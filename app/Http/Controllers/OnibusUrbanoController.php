@@ -14,7 +14,10 @@ class OnibusUrbanoController extends Controller
      */
     public function index()
     {
-        return "teste";
+        $onibus = new OnibusUrbano();
+        $listadeOnibus = $onibus->getAll();
+        return view('welcome', compact('listaDeOnibus'));
+
     }
 
     /**
@@ -25,7 +28,7 @@ class OnibusUrbanoController extends Controller
     public function create()
     {
         return "Formulário cadastro";
-        //return view('cadastroOnibusUrbano);
+        //return view('cadastroOnibusUrbano');
     }
 
     /**
@@ -36,8 +39,14 @@ class OnibusUrbanoController extends Controller
      */
     public function store(Request $request)
     {
-                $onibus = new OnibusUrbano();
-                return $onibus->add($request->input());
+        try {
+
+            $onibus = new OnibusUrbano();
+            return $onibus->add($request);
+
+        } catch (Exception $e) {
+            return response(['error' => 'Requisição inválida.'], 400);
+        }
 
     }
 
@@ -83,6 +92,6 @@ class OnibusUrbanoController extends Controller
      */
     public function destroy($id)
     {
-        return response(['error'=>'Função não permitida.'],501);
+        return response(['error' => 'Função não permitida.'], 501);
     }
 }

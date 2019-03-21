@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('onibus')->group(function () {
+    Route::resource('urbano', 'OnibusUrbanoController');
+    Route::resource('intermunicipal', 'OnibusIntermunicipalController');
+});

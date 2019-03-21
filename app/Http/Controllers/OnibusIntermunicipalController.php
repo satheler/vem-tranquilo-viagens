@@ -14,7 +14,10 @@ class OnibusIntermunicipalController extends Controller
      */
     public function index()
     {
-        return "teste";
+        $onibus = new OnibusIntermunicipal();
+        $listadeOnibus = $onibus->getAll();
+        return view('welcome', compact('listaDeOnibus'));
+
     }
 
     /**
@@ -36,8 +39,14 @@ class OnibusIntermunicipalController extends Controller
      */
     public function store(Request $request)
     {
-                $onibus = new OnibusIntermunicipal();
-                return $onibus->add($request->input());
+        try {
+
+            $onibus = new OnibusIntermunicipal();
+            return $onibus->add($request);
+
+        } catch (Exception $e) {
+            return response(['error' => 'Requisição inválida.'], 400);
+        }
 
     }
 
