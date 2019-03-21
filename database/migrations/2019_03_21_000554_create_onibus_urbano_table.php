@@ -17,7 +17,12 @@ class CreateOnibusUrbanoTable extends Migration
     public function up()
     {
         Schema::create($this->databaseName, function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigInteger('id')->unsigned();
+            $table->foreign('id')->references('id')->on('onibus');
+
+            $table->integer('lotacao');
+            $table->boolean('ar_condicionado');
+
             $table->timestamps();
         });
     }

@@ -18,11 +18,12 @@ class CreateFrotasOnibusTable extends Migration
     public function up()
     {
         Schema::create($this->databaseName, function (Blueprint $table) {
-            $table->unsignedBigInteger('idfrota');
+            $table->bigInteger('idfrota')->unsigned();
             $table->foreign('idfrota')->references('id')->on('frotas');
 
-            $table->unsignedBigInteger('idonibus');
+            $table->bigInteger('idonibus')->unsigned();
             $table->foreign('idonibus')->references('id')->on('onibus');
+
             $table->timestamps();
         });
     }
