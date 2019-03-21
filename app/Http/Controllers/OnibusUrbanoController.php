@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\OnibusUrbano;
 use Illuminate\Http\Request;
 
-class OnibusController extends Controller
+class OnibusUrbanoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,7 @@ class OnibusController extends Controller
      */
     public function index()
     {
-        //
+        return "teste";
     }
 
     /**
@@ -23,7 +24,8 @@ class OnibusController extends Controller
      */
     public function create()
     {
-        //
+        return "Formulário cadastro";
+        //return view('cadastroOnibusUrbano);
     }
 
     /**
@@ -34,7 +36,9 @@ class OnibusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+                $onibus = new OnibusUrbano();
+                return $onibus->add($request->input());
+
     }
 
     /**
@@ -45,7 +49,7 @@ class OnibusController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -79,6 +83,6 @@ class OnibusController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return response(['error'=>'Função não permitida.'],501);
     }
 }

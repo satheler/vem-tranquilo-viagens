@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use app\Frota;
+use App\OnibusIntermunicipal;
 use Illuminate\Http\Request;
 
-class FrotaController extends Controller
+class OnibusIntermunicipalController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class FrotaController extends Controller
      */
     public function index()
     {
-        //
+        return "teste";
     }
 
     /**
@@ -24,7 +24,8 @@ class FrotaController extends Controller
      */
     public function create()
     {
-        //
+        return "Formulário cadastro";
+        //return view('cadastroOnibusIntermunicipal');
     }
 
     /**
@@ -35,7 +36,9 @@ class FrotaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+                $onibus = new OnibusIntermunicipal();
+                return $onibus->add($request->input());
+
     }
 
     /**
@@ -46,7 +49,7 @@ class FrotaController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -80,6 +83,6 @@ class FrotaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return response(['error'=>'Função não permitida.'],501);
     }
 }
