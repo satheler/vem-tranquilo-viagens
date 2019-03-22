@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateOnibusTable extends Migration
 {
@@ -23,6 +23,10 @@ class CreateOnibusTable extends Migration
             $table->double('custoManutencao');
             $table->string('chassi', 17);
             $table->string('placa', 7);
+
+            $table->bigInteger('description_id');
+            $table->string('description_type');
+
             $table->timestamps();
         });
     }
