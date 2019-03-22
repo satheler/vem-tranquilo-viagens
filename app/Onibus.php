@@ -2,32 +2,39 @@
 
 namespace App;
 
-use Exception;
 use Illuminate\Database\Eloquent\Model;
 
 class Onibus extends Model
 {
     protected $table = 'onibus';
 
-    public function getAll() {
-        return $this::all();
+    public function description()
+    {
+        return $this->morphTo();
     }
 
-    public function add(bool $disponivel, bool $acessibilidade, float $custoManutencao, string $chassi, string $placa) {
-        $this->disponivel = $disponivel;
-        $this->acessibilidade = $acessibilidade;
-        $this->custoManutencao = $custoManutencao;
+    // protected function getAll()
+    // {
+    //     return $this::all();
+    // }
 
-        if(strlen($chassi) != 17) {
-            throw new Exception("Chassi: Quantidade de caracteres inválidos");
-        }
-        $this->chassi = $chassi;
+    // public function add(array $request)
+    // {
+    //     $request->validate([
+    //         'disponivel' => 'required|boolean',
+    //         'acessibilidade' => 'required|boolean',
+    //         'custoManutencao' => 'required|integer',
+    //         'chassi' => 'required|min:17|max:17|unique:onibus',
+    //         'placa' => 'required|min:7|max:7|unique:onibus',
+    //     ]);
 
-        if(strlen($placa) != 7) {
-            throw new Exception("Placa: Quantidade de caracteres inválidos");
-        }
-        $this->placa = $placa;
+    //     $this->disponivel = $request->input('disponivel');
+    //     $this->acessibilidade = $request->input('acessibilidade');
+    //     $this->custoManutencao = $request->input('custoManutencao');
+    //     $this->chassi = $request->input('chassi');
+    //     $this->placa = $request->input('placa');
 
-        $this->save();
-    }
+    //     $this->save();
+
+    // }
 }

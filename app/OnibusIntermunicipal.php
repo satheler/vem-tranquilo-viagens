@@ -4,10 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class OnibusUrbano extends Model
+class OnibusIntermunicipal extends Model
 {
-
-    protected $table = 'onibus_urbano';
+    protected $table = 'onibus_intermunicipal';
 
     public function description()
     {
