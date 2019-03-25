@@ -58,7 +58,12 @@ class OnibusIntermunicipalController extends Controller
      */
     public function show($id)
     {
-
+        $onibus = new OnibusIntermunicipal();
+        $listadeOnibus = $onibus->getAll();
+        if ($id >= 0 && $id < count($listadeOnibus)) {
+            return $listadeOnibus[$id]->toJson();
+        }
+        return response(['error' => 'Ônibus não encontrado.'], 400);
     }
 
     /**
@@ -69,7 +74,11 @@ class OnibusIntermunicipalController extends Controller
      */
     public function edit($id)
     {
-        //
+        $onibus = new OnibusIntermunicipal();
+        $listadeOnibus = $onibus->getAll();
+        $onibuseditado = $listadeOnibus[$id];
+        return "Formulario de edição para o".$onibuseditado->toJson();
+
     }
 
     /**
@@ -81,7 +90,14 @@ class OnibusIntermunicipalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+
+            $onibuseditado = new OnibusIntermunicipal();
+            return $onibuseditado->editar($request, $id);
+
+        } catch (Exception $e) {
+            return response(['error' => 'Requisição inválida.'], 400);
+        }
     }
 
     /**
@@ -92,6 +108,6 @@ class OnibusIntermunicipalController extends Controller
      */
     public function destroy($id)
     {
-        return response(['error'=>'Função não permitida.'],501);
+        return response(['error' => 'Função não permitida.'], 501);
     }
 }
