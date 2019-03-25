@@ -15,13 +15,13 @@ class CreateOnibusIntermunicipalTable extends Migration
      */
     public function up()
     {
-        // Schema::create($this->databaseName, function (Blueprint $table) {
-        //     $table->bigIncrements('id');
+        Schema::create($this->databaseName, function (Blueprint $table) {
+            $table->bigIncrements('id');
 
-        //     $table->boolean('banheiro');
+            $table->boolean('banheiro');
 
-        //     $table->timestamps();
-        // });
+            $table->timestamps();
+        });
     }
 
     /**

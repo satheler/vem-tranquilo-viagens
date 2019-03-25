@@ -24,7 +24,7 @@ class CreateOnibusTable extends Migration
             $table->string('chassi', 17);
             $table->string('placa', 7);
 
-            $table->bigInteger('description_id');
+            $table->bigInteger('description_id')->unsigned();
             $table->string('description_type');
 
             $table->timestamps();

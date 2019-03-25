@@ -11,11 +11,20 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function(){
+    return "BusE-commerce";
 });
 
-Route::prefix('onibus')->group(function () {
-    Route::resource('urbano', 'OnibusUrbanoController');
-    Route::resource('intermunicipal', 'OnibusIntermunicipalController');
+Route::get('/admin', function(){
+    return view('admin');
 });
+
+Route::get('/admin/gerenciarfrota/intermunicipal', 'IntermunicipalController@index');
+Route::get('/admin/gerenciarfrota/urbano', 'UrbanoController@index');
+
+
+
+// Route::prefix('onibus')->group(function () {
+//     Route::resource('urbano', 'OnibusUrbanoController');
+//     Route::resource('intermunicipal', 'OnibusIntermunicipalController');
+// });
