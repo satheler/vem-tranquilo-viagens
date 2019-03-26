@@ -20,7 +20,7 @@ class CreateOnibusUrbanoTable extends Migration
             $table->bigIncrements('id');
 
             $table->integer('lotacao');
-            $table->boolean('ar_condicionado');
+            $table->boolean('arCondicionado');
 
             $table->timestamps();
         });
