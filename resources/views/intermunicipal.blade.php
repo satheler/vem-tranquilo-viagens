@@ -71,18 +71,18 @@
                             </tbody>
                         </table>
                     </div>
-                    <button type="button" class="btn btn-primary waves-effect" data-toggle="modal" data-target="#modelId">
-                        <i class="material-icons">add</i>
-                        <span>Adicionar</span>
-                    </button>
-                    <button type="button" class="btn btn-warning waves-effect">
-                        <i class="material-icons">create</i>
-                        <span>Editar</span>
-                    </button>
-                    <button type="button" class="btn btn-danger waves-effect">
-                        <i class="material-icons">remove_circle</i>
-                        <span>Disponibilidade</span>
-                    </button>
+                    <br>
+                    <div class="row">
+                        <div class="modal-footer d-flex justify-content-center col-lg-7">
+                            <button class="btn btn-primary waves-effect" data-toggle="modal" data-target="#modelId"><i class="material-icons">add</i>Adicionar</button>
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center col-lg-2">
+                            <button class="btn btn-warning waves-effect"><i class="material-icons">create</i>Editar</button>
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center col-lg-3">
+                            <button class="btn btn-danger waves-effect"><i class="material-icons">remove_circle</i>Disponibilidade</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -135,10 +135,29 @@
                     <label data-error="wrong" data-success="right" for="qntAss">Quantidade de Assentos</label>
                     <input type="number" maxlength="2" id="qntAss" class="form-control validate">
                 </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-3">
+                <label data-error="wrong" data-success="right" for="marca">Marca</label>
+                <input type="text" id="marca" class="form-control validate">
             </div>
-            <br>
-            <div class="row">
-                <div class="col-lg-4">
+            <div class="col-lg-3">
+                <label for="modelo">Modelo</label>
+                <input type="text" id="modelo" class="form-control validate">
+            </div>
+            <div class="col-lg-3">
+                <label data-error="wrong" data-success="right" for="capa">Capacidade Do Tanque</label>
+                <input type="number" id="capa" class="form-control validate">
+            </div>
+            <div class="col-lg-3">
+                <label data-error="wrong" data-success="right" for="qntEixos">Quantidade de Eixos</label>
+                <input type="number" id="qntEixos" class="form-control validate">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-3">
                         <p class="text-left">
                             <strong>Selecione a Categoria</strong>
                         </p>
@@ -155,7 +174,20 @@
                             <label class="form-check-label" for="radio-379">Leito</label>
                         </div>
                 </div>
-                <div class="md-form mb-5 col-lg-4">
+                <div class="md-form mb-5 col-lg-3">
+                    <p class="text-left">
+                        <strong>Possui Banheiro</strong>
+                    </p>
+                    <div class="form-check mb-4">
+                        <input class="form-check1" name="group4" type="radio" id="radio-879" value="option1" checked>
+                        <label class="form-check-label" for="radio-879">Sim</label>
+                    </div>
+                    <div class="form-check mb-4">
+                        <input class="form-check2" name="group4" type="radio" id="radio-979" value="option2">
+                        <label class="form-check-label" for="radio-979">Não</label>
+                    </div>
+                </div>
+                <div class="md-form mb-5 col-lg-3">
                         <p class="text-left">
                             <strong>Selecione o Tipo</strong>
                         </p>
@@ -168,7 +200,7 @@
                             <label class="form-check-label" for="radio-579">Andar Extra</label>
                         </div>
                 </div>
-                <div class="md-form mb-5 col-lg-4">
+                <div class="md-form mb-5 col-lg-3">
                         <p class="text-left">
                             <strong>Selecione Estado</strong>
                         </p>

@@ -20,7 +20,7 @@
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 </head>
-<body class="theme-blue">
+<body class="theme-blue back_image">
     <div class="container">
         @component('admin-nav', ["current" => $current])
         @endcomponent
