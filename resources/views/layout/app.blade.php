@@ -19,8 +19,6 @@
 </head>
 <body class="theme-blue">
     <div class="container">
-        @component('admin-nav')
-        @endcomponent
         <main role="main">
             @hasSection('body')
                 @yield('body')
