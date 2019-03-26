@@ -13,7 +13,7 @@ class UrbanoController extends Controller
      */
     public function index()
     {
-        view('urbano');
+        return view('urbano');
     }
 
     /**
