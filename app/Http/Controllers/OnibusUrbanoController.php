@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\OnibusUrbano;
 use Illuminate\Http\Request;
+use Exception;
 
 class OnibusUrbanoController extends Controller
 {
@@ -15,8 +16,8 @@ class OnibusUrbanoController extends Controller
     public function index()
     {
         $onibus = new OnibusUrbano();
-        $listadeOnibus = $onibus->getAll();
-        return view('welcome', compact('listaDeOnibus'));
+        $listaDeOnibus = $onibus->getAll();
+        return view('urbano', compact('listaDeOnibus'));
 
     }
 
@@ -42,10 +43,11 @@ class OnibusUrbanoController extends Controller
         try {
 
             $onibus = new OnibusUrbano();
-            return $onibus->add($request);
+            $onibus->add($request->input());
+            return response(["status" => "Ônibus cadastrado com sucesso"], 201);
 
         } catch (Exception $e) {
-            return response(['error' => 'Requisição inválida.'], 400);
+            return response($e->getMessage(), 400);
         }
 
     }
@@ -58,7 +60,12 @@ class OnibusUrbanoController extends Controller
      */
     public function show($id)
     {
-
+        $onibus = new OnibusUrbano();
+        //if ($id >= 0 && $id < count($listadeOnibus)) {
+            $onibus = $onibus->get($id);
+            return response($onibus->toJson(), 200);
+       //}
+       //return response(['error' => 'Ônibus não encontrado.'], 400);
     }
 
     /**
@@ -69,7 +76,11 @@ class OnibusUrbanoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $onibus = new OnibusUrbano();
+        $listadeOnibus = $onibus->getAll();
+        $onibuseditado = $listadeOnibus[$id];
+        return "Formulario de edição para o".$onibuseditado->toJson();
+
     }
 
     /**
@@ -81,7 +92,15 @@ class OnibusUrbanoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+
+            $onibuseditado = new OnibusUrbano();
+            $onibuseditado->edit($id);
+            return response(["status" => "Ônibus atualizado com sucesso"], 202);
+
+        } catch (Exception $e) {
+            return response($e->getMessage(), 400);
+        }
     }
 
     /**
