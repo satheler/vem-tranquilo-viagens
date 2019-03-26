@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\OnibusIntermunicipal;
 use Illuminate\Http\Request;
+use Exception;
 
 class OnibusIntermunicipalController extends Controller
 {
@@ -15,8 +16,8 @@ class OnibusIntermunicipalController extends Controller
     public function index()
     {
         $onibus = new OnibusIntermunicipal();
-        $listadeOnibus = $onibus->getAll();
-        return view('welcome', compact('listaDeOnibus'));
+        $listaDeOnibus = $onibus->getAll();
+        return view('intermunicipal', compact('listaDeOnibus'));
 
     }
 
@@ -42,10 +43,11 @@ class OnibusIntermunicipalController extends Controller
         try {
 
             $onibus = new OnibusIntermunicipal();
-            return $onibus->add($request);
+            $onibus->add($request->input());
+            return response(["status" => "Ônibus cadastrado com sucesso"], 201);
 
         } catch (Exception $e) {
-            return response(['error' => 'Requisição inválida.'], 400);
+            return response($e->getMessage(), 400);
         }
 
     }
@@ -59,11 +61,11 @@ class OnibusIntermunicipalController extends Controller
     public function show($id)
     {
         $onibus = new OnibusIntermunicipal();
-        $listadeOnibus = $onibus->getAll();
-        if ($id >= 0 && $id < count($listadeOnibus)) {
-            return $listadeOnibus[$id]->toJson();
-        }
-        return response(['error' => 'Ônibus não encontrado.'], 400);
+       // if ($id >= 0 && $id < count($listadeOnibus)) {
+            $onibus = $onibus->get($id);
+            return response($onibus->toJson(), 200);
+       // }
+       // return response(['error' => 'Ônibus não encontrado.'], 400);
     }
 
     /**
@@ -93,10 +95,11 @@ class OnibusIntermunicipalController extends Controller
         try {
 
             $onibuseditado = new OnibusIntermunicipal();
-            return $onibuseditado->editar($request, $id);
+            $onibuseditado->edit($id);
+            return response(["status" => "Ônibus atualizado com sucesso"], 202);
 
         } catch (Exception $e) {
-            return response(['error' => 'Requisição inválida.'], 400);
+            return response($e->getMessage(), 400);
         }
     }
 
