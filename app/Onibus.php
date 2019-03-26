@@ -4,6 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Validator;
+use Exception;
+
 class Onibus extends Model
 {
     protected $table = 'onibus';
@@ -13,28 +16,31 @@ class Onibus extends Model
         return $this->morphTo();
     }
 
-    // protected function getAll()
-    // {
-    //     return $this::all();
-    // }
+    protected function getAll()
+    {
+        return $this::all();
+    }
 
-    // public function add(array $request)
-    // {
-    //     $request->validate([
-    //         'disponivel' => 'required|boolean',
-    //         'acessibilidade' => 'required|boolean',
-    //         'custoManutencao' => 'required|integer',
-    //         'chassi' => 'required|min:17|max:17|unique:onibus',
-    //         'placa' => 'required|min:7|max:7|unique:onibus',
-    //     ]);
+    public function add(array $input)
+    {
+        $validator = Validator::make($input, [
+            'disponivel' => 'required|boolean',
+            'acessibilidade' => 'required|boolean',
+            'custoManutencao' => 'required|numeric',
+            'chassi' => 'required|min:17|max:17|unique:onibus',
+            'placa' => 'required|min:7|max:7|unique:onibus',
+        ]);
 
-    //     $this->disponivel = $request->input('disponivel');
-    //     $this->acessibilidade = $request->input('acessibilidade');
-    //     $this->custoManutencao = $request->input('custoManutencao');
-    //     $this->chassi = $request->input('chassi');
-    //     $this->placa = $request->input('placa');
+        if ($validator->fails()) {
+            throw new Exception($validator->messages());
+        }
 
-    //     $this->save();
+        $this->disponivel = $input['disponivel'];
+        $this->acessibilidade = $input['acessibilidade'];
+        $this->custoManutencao = $input['custoManutencao'];
+        $this->chassi = $input['chassi'];
+        $this->placa = $input['placa'];
 
-    // }
+        return $this;
+    }
 }
