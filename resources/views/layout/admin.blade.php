@@ -6,16 +6,18 @@
     <meta name="csrf-token" content="{{csrf_token()}}">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    
+
     <title>BusE-commerce</title>
 
     <!-- Favicon-->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    {{-- <link rel="icon" href="favicon.ico" type="image/x-icon"> --}}
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet" />
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
 </head>
 <body class="theme-blue">
     <div class="container">
