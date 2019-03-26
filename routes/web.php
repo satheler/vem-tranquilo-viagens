@@ -16,7 +16,7 @@ Route::get('/', function(){
 });
 
 Route::get('/admin', function(){
-    return view('admin');
+    return view('admin-index');
 });
 
 Route::get('/admin/gerenciarfrota/intermunicipal', 'IntermunicipalController@index');
