@@ -10,7 +10,7 @@
             </li>
             <li>
                 <a href="javascript:void(0);">
-                    <i class="material-icons">directions_bus</i> Gerenciar Frota
+                    <i sclass="material-icons">directions_bus</i> Gerenciar Frota
                 </a>
             </li>
             <li class="active">
@@ -23,61 +23,23 @@
                     <h2>
                         Ônibus urbanos
                     </h2>
-                    <ul class="header-dropdown m-r--5">
-                        <li class="dropdown">
-                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <i class="material-icons">more_vert</i>
-                            </a>
-                            <ul class="dropdown-menu pull-right">
-                                <li><a href="javascript:void(0);">Action</a></li>
-                                <li><a href="javascript:void(0);">Another action</a></li>
-                                <li><a href="javascript:void(0);">Something else here</a></li>
-                            </ul>
-                        </li>
-                    </ul>
                 </div>
                 <div class="body">
                     <div class="table-responsive">
-                        <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                        <table id="urbanoData" class="table table-bordered table-striped table-hover js-basic-example dataTable">
                             <thead>
                                 <tr>
                                     <th>Cod</th>
+                                    <th>Chassi</th>
                                     <th>Placa</th>
-                                    <th>Marca</th>
-                                    <th>Categoria</th>
+                                    <th>Ações</th>
                                 </tr>
                             </thead>
-                            <tfoot>
-                                <tr>
-                                    <th>Cod</th>
-                                    <th>Placa</th>
-                                    <th>Marca</th>
-                                    <th>Categoria</th>
-                                </tr>
-                            </tfoot>
-                            <tbody>
-                                <tr>
-                                    <td>0001</td>
-                                    <td>AAA-1111</td>
-                                    <td>Mercedez</td>
-                                    <td>Mercedez F810M</td>
-                                </tr>
-                                <tr>
-                                    <td>0002</td>
-                                    <td>BBB-2222</td>
-                                    <td>Mercedez</td>
-                                    <td>Mercedez M25</td>
-                                </tr>
-                            </tbody>
                         </table>
                     </div>
-                    <button type="button" class="btn btn-primary waves-effect">
+                    <button type="button" class="btn btn-primary waves-effect justify-content-right">
                         <i class="material-icons">add</i>
                         <span>Adicionar</span>
-                    </button>
-                    <button type="button" class="btn btn-warning waves-effect">
-                        <i class="material-icons">create</i>
-                        <span>Editar</span>
                     </button>
                     <button type="button" class="btn btn-danger waves-effect">
                         <i class="material-icons">remove_circle</i>
@@ -89,3 +51,18 @@
     </div>
 </section>
 @endsection
+@push('scripts')
+<script type="text/javascript">
+    $('#urbanoData').DataTable({
+        processing: false,
+        serverSide: true,
+        ajax: '/admin/gerenciarfrota/urbano/api',
+        columns: [
+            {data: 'id', name: 'id'},
+            {data: 'chassi', name: 'chassi'},
+            {data: 'placa', name: 'placa'},
+            {data: 'action', name: 'action', orderable: false, searchable: false}
+        ]
+    });
+</script>
+@endpush

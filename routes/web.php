@@ -21,6 +21,7 @@ Route::get('/admin', function(){
 
 Route::get('/admin/gerenciarfrota/intermunicipal', 'IntermunicipalController@index');
 Route::get('/admin/gerenciarfrota/urbano', 'UrbanoController@index');
+Route::get('/admin/gerenciarfrota/urbano/api', 'UrbanoController@urbanoData');
 
 
 

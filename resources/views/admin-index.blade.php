@@ -2,7 +2,7 @@
 
 @section('body')
 <section class="content">
-    <div class="container-fluid">
+    <div id="myMoldal" class="container-fluid">
         <div class="block-header">
             <h2>ADMIN-index</h2>
         </div>

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Onibus;
+use Yajra\Datatables\Datatables;
+
 class UrbanoController extends Controller
 {
     /**
@@ -14,6 +17,17 @@ class UrbanoController extends Controller
     public function index()
     {
         return view('urbano');
+    }
+
+    public function urbanoData(){
+        $bus = Onibus::select(['id', 'chassi', 'placa', 'created_at', 'updated_at']);
+
+        return Datatables::of($bus)
+            ->addColumn('action', function ($urban) {
+                return '<a href="#edit-'.$urban->id.'" class="btn btn-xs btn-info"><i class="glyphicon glyphicon-edit"></i> Editar</a>';
+            })
+            ->editColumn('id', 'ID: {{$id}}')
+            ->make(true);
     }
 
     /**
