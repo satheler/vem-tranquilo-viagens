@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('layout.admin', ["current" => "admin-index"])
 
 @section('body')
 <section class="content">

@@ -19,7 +19,7 @@
 </head>
 <body class="theme-blue">
     <div class="container">
-        @component('admin-nav')
+        @component('admin-nav', ["current" => $current])
         @endcomponent
         <main role="main">
             @hasSection('body')

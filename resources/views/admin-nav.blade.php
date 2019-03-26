@@ -264,24 +264,24 @@
         <!-- Menu -->
         <div class="menu">
             <ul class="list">
-                <li class="active">
+                <li @if($current =="admin-index") class="active" @else class="" @endif>
                     <a href="/admin">
                         <i class="material-icons">home</i>
                         <span>Home</span>
                     </a>
                 </li>
-                <li>
+                <li @if($current =="intermunicipal" || $current == "urbano") class="active" @else class="" @endif>
                     <a href="javascript:void(0);" class="menu-toggle">
                         <i class="material-icons">directions_bus</i>
                         <span>Gerenciar Frota</span>
                     </a>
                     <ul class="ml-menu">
-                        <li>
+                        <li @if($current =="intermunicipal") class="active" @else class="" @endif>
                             <a href="/admin/gerenciarfrota/intermunicipal">
                                 <span>Intermunicipal</span>
                             </a>
                         </li>
-                        <li>
+                        <li @if($current =="urbano") class="active" @else class="" @endif>
                             <a href="/admin/gerenciarfrota/urbano">
                                 <span>Urbano</span>
                             </a>
