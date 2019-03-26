@@ -1,313 +1,243 @@
-@extends('layout.app')
+@extends('layout.admin', ["current" => "intermunicipal"])
 @section('body')
-    <section class="content">
-        <div class="container-fluid">
-            <div class="block-header">
-                <h2>INTERMUNICIPAL</h2>
-            </div>
-            <!-- Widgets -->
-            <div class="row clearfix">
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-pink hover-expand-effect">
-                        <div class="icon">
-                            <i class="material-icons">playlist_add_check</i>
-                        </div>
-                        <div class="content">
-                            <div class="text">NEW TASKS</div>
-                            <div class="number count-to" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-cyan hover-expand-effect">
-                        <div class="icon">
-                            <i class="material-icons">help</i>
-                        </div>
-                        <div class="content">
-                            <div class="text">NEW TICKETS</div>
-                            <div class="number count-to" data-from="0" data-to="257" data-speed="1000" data-fresh-interval="20"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-light-green hover-expand-effect">
-                        <div class="icon">
-                            <i class="material-icons">forum</i>
-                        </div>
-                        <div class="content">
-                            <div class="text">NEW COMMENTS</div>
-                            <div class="number count-to" data-from="0" data-to="243" data-speed="1000" data-fresh-interval="20"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-orange hover-expand-effect">
-                        <div class="icon">
-                            <i class="material-icons">person_add</i>
-                        </div>
-                        <div class="content">
-                            <div class="text">NEW VISITORS</div>
-                            <div class="number count-to" data-from="0" data-to="1225" data-speed="1000" data-fresh-interval="20"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #END# Widgets -->
-            <!-- CPU Usage -->
-            <div class="row clearfix">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div class="card">
-                        <div class="header">
-                            <div class="row clearfix">
-                                <div class="col-xs-12 col-sm-6">
-                                    <h2>CPU USAGE (%)</h2>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 align-right">
-                                    <div class="switch panel-switch-btn">
-                                        <span class="m-r-10 font-12">REAL TIME</span>
-                                        <label>OFF<input type="checkbox" id="realtime" checked><span class="lever switch-col-cyan"></span>ON</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another action</a></li>
-                                        <li><a href="javascript:void(0);">Something else here</a></li>
-                                    </ul>
-                                </li>
+<section class="content">
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li>
+                <a href="javascript:void(0);">
+                    <i class="material-icons">home</i> Home
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0);">
+                    <i class="material-icons">directions_bus</i> Gerenciar Frota
+                </a>
+            </li>
+            <li class="active">
+                Ônibus intermunicipais
+            </li>
+        </ol>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>
+                        Ônibus intermunicipais
+                    </h2>
+                    <ul class="header-dropdown m-r--5">
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="material-icons">more_vert</i>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="javascript:void(0);">Action</a></li>
+                                <li><a href="javascript:void(0);">Another action</a></li>
+                                <li><a href="javascript:void(0);">Something else here</a></li>
                             </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                            <thead>
+                                <tr>
+                                    <th>Cod</th>
+                                    <th>Placa</th>
+                                    <th>Marca</th>
+                                    <th>Categoria</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Cod</th>
+                                    <th>Placa</th>
+                                    <th>Marca</th>
+                                    <th>Categoria</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                <tr>
+                                    <td>0001</td>
+                                    <td>AAA-1111</td>
+                                    <td>Mercedez</td>
+                                    <td>Mercedez F810M</td>
+                                </tr>
+                                <tr>
+                                    <td>0002</td>
+                                    <td>BBB-2222</td>
+                                    <td>Mercedez</td>
+                                    <td>Mercedez M25</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="modal-footer d-flex justify-content-center col-lg-7">
+                            <button class="btn btn-primary waves-effect" data-toggle="modal" data-target="#modelId"><i class="material-icons">add</i>Adicionar</button>
                         </div>
-                        <div class="body">
-                            <div id="real_time_chart" class="dashboard-flot-chart"></div>
+                        <div class="modal-footer d-flex justify-content-center col-lg-2">
+                            <button class="btn btn-warning waves-effect"><i class="material-icons">create</i>Editar</button>
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center col-lg-3">
+                            <button class="btn btn-danger waves-effect"><i class="material-icons">remove_circle</i>Disponibilidade</button>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- #END# CPU Usage -->
-            <div class="row clearfix">
-                <!-- Visitors -->
-                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                    <div class="card">
-                        <div class="body bg-pink">
-                            <div class="sparkline" data-type="line" data-spot-Radius="4" data-highlight-Spot-Color="rgb(233, 30, 99)" data-highlight-Line-Color="#fff"
-                                    data-min-Spot-Color="rgb(255,255,255)" data-max-Spot-Color="rgb(255,255,255)" data-spot-Color="rgb(255,255,255)"
-                                    data-offset="90" data-width="100%" data-height="92px" data-line-Width="2" data-line-Color="rgba(255,255,255,0.7)"
-                                    data-fill-Color="rgba(0, 188, 212, 0)">
-                                12,10,9,6,5,6,10,5,7,5,12,13,7,12,11
-                            </div>
-                            <ul class="dashboard-stat-list">
-                                <li>
-                                    TODAY
-                                    <span class="pull-right"><b>1 200</b> <small>USERS</small></span>
-                                </li>
-                                <li>
-                                    YESTERDAY
-                                    <span class="pull-right"><b>3 872</b> <small>USERS</small></span>
-                                </li>
-                                <li>
-                                    LAST WEEK
-                                    <span class="pull-right"><b>26 582</b> <small>USERS</small></span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- #END# Visitors -->
-                <!-- Latest Social Trends -->
-                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                    <div class="card">
-                        <div class="body bg-cyan">
-                            <div class="m-b--35 font-bold">LATEST SOCIAL TRENDS</div>
-                            <ul class="dashboard-stat-list">
-                                <li>
-                                    #socialtrends
-                                    <span class="pull-right">
-                                        <i class="material-icons">trending_up</i>
-                                    </span>
-                                </li>
-                                <li>
-                                    #materialdesign
-                                    <span class="pull-right">
-                                        <i class="material-icons">trending_up</i>
-                                    </span>
-                                </li>
-                                <li>#adminbsb</li>
-                                <li>#freeadmintemplate</li>
-                                <li>#bootstraptemplate</li>
-                                <li>
-                                    #freehtmltemplate
-                                    <span class="pull-right">
-                                        <i class="material-icons">trending_up</i>
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- #END# Latest Social Trends -->
-                <!-- Answered Tickets -->
-                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                    <div class="card">
-                        <div class="body bg-teal">
-                            <div class="font-bold m-b--35">ANSWERED TICKETS</div>
-                            <ul class="dashboard-stat-list">
-                                <li>
-                                    TODAY
-                                    <span class="pull-right"><b>12</b> <small>TICKETS</small></span>
-                                </li>
-                                <li>
-                                    YESTERDAY
-                                    <span class="pull-right"><b>15</b> <small>TICKETS</small></span>
-                                </li>
-                                <li>
-                                    LAST WEEK
-                                    <span class="pull-right"><b>90</b> <small>TICKETS</small></span>
-                                </li>
-                                <li>
-                                    LAST MONTH
-                                    <span class="pull-right"><b>342</b> <small>TICKETS</small></span>
-                                </li>
-                                <li>
-                                    LAST YEAR
-                                    <span class="pull-right"><b>4 225</b> <small>TICKETS</small></span>
-                                </li>
-                                <li>
-                                    ALL
-                                    <span class="pull-right"><b>8 752</b> <small>TICKETS</small></span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- #END# Answered Tickets -->
-            </div>
-
-            <div class="row clearfix">
-                <!-- Task Info -->
-                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                    <div class="card">
-                        <div class="header">
-                            <h2>TASK INFOS</h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another action</a></li>
-                                        <li><a href="javascript:void(0);">Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="body">
-                            <div class="table-responsive">
-                                <table class="table table-hover dashboard-task-infos">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Task</th>
-                                            <th>Status</th>
-                                            <th>Manager</th>
-                                            <th>Progress</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Task A</td>
-                                            <td><span class="label bg-green">Doing</span></td>
-                                            <td>John Doe</td>
-                                            <td>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-green" role="progressbar" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100" style="width: 62%"></div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Task B</td>
-                                            <td><span class="label bg-blue">To Do</span></td>
-                                            <td>John Doe</td>
-                                            <td>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%"></div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Task C</td>
-                                            <td><span class="label bg-light-blue">On Hold</span></td>
-                                            <td>John Doe</td>
-                                            <td>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-light-blue" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" style="width: 72%"></div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>Task D</td>
-                                            <td><span class="label bg-orange">Wait Approvel</span></td>
-                                            <td>John Doe</td>
-                                            <td>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-orange" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" style="width: 95%"></div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>Task E</td>
-                                            <td>
-                                                <span class="label bg-red">Suspended</span>
-                                            </td>
-                                            <td>John Doe</td>
-                                            <td>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-red" role="progressbar" aria-valuenow="87" aria-valuemin="0" aria-valuemax="100" style="width: 87%"></div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- #END# Task Info -->
-                <!-- Browser Usage -->
-                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                    <div class="card">
-                        <div class="header">
-                            <h2>BROWSER USAGE</h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another action</a></li>
-                                        <li><a href="javascript:void(0);">Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="body">
-                            <div id="donut_chart" class="dashboard-donut-chart"></div>
-                        </div>
-                    </div>
-                </div>
-                <!-- #END# Browser Usage -->
             </div>
         </div>
-    </section>
+    </div>
+    <!-- Button trigger modal -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-left">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title w-100 font-weight-bold">Adicionar Ônibus</h4>
+
+      </div>
+      <div class="modal-body mx-3">
+        <div class="row">
+            <div class="md-form mb-5 col-lg-8">
+                <label data-error="wrong" data-success="right" for="chassi">Chassi</label>
+                <input type="text" id="chassi" class="form-control validate">
+            </div>
+            <div class="md-form mb-5 col-lg-4">
+                <label data-error="wrong" data-success="right" for="placa">Placa</label>
+                <input type="text" id="placa" maxlength="7" placeholder="ABC1234" class="form-control validate">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+                <div class="col-lg-3">
+                    <label data-error="wrong" data-success="right" for="anoFab">Ano de Fabricação</label>
+                    <input type="number" id="anoFab" maxlenght="4" class="form-control validate">
+                </div>
+                <div class="col-lg-3">
+                    <form action="">
+                        <div>
+                            <label for="anoAq">Data de Aquisição</label>
+                            <input type="number" id="anoAq" placeholder="MM/YY" class="form-control validate" pattern="(1[0-2]|0[1-9])\/(1[5-9]|2\d)" data-valid-example="05/18">
+                        </div>
+                    </form>
+                    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/masking-input.js" data-autoinit="true"></script>
+                </div>
+                <div class="col-lg-3">
+                    <label data-error="wrong" data-success="right" for="cor">Cor Predominante</label>
+                    <input type="text" id="cor" class="form-control validate">
+                </div>
+                <div class="col-lg-3">
+                    <label data-error="wrong" data-success="right" for="qntAss">Quantidade de Assentos</label>
+                    <input type="number" maxlength="2" id="qntAss" class="form-control validate">
+                </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-3">
+                <label data-error="wrong" data-success="right" for="marca">Marca</label>
+                <input type="text" id="marca" class="form-control validate">
+            </div>
+            <div class="col-lg-3">
+                <label for="modelo">Modelo</label>
+                <input type="text" id="modelo" class="form-control validate">
+            </div>
+            <div class="col-lg-3">
+                <label data-error="wrong" data-success="right" for="capa">Capacidade Do Tanque</label>
+                <input type="number" id="capa" class="form-control validate">
+            </div>
+            <div class="col-lg-3">
+                <label data-error="wrong" data-success="right" for="qntEixos">Quantidade de Eixos</label>
+                <input type="number" id="qntEixos" class="form-control validate">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-3">
+                        <p class="text-left">
+                            <strong>Selecione a Categoria</strong>
+                        </p>
+                        <div class="form-check mb-4">
+                            <input class="form-check1" name="group1" type="radio" id="radio-179" value="option1" checked>
+                            <label class="form-check-label" for="radio-179">Convencional</label>
+                        </div>
+                        <div class="form-check mb-4">
+                            <input class="form-check2" name="group1" type="radio" id="radio-279" value="option2">
+                            <label class="form-check-label" for="radio-279">Executivo</label>
+                        </div>
+                        <div class="form-check mb-4">
+                            <input class="form-check3" name="group1" type="radio" id="radio-379" value="option3">
+                            <label class="form-check-label" for="radio-379">Leito</label>
+                        </div>
+                </div>
+                <div class="md-form mb-5 col-lg-3">
+                    <p class="text-left">
+                        <strong>Possui Banheiro</strong>
+                    </p>
+                    <div class="form-check mb-4">
+                        <input class="form-check1" name="group4" type="radio" id="radio-879" value="option1" checked>
+                        <label class="form-check-label" for="radio-879">Sim</label>
+                    </div>
+                    <div class="form-check mb-4">
+                        <input class="form-check2" name="group4" type="radio" id="radio-979" value="option2">
+                        <label class="form-check-label" for="radio-979">Não</label>
+                    </div>
+                </div>
+                <div class="md-form mb-5 col-lg-3">
+                        <p class="text-left">
+                            <strong>Selecione o Tipo</strong>
+                        </p>
+                        <div class="form-check mb-4">
+                            <input class="form-check1" name="group2" type="radio" id="radio-479" value="option1" checked>
+                            <label class="form-check-label" for="radio-479">Comum</label>
+                        </div>
+                        <div class="form-check mb-4">
+                            <input class="form-check2" name="group2" type="radio" id="radio-579" value="option2">
+                            <label class="form-check-label" for="radio-579">Andar Extra</label>
+                        </div>
+                </div>
+                <div class="md-form mb-5 col-lg-3">
+                        <p class="text-left">
+                            <strong>Selecione Estado</strong>
+                        </p>
+                        <div class="form-check mb-4">
+                            <input class="form-check1" name="group3" type="radio" id="radio-679" value="option1" checked>
+                            <label class="form-check-label" for="radio-679">Novo</label>
+                        </div>
+                        <div class="form-check mb-4">
+                            <input class="form-check2" name="group3" type="radio" id="radio-779" value="option2">
+                            <label class="form-check-label" for="radio-779">Usado</label>
+                        </div>
+                </div>
+            </div>
+      </div>
+      <div class="row">
+            <div class="modal-footer d-flex justify-content-center col-lg-10">
+                <button class="btn btn-primary waves-effect">Adicionar</button>
+            </div>
+            <div class="modal-footer d-flex justify-content-center col-lg-1">
+                <button class="btn btn-danger waves-effect" data-dismiss="modal">Cancelar</button>
+            </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+    <script>
+
+        // $('#exampleModal').on('show.bs.modal', event => {
+        //     var button = $(event.relatedTarget);
+        //     var modal = $(this);
+        //     // Use above variables to manipulate the DOM
+
+        // });
+
+    </script>
+</section>
 @endsection

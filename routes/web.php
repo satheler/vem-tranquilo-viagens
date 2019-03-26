@@ -12,15 +12,12 @@
  */
 
 Route::get('/', function () {
-    return "BusE-commerce";
+  return redirect('admin'); 
 });
 
-Route::get('/admin', function () {
-    return view('admin');
+Route::get('/admin', function(){
+    return view('admin-index');
 });
-
-Route::get('/admin/gerenciarfrota/intermunicipal', 'IntermunicipalController@index');
-Route::get('/admin/gerenciarfrota/urbano', 'UrbanoController@index');
 
 Route::prefix('admin')->group(function () {
     Route::prefix('onibus')->group(function () {
