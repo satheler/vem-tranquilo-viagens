@@ -257,12 +257,12 @@
                     </a>
                     <ul class="ml-menu">
                         <li @if($current =="intermunicipal") class="active" @else class="" @endif>
-                            <a href="/admin/gerenciarfrota/intermunicipal">
+                            <a href="{{url("/admin/gerenciarfrota/intermunicipal")}}">
                                 <span>Intermunicipal</span>
                             </a>
                         </li>
                         <li @if($current =="urbano") class="active" @else class="" @endif>
-                            <a href="/admin/gerenciarfrota/urbano">
+                            <a href="{{"/admin/gerenciarfrota/urbano"}}">
                                 <span>Urbano</span>
                             </a>
                         </li>
