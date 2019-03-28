@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "adminbsb-materialdesign": "^1.0.7",
-        "bootstrap-sass": "^3.4.1"
+        "bootstrap-sass": "^3.4.1",
+        "datatables": "^1.10.18"
     }
 }

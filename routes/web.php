@@ -12,16 +12,10 @@
  */
 
 Route::get('/', function () {
-  return redirect('admin'); 
+  return  view('index');
 });
 
-Route::get('/admin', function(){
-    return view('admin-index');
-});
-
-Route::prefix('admin')->group(function () {
-    Route::prefix('onibus')->group(function () {
-        Route::resource('urbano', 'OnibusUrbanoController');
-        Route::resource('intermunicipal', 'OnibusIntermunicipalController');
-    });
+Route::prefix('onibus')->group(function () {
+    Route::resource('urbano', 'OnibusUrbanoController');
+    Route::resource('intermunicipal', 'OnibusIntermunicipalController');
 });
