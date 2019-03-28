@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Blade::directive('active', function ($expression) {
+        //     return $expression;
+        //     // list($pattern, $class) = explode(',', str_replace(['(', ')', ' ', "'"], '', $expression));
+        //     // return "<?= request()->is('$pattern') ? '$class' : ''; ?->";
+        // });
+
+        Blade::component('components.navigation.simpleButtonMenu', 'simpleButtonMenu');
+        Blade::component('components.navigation.groupMenu', 'groupMenu');
+        Blade::component('components.header.headerIconButton', 'headerIconButton');
     }
 }
