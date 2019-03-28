@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Route::prefix('onibus')->group(function () {
     Route::get('urbano', function () {
-        return view('pages.home');
+        return view('pages.frotas.urbano.index');
     })->name('onibusurbano');
 
     Route::get('intermunicipal', function () {
