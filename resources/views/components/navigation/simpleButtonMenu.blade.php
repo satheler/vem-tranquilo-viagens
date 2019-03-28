@@ -1,7 +1,6 @@
 <li class="">
-    {{-- @active(<?= $url ?>) --}}
     <a href="{{ $url }}">
         <i class="material-icons">{{ $icon }}</i>
-        <span>{{ $name }} - {{{ $url }}} </span>
+        <span>{{ $name }} </span>
     </a>
 </li>

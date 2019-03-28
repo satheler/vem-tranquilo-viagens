@@ -1,5 +1,4 @@
 <li class="">
-     {{-- @active <?= $url ?> --}}
     <a href="#" class="menu-toggle">
         <i class="material-icons">{{ $icon }}</i>
         <span>{{ $groupName }}</span>

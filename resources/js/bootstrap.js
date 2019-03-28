@@ -26,6 +26,7 @@ try {
     require('adminbsb-materialdesign/plugins/flot-charts/jquery.flot.categories')
     require('adminbsb-materialdesign/plugins/flot-charts/jquery.flot.time')
     require('adminbsb-materialdesign/plugins/jquery-sparkline/jquery.sparkline')
+    require('adminbsb-materialdesign/plugins/jquery-datatable/jquery.dataTables')
     require('adminbsb-materialdesign/js/admin')
     require('adminbsb-materialdesign/js/pages/index')
     require('adminbsb-materialdesign/js/demo')
