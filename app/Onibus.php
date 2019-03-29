@@ -43,4 +43,23 @@ class Onibus extends Model
 
         return $this;
     }
+
+    public function disable(int $id,array $input)
+    {
+        $onibus = $this->find(id);
+        $validator = Validator::make($input, [
+            'observacao'=> 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            throw new Exception($validator->messages());
+        }
+
+	    $this->inativo = true;
+        $this->observacao = $input['observacao'];
+
+        $onibus->save();
+
+        return $this;
+    }
 }
