@@ -104,13 +104,20 @@ class OnibusIntermunicipalController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Disable the specified resource from storage.
      *
      * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function disable($id, $request)
     {
-        return response(['error' => 'Função não permitida.'], 501);
+        try {
+            $onibus = new OnibusIntermunicipal();
+            $onibus->disable($id, $request);
+        } catch (Exception $e) {
+            return response($e->getMessage(), 400);
+        }
+
     }
 }
