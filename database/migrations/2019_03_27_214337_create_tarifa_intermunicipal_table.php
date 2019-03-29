@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTarifaIntermunicipalsTable extends Migration
+class CreateTarifaIntermunicipalTable extends Migration
 {
+    private $dataBaseName = 'tarifa_intermunicipal';
     /**
      * Run the migrations.
      *
@@ -13,7 +14,7 @@ class CreateTarifaIntermunicipalsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tarifa_intermunicipals', function (Blueprint $table) {
+        Schema::create($this->dataBaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
         });
@@ -26,6 +27,6 @@ class CreateTarifaIntermunicipalsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tarifa_intermunicipals');
+        Schema::dropIfExists($this->dataBaseName);
     }
 }

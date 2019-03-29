@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTarifasTable extends Migration
+class CreateTarifaTable extends Migration
 {
+    private $databaseName = "tarifa";
     /**
      * Run the migrations.
      *
@@ -13,8 +14,14 @@ class CreateTarifasTable extends Migration
      */
     public function up()
     {
-        Schema::create('tarifas', function (Blueprint $table) {
+        Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('valor');
+            $table->date('data');
+
+            $table->bigInteger('description_id')->unsigned();
+            $table->string('description_type');
+
             $table->timestamps();
         });
     }
@@ -26,6 +33,6 @@ class CreateTarifasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tarifas');
+        Schema::dropIfExists($this->databaseName);
     }
 }

@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTarifaLocalsTable extends Migration
+class CreateTarifaLocalTable extends Migration
 {
+    private $databaseName = "tarifa_local";
     /**
      * Run the migrations.
      *
@@ -13,8 +14,12 @@ class CreateTarifaLocalsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tarifa_locals', function (Blueprint $table) {
+        Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('cidade');
+            $table->string('licitacao');
+            $table->double('valor_especial');
+
             $table->timestamps();
         });
     }
@@ -26,6 +31,6 @@ class CreateTarifaLocalsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tarifa_locals');
+        Schema::dropIfExists($this->databaseName);
     }
 }
