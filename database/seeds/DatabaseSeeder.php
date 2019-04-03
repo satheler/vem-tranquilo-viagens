@@ -12,5 +12,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(OnibusSeeder::class);
+        $this->call(TarifaSeeder::class);
+    
+
     }
 }
