@@ -4,9 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTrajetoLocalTable extends Migration
+class TrajetoTrecho extends Migration
 {
-    private $dataBaseName = 'trajeto_local';
+    private $databaseName = 'trajeto_trecho';
     /**
      * Run the migrations.
      *
@@ -14,12 +14,11 @@ class CreateTrajetoLocalTable extends Migration
      */
     public function up()
     {
-        Schema::create($this->dataBaseName, function (Blueprint $table) {
+        Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('qntParadas');
-            $table->string('terminal');
-            $table->time('horarioSaida');
-            $table->time('horarioChegada');
+
+            $table->bigInteger('trajeto_id')->unsigned();
+            $table->bigInteger('trecho_id')->unsigned();
 
             $table->timestamps();
         });
@@ -32,6 +31,6 @@ class CreateTrajetoLocalTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists($this->dataBaseName);
+        Schema::dropIfExists($this->databaseName);
     }
 }

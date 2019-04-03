@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateTrajetoIntermunicipalTable extends Migration
 {
+    private $databaseName = 'trajeto_intermunicipal';
     /**
      * Run the migrations.
      *
@@ -13,8 +14,9 @@ class CreateTrajetoIntermunicipalTable extends Migration
      */
     public function up()
     {
-        Schema::create('trajeto_intermunicipal', function (Blueprint $table) {
+        Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('listaDeTrechos');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreateTrajetoIntermunicipalTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('trajeto_intermunicipal');
+        Schema::dropIfExists($this->databaseName);
     }
 }
