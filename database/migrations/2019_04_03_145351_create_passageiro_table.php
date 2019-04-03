@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePassageirosTable extends Migration
+class CreatePassageiroTable extends Migration
 {
+    private $databaseName = 'passageiro';
     /**
      * Run the migrations.
      *
@@ -13,8 +14,11 @@ class CreatePassageirosTable extends Migration
      */
     public function up()
     {
-        Schema::create('passageiros', function (Blueprint $table) {
+        Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('tipo');
+            $table->integer('desconto');
+
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ class CreatePassageirosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('passageiros');
+        Schema::dropIfExists($this->databaseName);
     }
 }
