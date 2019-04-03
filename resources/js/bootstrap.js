@@ -11,24 +11,6 @@ try {
     window.$ = window.jQuery = require('jquery')
 
     require('bootstrap-sass')
-
-    // JS Files - Admin BSB
-    require('adminbsb-materialdesign/plugins/bootstrap-select/js/bootstrap-select')
-    require('adminbsb-materialdesign/plugins/jquery-slimscroll/jquery.slimscroll')
-    window.Waves = require('adminbsb-materialdesign/plugins/node-waves/waves')
-    require('adminbsb-materialdesign/plugins/jquery-countto/jquery.countTo')
-    window.Raphael = require('adminbsb-materialdesign/plugins/raphael/raphael')
-    require('adminbsb-materialdesign/plugins/morrisjs/morris')
-    require('adminbsb-materialdesign/plugins/chartjs/Chart.bundle')
-    require('adminbsb-materialdesign/plugins/flot-charts/jquery.flot')
-    require('adminbsb-materialdesign/plugins/flot-charts/jquery.flot.resize')
-    require('adminbsb-materialdesign/plugins/flot-charts/jquery.flot.pie')
-    require('adminbsb-materialdesign/plugins/flot-charts/jquery.flot.categories')
-    require('adminbsb-materialdesign/plugins/flot-charts/jquery.flot.time')
-    require('adminbsb-materialdesign/plugins/jquery-sparkline/jquery.sparkline')
-    require('adminbsb-materialdesign/js/admin')
-    require('adminbsb-materialdesign/js/pages/index')
-    require('adminbsb-materialdesign/js/demo')
 } catch (e) {}
 
 /**

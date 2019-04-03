@@ -1,15 +1,9 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
-// Variables
-// @import 'variables';
-
 // Bootstrap
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
-@import '~adminbsb-materialdesign/scss/style';
-@import '~adminbsb-materialdesign/plugins/node-waves/waves';
-@import '~adminbsb-materialdesign/plugins/animate-css/animate';
-@import '~adminbsb-materialdesign/plugins/morrisjs/morris';
-@import '~adminbsb-materialdesign/scss/themes/_all-themes';
-@import '~adminbsb-materialdesign/css/materialize';
+
+// Styles
 @import 'custom';
+// @import 'styles';
