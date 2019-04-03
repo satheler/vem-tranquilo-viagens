@@ -30,6 +30,7 @@ class OnibusIntermunicipal extends Model
     public function add(array $input)
     {
         $validator = Validator::make($input, [
+            'categoria' => 'exists:categoria,categoria',
             'banheiro' => 'required|boolean',
         ]);
 
@@ -37,6 +38,7 @@ class OnibusIntermunicipal extends Model
             throw new Exception($validator->messages());
         }
 
+        $this->categoria = $input['categoria'];
         $this->banheiro = $input['banheiro'];
 
         $onibus = new Onibus();

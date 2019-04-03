@@ -20,6 +20,8 @@ class CreateOnibusIntermunicipalTable extends Migration
             $table->bigIncrements('id');
             $table->boolean('banheiro');
 
+            $table->bigInteger('categoria_id')->unsigned();
+
             $table->timestamps();
         });
     }

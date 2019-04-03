@@ -24,6 +24,8 @@ class OnibusSeeder extends Seeder
             'description_type' => 'App\OnibusUrbano',
             'disponivel' => true,
             'acessibilidade' => false,
+            'inativo' => false,
+            'observacao' => 'N/A',
             'custoManutencao' => 199.20,
             'chassi' => 'G2L5CH64R7K85G5KG',
             'placa' => 'GOV8956',
