@@ -13,7 +13,9 @@ class TrajetoIntermunicipalController extends Controller
      */
     public function index()
     {
-        //
+        $trajeto = new TrajetoIntermunicipal();
+        $listaDeTrajetos = $trajeto->getAll();
+        return view('xxx', compact('listaDeTrajetos'));
     }
 
     /**
@@ -23,7 +25,7 @@ class TrajetoIntermunicipalController extends Controller
      */
     public function create()
     {
-        //
+        return view('xxx');
     }
 
     /**
@@ -34,7 +36,15 @@ class TrajetoIntermunicipalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+
+            $trajeto = new TrajetoIntermunicipal();
+            $trajeto->add($request->input());
+            return response(["status" => "Trajeto cadastrado com sucesso"], 201);
+
+        } catch (Exception $e) {
+            return response($e->getMessage(), 400);
+        }
     }
 
     /**
@@ -45,7 +55,9 @@ class TrajetoIntermunicipalController extends Controller
      */
     public function show($id)
     {
-        //
+        $trajeto = new TrajetoIntermunicipal();
+        $trajeto = $trajeto->get($id);
+        return response($trajeto->toJson(), 200);
     }
 
     /**
@@ -56,7 +68,10 @@ class TrajetoIntermunicipalController extends Controller
      */
     public function edit($id)
     {
-        //
+        $trajeto = new TrajetoIntermunicipal();
+        $listaDeTrajetos = $trajeto->getAll();
+        $trajetoEditado = $listaDeTrajetos[$id];
+        return "Formulario de edição para o".$trajetoEditado->toJson();
     }
 
     /**
@@ -68,7 +83,15 @@ class TrajetoIntermunicipalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+
+            $trajetoEditado = new TrajetoIntermunicipal();
+            $trajetoEditado->edit($id);
+            return response(["status" => "Trajeto atualizado com sucesso"], 202);
+
+        } catch (Exception $e) {
+            return response($e->getMessage(), 400);
+        }
     }
 
     /**
