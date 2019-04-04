@@ -25,15 +25,16 @@ class Funcionario extends Model
     {
         $validator = Validator::make($input, [
             'nome' => 'required|string',
-            'tipo' => 'exists:tipo,tipo'
+            'tipo' => 'exists:tipo,nome'
         ]);
 
         if ($validator->fails()) {
             throw new Exception($validator->messages());
         }
+        //Funcionario::where('id', $id)->first();
 
         $this->nome = $input['nome'];
-        $this->tipo = $input['tipo'];
+        $this->id = $input['tipo'];
 
         $this->save();
     }
