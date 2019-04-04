@@ -80,7 +80,7 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('home') }}">
-                        <i class="ni ni-tv-2 text-primary"></i> {{ __('Home') }}
+                            <i class="fas fa-home"></i> {{ __('Página Inicial') }}
                     </a>
                 </li>
                 <li class="nav-item">
@@ -92,12 +92,12 @@
                     <div class="collapse show" id="navbar-examples">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('profile.edit') }}">
+                                <a class="nav-link" href="{{ route('urbano.index') }}">
                                     {{ __('Ônibus Urbano') }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('user.index') }}">
+                                <a class="nav-link" href="{{ route('intermunicipal.index') }}">
                                     {{ __('Ônibus Intermunicipal') }}
                                 </a>
                             </li>

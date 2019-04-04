@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\OnibusUrbano;
-use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Http\Request;
 
 class OnibusUrbanoController extends Controller
 {
@@ -17,7 +17,7 @@ class OnibusUrbanoController extends Controller
     {
         $onibus = new OnibusUrbano();
         $listaDeOnibus = $onibus->getAll();
-        return view('urbano', compact('listaDeOnibus'));
+        return view('frotas.urbano.index', compact('listaDeOnibus'));
 
     }
 
@@ -28,7 +28,8 @@ class OnibusUrbanoController extends Controller
      */
     public function create()
     {
-        return "Formulário cadastro";
+        return view('frotas.urbano.create');
+        // return "Formulário cadastro";
         //return view('cadastroOnibusUrbano');
     }
 
@@ -62,10 +63,10 @@ class OnibusUrbanoController extends Controller
     {
         $onibus = new OnibusUrbano();
         //if ($id >= 0 && $id < count($listadeOnibus)) {
-            $onibus = $onibus->get($id);
-            return response($onibus->toJson(), 200);
-       //}
-       //return response(['error' => 'Ônibus não encontrado.'], 400);
+        $onibus = $onibus->get($id);
+        return response($onibus->toJson(), 200);
+        //}
+        //return response(['error' => 'Ônibus não encontrado.'], 400);
     }
 
     /**
@@ -79,7 +80,7 @@ class OnibusUrbanoController extends Controller
         $onibus = new OnibusUrbano();
         $listadeOnibus = $onibus->getAll();
         $onibuseditado = $listadeOnibus[$id];
-        return "Formulario de edição para o".$onibuseditado->toJson();
+        return "Formulario de edição para o" . $onibuseditado->toJson();
 
     }
 
