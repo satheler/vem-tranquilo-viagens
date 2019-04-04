@@ -1,7 +1,7 @@
-@extends('layouts.app', ['title' => __('User Management')])
+@extends('layouts.app', ['title' => __('Ônibus Intermunicipal')])
 
 @section('content')
-    @include('layouts.headers.cards')
+    @include('layouts.headers.guest')
 
     <div class="container-fluid mt--7">
         <div class="row">
@@ -10,14 +10,14 @@
                     <div class="card-header border-0">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h3 class="mb-0">{{ __('Users') }}</h3>
+                                <h3 class="mb-0">{{ __('Ônibus Intermunicipal') }}</h3>
                             </div>
                             <div class="col-4 text-right">
-                                <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary">{{ __('Add user') }}</a>
+                                <a href="{{ route('intermunicipal.create') }}" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Adicionar ônibus"><i class="fas fa-plus"></i></a>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-12">
                         @if (session('status'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -33,39 +33,36 @@
                         <table class="table align-items-center table-flush">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col">{{ __('Name') }}</th>
-                                    <th scope="col">{{ __('Email') }}</th>
-                                    <th scope="col">{{ __('Creation Date') }}</th>
+                                    <th align="center" scope="col">{{ __('#') }}</th>
+                                    <th scope="col">{{ __('Placa') }}</th>
+                                    <th scope="col">{{ __('Chassi') }}</th>
+                                    <th scope="col">{{ __('Lotação') }}</th>
+                                    <th scope="col">{{ __('Ar condicionado') }}</th>
+                                    <th scope="col">{{ __('Disponibilidade') }}</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $user)
+                                @foreach ($listaDeOnibus as $onibus)
                                     <tr>
-                                        <td>{{ $user->name }}</td>
                                         <td>
-                                            <a href="mailto:{{ $user->email }}">{{ $user->email }}</a>
+                                            <button class="btn btn-icon btn-2 btn-primary" type="button">
+                                                <span class="btn-inner--icon"><i class="ni ni-single-copy-04"></i></span>
+                                            </button>
                                         </td>
-                                        <td>{{ $user->created_at->format('d/m/Y H:i') }}</td>
+                                        <td>{{ $onibus->description->placa }}</td>
+                                        <td>{{ $onibus->description->chassi }}</td>
+                                        <td>{{ $onibus->lotacao }}</td>
+                                        <td>{{ $onibus->arCondicionado }}</td>
+                                        <td>{{ $onibus->description->disponivel }}</td>
+
                                         <td class="text-right">
                                             <div class="dropdown">
                                                 <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <i class="fas fa-ellipsis-v"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                    @if ($user->id != auth()->id())
-                                                        <form action="{{ route('user.destroy', $user) }}" method="post">
-                                                            @csrf
-                                                            @method('delete')
-                                                            
-                                                            <a class="dropdown-item" href="{{ route('user.edit', $user) }}">{{ __('Edit') }}</a>
-                                                            <button type="button" class="dropdown-item" onclick="confirm('{{ __("Are you sure you want to delete this user?") }}') ? this.parentElement.submit() : ''">
-                                                                {{ __('Delete') }}
-                                                            </button>
-                                                        </form>    
-                                                    @else
-                                                        <a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('Edit') }}</a>
-                                                    @endif
+                                                    <a class="dropdown-item" href="#">{{ __('Em manutenção') }}</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -76,13 +73,13 @@
                     </div>
                     <div class="card-footer py-4">
                         <nav class="d-flex justify-content-end" aria-label="...">
-                            {{ $users->links() }}
+                            {{-- {{ $users->links() }} --}}
                         </nav>
                     </div>
                 </div>
             </div>
         </div>
-            
+
         @include('layouts.footers.auth')
     </div>
 @endsection

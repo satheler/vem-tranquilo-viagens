@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\OnibusIntermunicipal;
-use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Http\Request;
 
 class OnibusIntermunicipalController extends Controller
 {
@@ -17,7 +17,7 @@ class OnibusIntermunicipalController extends Controller
     {
         $onibus = new OnibusIntermunicipal();
         $listaDeOnibus = $onibus->getAll();
-        return view('intermunicipal', compact('listaDeOnibus'));
+        return view('frotas.intermunicipal.index', compact('listaDeOnibus'));
 
     }
 
@@ -28,7 +28,8 @@ class OnibusIntermunicipalController extends Controller
      */
     public function create()
     {
-        return "Formulário cadastro";
+        return view('frotas.intermunicipal.create');
+        // return "Formulário cadastro";
         //return view('cadastroOnibusIntermunicipal');
     }
 
@@ -61,11 +62,11 @@ class OnibusIntermunicipalController extends Controller
     public function show($id)
     {
         $onibus = new OnibusIntermunicipal();
-       // if ($id >= 0 && $id < count($listadeOnibus)) {
-            $onibus = $onibus->get($id);
-            return response($onibus->toJson(), 200);
-       // }
-       // return response(['error' => 'Ônibus não encontrado.'], 400);
+        // if ($id >= 0 && $id < count($listadeOnibus)) {
+        $onibus = $onibus->get($id);
+        return response($onibus->toJson(), 200);
+        // }
+        // return response(['error' => 'Ônibus não encontrado.'], 400);
     }
 
     /**
@@ -79,7 +80,7 @@ class OnibusIntermunicipalController extends Controller
         $onibus = new OnibusIntermunicipal();
         $listadeOnibus = $onibus->getAll();
         $onibuseditado = $listadeOnibus[$id];
-        return "Formulario de edição para o".$onibuseditado->toJson();
+        return "Formulario de edição para o" . $onibuseditado->toJson();
 
     }
 
