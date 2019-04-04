@@ -101,7 +101,7 @@ class PassageiroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete($id)
+    public function destroy($id)
     {
         try {
             $passageiro = Passageiro::where('id', $id)->first();
