@@ -25,6 +25,9 @@
     },
     "dependencies": {
         "adminbsb-materialdesign": "^1.0.7",
-        "bootstrap-sass": "^3.4.1"
+        "bootstrap-sass": "^3.4.1",
+        "datatables.net": "^1.10.19",
+        "promise-polyfill": "^8.1.0",
+        "sweetalert2": "^8.8.1"
     }
 }
