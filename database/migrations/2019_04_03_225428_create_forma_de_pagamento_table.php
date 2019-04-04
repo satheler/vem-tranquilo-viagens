@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFormaDePagamentosTable extends Migration
+class CreateFormaDePagamentoTable extends Migration
 {
+    private $databaseName = 'forma_de_pagamento';
     /**
      * Run the migrations.
      *
@@ -13,8 +14,11 @@ class CreateFormaDePagamentosTable extends Migration
      */
     public function up()
     {
-        Schema::create('forma_de_pagamentos', function (Blueprint $table) {
+        Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('forma');
+            $table->boolean('intermunicipal');
+
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ class CreateFormaDePagamentosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('forma_de_pagamentos');
+        Schema::dropIfExists($this->databaseName);
     }
 }
