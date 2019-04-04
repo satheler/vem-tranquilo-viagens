@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Validator;
+use Exception;
 
 class Passageiro extends Model
 {
