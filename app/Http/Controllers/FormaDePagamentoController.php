@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\FormaDePagamento;
 
 class FormaDePagamentoController extends Controller
 {
@@ -102,6 +103,15 @@ class FormaDePagamentoController extends Controller
      */
     public function destroy($id)
     {
-        return response(['error' => 'Função não permitida.'], 501);
+        try {
+            $pagamento = FormaDePagamento::where('id', $id)->first();
+
+            if($pagamento) {
+
+                return $pagamento->delete();
+            }
+        } catch (Exception $e) {
+            return response($e->getMessage(), 400);
+        }
     }
 }
