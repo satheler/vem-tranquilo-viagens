@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Funcionario;
 
-class AlocarFuncionarioController extends Controller
+class FuncionarioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -102,6 +103,14 @@ class AlocarFuncionarioController extends Controller
      */
     public function destroy($id)
     {
-        return response(['error' => 'Função não permitida.'], 501);
+        try {
+            $funcionario = Funcionario::where('id', $id)->first();
+            if($funcionario) {
+                return $funcionario->delete();
+            }
+
+        } catch (Exception $e) {
+            return response($e->getMessage(), 400);
+        }
     }
 }
