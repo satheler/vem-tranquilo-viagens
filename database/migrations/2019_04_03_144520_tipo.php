@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAlocarFuncionariosTable extends Migration
+class Tipo extends Migration
 {
+    private $databaseName = 'tipo';
     /**
      * Run the migrations.
      *
@@ -13,8 +14,9 @@ class CreateAlocarFuncionariosTable extends Migration
      */
     public function up()
     {
-        Schema::create('alocar_funcionarios', function (Blueprint $table) {
+        Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('nome');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreateAlocarFuncionariosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('alocar_funcionarios');
+        Schema::dropIfExists($this->databaseName);
     }
 }
