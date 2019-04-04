@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Passageiro;
 
 class PassageiroController extends Controller
 {
@@ -102,6 +103,11 @@ class PassageiroController extends Controller
      */
     public function destroy($id)
     {
-        return response(['error' => 'Função não permitida.'], 501);
+        try {
+            $passageiro = new Passageiro();
+            $passageiro->destroy($id);
+        } catch (Exception $e) {
+            return response($e->getMessage(), 400);
+        }
     }
 }
