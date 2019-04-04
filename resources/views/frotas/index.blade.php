@@ -86,7 +86,7 @@ $('[data-remove-id]').on('click', async function () {
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Sim, tenho certeza!',
-        cancelButtonText: 'cancelar'
+        cancelButtonText: 'Cancelar'
     })
 
     if(value){
