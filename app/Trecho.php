@@ -21,7 +21,7 @@ class Trecho extends Model
     public function add(array $input)
     {
         $validator = Validator::make($input, [
-            'valor' => 'valor|integer',
+            'valor' => 'required|integer',
             'horarioSaida' => 'required|time',
             'horarioChegada' => 'required|time',
             'origem'=> 'exists:cidade,cidade',
@@ -45,7 +45,7 @@ class Trecho extends Model
         $trecho = $this->find($id);
 
         $validator = Validator::make($input, [
-            'valor' => 'valor|integer',
+            'valor' => 'required|integer',
             'horarioSaida' => 'required|time',
             'horarioChegada' => 'required|time',
             'origem'=> 'exists:cidade,cidade',
