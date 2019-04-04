@@ -1,14 +1,12 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
-class CreateOnibusTable extends Migration
+class CreateTarifaTable extends Migration
 {
-
-    private $databaseName = "onibus";
-
+    private $databaseName = "tarifa";
     /**
      * Run the migrations.
      *
@@ -18,14 +16,8 @@ class CreateOnibusTable extends Migration
     {
         Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->boolean('disponivel');
-            $table->boolean('acessibilidade');
-            $table->double('custoManutencao');
-            $table->string('chassi', 17);
-            $table->string('placa', 7);
-
-            $table->boolean('inativo')->default(false);
-            $table->string('observacao')->nullable();
+            $table->integer('valor');
+            $table->date('data');
 
             $table->bigInteger('description_id')->unsigned();
             $table->string('description_type');

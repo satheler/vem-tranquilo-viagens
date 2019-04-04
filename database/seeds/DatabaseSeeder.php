@@ -13,5 +13,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([UsersTableSeeder::class]);
         $this->call(OnibusSeeder::class);
+        $this->call(TarifaSeeder::class);
+    
+
     }
 }
