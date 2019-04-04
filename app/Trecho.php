@@ -4,6 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Exception;
+use Validator;
+
 class Trecho extends Model
 {
     protected $table = 'trecho';
