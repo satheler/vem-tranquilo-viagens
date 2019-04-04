@@ -64,9 +64,9 @@ class TrajetoLocal extends Model
         $trajeto->save();
     }
 
-    public function destroy(int $id){
+    // public function destroy(int $id){
 
-        $this->destroy($id);
-        //return response();
-    }
+    //     $this->destroy($id);
+    //     //return response();
+    // }
 }
