@@ -15,7 +15,7 @@ class TrajetoUrbanoController extends Controller
     {
         $trajeto = new TrajetoLocal();
         $listaDeTrajetos = $trajeto->getAll();
-        return view('xxx', compact('listaDeTrajetos'));
+        return view('trajetoLocal', compact('listaDeTrajetos'));
     }
 
     /**
@@ -25,7 +25,7 @@ class TrajetoUrbanoController extends Controller
      */
     public function create()
     {
-        return view('xxx');
+        return view('Formulario trajetoLocal');
     }
 
     /**
