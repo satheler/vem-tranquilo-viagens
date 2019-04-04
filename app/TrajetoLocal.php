@@ -13,7 +13,7 @@ class TrajetoLocal extends Model
 
     public function description()
     {
-        return $this->morphOne('App\Trajeto', 'description');
+        return $this->morphTo();
     }
 
     public function getAll()
@@ -62,5 +62,11 @@ class TrajetoLocal extends Model
         $trajeto->horarioChegada = $input['horarioChegada'];
 
         $trajeto->save();
+    }
+
+    public function destroy(int $id){
+
+        $this->destroy($id);
+        //return response();
     }
 }

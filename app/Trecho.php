@@ -10,7 +10,7 @@ class Trecho extends Model
 
     public function description()
     {
-        return $this->morphOne('App\Trecho', 'description');
+        return $this->morphTo();
     }
 
     public function getAll()
@@ -63,5 +63,12 @@ class Trecho extends Model
         $trecho->destino = $input['destino'];
 
         $trecho->save();
+    }
+
+
+    public function destroy(int $id){
+
+        $this->destroy($id);
+        //return response();
     }
 }

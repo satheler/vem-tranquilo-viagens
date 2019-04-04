@@ -17,7 +17,7 @@ class TrajetoIntermunicipal extends Model
 
     public function description()
     {
-        return $this->morphOne('App\Trajeto', 'description');
+        return $this->morphTo();
     }
 
     public function getAll()
@@ -54,6 +54,12 @@ class TrajetoIntermunicipal extends Model
         $trajeto->listaDeTrechos = $input['listaDeTrechos'];
 
         $trajeto->save();
+    }
+
+    public function destroy(int $id){
+
+        $this->destroy($id);
+        //return response();
     }
 
 }
