@@ -13,7 +13,7 @@ class Passageiro extends Model
         return $this->morphTo();
     }
 
-    protected function getAll()
+    public function getAll()
     {
         return $this::all();
     }
@@ -55,9 +55,9 @@ class Passageiro extends Model
 
         $this->destroy($id);
 
-    //  OUTRA FORMA DE DELETAR O OBJETO
-    //  $passageiro = $this->find($id);
-    //  $passageiro->delete();
+    // //  OUTRA FORMA DE DELETAR O OBJETO
+    // //  $passageiro = $this->find($id);
+    // //  $passageiro->delete();
 
     }
 }
