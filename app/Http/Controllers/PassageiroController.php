@@ -101,11 +101,17 @@ class PassageiroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
         try {
-            $passageiro = new Passageiro();
-            $passageiro->destroy($id);
+            $passageiro = Passageiro::where('id', $id)->first();
+
+            if($passageiro) {
+
+                return $passageiro->delete();
+            }
+            // $passageiro = new Passageiro();
+            // $passageiro->destroy($id);
         } catch (Exception $e) {
             return response($e->getMessage(), 400);
         }

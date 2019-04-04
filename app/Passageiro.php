@@ -51,13 +51,15 @@ class Passageiro extends Model
         $passageiro->save();
     }
 
-    public function destroy(int $id){
+    //public function destroy(int $id){
 
-        $this->destroy($id);
+        //$this::destroy($id);
 
-    // //  OUTRA FORMA DE DELETAR O OBJETO
-    // //  $passageiro = $this->find($id);
-    // //  $passageiro->delete();
 
-    }
+
+    //  OUTRA FORMA DE DELETAR O OBJETO
+        //$passageiro = $this->find($id);
+        //$passageiro->delete();
+
+   // }
 }
