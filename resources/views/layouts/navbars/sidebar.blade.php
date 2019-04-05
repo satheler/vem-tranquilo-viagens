@@ -90,7 +90,7 @@
                  <!-- Passageiro :: INICIO -->
                  <li class="nav-item">
                     <a class="nav-link" href="{{ route('passageiro.index') }}">
-                        <i class="fas fa-users"></i> {{ __('Passageiros') }}
+                        <i class="fas fa-users"></i> {{ __('Categoria de Passageiros') }}
                     </a>
                 </li>
                 <!-- Passageiro :: FIM -->
@@ -106,7 +106,7 @@
                  <!-- Pagamento :: INICIO -->
                  <li class="nav-item">
                     <a class="nav-link" href="{{ route('pagamento.index') }}">
-                        <i class="fas fa-money-bill"></i> {{ __('Pagamentos') }}
+                        <i class="fas fa-money-bill"></i> {{ __('Formas de Pagamentos') }}
                     </a>
                 </li>
                 <!-- Pagamento :: FIM -->
