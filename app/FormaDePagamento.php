@@ -21,6 +21,13 @@ class FormaDePagamento extends Model
         return $this::all();
     }
 
+    public function get(int $id)
+    {
+        $item = $this->find($id);
+        return $item;
+    }
+
+
     public function add(array $input)
     {
         $validator = Validator::make($input, [
