@@ -26,7 +26,6 @@
             <table id="datatable-basic" class="table align-items-center table-flush dataTable">
                 <thead class="thead-light">
                     <tr>
-                        <th scope="col"></th>
                         <th scope="col">{{ __('Forma') }}</th>
                         <th scope="col">{{ __('Tipo') }}</th>
                         <th scope="col">Ações</th>
@@ -35,11 +34,6 @@
                 <tbody>
                     @foreach ($lista as $item)
                         <tr data-table-row-id={{ $item->id }}>
-                            <td>
-                                <button data-show-id={{ $item->id }} class="btn btn-icon btn-sm btn-primary" type="button">
-                                    <span class="btn-inner--icon"><i class="ni ni-single-copy-04"></i></span>
-                                </button>
-                            </td>
                             <td>{{ $item->forma }}</td>
                             <td  align="center">
                                 @if ($item->intermunicipal)
@@ -54,8 +48,7 @@
                                         <i class="fas fa-ellipsis-v"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                        <a class="dropdown-item" data-available-id="{{ $item->id }}" href="#">{{ __('Em manutenção') }}</a>
-                                        <a class="dropdown-item" data-remove-id="{{ $item->id }}" href="#">{{ __('Deixar inativo') }}</a>
+                                        <a class="dropdown-item" data-remove-id="{{ $item->id }}" href="#">{{ __('Remover') }}</a>
                                     </div>
                                 </div>
                             </td>

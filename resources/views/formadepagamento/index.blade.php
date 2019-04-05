@@ -102,45 +102,5 @@ $('[data-remove-id]').on('click', async function () {
         })
     }
 })
-
-
-$('[data-available-id]').on('click', async function () {
-    let id = $(this).data('available-id');
-
-    let response = await Swal.fire({
-        title: 'Você tem certeza que deseja mudar a disponibilidade deste ônibus?',
-        type: 'question',
-        showCancelButton: true,
-        confirmButtonColor: '#28a745',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Sim, tenho certeza!',
-        cancelButtonText: 'Não, cancelar'
-    })
-
-    if(response.value){
-        axios.put(`${url}/${id}`)
-        .then(data => {
-            Swal.fire('Estado do Ônibus alterado com sucesso!', '', 'success')
-            console.log(data);
-        })
-        .catch((error) => {
-            console.error(error);
-            Swal.fire('Aconteceu um erro inesperado...', '', 'error' )
-        })
-
-        //ALTERAR A BADGE DEPOIS
-        // $(`data-badge-available-id="${id}"`)
-    }
-})
-
-$('[data-show-id]').on('click', function() {
-    let id = $(this).data('show-id');
-
-    axios.get(`${url}/${id}`)
-    .then(data => {
-        $(".modal-body").html(data.data)
-        $("#modal-infos").modal('show');
-    })
-})
 </script>
 @endpush
