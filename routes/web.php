@@ -27,23 +27,24 @@ Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@up
 Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 });
 
-Route::prefix('onibus')->group(function () {
+Route::prefix('onibus')->name('onibus_')->group(function () {
     Route::resource('urbano', 'OnibusUrbanoController');
     Route::resource('intermunicipal', 'OnibusIntermunicipalController');
 });
 
-Route::resource('passageiro', 'PassageiroController');
 
-Route::prefix('trajeto')->group(function () {
+Route::prefix('trajeto')->name('trajeto_')->group(function () {
     Route::resource('urbano', 'TrajetoUrbanoController');
     Route::resource('intermunicipal', 'TrajetoIntermunicipalController');
 });
 
-Route::prefix('tarifa')->group(function () {
-    Route::resource('urbano', 'TarifaLocalController');
+Route::prefix('tarifa')->name('tarifa_')->group(function () {
+    Route::resource('urbano', 'TarifaUrbanoController');
     Route::resource('intermunicipal', 'TarifaIntermunicipalController');
 });
 
-Route::resource('funcionario', 'AlocarFuncionarioController');
+Route::resource('passageiro', 'PassageiroController');
+
+Route::resource('funcionario', 'FuncionarioController');
 
 Route::resource('pagamento', 'FormaDePagamentoController');

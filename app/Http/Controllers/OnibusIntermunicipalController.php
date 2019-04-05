@@ -16,8 +16,8 @@ class OnibusIntermunicipalController extends Controller
     public function index()
     {
         $onibus = new OnibusIntermunicipal();
-        $listaDeOnibus = $onibus->getAll();
-        return view('frotas.intermunicipal.index', compact('listaDeOnibus'));
+        $lista = $onibus->getAll();
+        return view('frotas.intermunicipal.index', compact('lista'));
 
     }
 
@@ -62,11 +62,8 @@ class OnibusIntermunicipalController extends Controller
     public function show($id)
     {
         $onibus = new OnibusIntermunicipal();
-        // if ($id >= 0 && $id < count($listadeOnibus)) {
-        $onibus = $onibus->get($id);
-        return response($onibus->toJson(), 200);
-        // }
-        // return response(['error' => 'Ônibus não encontrado.'], 400);
+        $item = $onibus->get($id);
+        return view('frotas.intermunicipal.show', compact('item'));
     }
 
     /**
@@ -110,8 +107,12 @@ class OnibusIntermunicipalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
+
+        $onibus = new OnibusIntermunicipal();
+        return $onibus->disable($id, $request->input());
+        // return "true";
         return response(['error' => 'Função não permitida.'], 501);
     }
 }

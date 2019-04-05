@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\TrajetoUrbano;
+use App\TarifaUrbano;
 
-class TrajetoUrbanoController extends Controller
+class TarifaUrbanoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class TrajetoUrbanoController extends Controller
      */
     public function index()
     {
-        $trajeto = new TrajetoUrbano();
-        $lista = $trajeto->getAll();
-        return view('trajeto.urbano.index', compact('lista'));
+        $tarifa = new TarifaUrbano();
+        $lista = $tarifa->getAll();
+        return view('tarifa.urbano.index', compact('lista'));
     }
 
     /**
@@ -26,7 +26,7 @@ class TrajetoUrbanoController extends Controller
      */
     public function create()
     {
-        return view('trajeto.urbano.create');
+        return view('tarifa.urbano.create');
     }
 
     /**
@@ -39,9 +39,9 @@ class TrajetoUrbanoController extends Controller
     {
         try {
 
-            $trajeto = new TrajetoLocal();
-            $trajeto->add($request->input());
-            return response(["status" => "Trajeto cadastrado com sucesso"], 201);
+            $tarifa = new TarifaUrbano();
+            $tarifa->add($request->input());
+            return response(["status" => "Tarifa alterada com sucesso"], 201);
 
         } catch (Exception $e) {
             return response($e->getMessage(), 400);
@@ -56,9 +56,9 @@ class TrajetoUrbanoController extends Controller
      */
     public function show($id)
     {
-        $trajeto = new TrajetoUrbano();
-        $item = $trajeto->get($id);
-        return view('trajeto.urbano.show', compact('item'));
+        $tarifa = new TarifaUrbano();
+        $item = $tarifa->get($id);
+        return view('tarifa.urbano.show', compact('item'));
     }
 
     /**
@@ -69,10 +69,10 @@ class TrajetoUrbanoController extends Controller
      */
     public function edit($id)
     {
-        $trajeto = new TrajetoLocal();
-        $listaDeTrajetos = $trajeto->getAll();
-        $trajetoEditado = $listaDeTrajetos[$id];
-        return "Formulario de edição para o".$trajetoEditado->toJson();
+        $tarifa = new TarifaUrbano();
+        $listaDeTarifas = $tarifa->getAll();
+        $tarifaEditada = $listaDeTarifas[$id];
+        return "Formulario de edição para a".$tarifaEditada->toJson();
     }
 
     /**
@@ -84,15 +84,7 @@ class TrajetoUrbanoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try {
-
-            $trajetoEditado = new TrajetoLocal();
-            $trajetoEditado->edit($id);
-            return response(["status" => "Trajeto atualizado com sucesso"], 202);
-
-        } catch (Exception $e) {
-            return response($e->getMessage(), 400);
-        }
+        //
     }
 
     /**

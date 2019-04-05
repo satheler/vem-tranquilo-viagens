@@ -15,8 +15,8 @@ class PassageiroController extends Controller
     public function index()
     {
         $passageiro = new Passageiro();
-        $listaDePassageiros = $passageiro->getAll();
-        return view('passageiro', compact('listaDePassageiros'));
+        $lista = $passageiro->getAll();
+        return view('passageiro.main.index', compact('lista'));
     }
 
     /**
@@ -26,7 +26,7 @@ class PassageiroController extends Controller
      */
     public function create()
     {
-        return view('cadastroPassageiro');
+        return view('passageiro.main.create');
     }
 
     /**
@@ -57,8 +57,8 @@ class PassageiroController extends Controller
     public function show($id)
     {
         $passageiro = new Passageiro();
-        $passageiro = $passageiro->get($id);
-        return response($passageiro->toJson(), 200);
+        $item = $passageiro->get($id);
+        return view('passageiro.main.show', compact('item'));
     }
 
     /**

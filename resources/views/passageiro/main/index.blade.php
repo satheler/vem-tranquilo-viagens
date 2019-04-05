@@ -1,13 +1,13 @@
-@extends('frotas.index', ['title' => __('Ônibus Urbano')])
+@extends('frotas.index', ['title' => __('Passageiro')])
 
 @section('infos')
     <div class="card-header border-0">
         <div class="row align-items-center">
             <div class="col-8">
-                <h3 class="mb-0">{{ __('Ônibus Urbano') }}</h3>
+                <h3 class="mb-0">{{ __('Passageiro') }}</h3>
             </div>
             <div class="col-4 text-right">
-                <a href="{{ route('onibus_urbano.create') }}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Adicionar ônibus"><i class="fas fa-plus"></i></a>
+                <a href="{{ route('passageiro.create') }}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Adicionar ônibus"><i class="fas fa-plus"></i></a>
             </div>
         </div>
     </div>

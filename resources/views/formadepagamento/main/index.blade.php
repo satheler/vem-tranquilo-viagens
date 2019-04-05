@@ -1,13 +1,13 @@
-@extends('frotas.index', ['title' => __('Ônibus Urbano')])
+@extends('frotas.index', ['title' => __('Forma de pagamento')])
 
 @section('infos')
     <div class="card-header border-0">
         <div class="row align-items-center">
             <div class="col-8">
-                <h3 class="mb-0">{{ __('Ônibus Urbano') }}</h3>
+                <h3 class="mb-0">{{ __('Forma de pagamento') }}</h3>
             </div>
             <div class="col-4 text-right">
-                <a href="{{ route('onibus_urbano.create') }}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Adicionar ônibus"><i class="fas fa-plus"></i></a>
+                <a href="{{ route('pagamento.create') }}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Adicionar ônibus"><i class="fas fa-plus"></i></a>
             </div>
         </div>
     </div>
@@ -27,12 +27,8 @@
                 <thead class="thead-light">
                     <tr>
                         <th scope="col"></th>
-                        <th scope="col">{{ __('Placa') }}</th>
-                        <th scope="col">{{ __('Chassi') }}</th>
-                        <th scope="col">{{ __('Lotação') }}</th>
-                        <th scope="col">{{ __('Ar condicionado') }}</th>
-                        <th scope="col">{{ __('Acessibilidade') }}</th>
-                        <th scope="col">{{ __('Disponibilidade') }}</th>
+                        <th scope="col">{{ __('Forma') }}</th>
+                        <th scope="col">{{ __('Tipo') }}</th>
                         <th scope="col">Ações</th>
                     </tr>
                 </thead>
@@ -44,33 +40,14 @@
                                     <span class="btn-inner--icon"><i class="ni ni-single-copy-04"></i></span>
                                 </button>
                             </td>
-                            <td>{{ $item->description->placa }}</td>
-                            <td>{{ $item->description->chassi }}</td>
-                            <td>{{ $item->lotacao }}</td>
+                            <td>{{ $item->forma }}</td>
                             <td  align="center">
-                                @if ($item->arCondicionado)
-                                    <span class="badge badge-success">Possui</span>
+                                @if ($item->intermunicipal)
+                                    <span class="badge badge-info">Intermunicipal</span>
                                 @else
-                                    <span class="badge badge-warning">Não possui</span>
+                                    <span class="badge badge-info">Urbano</span>
                                 @endif
                             </td>
-
-                            <td  align="center">
-                                @if ($item->acessibilidade)
-                                    <span class="badge badge-success">Possui</span>
-                                @else
-                                    <span class="badge badge-warning">Não possui</span>
-                                @endif
-                            </td>
-
-                            <td align="center">
-                                @if ($item->description->disponivel)
-                                    <span data-badge-available-id="{{ $item->id }}" class="badge badge-success">Disponível</span>
-                                @else
-                                    <span data-badge-available-id="{{ $item->id }}" class="badge badge-warning">Em manutenção</span>
-                                @endif
-                            </td>
-
                             <td align="center">
                                 <div class="dropdown">
                                     <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

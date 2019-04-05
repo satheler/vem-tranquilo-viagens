@@ -78,32 +78,111 @@
             </form>
             <!-- Navigation -->
             <ul class="navbar-nav">
+
+                <!-- Página Inicial :: FIM -->
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('home') }}">
-                            <i class="fas fa-home"></i> {{ __('Página Inicial') }}
+                        <i class="fas fa-home"></i> {{ __('Página Inicial') }}
                     </a>
                 </li>
+                <!-- Página Inicial :: FIM -->
+
+                 <!-- Passageiro :: INICIO -->
+                 <li class="nav-item">
+                    <a class="nav-link" href="{{ route('passageiro.index') }}">
+                        <i class="fas fa-users"></i> {{ __('Passageiros') }}
+                    </a>
+                </li>
+                <!-- Passageiro :: FIM -->
+
+                 <!-- Funcionário :: INICIO -->
+                 <li class="nav-item">
+                    <a class="nav-link" href="{{ route('funcionario.index') }}">
+                        <i class="fas fa-user-cog"></i> {{ __('Funcionários') }}
+                    </a>
+                </li>
+                <!-- Funcionário :: FIM -->
+
+                 <!-- Pagamento :: INICIO -->
+                 <li class="nav-item">
+                    <a class="nav-link" href="{{ route('pagamento.index') }}">
+                        <i class="fas fa-money-bill"></i> {{ __('Pagamentos') }}
+                    </a>
+                </li>
+                <!-- Pagamento :: FIM -->
+
+                <!-- Gerenciar frotas :: INICIO -->
                 <li class="nav-item">
-                    <a class="nav-link active" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
-                        <i class="fas fa-bus" style="color: #f4645f;"></i>
-                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Gerenciar frotas') }}</span>
+                    <a class="nav-link" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
+                        <i class="fas fa-bus"></i>
+                        <span class="nav-link-text">{{ __('Gerenciar frotas') }}</span>
                     </a>
 
-                    <div class="collapse show" id="navbar-examples">
+                    <div class="collapse" id="navbar-examples">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('urbano.index') }}">
+                                <a class="nav-link" href="{{ route('onibus_urbano.index') }}">
                                     {{ __('Ônibus Urbano') }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('intermunicipal.index') }}">
+                                <a class="nav-link" href="{{ route('onibus_intermunicipal.index') }}">
                                     {{ __('Ônibus Intermunicipal') }}
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </li>
+                <!-- Gerenciar frotas :: FIM -->
+
+
+                <!-- Gerenciar tarifas :: INICIO -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#navbar-examples1" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
+                        <i class="ni ni-tag"></i>
+                        <span class="nav-link-text">{{ __('Gerenciar tarifas') }}</span>
+                    </a>
+
+                    <div class="collapse" id="navbar-examples1">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('tarifa_urbano.index') }}">
+                                    {{ __('Tarifa Urbano') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('tarifa_intermunicipal.index') }}">
+                                    {{ __('Tarifa Intermunicipal') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <!-- Gerenciar tarifas :: FIM -->
+
+                <!-- Gerenciar trajeto :: INICIO -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#navbar-examples2" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
+                        <i class="fas fa-road"></i>
+                        <span class="nav-link-text">{{ __('Gerenciar trajeto') }}</span>
+                    </a>
+
+                    <div class="collapse" id="navbar-examples2">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('trajeto_urbano.index') }}">
+                                    {{ __('Trajeto Urbano') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('trajeto_intermunicipal.index') }}">
+                                    {{ __('Trajeto Intermunicipal') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <!-- Gerenciar trajeto :: FIM -->
             </ul>
         </div>
     </div>

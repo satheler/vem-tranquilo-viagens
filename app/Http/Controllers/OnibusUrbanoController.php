@@ -16,8 +16,8 @@ class OnibusUrbanoController extends Controller
     public function index()
     {
         $onibus = new OnibusUrbano();
-        $listaDeOnibus = $onibus->getAll();
-        return view('frotas.urbano.index', compact('listaDeOnibus'));
+        $lista = $onibus->getAll();
+        return view('frotas.urbano.index', compact('lista'));
 
     }
 
@@ -62,9 +62,11 @@ class OnibusUrbanoController extends Controller
     public function show($id)
     {
         $onibus = new OnibusUrbano();
-        //if ($id >= 0 && $id < count($listadeOnibus)) {
-        $onibus = $onibus->get($id);
-        return response($onibus->toJson(), 200);
+        $item = $onibus->get($id);
+        return view('frotas.urbano.show', compact('item'));
+        // //if ($id >= 0 && $id < count($listadeOnibus)) {
+        // $onibus = $onibus->get($id);
+        // return response($onibus->toJson(), 200);
         //}
         //return response(['error' => 'Ônibus não encontrado.'], 400);
     }
@@ -110,8 +112,12 @@ class OnibusUrbanoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
+
+        $onibus = new OnibusUrbano();
+        return $onibus->disable($id, $request->input());
+        // return "true";
         return response(['error' => 'Função não permitida.'], 501);
     }
 }

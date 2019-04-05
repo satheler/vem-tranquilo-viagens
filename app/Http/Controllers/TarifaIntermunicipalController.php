@@ -15,8 +15,8 @@ class TarifaIntermunicipalController extends Controller
     public function index()
     {
         $tarifa = new TarifaIntermunicipal();
-        $listaDeTarifas = $tarifa->getAll();
-        return view('tarifaIntermunicipal', compact('listaDeTarifas'));
+        $lista = $tarifa->getAll();
+        return view('tarifa.intermunicipal.index', compact('lista'));
     }
 
     /**
@@ -26,7 +26,7 @@ class TarifaIntermunicipalController extends Controller
      */
     public function create()
     {
-        //
+        return view('tarifa.intermunicipal.create');
     }
 
     /**
@@ -57,8 +57,8 @@ class TarifaIntermunicipalController extends Controller
     public function show($id)
     {
         $tarifa = new TarifaIntermunicipal();
-        $tarifa = $tarifa->get($id);
-        return response($tarifa->toJson(), 200);
+        $item = $tarifa->get($id);
+        return view('tarifa.intermunicipal.show', compact('item'));
     }
 
     /**

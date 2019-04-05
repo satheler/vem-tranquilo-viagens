@@ -14,9 +14,9 @@ class FuncionarioController extends Controller
      */
     public function index()
     {
-        $funcionario = new AlocarFuncionario();
-        $listaDeFuncionarios = $funcionario->getAll();
-        return view('funcionario', compact('listaDeFuncionarios'));
+        $funcionario = new Funcionario();
+        $lista = $funcionario->getAll();
+        return view('funcionario.main.index', compact('lista'));
     }
 
     /**
@@ -26,7 +26,7 @@ class FuncionarioController extends Controller
      */
     public function create()
     {
-        return view('cadastroFuncionario');
+        return view('funcionario.main.create');
     }
 
     /**
@@ -39,7 +39,7 @@ class FuncionarioController extends Controller
     {
         try {
 
-            $funcionario = new AlocarFuncionario();
+            $funcionario = new Funcionario();
             $funcionario->add($request->input());
             return response(["status" => "Funcionário cadastrado com sucesso"], 201);
 
@@ -56,9 +56,9 @@ class FuncionarioController extends Controller
      */
     public function show($id)
     {
-        $funcionario = new AlocarFuncionario();
-        $funcionario = $funcionario->get($id);
-        return response($funcionario->toJson(), 200);
+        $funcionario = new Funcionario();
+        $item = $funcionario->get($id);
+        return view('funcionario.main.show', compact('item'));
     }
 
     /**
@@ -69,7 +69,7 @@ class FuncionarioController extends Controller
      */
     public function edit($id)
     {
-        $funcionario = new AlocarFuncionario();
+        $funcionario = new Funcionario();
         $listaDeFuncionarios = $funcionario->getAll();
         $funcionarioEditado = $listaDeFuncionarios[$id];
         return "Formulario de edição para o".$funcionarioEditado->toJson();
@@ -86,7 +86,7 @@ class FuncionarioController extends Controller
     {
         try {
 
-            $funcionarioEditado = new AlocarFuncionario();
+            $funcionarioEditado = new Funcionario();
             $funcionarioEditado->edit($id);
             return response(["status" => "Funcionário atualizado com sucesso"], 202);
 

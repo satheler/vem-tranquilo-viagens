@@ -2,10 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
-use Validator;
 use Exception;
+use Illuminate\Database\Eloquent\Model;
+use Validator;
 
 class OnibusUrbano extends Model
 {
@@ -19,6 +18,13 @@ class OnibusUrbano extends Model
     public function getAll()
     {
         return $this->all();
+    }
+
+    public function get(int $id)
+    {
+        $onibus = $this->find($id);
+        $onibus->description;
+        return $onibus;
     }
 
     public function add(array $input)
@@ -42,4 +48,34 @@ class OnibusUrbano extends Model
         $this->description()->save($data);
     }
 
+    public function edit(int $id)
+    {
+        $onibus = $this->find($id);
+        $description = $onibus->description;
+        $description->disponivel = !$description->disponivel;
+
+        $onibus->save();
+        $onibus->description()->save($description);
+    }
+
+    public function disable(int $id, array $input)
+    {
+        $onibus = $this->find($id);
+        $validator = Validator::make($input, [
+            'observacao'=> 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            throw new Exception($validator->messages());
+        }
+
+        $description = $onibus->description;
+        $description->inativo = true;
+        $description->observacao = $input['observacao'];
+
+        $onibus->save();
+        $onibus->description()->save($description);
+
+        return $this;
+    }
 }

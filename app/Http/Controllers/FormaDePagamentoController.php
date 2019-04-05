@@ -15,8 +15,8 @@ class FormaDePagamentoController extends Controller
     public function index()
     {
         $pagamento = new FormaDePagamento();
-        $listaDePagamentos = $pagamento->getAll();
-        return view('xxx', compact('listaDePagamentos'));
+        $lista = $pagamento->getAll();
+        return view('formadepagamento.main.index', compact('lista'));
     }
 
     /**
@@ -26,7 +26,7 @@ class FormaDePagamentoController extends Controller
      */
     public function create()
     {
-        return view('xxx');
+        return view('formadepagamento.main.create');
     }
 
     /**
@@ -57,8 +57,8 @@ class FormaDePagamentoController extends Controller
     public function show($id)
     {
         $pagamento = new FormaDePagamento();
-        $pagamento = $pagamento->get($id);
-        return response($pagamento->toJson(), 200);
+        $item = $pagamento->get($id);
+        return view('passageiro.main.show', compact('item'));
     }
 
     /**
