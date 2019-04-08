@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Validator;
 use Exception;
 
-class Passageiro extends Model
+class CategoriaPassageiro extends Model
 {
-    protected $table = 'passageiro';
+    protected $table = 'categoria_passageiro';
 
     public function description()
     {

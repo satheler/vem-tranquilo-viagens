@@ -4,9 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePassageiroTable extends Migration
+class CreateCategoriaPassageiroTable extends Migration
 {
-    private $databaseName = 'passageiro';
+    private $databaseName = 'categoria_passageiro';
     /**
      * Run the migrations.
      *

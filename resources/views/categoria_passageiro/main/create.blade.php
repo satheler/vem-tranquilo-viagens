@@ -10,7 +10,7 @@
                     <div class="card-header bg-white border-0">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <a href="{{ route('onibus_urbano.index') }}" class="btn btn-sm btn-primary">{{ __('Voltar') }}</a>
+                                <a href="{{ route('categoria_passageiro.index') }}" class="btn btn-sm btn-primary">{{ __('Voltar') }}</a>
                             </div>
                             <div class="col-4 text-right">
                                 <h3 class="mb-0">{{ __('Adicionar Ônibus') }}</h3>
@@ -18,7 +18,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{ route('onibus_urbano.store') }}" autocomplete="off">
+                        <form method="post" action="{{ route('categoria_passageiro.store') }}" autocomplete="off">
                             @csrf
 
                             <h6 class="heading-small text-muted mb-4">{{ __('Informações do ônibus') }}</h6>

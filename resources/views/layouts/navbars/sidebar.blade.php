@@ -89,7 +89,7 @@
 
                  <!-- Passageiro :: INICIO -->
                  <li class="nav-item">
-                    <a class="nav-link" href="{{ route('passageiro.index') }}">
+                    <a class="nav-link" href="{{ route('categoria_passageiro.index') }}">
                         <i class="fas fa-users"></i> {{ __('Categoria de Passageiros') }}
                     </a>
                 </li>

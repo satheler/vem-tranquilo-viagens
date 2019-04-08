@@ -7,7 +7,7 @@
                 <h3 class="mb-0">{{ __('Categoria de Passageiros') }}</h3>
             </div>
             <div class="col-4 text-right">
-                <a href="{{ route('passageiro.create') }}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Adicionar Categoria de Passageiros"><i class="fas fa-plus"></i></a>
+                <a href="{{ route('categoria_passageiro.create') }}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Adicionar Categoria de Passageiros"><i class="fas fa-plus"></i></a>
             </div>
         </div>
     </div>

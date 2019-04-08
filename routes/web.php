@@ -43,7 +43,9 @@ Route::prefix('tarifa')->name('tarifa_')->group(function () {
     Route::resource('intermunicipal', 'TarifaIntermunicipalController');
 });
 
-Route::resource('passageiro', 'PassageiroController');
+Route::prefix('categoria')->name('categoria_')->group(function () {
+    Route::resource('passageiro', 'CategoriaPassageiroController');
+});
 
 Route::resource('funcionario', 'FuncionarioController');
 
