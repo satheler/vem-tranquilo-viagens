@@ -92,7 +92,8 @@ $('[data-remove-id]').on('click', async function () {
     if(value){
         axios.delete(`${url}/${id}`, { data: { observacao: value } })
         .then(data => {
-            $(`[data-table-row-id="${id}"]`).remove();
+            table.row(`[data-table-row-id="${id}"]`).remove();
+            table.draw();
             Swal.fire('Ônibus inativado com sucesso!','','success')
             console.log(data);
         })

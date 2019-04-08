@@ -81,7 +81,8 @@ $('[data-remove-id]').on('click', async function () {
     if(response.value){
         axios.delete(`${url}/${id}`)
         .then(data => {
-            $(`[data-table-row-id="${id}"]`).remove();
+            table.row(`[data-table-row-id="${id}"]`).remove();
+            table.draw();
             Swal.fire('Forma de pagamento removida com sucesso!', '', 'success')
             console.log(data);
         })
