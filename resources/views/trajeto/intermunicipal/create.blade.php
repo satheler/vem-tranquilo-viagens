@@ -1,7 +1,7 @@
-@extends('layouts.app', ['title' => __('Adicionar Ônibus')])
+@extends('layouts.app', ['title' => __('Adicionar Trajeto Intermunicipal')])
 
 @section('content')
-    @include('users.partials.header', ['title' => __('Adicionar Ônibus')])
+    @include('users.partials.header', ['title' => __('Adicionar Trajeto Intermunicipal')])
 
     <div class="container-fluid mt--7">
         <div class="row">
@@ -10,158 +10,57 @@
                     <div class="card-header bg-white border-0">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <a href="{{ route('onibus_intermunicipal.index') }}" class="btn btn-sm btn-primary">{{ __('Voltar') }}</a>
+                                <a href="{{ route('trajeto_intermunicipal.index') }}" class="btn btn-sm btn-primary">{{ __('Voltar') }}</a>
                             </div>
                             <div class="col-4 text-right">
-                                <h3 class="mb-0">{{ __('Adicionar Ônibus') }}</h3>
+                                <h3 class="mb-0">{{ __('Adicionar Trajeto Intermunicipal') }}</h3>
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{ route('onibus_intermunicipal.store') }}" autocomplete="off">
+                        <form method="post" action="{{ route('trajeto_urbano.store') }}" autocomplete="off">
                             @csrf
 
-                            <h6 class="heading-small text-muted mb-4">{{ __('Informações do ônibus') }}</h6>
+                            <h6 class="heading-small text-muted mb-4">{{ __('terminal') }}</h6>
                             <div class="pl-lg-4">
-                                <div class="form-group{{ $errors->has('chassi') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="input-chassi">{{ __('CHASSI') }}</label>
-                                    <input type="text" name="chassi" id="input-chassi" class="form-control form-control-alternative{{ $errors->has('chassi') ? ' is-invalid' : '' }}" placeholder="{{ __('chassi') }}" value="{{ old('chassi') }}" required autofocus>
-
-                                    @if ($errors->has('chassi'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('Placa') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                                <div class="form-group{{ $errors->has('placa') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="input-placa">{{ __('Placa') }}</label>
-                                    <input type="text" name="placa" id="input-placa" class="form-control form-control-alternative{{ $errors->has('placa') ? ' is-invalid' : '' }}" placeholder="{{ __('Placa') }}" value="{{ old('placa') }}" required>
-
-                                    @if ($errors->has('placa'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('Placa') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="form-group{{ $errors->has('marca') ? ' has-danger' : '' }}">
-                                            <label class="form-control-label" for="input-marca">{{ __('Marca') }}</label>
-                                            <input type="text" name="marca" id="input-password" class="form-control form-control-alternative{{ $errors->has('marca') ? ' is-invalid' : '' }}" placeholder="{{ __('Marca') }}" value="" required>
-
-                                            @if ($errors->has('marca'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('Marca') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group{{ $errors->has('modelo') ? ' has-danger' : '' }}">
-                                            <label class="form-control-label" for="input-modelo">{{ __('Modelo') }}</label>
-                                            <input type="text" name="modelo" id="input-modelo" class="form-control form-control-alternative{{ $errors->has('modelo') ? ' is-invalid' : '' }}" placeholder="{{ __('Modelo') }}" value="" required>
-
-                                            @if ($errors->has('modelo'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('Modelo') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group{{ $errors->has('locacao') ? ' has-danger' : '' }}">
-                                            <label class="form-control-label" for="input-lotacao">{{ __('Lotação') }}</label>
-                                            <input type="number" name="lotacao" id="input-lotacao" class="form-control form-control-alternative{{ $errors->has('lotacao') ? ' is-invalid' : '' }}" placeholder="{{ __('Lotação') }}" value="" required>
-
-                                            @if ($errors->has('lotacao'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('Lotação') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group{{ $errors->has('custoManutencao') ? ' has-danger' : '' }}">
-                                            <label class="form-control-label" for="input-custoManutencao">{{ __('Custo Manutenção') }}</label>
-                                            <input type="number" name="custoManutencao" id="input-custoManutencao" class="form-control form-control-alternative{{ $errors->has('cor') ? ' is-invalid' : '' }}" placeholder="{{ __('Custo Manutenção') }}" value="" required>
-
-                                            @if ($errors->has('custoManutencao'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('custoManutencao') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label class="form-control-label" for="input-data-compra">{{ __('Data da Compra') }}</label>
-                                        <div class="form-group">
-                                            <div class="input-group input-group-alternative">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-                                                </div>
-                                                <input class="form-control datepicker" placeholder="Clique para selecionar a data" type="text" value="">
-                                            </div>
+                                        <div class="form-group{{ $errors->has('terminal') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label" for="input-terminal">{{ __('TERMINAL') }}</label>
+                                            <input type="text" name="terminal" id="input-terminal" class="form-control form-control-alternative{{ $errors->has('terminal') ? ' is-invalid' : '' }}" placeholder="{{ __('Terminal') }}" value="{{ old('terminal') }}" required autofocus>
+        
+                                            @if ($errors->has('terminal'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('Terminal') }}</strong>
+                                                </span>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-control-label" for="input-data-fabricacao">{{ __('Data da Fabricação') }}</label>
-                                        <div class="form-group">
-                                            <div class="input-group input-group-alternative">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-                                                </div>
-                                                <input class="form-control datepicker" placeholder="Clique para selecionar a data" type="text" value="">
-                                            </div>
+                                        <div class="form-group{{ $errors->has('terminal') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label" for="input-qntParadas">{{ __('Quantidade de Paradas') }}</label>
+                                            <input type="number" name="qntParadas" id="input-qntParadas" class="form-control form-control-alternative{{ $errors->has('Quantidade de Paradas') ? ' is-invalid' : '' }}" placeholder="{{ __('Quantidade de Paradas') }}" value="{{ old('Quantidade de Paradas') }}" required autofocus>
+        
+                                            @if ($errors->has('qntParadas'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('qntParadas') }}</strong>
+                                                </span>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="row">
-                                    <div class="col-md-3">
-                                        <label for="form-control-label"> {{__('Possui acessibilidade?')}} </label>
-                                        {{-- Check 1 --}}
-                                        <div class="custom-control custom-radio mb-3">
-                                            <input name="acessibilidade" class="custom-control-input" id="acessibilidade" type="radio" value=1>
-                                            <label class="custom-control-label" for="acessibilidade">Sim</label>
-                                        </div>
-                                        {{-- Check 2 --}}
-                                        <div class="custom-control custom-radio mb-3">
-                                            <input name="acessibilidade" class="custom-control-input" id="acessibilidade2" type="radio" value=0>
-                                            <label class="custom-control-label" for="acessibilidade2">Não</label>
+                                    <div class="col-md-4">
+                                        <label class="form-control-label" for="input-horarioSaida">{{ __('Horário de saída') }}</label>
+                                        <div class="form-group">
+                                            <div class="input-group input-group-alternative">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="far fa-clock"></i></span>
+                                                </div>
+                                                <input name='horarioSaida' class="form-control timepicker" placeholder="Selecione o horário de saída" type="time" value="">
+                                            </div>
                                         </div>
                                     </div>
-
-                                    <div class="col-md-3">
-                                        <label for="form-control-label"> {{__('Possui banheiro?')}} </label>
-                                        {{-- Check 1 --}}
-                                        <div class="custom-control custom-radio mb-3">
-                                            <input name="banheiro" class="custom-control-input" id="banheiro" type="radio" value=1>
-                                            <label class="custom-control-label" for="banheiro">Sim</label>
-                                        </div>
-                                        {{-- Check 2 --}}
-                                        <div class="custom-control custom-radio mb-3">
-                                            <input name="banheiro" class="custom-control-input" id="banheiro2" type="radio" value=0>
-                                            <label class="custom-control-label" for="banheiro2">Não</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <label for="form-control-label"> {{__('Status do Ônibus')}} </label>
-                                        {{-- Check 1 --}}
-                                        <div class="custom-control custom-radio mb-3">
-                                            <input name="disponivel" class="custom-control-input" id="disponivel" type="radio" value=1>
-                                            <label class="custom-control-label" for="disponivel">Disponível</label>
-                                        </div>
-                                        {{-- Check 2 --}}
-                                        <div class="custom-control custom-radio mb-3">
-                                            <input name="disponivel" class="custom-control-input" id="disponivel2" type="radio" value=0>
-                                            <label class="custom-control-label" for="disponivel2">Indisponível</label>
-                                        </div>
-                                    </div>
-
                                 </div>
 
                                 {{-- END FORM --}}

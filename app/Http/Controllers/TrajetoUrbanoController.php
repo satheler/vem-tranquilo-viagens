@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\TrajetoUrbano;
+use App\TrajetoLocal;
 
 class TrajetoUrbanoController extends Controller
 {
