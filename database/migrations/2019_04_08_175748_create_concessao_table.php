@@ -17,7 +17,7 @@ class CreateConcessaoTable extends Migration
         Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->date('data');
-            $table->file('anexo');
+            $table->binary('anexo');
             $table->integer('numero_protocolo');
             $table->timestamps();
         });
