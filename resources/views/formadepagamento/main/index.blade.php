@@ -7,7 +7,7 @@
                 <h3 class="mb-0">{{ __('Forma de pagamento') }}</h3>
             </div>
             <div class="col-4 text-right">
-                <a href="{{ route('pagamento.create') }}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Adicionar ônibus"><i class="fas fa-plus"></i></a>
+                <a href="{{ route('pagamento.create') }}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Adicionar Forma de pagamento"><i class="fas fa-plus"></i></a>
             </div>
         </div>
     </div>

@@ -7,7 +7,7 @@
                 <h3 class="mb-0">{{ __('Tarifa Intermunicipal') }}</h3>
             </div>
             <div class="col-4 text-right">
-                <a href="{{ route('tarifa_intermunicipal.create') }}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Adicionar ônibus"><i class="fas fa-plus"></i></a>
+                <a href="{{ route('tarifa_intermunicipal.create') }}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Adicionar Tarifa Intermunicipal"><i class="fas fa-plus"></i></a>
             </div>
         </div>
     </div>
