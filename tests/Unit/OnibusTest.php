@@ -91,8 +91,53 @@ class OnibusTest extends TestCase
    //          "placa" => "HGG5547",
    //      ]);
 
-   //      $this->assertTrue($test === true);
-   //  }
+        $this->assertTrue($test === true);
+    }
+    public function testOnibusUrbanoTreis()
+    {
+        $o = new OnibusUrbano();
+        $test = $o->add([
+            "lotacao" => 35,
+            "arCondicionado" => true,
+            "disponivel" => true,
+            "acessibilidade" => false,
+            "custoManutencao" => 167.9,
+            "chassi" => "juhs85j032jkladlk",
+            "placa" => "sqs9126",
+        ]);
+
+        $this->assertTrue($test === true);
+    }
+    public function testOnibusUrbanoQuatro()
+    {
+        $o = new OnibusUrbano();
+        $test = $o->add([
+            "lotacao" => 45,
+            "arCondicionado" => true,
+            "disponivel" => true,
+            "acessibilidade" => false,
+            "custoManutencao" => 267.9,
+            "chassi" => "juhs85jl92jkladlk",
+            "placa" => "sqs4d56",
+        ]);
+
+        $this->assertTrue($test === true);
+    }
+    public function testOnibusUrbanoCinco()
+    {
+        $o = new OnibusUrbano();
+        $test = $o->add([
+            "lotacao" => 84,
+            "arCondicionado" => true,
+            "disponivel" => true,
+            "acessibilidade" => false,
+            "custoManutencao" => 777.9,
+            "chassi" => "juhs85jfv2jkladlk",
+            "placa" => "snh9056",
+        ]);
+
+        $this->assertTrue($test === true);
+    }
     
 
 }
