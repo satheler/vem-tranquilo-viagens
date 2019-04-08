@@ -29,6 +29,10 @@ class TrajetoLocal extends Model
             'horarioSaida' => 'required|time',
             'horarioChegada' => 'required|time'
         ]);
+        print("*********************************");
+        print($input['horarioSaida']);
+        print($input['horarioChegada']);
+        print("*********************************");
 
         if ($validator->fails()) {
             throw new Exception($validator->messages());
@@ -38,7 +42,10 @@ class TrajetoLocal extends Model
         $this->terminal = $input['terminal'];
         $this->horarioSaida = $input['horarioSaida'];
         $this->horarioChegada = $input['horarioChegada'];
-
+        print("*********************************");
+        print($this->horarioSaida);
+        print($this->horarioChegada);
+        print("*********************************");
         $this->save();
     }
     public function edit(int $id, array $input)
