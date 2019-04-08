@@ -4,9 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFuncionarioTable extends Migration
+class CreateFuncionariosTable extends Migration
 {
-    private $databaseName = 'funcionario';
+    private $databaseName = 'funcionarios';
     /**
      * Run the migrations.
      *

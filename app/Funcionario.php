@@ -9,11 +9,10 @@ use Exception;
 
 class Funcionario extends Model
 {
-    protected $table = 'funcionario';
+    protected $table = 'funcionarios';
 
-    public function description()
-    {
-        return $this->morphTo();
+    public function tipo() {
+        return $this->hasOne('App\TipoFuncionario', 'id');
     }
 
     public function getAll()
@@ -25,15 +24,15 @@ class Funcionario extends Model
     {
         $validator = Validator::make($input, [
             'nome' => 'required|string',
-            'tipo' => 'exists:tipo,tipo'
+            'tipo' => 'required|exists:tipos_funcionario,id'
         ]);
 
         if ($validator->fails()) {
-            throw new Exception($validator->messages());
+            return $validator;
         }
 
         $this->nome = $input['nome'];
-        $this->tipo = $input['tipo'];
+        $this->tipo_id = $input['tipo'];
 
         $this->save();
     }

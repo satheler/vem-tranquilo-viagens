@@ -22,13 +22,13 @@
                             @csrf
 
                             <h6 class="heading-small text-muted mb-4">{{ __('Informações do Funcionário') }}</h6>
-                            <div class="pl-lg-4">
+                            <div class="pl-lg-12">
                                 <div class="row clearfix">
                                     <div class="col-lg-6">
                                         <div class="form-group{{ $errors->has('nome') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-nome">{{ __('NOME') }}</label>
                                             <input type="text" name="nome" id="input-nome" class="form-control form-control-alternative{{ $errors->has('nome') ? ' is-invalid' : '' }}" placeholder="{{ __('Nome do Funcionário') }}" value="{{ old('nome') }}" required autofocus>
-        
+
                                             @if ($errors->has('nome'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $errors->first('nome') }}</strong>
@@ -36,27 +36,19 @@
                                             @endif
                                         </div>
                                     </div>
-    
+
                                     <div class="col-lg-6">
                                         <div class="row">
-                                            <label class="form-control-label" for="form-control-label"> {{__('FUNÇÃO:')}} </label>                                            
+                                            <label class="form-control-label" for="form-control-label"> {{__('FUNÇÃO')}} </label>
                                         </div>
+
                                         <div class="row">
-                                            {{-- Check 1 --}}
-                                            <div class="custom-control custom-radio mb-3">
-                                                <input name="tipo" class="custom-control-input" id="tipo_id1" type="radio" value=1>
-                                                <label class="custom-control-label" for="tipo_id1">Secretário <br></label>
-                                            </div>
-                                            {{-- Check 2 --}}
-                                            <div class="custom-control custom-radio mb-3">
-                                                <input name="tipo" class="custom-control-input" id="tipo_id2" type="radio" value=2>
-                                                <label class="custom-control-label" for="tipo_id2">Administrador Local <br></label>
-                                            </div>
-                                            {{-- Check 2 --}}
-                                            <div class="custom-control custom-radio mb-3">
-                                                <input name="tipo" class="custom-control-input" id="tipo_id3" type="radio" value=2>
-                                                <label class="custom-control-label" for="tipo_id3">Administrador Geral <br></label>
-                                            </div>
+                                            <select name="tipo" class="form-control" required>
+                                                <option value="" disabled selected>Selecione uma função...</option>
+                                                @foreach ($lista as $item)
+                                                    <option value="{{ $item->id }}">{{ $item->nome }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                 </div>

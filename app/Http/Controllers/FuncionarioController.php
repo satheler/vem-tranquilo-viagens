@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Funcionario;
+use App\TipoFuncionario;
 
 class FuncionarioController extends Controller
 {
@@ -26,7 +27,9 @@ class FuncionarioController extends Controller
      */
     public function create()
     {
-        return view('funcionario.main.create');
+        $tipos_funcionario = new TipoFuncionario();
+        $lista = $tipos_funcionario->getAll();
+        return view('funcionario.main.create', compact('lista'));
     }
 
     /**
@@ -37,14 +40,16 @@ class FuncionarioController extends Controller
      */
     public function store(Request $request)
     {
-        try {
+        $funcionario = new Funcionario();
+        $validator = $funcionario->add($request->input());
 
-            $funcionario = new Funcionario();
-            $funcionario->add($request->input());
-            return response(["status" => "Funcionário cadastrado com sucesso"], 201);
-
-        } catch (Exception $e) {
-            return response($e->getMessage(), 400);
+        if($validator === NULL) {
+            return redirect()->route('funcionario.index')->withStatus(__('Funcionário adicionado com sucesso.'));
+        } else {
+            return redirect()
+                    ->route('funcionario.create')
+                    ->withErrors($validator)
+                    ->withInput();
         }
     }
 

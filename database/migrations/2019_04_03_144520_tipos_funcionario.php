@@ -4,9 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Tipo extends Migration
+class TiposFuncionario extends Migration
 {
-    private $databaseName = 'tipo';
+    private $databaseName = 'tipos_funcionario';
     /**
      * Run the migrations.
      *
