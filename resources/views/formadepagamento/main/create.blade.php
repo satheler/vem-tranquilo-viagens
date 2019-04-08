@@ -3,6 +3,7 @@
 @section('content')
     @include('users.partials.header', ['title' => __('Forma de Pagamento')])
 
+
     <div class="container-fluid mt--7">
         <div class="row">
             <div class="col-xl-12 order-xl-1">
@@ -25,29 +26,37 @@
                             <div class="pl-lg-4">
                                 <div class="row clearfix">
                                     <div class="col-lg-6">
-                                        <div class="form-group{{ $errors->has('forma') ? ' has-danger' : '' }}">
-                                            <label class="form-control-label" for="input-chassi">{{ __('DESCRIÇÃO') }}</label>
-                                            <input type="text" name="forma" id="input-forma" class="form-control form-control-alternative{{ $errors->has('forma') ? ' is-invalid' : '' }}" placeholder="{{ __('Ex.: Boleto bancário, Cartão de Crédito...') }}" value="{{ old('forma') }}" required autofocus>
-        
+                                        <label class="form-control-label{{ $errors->has('forma') ? ' text-warning' : '' }}" for="input-forma">
+                                            {{ __('DESCRIÇÃO') }}
                                             @if ($errors->has('forma'))
                                                 <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('Forma') }}</strong>
+                                                    <strong>{{ $errors->first('forma') }}</strong>
                                                 </span>
                                             @endif
+                                        </label>
+                                        <div class="form-group{{ $errors->has('forma') ? ' has-warning' : '' }}">
+                                            <input type="text" name="forma" id="input-forma" class="form-control{{ $errors->has('forma') ? ' is-invalid' : '' }}" placeholder="{{ __('Ex.: Boleto bancário, Cartão de Crédito...') }}" value="{{ old('forma') }}" required autofocus>
                                         </div>
                                     </div>
-    
                                     <div class="col-lg-6">
-                                        <label class="form-control-label" for="form-control-label"> {{__('Adicionar forma de pagamento para')}} </label>
+                                        <label class="form-control-label{{ $errors->has('intermunicipal') ? ' text-warning' : '' }}" for="form-control-label"> {{__('SELECIONE O TIPO DE FROTA')}}
+                                        @if ($errors->has('intermunicipal'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('intermunicipal') }}</strong>
+                                            </span>
+                                        @endif
+                                        </label>
                                         {{-- Check 1 --}}
-                                        <div class="custom-control custom-radio mb-3">
-                                            <input name="intermunicipal" class="custom-control-input" id="intermunicipal1" type="radio" value=1>
-                                            <label class="custom-control-label" for="intermunicipal1">Intermunicipal</label>
-                                        </div>
-                                        {{-- Check 2 --}}
-                                        <div class="custom-control custom-radio mb-3">
-                                            <input name="intermunicipal" class="custom-control-input" id="intermunicipal2" type="radio" value=0>
-                                            <label class="custom-control-label" for="intermunicipal2">Urbano</label>
+                                        <div class="form-group{{ $errors->has('forma') ? ' is-invalid' : '' }}">
+                                            <div class="custom-control custom-radio mb-3{{ $errors->has('forma') ? ' has-warning' : '' }}">
+                                                <input name="intermunicipal" class="custom-control-input{{ $errors->has('intermunicipal') ? ' is-invalid' : '' }}" id="intermunicipal1" type="radio" value="1" {{ old('intermunicipal') == "1" ? 'checked="checked"' : "" }} required>
+                                                <label class="custom-control-label" for="intermunicipal1">Intermunicipal</label>
+                                            </div>
+                                            {{-- Check 2 --}}
+                                            <div class="custom-control custom-radio mb-3{{ $errors->has('forma') ? ' has-warning' : '' }}">
+                                                <input name="intermunicipal" class="custom-control-input{{ $errors->has('intermunicipal') ? ' is-invalid' : '' }}" id="intermunicipal2" type="radio" value="0" {{ old('intermunicipal') == "0" ? 'checked="checked"' : "" }}>
+                                                <label class="custom-control-label" for="intermunicipal2">Urbano</label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

@@ -1,4 +1,4 @@
-@extends('frotas.index', ['title' => __('Forma de pagamento')])
+@extends('formadepagamento.index', ['title' => __('Forma de pagamento')])
 
 @section('infos')
     <div class="card-header border-0">
@@ -26,18 +26,18 @@
             <table id="datatable-basic" class="table align-items-center table-flush dataTable">
                 <thead class="thead-light">
                     <tr>
-                        <th scope="col">{{ __('Forma') }}</th>
-                        <th scope="col">{{ __('Tipo') }}</th>
-                        <th scope="col">Ações</th>
+                        <th width="45%" scope="col">{{ __('Forma') }}</th>
+                        <th width="45%" scope="col">{{ __('Tipo') }}</th>
+                        <th width="10%" scope="col">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($lista as $item)
                         <tr data-table-row-id={{ $item->id }}>
                             <td>{{ $item->forma }}</td>
-                            <td  align="center">
+                            <td >
                                 @if ($item->intermunicipal)
-                                    <span class="badge badge-info">Intermunicipal</span>
+                                    <span class="badge badge-warning">Intermunicipal</span>
                                 @else
                                     <span class="badge badge-info">Urbano</span>
                                 @endif

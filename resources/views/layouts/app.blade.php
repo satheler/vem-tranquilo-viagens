@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+{{-- <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"> --}}
+<html lang="pt-br">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -18,7 +19,7 @@
         <!-- Page plugins -->
         @stack('css')
         <!-- Argon CSS -->
-        <link type="text/css" href="{{ asset('argon') }}/css/argon.css?v=1.0.0" rel="stylesheet">
+        <link type="text/css" href="{{ asset('argon') }}/css/argon.min.css?v=1.0.0" rel="stylesheet">
         <!-- Custom CSS -->
         <link type="text/css" href="{{ asset('argon') }}/css/style.css" rel="stylesheet">
 
@@ -53,6 +54,6 @@
 
         <!-- Argon JS -->
         <script src="{{ asset('argon') }}/js/script.js"></script>
-        <script src="{{ asset('argon') }}/js/argon.js?v=1.0.0"></script>
+        <script src="{{ asset('argon') }}/js/argon.min.js?v=1.0.0"></script>
     </body>
 </html>

@@ -36,7 +36,7 @@ class FormaDePagamento extends Model
         ]);
 
         if ($validator->fails()) {
-            throw new Exception($validator->messages());
+            return $validator;
         }
 
         $this->forma = $input['forma'];
@@ -58,5 +58,10 @@ class FormaDePagamento extends Model
         $pagamento->forma = $input['forma'];
         $pagamento->intermunicipal = $input['intermunicipal'];
         $pagamento->save();
+    }
+
+    public function remove(int $id)
+    {
+        return $this->destroy($id);
     }
 }

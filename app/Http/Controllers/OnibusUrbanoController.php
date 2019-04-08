@@ -114,10 +114,7 @@ class OnibusUrbanoController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-
         $onibus = new OnibusUrbano();
         return $onibus->disable($id, $request->input());
-        // return "true";
-        return response(['error' => 'Função não permitida.'], 501);
     }
 }

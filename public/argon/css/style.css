@@ -1,0 +1,6 @@
+.invalid-feedback {
+    display: block;
+    width: 100%;
+    margin-top: .15rem;
+    color: #fb6340
+}

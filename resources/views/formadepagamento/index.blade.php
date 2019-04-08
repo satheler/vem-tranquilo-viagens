@@ -68,37 +68,26 @@ $(document).ready( function () {
 $('[data-remove-id]').on('click', async function () {
     let id = $(this).data('remove-id');
 
-    let { value } = await Swal.fire({
-        title: 'Você tem certeza que deseja inativar esse ônibus?',
-        input: 'text',
-        inputAttributes: {
-            autocapitalize: 'off'
-        },
-        inputPlaceholder: 'Informe o ocorrido...',
-        inputValidator: (value) => {
-            if (!value) {
-            return 'Este campo não pode ser vazio!'
-            }
-        },
-        text: "Atenção: Esta ação não poderá ser desfeita!",
-        type: 'warning',
+    let response = await Swal.fire({
+        title: 'Você tem certeza que deseja remover esta forma de pagamento?',
+        type: 'question',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
+        confirmButtonColor: '#28a745',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Sim, tenho certeza!',
-        cancelButtonText: 'Cancelar'
+        cancelButtonText: 'Não, cancelar'
     })
 
-    if(value){
-        axios.delete(`${url}/${id}`, { data: { observacao: value } })
+    if(response.value){
+        axios.delete(`${url}/${id}`)
         .then(data => {
             $(`[data-table-row-id="${id}"]`).remove();
-            Swal.fire('Ônibus inativado com sucesso!','','success')
+            Swal.fire('Forma de pagamento removida com sucesso!', '', 'success')
             console.log(data);
         })
         .catch((error) => {
             console.error(error);
-            Swal.fire('Aconteceu um erro inesperado...','','error')
+            Swal.fire('Aconteceu um erro inesperado...', '', 'error' )
         })
     }
 })
