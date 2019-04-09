@@ -108,14 +108,7 @@ class FuncionarioController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            $funcionario = Funcionario::where('id', $id)->first();
-            if($funcionario) {
-                return $funcionario->delete();
-            }
-
-        } catch (Exception $e) {
-            return response($e->getMessage(), 400);
-        }
+        $funcionario = new Funcionario();
+        return response($funcionario->remove($id), 204);
     }
 }

@@ -12,7 +12,7 @@ class Funcionario extends Model
     protected $table = 'funcionarios';
 
     public function tipo() {
-        return $this->hasOne('App\TipoFuncionario', 'id');
+        return $this->hasOne('App\TipoFuncionario', 'id', 'tipo_id');
     }
 
     public function getAll()
@@ -36,13 +36,14 @@ class Funcionario extends Model
 
         $this->save();
     }
+
     public function edit(int $id, array $input)
     {
         $funcionario = $this->find($id);
 
         $validator = Validator::make($input, [
             'nome' => 'required|string',
-            'tipo' => 'exists:tipo,tipo'
+            'tipo' => 'required|exists:tipos_funcionario,id'
 
         ]);
         if ($validator->fails()) {
@@ -52,5 +53,10 @@ class Funcionario extends Model
         $funcionario->tipo = $input['tipo'];
 
         $funcionario->save();
+    }
+
+    public function remove(int $id)
+    {
+        return $this->destroy($id);
     }
 }
