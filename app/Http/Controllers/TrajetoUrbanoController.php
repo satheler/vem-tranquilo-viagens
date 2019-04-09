@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\TrajetoUrbano;
-use App\TrajetoLocal;
 
 class TrajetoUrbanoController extends Controller
 {
@@ -40,7 +39,7 @@ class TrajetoUrbanoController extends Controller
     {
         try {
 
-            $trajeto = new TrajetoLocal();
+            $trajeto = new TrajetoUrbano();
             $trajeto->add($request->input());
             return response(["status" => "Trajeto cadastrado com sucesso"], 201);
 
@@ -70,7 +69,7 @@ class TrajetoUrbanoController extends Controller
      */
     public function edit($id)
     {
-        $trajeto = new TrajetoLocal();
+        $trajeto = new TrajetoUrbano();
         $listaDeTrajetos = $trajeto->getAll();
         $trajetoEditado = $listaDeTrajetos[$id];
         return "Formulario de edição para o".$trajetoEditado->toJson();
@@ -86,11 +85,9 @@ class TrajetoUrbanoController extends Controller
     public function update(Request $request, $id)
     {
         try {
-
-            $trajetoEditado = new TrajetoLocal();
+            $trajetoEditado = new TrajetoUrbano();
             $trajetoEditado->edit($id);
             return response(["status" => "Trajeto atualizado com sucesso"], 202);
-
         } catch (Exception $e) {
             return response($e->getMessage(), 400);
         }

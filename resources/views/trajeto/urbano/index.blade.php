@@ -27,12 +27,12 @@
                 <thead class="thead-light">
                     <tr>
                         <th scope="col"></th>
-                        <th scope="col">{{ __('Placa') }}</th>
-                        <th scope="col">{{ __('Chassi') }}</th>
-                        <th scope="col">{{ __('Lotação') }}</th>
-                        <th scope="col">{{ __('Ar condicionado') }}</th>
-                        <th scope="col">{{ __('Acessibilidade') }}</th>
-                        <th scope="col">{{ __('Disponibilidade') }}</th>
+                        <th scope="col">{{ __('Origem') }}</th>
+                        <th scope="col">{{ __('Destino') }}</th>
+                        <th scope="col">{{ __('Terminal') }}</th>
+                        <th scope="col">{{ __('Valor') }}</th>
+                        <th scope="col">{{ __('Horario saída') }}</th>
+                        <th scope="col">{{ __('Horario chegada') }}</th>
                         <th scope="col">Ações</th>
                     </tr>
                 </thead>
@@ -44,32 +44,12 @@
                                     <span class="btn-inner--icon"><i class="ni ni-single-copy-04"></i></span>
                                 </button>
                             </td>
-                            <td>{{ $item->description->placa }}</td>
-                            <td>{{ $item->description->chassi }}</td>
-                            <td>{{ $item->lotacao }}</td>
-                            <td  align="center">
-                                @if ($item->arCondicionado)
-                                    <span class="badge badge-success">Possui</span>
-                                @else
-                                    <span class="badge badge-warning">Não possui</span>
-                                @endif
-                            </td>
-
-                            <td  align="center">
-                                @if ($item->acessibilidade)
-                                    <span class="badge badge-success">Possui</span>
-                                @else
-                                    <span class="badge badge-warning">Não possui</span>
-                                @endif
-                            </td>
-
-                            <td align="center">
-                                @if ($item->description->disponivel)
-                                    <span data-badge-available-id="{{ $item->id }}" class="badge badge-success">Disponível</span>
-                                @else
-                                    <span data-badge-available-id="{{ $item->id }}" class="badge badge-warning">Em manutenção</span>
-                                @endif
-                            </td>
+                            <td>{{ $item->origem }}</td>
+                            <td>{{ $item->destino }}</td>
+                            <td>{{ $item->terminal }}</td>
+                            <td>{{ $item->valor }}</td>
+                            <td>{{ $item->horarioSaida }}</td>
+                            <td>{{ $item->horarioChegada }}</td>
 
                             <td align="center">
                                 <div class="dropdown">

@@ -37,7 +37,6 @@
                             <td>
                             <td>{{ $item->tipo }}</td>
                             <td>{{ $item->desconto }}</td>
-                            <td>{{ $item->lotacao }}</td>
 
                             <td align="center">
                                 <div class="dropdown">
