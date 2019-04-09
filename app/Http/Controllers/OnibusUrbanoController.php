@@ -41,16 +41,17 @@ class OnibusUrbanoController extends Controller
      */
     public function store(Request $request)
     {
-        try {
+        $onibus = new OnibusUrbano();
+        $validator = $onibus->add($request->input());
 
-            $onibus = new OnibusUrbano();
-            $onibus->add($request->input());
-            return response(["status" => "Ônibus cadastrado com sucesso"], 201);
-
-        } catch (Exception $e) {
-            return response($e->getMessage(), 400);
+        if($validator === NULL) {
+            return redirect()->route('onibus_urbano.index')->withStatus(__('Ônibus urbano adicionado com sucesso.'));
+        } else {
+            return redirect()
+                    ->route('onibus_urbano.create')
+                    ->withErrors($validator)
+                    ->withInput();
         }
-
     }
 
     /**

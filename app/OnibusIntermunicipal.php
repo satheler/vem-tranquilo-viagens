@@ -35,7 +35,7 @@ class OnibusIntermunicipal extends Model
         ]);
 
         if ($validator->fails()) {
-            throw new Exception($validator->messages());
+            return $validator;
         }
 
         $this->categoria = $input['categoria'];
