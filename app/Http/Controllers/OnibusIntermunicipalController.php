@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\OnibusIntermunicipal;
 use Exception;
 use Illuminate\Http\Request;
+use App\CategoriaOnibus;
 
 class OnibusIntermunicipalController extends Controller
 {
@@ -28,7 +29,9 @@ class OnibusIntermunicipalController extends Controller
      */
     public function create()
     {
-        return view('frotas.intermunicipal.create');
+        $categoriasOnibus = new CategoriaOnibus();
+        $lista = $categoriasOnibus->getAll();
+        return view('frotas.intermunicipal.create', compact('lista'));
         // return "Formulário cadastro";
         //return view('cadastroOnibusIntermunicipal');
     }

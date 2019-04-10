@@ -95,26 +95,38 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <label class="form-control-label" for="input-data-compra">{{ __('Data da Compra') }}</label>
                                         <div class="form-group">
                                             <div class="input-group input-group-alternative">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                                 </div>
-                                                <input class="form-control datepicker" placeholder="Clique para selecionar a data" type="text" value="">
+                                                <input name="data_compra" class="form-control datepicker" placeholder="Clique para selecionar a data" type="text" value="">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <label class="form-control-label" for="input-data-fabricacao">{{ __('Data da Fabricação') }}</label>
                                         <div class="form-group">
                                             <div class="input-group input-group-alternative">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                                 </div>
-                                                <input class="form-control datepicker" placeholder="Clique para selecionar a data" type="text" value="">
+                                                <input name="data_fabricacao" class="form-control datepicker" placeholder="Clique para selecionar a data" type="text" value="">
                                             </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label class="form-control-label" for="input-data-compra">{{ __('Selecione a Categoria') }}</label>
+                                        <div class="form-group">
+                                            <select>
+                                                <option value="" selected disabled>Selecione uma categoria...</option>
+                                                @foreach ($lista as $item)
+                                                    <option value="{{ $item->id }}">{{ $item->categoria }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                 </div>

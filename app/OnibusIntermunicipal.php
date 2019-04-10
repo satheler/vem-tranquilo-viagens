@@ -22,7 +22,9 @@ class OnibusIntermunicipal extends Model
 
     public function getAll()
     {
-        return $this->where('inativo', '1')->all();
+        return $this->whereHas('description', function ($query) {
+            $query->where('inativo', false);
+        })->get();
     }
 
     public function get(int $id)
