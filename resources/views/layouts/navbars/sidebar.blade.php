@@ -130,6 +130,11 @@
                                     {{ __('Ônibus Intermunicipal') }}
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('onibus_inativo.index') }}">
+                                    {{ __('Ônibus Inativos') }}
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>

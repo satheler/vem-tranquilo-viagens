@@ -16,9 +16,14 @@ class Onibus extends Model
         return $this->morphTo();
     }
 
-    protected function getAll()
+    public function get($id)
     {
-        return $this::all();
+        return $this->find($id);
+    }
+
+    public function getAll()
+    {
+        return $this->where('inativo', true)->get();
     }
 
     public function add(array $input)
