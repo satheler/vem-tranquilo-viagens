@@ -1,4 +1,4 @@
-if($.fn.dataTable) {
+if ($.fn.dataTable) {
     $.extend(true, $.fn.dataTable.defaults, {
         language: {
             url: '/argon/vendor/datatables/dist/json/Portuguese-Brasil.json'
@@ -6,7 +6,6 @@ if($.fn.dataTable) {
     })
 }
 
-$(window).on('load', function () {
-    setTimeout(function () { $('.page-loader-wrapper').fadeOut(); }, 250);
-})
-
+setTimeout(function() {
+    $('.page-loader-wrapper').fadeOut()
+}, 250)
