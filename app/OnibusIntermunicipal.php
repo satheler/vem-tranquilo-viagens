@@ -10,6 +10,11 @@ class OnibusIntermunicipal extends Model
 {
     protected $table = 'onibus_intermunicipal';
 
+    public function assento()
+    {
+        return $this->hasMany('App\AssentoOnibus',  'onibus_id', 'id');
+    }
+
     public function description()
     {
         return $this->morphOne('App\Onibus', 'description');
@@ -30,7 +35,7 @@ class OnibusIntermunicipal extends Model
     public function add(array $input)
     {
         $validator = Validator::make($input, [
-            'categoria' => 'exists:categoria_onibus,id',
+            'assento_id' => 'exists:assento_id,id',
             'banheiro' => 'required|boolean',
         ]);
 
@@ -38,7 +43,7 @@ class OnibusIntermunicipal extends Model
             return $validator;
         }
 
-        $this->categoria = $input['categoria'];
+        $this->assento_id = $input['assento_id'];
         $this->banheiro = $input['banheiro'];
 
         $onibus = new Onibus();
