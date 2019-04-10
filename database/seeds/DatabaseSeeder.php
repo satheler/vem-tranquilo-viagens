@@ -14,8 +14,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UsersTableSeeder::class,
             TiposFuncionarioSeeder::class,
-            OnibusSeeder::class,
-            OnibusIntermunicipalSeeder::class
+            OnibusSeeder::class
             ]);
 
 

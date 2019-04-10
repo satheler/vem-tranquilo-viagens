@@ -27,6 +27,10 @@ class OnibusSeeder extends Seeder
             'custoManutencao' => 199.20,
             'chassi' => 'G2L5CH64R7K85G5KG',
             'placa' => 'GOV8956',
+            'marca' => 'Mercedes Benz',
+            'modelo' => 'OF 1519',
+            'data_fabricacao' => now(),
+            'data_compra' => now()
         ]);
 
         /* --------------------------------------------------------- */
@@ -46,6 +50,10 @@ class OnibusSeeder extends Seeder
             'custoManutencao' => 199.99,
             'chassi' => '25HD6U4A78VOAI9A6',
             'placa' => 'MGJ8741',
+            'marca' => 'Mercedes Benz',
+            'modelo' => 'OF 1519',
+            'data_fabricacao' => now(),
+            'data_compra' => now()
         ]);
     }
 }
