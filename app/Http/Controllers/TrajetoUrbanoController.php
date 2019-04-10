@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\TrajetoUrbano;
+use Exception;
 
 class TrajetoUrbanoController extends Controller
 {
@@ -37,14 +38,16 @@ class TrajetoUrbanoController extends Controller
      */
     public function store(Request $request)
     {
-        try {
+        $trajeto = new TrajetoUrbano();
+        $validator = $trajeto->add($request->input());
 
-            $trajeto = new TrajetoUrbano();
-            $trajeto->add($request->input());
-            return response(["status" => "Trajeto cadastrado com sucesso"], 201);
-
-        } catch (Exception $e) {
-            return response($e->getMessage(), 400);
+        if($validator === NULL) {
+            return redirect()->route('trajeto.urbano.index')->withStatus(__('Trajeto adicionado com sucesso.'));
+        } else {
+            return redirect()
+                    ->route('trajeto.urbano.create')
+                    ->withErrors($validator)
+                    ->withInput();
         }
     }
 
@@ -101,6 +104,7 @@ class TrajetoUrbanoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $trajeto = new TrajetoUrbano();
+        return $trajeto->disable($id, $request->input());
     }
 }

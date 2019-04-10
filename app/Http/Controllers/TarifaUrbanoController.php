@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\TarifaUrbano;
+use Exception;
 
 class TarifaUrbanoController extends Controller
 {
@@ -37,14 +38,16 @@ class TarifaUrbanoController extends Controller
      */
     public function store(Request $request)
     {
-        try {
+        $tarifa = new TarifaUrbano();
+        $validator = $tarifa->add($request->input());
 
-            $tarifa = new TarifaUrbano();
-            $tarifa->add($request->input());
-            return response(["status" => "Tarifa alterada com sucesso"], 201);
-
-        } catch (Exception $e) {
-            return response($e->getMessage(), 400);
+        if($validator === NULL) {
+            return redirect()->route('tarifa.urbano.index')->withStatus(__('Tarifa adicionada com sucesso.'));
+        } else {
+            return redirect()
+                    ->route('tarifa.urbano.create')
+                    ->withErrors($validator)
+                    ->withInput();
         }
     }
 

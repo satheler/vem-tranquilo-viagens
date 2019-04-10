@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Funcionario;
 use App\TipoFuncionario;
+use Exception;
 
 class FuncionarioController extends Controller
 {
