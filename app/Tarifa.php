@@ -17,7 +17,7 @@ class Tarifa extends Model
 
     protected function getAll()
     {
-        return $this::all();
+        return $this->all();
     }
 
     public function get(int $id){

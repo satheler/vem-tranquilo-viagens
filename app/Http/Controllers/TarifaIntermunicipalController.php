@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\TarifaIntermunicipal;
+use App\Tarifa;
 use Exception;
 
 class TarifaIntermunicipalController extends Controller
@@ -15,7 +15,7 @@ class TarifaIntermunicipalController extends Controller
      */
     public function index()
     {
-        $tarifa = new TarifaIntermunicipal();
+        $tarifa = new Tarifa();
         $lista = $tarifa->getAll();
         return view('tarifa.intermunicipal.index', compact('lista'));
     }
@@ -38,7 +38,7 @@ class TarifaIntermunicipalController extends Controller
      */
     public function store(Request $request)
     {
-        $tarifa = new FormaDePagamento();
+        $tarifa = new Tarifa();
         $validator = $tarifa->add($request->input());
 
         if($validator === NULL) {
@@ -59,7 +59,7 @@ class TarifaIntermunicipalController extends Controller
      */
     public function show($id)
     {
-        $tarifa = new TarifaIntermunicipal();
+        $tarifa = new Tarifa();
         $item = $tarifa->get($id);
         return view('tarifa.intermunicipal.show', compact('item'));
     }
@@ -72,7 +72,7 @@ class TarifaIntermunicipalController extends Controller
      */
     public function edit($id)
     {
-        $tarifa = new TarifaIntermunicipal();
+        $tarifa = new Tarifa();
         $listaDeTarifas = $tarifa->getAll();
         $tarifaEditada = $listaDeTarifas[$id];
         return "Formulario de edição para a".$tarifaEditada->toJson();

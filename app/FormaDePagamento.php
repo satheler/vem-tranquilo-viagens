@@ -13,7 +13,7 @@ class FormaDePagamento extends Model
 
     public function getAll()
     {
-        return $this::all();
+        return $this->all();
     }
 
     public function get(int $id)
