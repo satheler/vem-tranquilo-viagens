@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\CategoriaPassageiro;
+use Exception;
 
 class CategoriaPassageiroController extends Controller
 {
@@ -14,8 +15,8 @@ class CategoriaPassageiroController extends Controller
      */
     public function index()
     {
-        $CategoriaPassageiro = new CategoriaPassageiro();
-        $lista = $CategoriaPassageiro->getAll();
+        $categoriaPassageiro = new CategoriaPassageiro();
+        $lista = $categoriaPassageiro->getAll();
         return view('categoria_passageiro.main.index', compact('lista'));
     }
 
@@ -37,14 +38,16 @@ class CategoriaPassageiroController extends Controller
      */
     public function store(Request $request)
     {
-        try {
+        $categoriaPassageiro = new CategoriaPassageiro();
+        $validator = $categoriaPassageiro->add($request->input());
 
-            $CategoriaPassageiro = new CategoriaPassageiro();
-            $CategoriaPassageiro->add($request->input());
-            return response(["status" => "Tipo de CategoriaPassageiro cadastrado com sucesso"], 201);
-
-        } catch (Exception $e) {
-            return response($e->getMessage(), 400);
+        if($validator === NULL) {
+            return redirect()->route('categoria_Passageiro.index')->withStatus(__('Forma de pagamento adicionada com sucesso.'));
+        } else {
+            return redirect()
+                    ->route('categoria_Passageiro.create')
+                    ->withErrors($validator)
+                    ->withInput();
         }
     }
 
@@ -56,8 +59,8 @@ class CategoriaPassageiroController extends Controller
      */
     public function show($id)
     {
-        $CategoriaPassageiro = new CategoriaPassageiro();
-        $item = $CategoriaPassageiro->get($id);
+        $categoriaPassageiro = new CategoriaPassageiro();
+        $item = $categoriaPassageiro->get($id);
         return view('categoria_passageiro.main.show', compact('item'));
     }
 
@@ -69,10 +72,10 @@ class CategoriaPassageiroController extends Controller
      */
     public function edit($id)
     {
-        $CategoriaPassageiro = new CategoriaPassageiro();
-        $listaDeCategoriaPassageiros = $CategoriaPassageiro->getAll();
-        $CategoriaPassageiroEditado = $listaDeCategoriaPassageiros[$id];
-        return "Formulario de edição para o".$CategoriaPassageiroEditado->toJson();
+        $categoriaPassageiro = new CategoriaPassageiro();
+        $listaDeCategoriaPassageiros = $categoriaPassageiro->getAll();
+        $categoriaPassageiroEditado = $listaDeCategoriaPassageiros[$id];
+        return "Formulario de edição para o".$categoriaPassageiroEditado->toJson();
     }
 
     /**
@@ -86,9 +89,9 @@ class CategoriaPassageiroController extends Controller
     {
         try {
 
-            $CategoriaPassageiroEditado = new CategoriaPassageiro();
-            $CategoriaPassageiroEditado->edit($id);
-            return response(["status" => "Tipo de CategoriaPassageiro atualizado com sucesso"], 202);
+            $categoriaPassageiroEditado = new CategoriaPassageiro();
+            $categoriaPassageiroEditado->edit($id);
+            return response(["status" => "Tipo de categoria de Passageiro atualizado com sucesso"], 202);
 
         } catch (Exception $e) {
             return response($e->getMessage(), 400);
@@ -103,17 +106,7 @@ class CategoriaPassageiroController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            $CategoriaPassageiro = CategoriaPassageiro::where('id', $id)->first();
-
-            if($CategoriaPassageiro) {
-
-                return $CategoriaPassageiro->delete();
-            }
-            // $CategoriaPassageiro = new CategoriaPassageiro();
-            // $CategoriaPassageiro->destroy($id);
-        } catch (Exception $e) {
-            return response($e->getMessage(), 400);
-        }
+        $categoriaPassageiro = new CategoriaPassageiro();
+        return response($categoriaPassageiro->remove($id), 204);
     }
 }

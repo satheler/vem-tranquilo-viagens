@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Concessao;
+use Exception;
 
 class ConcessaoController extends Controller
 {
@@ -36,15 +38,22 @@ class ConcessaoController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-
+        //try {
             $concessao = new Concessao();
-            $concessao->add($request->input());
-            return response(["status" => "Concessão registrada com sucesso"], 201);
+            $validator = $concessao->add($request->input());
 
-        } catch (Exception $e) {
-            return response($e->getMessage(), 400);
-        }
+            if($validator === NULL) {
+                return redirect()->route('concessao.index')->withStatus(__('Concessão registrada com sucesso.'));
+            } else {
+                return redirect()
+                        ->route('concessao.create')
+                        ->withErrors($validator)
+                        ->withInput();
+            }
+
+        // } catch (Exception $e) {
+        //     return response($e->getMessage(), 400);
+        // }
     }
 
     /**
@@ -69,9 +78,9 @@ class ConcessaoController extends Controller
     public function edit($id)
     {
         $concessao = new Concessao();
-        $lista = $concessao->getAll();
-        $concessaoEditada = $lista[$id];
-        return "Formulario de edição para o" . $concessaoEditada->toJson();
+        $listaDeConcessao = $concessao->getAll();
+        $concessaoEditada = $listaDeConcessao[$id];
+        return "Formulario de edição para o".$concessaoEditada->toJson();
     }
 
     /**
@@ -102,15 +111,7 @@ class ConcessaoController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            $concessao = Concessao::where('id', $id)->first();
-
-            if($concessao) {
-
-                return $concessao->delete();
-            }
-        } catch (Exception $e) {
-            return response($e->getMessage(), 400);
-        }
+        $concessao = new Concessao();
+        return response($concessao->remove($id), 204);
     }
 }

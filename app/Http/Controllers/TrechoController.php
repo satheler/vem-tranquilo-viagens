@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\TarifaIntermunicipal;
+use App\Trecho;
 use Exception;
 
-class TarifaIntermunicipalController extends Controller
+class TrechoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,9 @@ class TarifaIntermunicipalController extends Controller
      */
     public function index()
     {
-        $tarifa = new TarifaIntermunicipal();
-        $lista = $tarifa->getAll();
-        return view('tarifa.intermunicipal.index', compact('lista'));
+        $trecho = new Trecho();
+        $lista = $trecho->getAll();
+        return view('techo.main.index', compact('lista'));
     }
 
     /**
@@ -27,7 +27,7 @@ class TarifaIntermunicipalController extends Controller
      */
     public function create()
     {
-        return view('tarifa.intermunicipal.create');
+        return view('trecho.main.create');
     }
 
     /**
@@ -38,14 +38,14 @@ class TarifaIntermunicipalController extends Controller
      */
     public function store(Request $request)
     {
-        $tarifa = new FormaDePagamento();
-        $validator = $tarifa->add($request->input());
+        $trecho = new FormaDePagamento();
+        $validator = $trecho->add($request->input());
 
         if($validator === NULL) {
-            return redirect()->route('tarifa.intermunicipal.index')->withStatus(__('Tarifa adicionada com sucesso.'));
+            return redirect()->route('trecho.index')->withStatus(__('Trecho adicionado com sucesso.'));
         } else {
             return redirect()
-                    ->route('tarifa.intermunicipal.create')
+                    ->route('trecho.create')
                     ->withErrors($validator)
                     ->withInput();
         }
@@ -59,9 +59,9 @@ class TarifaIntermunicipalController extends Controller
      */
     public function show($id)
     {
-        $tarifa = new TarifaIntermunicipal();
-        $item = $tarifa->get($id);
-        return view('tarifa.intermunicipal.show', compact('item'));
+        $trecho = new Trecho();
+        $item = $trecho->get($id);
+        return view('trecho.main.show', compact('item'));
     }
 
     /**
@@ -72,10 +72,10 @@ class TarifaIntermunicipalController extends Controller
      */
     public function edit($id)
     {
-        $tarifa = new TarifaIntermunicipal();
-        $listaDeTarifas = $tarifa->getAll();
-        $tarifaEditada = $listaDeTarifas[$id];
-        return "Formulario de edição para a".$tarifaEditada->toJson();
+        $trecho = new Trecho();
+        $listaDeTrechos = $trecho->getAll();
+        $trechoEditado = $listaDeTrechos[$id];
+        return "Formulario de edição para o".$trechoEditado->toJson();
     }
 
     /**
@@ -87,7 +87,15 @@ class TarifaIntermunicipalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+
+            $trechoEditado = new Trecho();
+            $trechoEditado->edit($id);
+            return response(["status" => "Trecho atualizado com sucesso"], 202);
+
+        } catch (Exception $e) {
+            return response($e->getMessage(), 400);
+        }
     }
 
     /**
@@ -98,6 +106,7 @@ class TarifaIntermunicipalController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $trecho = new Trecho();
+        return response($trecho->remove($id), 204);
     }
 }

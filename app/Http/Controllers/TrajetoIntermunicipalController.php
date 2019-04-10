@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\TrajetoIntermunicipal;
+use Exception;
 
 class TrajetoIntermunicipalController extends Controller
 {
@@ -37,14 +38,16 @@ class TrajetoIntermunicipalController extends Controller
      */
     public function store(Request $request)
     {
-        try {
+        $trajeto = new FormaDePagamento();
+        $validator = $trajeto->add($request->input());
 
-            $trajeto = new TrajetoIntermunicipal();
-            $trajeto->add($request->input());
-            return response(["status" => "Trajeto cadastrado com sucesso"], 201);
-
-        } catch (Exception $e) {
-            return response($e->getMessage(), 400);
+        if($validator === NULL) {
+            return redirect()->route('trajeto.intermunicipal.index')->withStatus(__('Trajeto adicionado com sucesso.'));
+        } else {
+            return redirect()
+                    ->route('trajeto.intermunicipal.create')
+                    ->withErrors($validator)
+                    ->withInput();
         }
     }
 
@@ -103,6 +106,7 @@ class TrajetoIntermunicipalController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $trajeto = new TrajetoIntermunicipal();
+        return $trajeto->disable($id, $request->input());
     }
 }
