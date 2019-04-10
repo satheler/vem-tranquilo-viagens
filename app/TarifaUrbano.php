@@ -11,6 +11,10 @@ class TarifaUrbano extends Model
 {
     protected $table= 'tarifa_urbano';
 
+    public function cidade() {
+        return $this->hasOne('App\Cidade', 'id', 'cidade_id');
+    }
+
     public function description()
     {
         return $this->morphOne('App\Tarifa', 'description');
@@ -21,21 +25,26 @@ class TarifaUrbano extends Model
         return $this->all();
     }
 
+    public function get(int $id){
+        $tarifa = $this->find($id);
+        return $trarifa;
+    }
+
     public function add(array $input)
     {
 
         $validator = Validator::make($input, [
-            'cidade' => 'exists:cidade,cidade', //Verifica se a cidade existe na tabela cidade e coluna cidade.
+            'cidade_id' => 'exists:cidade,id', //Verifica se a cidade existe na tabela cidade e coluna cidade.
             'licitacao' => 'required|unique:tarifa',
             'valorEspecial' => 'required|integer'
 
         ]);
 
         if ($validator->fails()) {
-            throw new Exception($validator->messages());
+            return $validator;
         }
 
-        $this->cidade = $input['cidade'];
+        $this->cidade = $input['cidade_id'];
         $this->licitacao = $input['licitacao'];
         $this->valorEspecial = $input['valor_especial'];
 

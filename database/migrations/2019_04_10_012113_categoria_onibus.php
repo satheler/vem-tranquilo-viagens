@@ -17,7 +17,6 @@ class CategoriaOnibus extends Migration
         Schema::table($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('categoria');
-            $table->float('valor');
         });
     }
 
@@ -31,5 +30,5 @@ class CategoriaOnibus extends Migration
 
             Schema::dropIfExists($this->databaseName);
         }
-    
+
 }

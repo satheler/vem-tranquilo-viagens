@@ -16,7 +16,7 @@ class CreateTrajetoIntermunicipalTable extends Migration
     {
         Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('listaDeTrechos');
+    
             $table->timestamps();
         });
     }

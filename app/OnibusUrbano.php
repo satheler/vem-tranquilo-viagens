@@ -35,7 +35,7 @@ class OnibusUrbano extends Model
         ]);
 
         if ($validator->fails()) {
-            return $validator->messages();
+            return $validator;
         }
 
         $this->lotacao = $input['lotacao'];
@@ -66,7 +66,7 @@ class OnibusUrbano extends Model
         ]);
 
         if ($validator->fails()) {
-            throw new Exception($validator->messages());
+            return $validator;
         }
 
         $description = $onibus->description;

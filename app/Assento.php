@@ -3,13 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Validator;
-use Exception;
 
-class CategoriaPassageiro extends Model
+class Assento extends Model
 {
-    protected $table = 'categoria_passageiro';
+    protected $table = 'assento';
 
+    public function categoria() {
+        return $this->hasOne('App\categoriaOnibus', 'id', 'categoria_id');
+    }
     public function getAll()
     {
         return $this::all();
@@ -23,34 +24,34 @@ class CategoriaPassageiro extends Model
     public function add(array $input)
     {
         $validator = Validator::make($input, [
-            'tipo' => 'required|string',
-            'desconto' => 'required|integer'
+            'valor' => 'required|string',
+            'categoria_id' => 'exists:categoria_onibus,id'
         ]);
 
         if ($validator->fails()) {
             return $validator;
         }
 
-        $this->tipo = $input['tipo'];
-        $this->desconto = $input['desconto'];
+        $this->valor = $input['valor'];
+        $this->categoria_id = $input['categoria_id'];
 
         $this->save();
     }
 
     public function edit(int $id, array $input)
     {
-        $passageiro = $this->find($id);
+        $assento = $this->find($id);
         $validator = Validator::make($input, [
-            'tipo' => 'required|string',
-            'desconto' => 'required|integer'
+            'valor' => 'required|string',
+            'categoria_id' => 'exists:categoria_onibus,id'
         ]);
         if ($validator->fails()) {
             return $validator;
         }
-        $passageiro->tipo = $input['tipo'];
-        $passageiro->desconto = $input['desconto'];
+        $assento->valor = $input['valor'];
+        $assento->categoria_id = $input['categoria_id'];
 
-        $passageiro->save();
+        $assento->save();
     }
 
     public function remove(int $id)

@@ -19,7 +19,7 @@ class CreateTrechoTable extends Migration
             $table->bigIncrements('id');
             $table->dateTime('horarioSaida');
             $table->dateTime('horarioChegada');
-            $table->double('valor');
+            $table->double('quilometragem');
 
             $table->bigInteger('origem_id')->unsigned();
             $table->bigInteger('destino_id')->unsigned();

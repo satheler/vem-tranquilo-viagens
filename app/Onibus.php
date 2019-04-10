@@ -29,10 +29,16 @@ class Onibus extends Model
             'custoManutencao' => 'required|numeric',
             'chassi' => 'required|min:17|max:17|unique:onibus',
             'placa' => 'required|min:7|max:7|unique:onibus',
+
+            'modelo' => 'required|string',
+            'marca' => 'required|marca',
+            'data_compra' => 'before_or_equal:date',
+            'data_fabricacao' => 'before_or_equal:date'
+
         ]);
 
         if ($validator->fails()) {
-            throw new Exception($validator->messages());
+            return $validator;
         }
 
         $this->disponivel = $input['disponivel'];
@@ -40,6 +46,10 @@ class Onibus extends Model
         $this->custoManutencao = $input['custoManutencao'];
         $this->chassi = $input['chassi'];
         $this->placa = $input['placa'];
+        $this->modelo = $input['modelo'];
+        $this->marca = $input['marca'];
+        $this->data_fabricacao = $input['data_fabricacao'];
+        $this->data_compra = $input['data_compra'];
 
         return $this;
     }

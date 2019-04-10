@@ -66,7 +66,7 @@ class OnibusIntermunicipal extends Model
         ]);
 
         if ($validator->fails()) {
-            throw new Exception($validator->messages());
+           return $validator;
         }
 
         $description = $onibus->description;

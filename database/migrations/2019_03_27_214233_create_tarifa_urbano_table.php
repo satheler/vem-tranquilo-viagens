@@ -16,9 +16,10 @@ class CreateTarifaUrbanoTable extends Migration
     {
         Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('cidade');
             $table->string('licitacao');
             $table->double('valor_especial');
+
+            $table->bigInteger('cidade_id');
 
             $table->timestamps();
         });

@@ -23,6 +23,10 @@ class CreateOnibusTable extends Migration
             $table->double('custoManutencao');
             $table->string('chassi', 17);
             $table->string('placa', 7);
+            $table->string('marca');
+            $table->string('modelo');
+            $table->date('data_fabricacao');
+            $table->date('data_compra');
 
             $table->boolean('inativo')->default(false);
             $table->string('observacao')->nullable();

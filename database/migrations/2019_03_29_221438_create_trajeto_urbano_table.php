@@ -21,6 +21,8 @@ class CreateTrajetoUrbanoTable extends Migration
             $table->time('horarioSaida');
             $table->time('horarioChegada');
 
+            $table->bigInteger('endereco_id');
+
             $table->timestamps();
         });
     }

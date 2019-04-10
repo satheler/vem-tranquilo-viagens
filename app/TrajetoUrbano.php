@@ -11,14 +11,18 @@ class TrajetoUrbano extends Model
 {
     protected $table = 'trajeto_urbano';
 
-    public function description()
-    {
-        return $this->morphTo();
+    public function endereco() {
+        return $this->hasOne('App\Cidade', 'id', 'endereco_id');
     }
 
     public function getAll()
     {
         return $this->all();
+    }
+
+    public function get(int $id){
+        $trajeto = $this->find($id);
+        return $trajeto;
     }
 
     public function add(array $input)
@@ -27,7 +31,8 @@ class TrajetoUrbano extends Model
             'qntParadas' => 'required|integer',
             'terminal' => 'required|string',
             'horarioSaida' => 'required|time',
-            'horarioChegada' => 'required|time'
+            'horarioChegada' => 'required|time',
+            'endereco_id'=> 'existis:cidade,id'
         ]);
 
         if ($validator->fails()) {
@@ -38,6 +43,7 @@ class TrajetoUrbano extends Model
         $this->terminal = $input['terminal'];
         $this->horarioSaida = $input['horarioSaida'];
         $this->horarioChegada = $input['horarioChegada'];
+        $this->endereco_id= $input['endereco_id'];
 
         $this->save();
     }
@@ -49,7 +55,8 @@ class TrajetoUrbano extends Model
             'qntParadas' => 'required|integer',
             'terminal' => 'required|string',
             'horarioSaida' => 'required|time',
-            'horarioChegada' => 'required|time'
+            'horarioChegada' => 'required|time',
+            'endereco_id'=> 'existis:cidade,id'
         ]);
 
         if ($validator->fails()) {
@@ -60,13 +67,14 @@ class TrajetoUrbano extends Model
         $trajeto->terminal = $input['terminal'];
         $trajeto->horarioSaida = $input['horarioSaida'];
         $trajeto->horarioChegada = $input['horarioChegada'];
+        $trajeto->endereco_id = $input['endereco_id'];
+
 
         $trajeto->save();
     }
 
-    // public function destroy(int $id){
+    public function remove(int $id){
 
-    //     $this->destroy($id);
-    //     //return response();
-    // }
+ //
+    }
 }

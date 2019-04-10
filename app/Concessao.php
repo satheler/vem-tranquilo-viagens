@@ -8,9 +8,9 @@ class Concessao extends Model
 {
     protected $table = 'concessao';
 
-    public function description()
-    {
-        return $this->morphTo();
+    public function get(int $id){
+        $concessao = $this->find($id);
+        return $concessao;
     }
 
     public function getAll()
@@ -28,7 +28,7 @@ class Concessao extends Model
 
 
         if ($validator->fails()) {
-            throw new Exception($validator->messages());
+            return $validator;
         }
 
         $this->numero_protocolo = $input['numero_protocolo'];
@@ -39,7 +39,7 @@ class Concessao extends Model
     }
     public function edit(int $id, array $input)
     {
-        $trecho = $this->find($id);
+        $concessao = $this->find($id);
 
         $validator = Validator::make($input, [
             'numero_protocolo' => 'required|integer',
@@ -48,14 +48,18 @@ class Concessao extends Model
         ]);
 
         if ($validator->fails()) {
-            throw new Exception($validator->messages());
+            return $validator;
         }
 
-        $trecho->numero_protocolo = $input['numero_protocolo'];
-        $trecho->anexo = $input['anexo'];
-        $trecho->data = $input['data'];
+        $concessao->numero_protocolo = $input['numero_protocolo'];
+        $concessao->anexo = $input['anexo'];
+        $concessao->data = $input['data'];
 
-        $trecho->save();
+        $concessao->save();
     }
 
+    public function remove(int $id)
+    {
+        return $this->destroy($id);
+    }
 }

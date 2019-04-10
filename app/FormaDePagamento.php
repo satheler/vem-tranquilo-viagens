@@ -11,11 +11,6 @@ class FormaDePagamento extends Model
 {
     protected $table = 'forma_de_pagamento';
 
-    public function description()
-    {
-        return $this->morphTo();
-    }
-
     public function getAll()
     {
         return $this::all();

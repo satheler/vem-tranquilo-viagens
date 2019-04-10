@@ -20,15 +20,20 @@ class Tarifa extends Model
         return $this::all();
     }
 
+    public function get(int $id){
+        $tarifa = $this->find($id);
+        return $tarifa;
+    }
+
     public function add(array $input)
     {
         $validator = Validator::make($input, [
             'valor' => 'required|double',
-            'data' => 'required|date'
+            'data' => 'after:date'
         ]);
 
         if ($validator->fails()) {
-            throw new Exception($validator->messages());
+            return $validator;
         }
 
         $this->valor = $input['valor'];
