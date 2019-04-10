@@ -24,7 +24,7 @@ class CategoriaPassageiro extends Model
     {
         $validator = Validator::make($input, [
             'tipo' => 'required|string',
-            'desconto' => 'required|integer'
+            'desconto' => 'required|numeric'
         ]);
 
         if ($validator->fails()) {
@@ -42,7 +42,7 @@ class CategoriaPassageiro extends Model
         $passageiro = $this->find($id);
         $validator = Validator::make($input, [
             'tipo' => 'required|string',
-            'desconto' => 'required|integer'
+            'desconto' => 'required|beetwen:0,100'
         ]);
         if ($validator->fails()) {
             return $validator;

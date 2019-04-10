@@ -42,10 +42,10 @@ class CategoriaPassageiroController extends Controller
         $validator = $categoriaPassageiro->add($request->input());
 
         if($validator === NULL) {
-            return redirect()->route('categoria_Passageiro.index')->withStatus(__('Forma de pagamento adicionada com sucesso.'));
+            return redirect()->route('categoria_passageiro.index')->withStatus(__('Forma de pagamento adicionada com sucesso.'));
         } else {
             return redirect()
-                    ->route('categoria_Passageiro.create')
+                    ->route('categoria_passageiro.create')
                     ->withErrors($validator)
                     ->withInput();
         }
