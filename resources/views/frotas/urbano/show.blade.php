@@ -48,7 +48,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                 </div>
-                <input class="form-control datepicker" type="text" value="{{ $item->description->dataCompra }}" readonly>
+                <input class="form-control datepicker" type="text" value=" {{ (new DateTime($item->description->data_compra))->format('d/m/Y') }}" readonly>
             </div>
         </div>
     </div>
@@ -59,7 +59,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                 </div>
-                <input class="form-control datepicker" type="text" value="{{ $item->description->dataFabricacao }}" readonly>
+                <input class="form-control datepicker" type="text" value=" {{ (new DateTime($item->description->data_fabricacao))->format('d/m/Y') }}" readonly>
             </div>
         </div>
     </div>
@@ -67,7 +67,7 @@
 
 <div class="row text-center">
     <div class="col-md-4">
-        <label for="form-control-label"> {{__('Possui Ar-condicionado?')}} </label>
+        <label for="form-control-label"> {{__('Possui ar-condicionado?')}} </label>
         <div>
             @if ($item->arCondicionado)
                 <span class="badge badge-success">Possui</span>

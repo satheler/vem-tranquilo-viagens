@@ -102,7 +102,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                                 </div>
-                                                <input class="form-control datepicker" placeholder="Clique para selecionar a data" type="text" value="">
+                                                <input name="data_compra" class="form-control datepicker" placeholder="Clique para selecionar a data" type="text" value="">
                                             </div>
                                         </div>
                                     </div>
@@ -113,7 +113,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                                 </div>
-                                                <input class="form-control datepicker" placeholder="Clique para selecionar a data" type="text" value="">
+                                                <input name="data_fabricacao" class="form-control datepicker" placeholder="Clique para selecionar a data" type="text" value="">
                                             </div>
                                         </div>
                                     </div>

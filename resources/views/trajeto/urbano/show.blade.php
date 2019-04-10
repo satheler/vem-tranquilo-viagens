@@ -48,7 +48,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                 </div>
-                <input class="form-control datepicker" type="text" value="{{ $info->description->dataCompra }}" readonly>
+                <input class="form-control datepicker" type="text" value="{{ $info->description->dataCwompra }}" readonly>
             </div>
         </div>
     </div>
