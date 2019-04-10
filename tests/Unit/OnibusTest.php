@@ -2,7 +2,8 @@
 
 namespace Tests\Unit;
 
-use App\OnibusUrbano;;
+use App\OnibusUrbano;
+use App\OnibusIntermunicipal;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -14,101 +15,24 @@ class OnibusTest extends TestCase
      *
      * @return void
      */
-      
 
-   
-     //Função de teste de disponibilidade do Onibus - Verifica se o ônibus está cadastrado
-    public function testDisponibilidade()
-    {
-      $o = new OnibusUrbano();
-      $test = $o->add([
-         "disponibilidade" => true
-         ]);
-       $this->assertEquals(true, $o->getDisponibilidade());
-     
-    }
-     //Função de teste a acessibilidade do ônibus - Verifica se o ônibus está acessivel 
-    public function testAcessibilidade()
-    {
-      $o = new OnibusUrbano();
-      $test = $o->add([
-         "acessibilidade"=> false
-      ]);
-       $this->assertEquals(true, $o->getAcessibilidade()());
-      
-    }
-     //Função de teste o custo da manutenção do ônibus 
-    public function testCustoManutencao()
-    {
-      $o = new OnibusUrbano();
-      $test = $o->add([
-         "custoManutencao"=> 199.99
-      ]);
-       $this->assertEquals(1219, $o->getCustoManutencao());
-      
-    }
-     //Função de teste e validação o número do chassi do ônibus 
-    public function testChassi()
-    {
-      $o = new OnibusUrbano();
-      $test = $o->add([
-         "chassi" => "17bhklsdbaabsdaDD"
-      ]);
-       $this->assertEquals("aaaaaaaaaaaaaaaaa", $Onibustdd->getChassi());
-    
-    }
-     //Função de teste e validação da placa do ônibus 
-    public function testPlaca()
-    {
-      $o = new OnibusUrbano();
-      $test = $o->add([
-            "placa" => "HGG5547"
-      ]);
-       $this->assertEquals("aaaaaaa", $o->getPlaca());
-      
-      
-    }
-    //Função de teste de tipo - Compara tipo da variável é o mesmo tipo da comparada
-    public function testType()
-    {
-      $o = new OnibusUrbano();
-        $test = $o->add([
-         "chassi" => "17bhklsdbaabsdaDD"
-      ]);
-        $this->assertInternalType('int', $o->getDisponibilidade());
-      
-    }
-   //  public function testedetamanhodecaractere()
-   //  {
-   //      $o = new OnibusUrbano();
-   //      $test = $o->add([
-   //          "lotacao" => 1,
-   //          "arCondicionado" => true,
-   //          "disponivel" => true,
-   //          "acessibilidade" => true,
-   //          "custoManutencao" => 1.00,
-   //          "chassi" => "17bhklsdbaabsdaDD",
-   //          "placa" => "HGG5547",
-   //      ]);
-
-        $this->assertTrue($test === true);
-    }
-    public function testOnibusUrbanoTreis()
+    public function testOnibusUrbano()
     {
         $o = new OnibusUrbano();
         $test = $o->add([
             "lotacao" => 35,
             "arCondicionado" => true,
-            "disponivel" => true,
+            "disponivel" => false,
             "acessibilidade" => false,
             "custoManutencao" => 167.9,
             "chassi" => "juhs85j032jkladlk",
             "placa" => "sqs9126",
+       
         ]);
 
         $this->assertTrue($test === true);
     }
-    public function testOnibusUrbanoQuatro()
+    public function testOnibusUrbanoDois()
     {
         $o = new OnibusUrbano();
         $test = $o->add([
@@ -116,24 +40,42 @@ class OnibusTest extends TestCase
             "arCondicionado" => true,
             "disponivel" => true,
             "acessibilidade" => false,
-            "custoManutencao" => 267.9,
-            "chassi" => "juhs85jl92jkladlk",
-            "placa" => "sqs4d56",
+            "custoManutencao" => 577.9,
+            "chassi" => "jugf85j032jkladlk",
+            "placa" => "sqs1126",
+          
         ]);
 
         $this->assertTrue($test === true);
     }
-    public function testOnibusUrbanoCinco()
+
+    public function testOnibusIntermunicipal()
     {
-        $o = new OnibusUrbano();
+        $o = new OnibusIntermunicipal();
         $test = $o->add([
-            "lotacao" => 84,
-            "arCondicionado" => true,
+          "banheiro"=> true, 
+          "disponivel" => true,
+          "acessibilidade" => false,
+          "custoManutencao" => 587.9,
+          "chassi" => "juhs85jfkcjkladlk",
+          "placa" => "snh2150",
+         
+        ]);
+
+        $this->assertTrue($test === true);
+    }
+
+    public function testOnibusIntermunicipalDois()
+    {
+        $o = new OnibusIntermunicipal();
+        $test = $o->add([
+            "banheiro"=> true, 
             "disponivel" => true,
             "acessibilidade" => false,
-            "custoManutencao" => 777.9,
-            "chassi" => "juhs85jfv2jkladlk",
-            "placa" => "snh9056",
+            "custoManutencao" => 577.9,
+            "chassi" => "juhs85jfh5jkladlk",
+            "placa" => "snh9050",
+            
         ]);
 
         $this->assertTrue($test === true);
