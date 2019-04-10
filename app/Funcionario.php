@@ -9,7 +9,7 @@ use Exception;
 
 class Funcionario extends Model
 {
-    protected $table = 'tipos_funcionario';
+    protected $table = 'funcionarios';
 
     public function tipo() {
         return $this->hasOne('App\TipoFuncionario', 'id', 'tipo_id');
@@ -29,7 +29,7 @@ class Funcionario extends Model
     {
         $validator = Validator::make($input, [
             'nome' => 'required|string',
-            'tipo_id' => 'required|exists:tipos_funcionario,id'
+            'tipo' => 'required|exists:tipos_funcionario,id'
         ]);
 
         if ($validator->fails()) {
@@ -37,7 +37,7 @@ class Funcionario extends Model
         }
 
         $this->nome = $input['nome'];
-        $this->tipo_id = $input['tipo_id'];
+        $this->tipo_id = $input['tipo'];
 
         $this->save();
     }

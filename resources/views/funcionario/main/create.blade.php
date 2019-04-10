@@ -40,10 +40,7 @@
                                     <div class="col-lg-6">
                                         <div class="row">
                                             <label class="form-control-label" for="form-control-label"> {{__('FUNÇÃO')}} </label>
-                                        </div>
-
-                                        <div class="row">
-                                            <select name="tipo" class="form-control" required>
+                                            <select name="tipo" required>
                                                 <option value="" disabled selected>Selecione uma função...</option>
                                                 @foreach ($lista as $item)
                                                     <option value="{{ $item->id }}">{{ $item->nome }}</option>
@@ -67,7 +64,3 @@
         @include('layouts.footers.auth')
     </div>
 @endsection
-
-@push('js')
-    <script src="{{ asset('argon') }}/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-@endpush

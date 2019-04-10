@@ -17,6 +17,7 @@
         <link href="{{ asset('argon') }}/vendor/nucleo/css/nucleo.css" rel="stylesheet">
         <link href="{{ asset('argon') }}/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
         <!-- Page plugins -->
+        <link type="text/css" href="{{ asset('argon') }}/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
         @stack('css')
         <!-- Argon CSS -->
         <link type="text/css" href="{{ asset('argon') }}/css/argon.min.css?v=1.0.0" rel="stylesheet">
@@ -65,7 +66,9 @@
         <script src="{{ asset('argon') }}/vendor/promise-polyfill/dist/polyfill.min.js"></script>
         <script src="{{ asset('argon') }}/vendor/axios/dist/axios.min.js"></script>
 
+        <!-- Plugins -->
         @stack('js')
+        <script src="{{ asset('argon') }}/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
 
         <!-- Argon JS -->
         <script src="{{ asset('argon') }}/js/argon.js?v=1.0.0"></script>

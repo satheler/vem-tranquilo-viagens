@@ -60,6 +60,10 @@ var Datepicker = (function() {
     }
 })()
 
+var BootstrapSelect = (function() {
+    $('select').selectpicker();
+})()
+
 //
 // Icon code copy/paste
 //

@@ -409,3 +409,50 @@
       -o-transform: rotate(-130deg);
       -webkit-transform: rotate(-130deg);
       transform: rotate(-130deg); } }
+
+
+/* Select Form ================================= */
+
+select {
+    font-size: .875rem;
+    height: 46px;
+}
+
+.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+  width: 100%;
+}
+
+.btn-light,
+.btn-light:not(:disabled):not(.disabled).active,
+.btn-light:not(:disabled):not(.disabled):active,
+.show>.btn-light.dropdown-toggle,
+.bootstrap-select>.dropdown-toggle.bs-placeholder,
+.bootstrap-select>.dropdown-toggle.bs-placeholder:active,
+.bootstrap-select>.dropdown-toggle.bs-placeholder:focus,
+.bootstrap-select>.dropdown-toggle.bs-placeholder:hover {
+    transition: box-shadow .15s ease;
+    border: 0;
+    box-shadow: 0 1px 3px rgba(50,50,93,.15), 0 1px 0 rgba(0,0,0,.02);
+    font-size: .875rem;
+    color: #8898aa;
+    border: none;
+    background-color: #fff;
+    outline: none;
+    height: 46px !important;
+}
+
+.btn-light:hover {
+    color: #8898aa;
+    background-color: #f9f9f9;
+    outline: none;
+    height: 46px !important;
+}
+
+div.dropdown.bootstrap-select button.btn.dropdown-toggle.btn-light,
+div.dropdown.bootstrap-select button.btn.dropdown-toggle.btn-light:focus,
+div.dropdown.bootstrap-select button.btn.dropdown-toggle.btn-light.bs-placeholder,
+div.dropdown.bootstrap-select button.btn.dropdown-toggle.btn-light.bs-placeholder:focus {
+    font-weight: normal;
+    height: 46px !important;
+    outline: none !important;
+}
