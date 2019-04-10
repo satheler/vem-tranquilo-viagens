@@ -34,7 +34,6 @@
                 <tbody>
                     @foreach ($lista as $item)
                         <tr data-table-row-id={{ $item->id }}>
-                            <td>
                             <td>{{ $item->tipo }}</td>
                             <td>{{ $item->desconto }}</td>
 

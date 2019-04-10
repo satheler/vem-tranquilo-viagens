@@ -35,7 +35,7 @@
                                             @endif
                                         </label>
                                         <div class="form-group{{ $errors->has('tipo') ? ' has-warning' : '' }}">
-                                            <input type="text" name="tipo" id="input-tipo" class="form-control{{ $errors->has('tipo') ? ' is-invalid' : '' }}" placeholder="{{ __('Tipo de Categoria') }}" value="{{ old('tipo') }}" required autofocus>
+                                            <input type="text" name="tipo" id="input-tipo" class="form-control{{ $errors->has('tipo') ? ' is-invalid' : '' }}" placeholder="{{ __('Ex.: Estudante...') }}" value="{{ old('tipo') }}" required autofocus>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
@@ -73,7 +73,7 @@
 
     <script>
         $(document).ready(function(){
-            $('[percent]').mask('00', {reverse: true});
+            $('[percent]').mask('000', {reverse: true});
         })
     </script>
 @endpush
