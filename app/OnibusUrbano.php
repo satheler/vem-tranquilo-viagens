@@ -17,7 +17,7 @@ class OnibusUrbano extends Model
 
     public function getAll()
     {
-        return $this->all();
+        return $this->where('inativo', '1')->all();
     }
 
     public function get(int $id)
