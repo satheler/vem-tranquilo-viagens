@@ -37,15 +37,13 @@ class OnibusIntermunicipal extends Model
     public function add(array $input)
     {
         $validator = Validator::make($input, [
-            'assento_id' => 'exists:assento_id,id',
-            'banheiro' => 'required|boolean',
+            'banheiro' => 'required|boolean'
         ]);
 
         if ($validator->fails()) {
             return $validator;
         }
 
-        $this->assento_id = $input['assento_id'];
         $this->banheiro = $input['banheiro'];
 
         $onibus = new Onibus();

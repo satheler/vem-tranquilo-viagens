@@ -60,12 +60,12 @@
 </div>
 
 <div class="row text-center">
-        <div class="col-md-12">
-    <center>
-        <div>
-            <label for="form-control-label"> {{__('Status do Ônibus')}} </label>
-        </div>
-        <span class="badge badge-danger">{{ $item->observacao }}</span>
-    </center>
-        </div>
+    <div class="col-md-12">
+        <center>
+            <div>
+                <label for="form-control-label"> {{__('Observação')}} </label>
+            </div>
+            <span class="badge badge-danger">{{ $item->observacao }}</span>
+        </center>
+    </div>
 </div>
