@@ -39,7 +39,7 @@
 
                                     <div class="col-lg-6">
                                         <label class="form-control-label" for="form-control-label"> {{__('FUNÇÃO')}} </label>
-                                        <select name="tipo"  data-size="4" data-live-search="true" required>
+                                        <select bootstrapSelect name="tipo"  data-size="4" data-live-search="true" required>
                                             <option value="" disabled selected>Selecione uma função...</option>
                                             @foreach ($lista as $item)
                                                 <option value="{{ $item->id }}">{{ $item->nome }}</option>

@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             OnibusSeeder::class,
             CidadesSeeder::class,
             CategoriaOnibusSeeder::class,
+            TrechosSeeder::class,
             AlocacaoUrbanoSeeder::class
         ]);
     }
