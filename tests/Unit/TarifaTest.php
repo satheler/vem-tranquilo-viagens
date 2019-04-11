@@ -14,15 +14,12 @@ class TarifaTest extends TestCase
      *
      * @return void
      */
-    public function testTarifaUrbano()
+    public function testTarifaIntermunicipal()
     {
         $o = new Tarifa();
         $test = $o->add([
-            'cidade' => 'Alegrete',
-            'licitacao' => 'test',
-            'valor_especial' => 3.50,
-            'valor' => 2.00,
-            'data' =>  date('Y-m-d'),
+            'valor' => 2.50,
+            'data' =>  '11/04/2019'
                                 
         ]);
 
