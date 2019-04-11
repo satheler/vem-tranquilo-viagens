@@ -25,7 +25,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label class="form-control-label" for="origem_id"> {{__('ORIGEM')}} </label>
-                                        <select name="origem_id" data-size="4" data-live-search="true" required>
+                                        <select bootstrapSelect name="origem_id" data-size="4" data-live-search="true" required>
                                             <option value="{{ old('origem_id') }}" disabled selected>Selecione a origem...</option>
                                             @foreach ($lista as $item)
                                             <option value="{{ $item->id }}">{{ $item->nome }}</option>
@@ -40,7 +40,7 @@
 
                                     <div class="col-md-6">
                                         <label class="form-control-label" for="destino_id"> {{__('DESTINO')}} </label>
-                                        <select name="destino_id" data-size="4" data-live-search="true" required>
+                                        <select bootstrapSelect name="destino_id" data-size="4" data-live-search="true" required>
                                             <option value="{{ old('destino_id') }}" disabled selected>Selecione o destino...</option>
                                             @foreach ($lista as $item)
                                             <option value="{{ $item->id }}">{{ $item->nome }}</option>

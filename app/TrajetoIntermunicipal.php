@@ -11,9 +11,9 @@ class TrajetoIntermunicipal extends Model
 {
     protected $table = 'trajeto_intermunicipal';
 
-    public function trecho()
+    public function trechos()
     {
-        return $this->hasMany('App\TrechoTrajeto',  'trajeto_id', 'id');
+        return $this->belongsToMany('App\Trecho', 'trajeto_trecho', 'trajeto_id', 'trecho_id');
     }
 
     public function getAll()
@@ -28,24 +28,14 @@ class TrajetoIntermunicipal extends Model
 
     public function add(array $input)
     {
-        $this->save();
-    }
-    public function edit(int $id, array $input)
-    {
-        $trajeto = $this->find($id);
-
         $validator = Validator::make($input, [
-            'listaDeTrechos' => 'required|string',
+            'trechos' => 'required|array',
         ]);
 
-        if ($validator->fails()) {
-            throw new Exception($validator->messages());
-        }
-
-        $trajeto->listaDeTrechos = $input['listaDeTrechos'];
-
-        $trajeto->save();
+        $this->save();
+        $this->trechos()->attach($input['trechos']);
     }
+
 
     public function remove(int $id)
     {

@@ -26,7 +26,7 @@
                 <div class="modal-content">
 
                     <div class="modal-header">
-                        <h3 class="modal-title" id="modal-title-default">Informações detalhadas do ônibus</h3>
+                        <h3 class="modal-title" id="modal-title-default">Informações detalhadas do trajeto</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -63,6 +63,16 @@ let url = window.location.pathname;
 $(document).ready( function () {
     table = $('#datatable-basic').DataTable();
 });
+
+$('[data-show-id]').on('click', function() {
+    let id = $(this).data('show-id');
+
+    axios.get(`${url}/${id}`)
+    .then(data => {
+        $(".modal-body").html(data.data)
+        $("#modal-infos").modal('show');
+    })
+})
 
 $('[data-remove-id]').on('click', async function () {
     let id = $(this).data('remove-id');
