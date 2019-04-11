@@ -29,9 +29,19 @@ class Tarifa extends Model
     public function add(array $input)
     {
         $dateToday = new DateTime();
+        $idUltimaData = Tarifa::orderBy('data', 'desc')->first();
+        $ultimaData = new DateTime('yesterday');
+
+        if($idUltimaData != null)
+        {
+            $ultimaData = $idUltimaData->data;
+            $ultimaData = date_create_from_format('Y-m-d', $ultimaData);
+        }
+
         $validator = Validator::make($input, [
             'valor' => 'required|numeric|min:0.01',
-            'data' => 'required|date_format:d/m/Y|after:'. $dateToday->format('d/m/Y')
+            'data' => 'required|date_format:d/m/Y|after:'. $dateToday->format('d/m/Y'),
+            'data' => 'date_format:d/m/Y|after:'. $ultimaData->format('d/m/Y')
         ]);
 
         if ($validator->fails()) {
