@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
             TiposFuncionarioSeeder::class,
             OnibusSeeder::class,
             CidadesSeeder::class,
-            CategoriaOnibusSeeder::class
+            CategoriaOnibusSeeder::class,
+            AlocacaoUrbanoSeeder::class
         ]);
     }
 }
