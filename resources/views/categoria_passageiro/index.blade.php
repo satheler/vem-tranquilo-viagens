@@ -60,7 +60,7 @@ $('[data-remove-id]').on('click', async function () {
         .then(data => {
             table.row(`[data-table-row-id="${id}"]`).remove();
             table.draw();
-            Swal.fire('Categoria de Passageiro removida com sucesso!', '', 'success')
+            Swal.fire('Categoria de passageiros removida com sucesso!', '', 'success')
             console.log(data);
         })
         .catch((error) => {

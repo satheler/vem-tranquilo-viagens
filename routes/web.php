@@ -34,6 +34,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::prefix('trajeto')->name('trajeto_')->group(function () {
         Route::resource('urbano', 'TrajetoUrbanoController');
         Route::resource('intermunicipal', 'TrajetoIntermunicipalController');
+        Route::resource('trecho', 'TrechoController');
     });
 
     Route::prefix('tarifa')->name('tarifa_')->group(function () {

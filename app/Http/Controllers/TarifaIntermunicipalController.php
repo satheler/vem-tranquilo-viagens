@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Tarifa;
+use App\TarifaIntermunicipal;
 use Exception;
 
 class TarifaIntermunicipalController extends Controller
@@ -15,7 +15,7 @@ class TarifaIntermunicipalController extends Controller
      */
     public function index()
     {
-        $tarifa = new Tarifa();
+        $tarifa = new TarifaIntermunicipal();
         $lista = $tarifa->getAll();
         return view('tarifa.intermunicipal.index', compact('lista'));
     }
@@ -38,14 +38,14 @@ class TarifaIntermunicipalController extends Controller
      */
     public function store(Request $request)
     {
-        $tarifa = new Tarifa();
+        $tarifa = new TarifaIntermunicipal();
         $validator = $tarifa->add($request->input());
 
-        if($validator === NULL) {
-            return redirect()->route('tarifa.intermunicipal.index')->withStatus(__('Tarifa adicionada com sucesso.'));
+        if(!($validator instanceof \Illuminate\Validation\Validator)) {
+            return redirect()->route('tarifa_intermunicipal.index')->withStatus(__('Tarifa intermunicipal adicionada com sucesso.'));
         } else {
             return redirect()
-                    ->route('tarifa.intermunicipal.create')
+                    ->route('tarifa_intermunicipal.create')
                     ->withErrors($validator)
                     ->withInput();
         }
@@ -59,7 +59,7 @@ class TarifaIntermunicipalController extends Controller
      */
     public function show($id)
     {
-        $tarifa = new Tarifa();
+        $tarifa = new TarifaIntermunicipal();
         $item = $tarifa->get($id);
         return view('tarifa.intermunicipal.show', compact('item'));
     }
@@ -72,7 +72,7 @@ class TarifaIntermunicipalController extends Controller
      */
     public function edit($id)
     {
-        $tarifa = new Tarifa();
+        $tarifa = new TarifaIntermunicipal();
         $listaDeTarifas = $tarifa->getAll();
         $tarifaEditada = $listaDeTarifas[$id];
         return "Formulario de edição para a".$tarifaEditada->toJson();

@@ -24,8 +24,8 @@
                             <h6 class="heading-small text-muted mb-4">{{ __('Informações do ônibus') }}</h6>
                             <div class="pl-lg-4">
                                 <div class="form-group{{ $errors->has('chassi') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="input-chassi">{{ __('CHASSI') }}</label>
-                                    <input type="text" name="chassi" id="input-chassi" class="form-control form-control-alternative{{ $errors->has('chassi') ? ' is-invalid' : '' }}" placeholder="{{ __('chassi') }}" value="{{ old('chassi') }}" required autofocus>
+                                    <label class="form-control-label" for="input-chassi">{{ __('Chassi') }}</label>
+                                    <input type="text" name="chassi" id="input-chassi" class="form-control form-control-alternative{{ $errors->has('Chassi') ? ' is-invalid' : '' }}" placeholder="{{ __('chassi') }}" value="{{ old('chassi') }}" required autofocus>
 
                                     @if ($errors->has('chassi'))
                                         <span class="invalid-feedback" role="alert">
@@ -44,7 +44,7 @@
                                     @endif
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <div class="form-group{{ $errors->has('marca') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-marca">{{ __('Marca') }}</label>
                                             <input type="text" name="marca" id="input-password" class="form-control form-control-alternative{{ $errors->has('marca') ? ' is-invalid' : '' }}" placeholder="{{ __('Marca') }}" value="" required>
@@ -56,7 +56,7 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <div class="form-group{{ $errors->has('modelo') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-modelo">{{ __('Modelo') }}</label>
                                             <input type="text" name="modelo" id="input-modelo" class="form-control form-control-alternative{{ $errors->has('modelo') ? ' is-invalid' : '' }}" placeholder="{{ __('Modelo') }}" value="" required>
@@ -68,7 +68,7 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <div class="form-group{{ $errors->has('locacao') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-lotacao">{{ __('Lotação') }}</label>
                                             <input type="number" name="lotacao" id="input-lotacao" class="form-control form-control-alternative{{ $errors->has('lotacao') ? ' is-invalid' : '' }}" placeholder="{{ __('Lotação') }}" value="" required>
@@ -76,18 +76,6 @@
                                             @if ($errors->has('lotacao'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $errors->first('Lotação') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group{{ $errors->has('custoManutencao') ? ' has-danger' : '' }}">
-                                            <label class="form-control-label" for="input-custoManutencao">{{ __('Custo Manutenção') }}</label>
-                                            <input type="number" name="custoManutencao" id="input-custoManutencao" class="form-control form-control-alternative{{ $errors->has('cor') ? ' is-invalid' : '' }}" placeholder="{{ __('Custo Manutenção') }}" value="" required>
-
-                                            @if ($errors->has('custoManutencao'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('custoManutencao') }}</strong>
                                                 </span>
                                             @endif
                                         </div>

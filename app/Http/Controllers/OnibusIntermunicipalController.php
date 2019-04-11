@@ -47,7 +47,7 @@ class OnibusIntermunicipalController extends Controller
         $onibus = new OnibusIntermunicipal();
         $validator = $onibus->add($request->input());
 
-        if($validator === NULL) {
+        if($validator instanceof \Illuminate\Validation\Validator) {
             return redirect()->route('onibus_intermunicipal.index')->withStatus(__('Ônibus intermunicipal adicionado com sucesso.'));
         } else {
             return redirect()

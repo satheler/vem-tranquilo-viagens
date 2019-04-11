@@ -15,10 +15,10 @@ class CategoriaOnibusSeeder extends Seeder
             'categoria' => "Comum"
         ]);
         DB::table('categoria_onibus')->insert([
-            'categoria' => "Leito"
+            'categoria' => "Executivo"
         ]);
         DB::table('categoria_onibus')->insert([
-            'categoria' => "Semi-leito"
+            'categoria' => "Leito"
         ]);
     }
 }
