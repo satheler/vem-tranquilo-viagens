@@ -4,7 +4,7 @@ namespace App;
 
 use Exception;
 use Illuminate\Database\Eloquent\Model;
-use Validator;
+use \Validator as Validator;
 
 class OnibusIntermunicipal extends Model
 {
@@ -47,10 +47,15 @@ class OnibusIntermunicipal extends Model
         $this->banheiro = $input['banheiro'];
 
         $onibus = new Onibus();
-        $data = $onibus->add($input);
+        $onibusAdd = $onibus->add($input);
+
+        if(($onibusAdd instanceof \Illuminate\Validation\Validator)) {
+            // die ($onibusAdd->messages());
+            return $onibusAdd;
+        }
 
         $this->save();
-        $this->description()->save($data);
+        $this->description()->save($onibusAdd);
     }
 
     public function edit(int $id)

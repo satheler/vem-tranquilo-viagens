@@ -4,7 +4,7 @@ namespace App;
 
 use Exception;
 use Illuminate\Database\Eloquent\Model;
-use Validator;
+use \Validator as Validator;
 
 class OnibusUrbano extends Model
 {

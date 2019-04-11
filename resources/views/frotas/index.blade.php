@@ -123,14 +123,16 @@ $('[data-available-id]').on('click', async function () {
         .then(data => {
             Swal.fire('Estado do Ônibus alterado com sucesso!', '', 'success')
             console.log(data);
+
+            $(`[data-badge-available-id="${id}"]`).attr('class').includes('badge-warning') ?
+            $(`[data-badge-available-id="${id}"]`).removeClass('badge-warning').addClass('badge-success').text('Disponivel') :
+            $(`[data-badge-available-id="${id}"]`).removeClass('badge-success').addClass('badge-warning').text('Em manutenção')
         })
         .catch((error) => {
             console.error(error);
             Swal.fire('Aconteceu um erro inesperado...', '', 'error' )
         })
 
-        //ALTERAR A BADGE DEPOIS
-        // $(`data-badge-available-id="${id}"`)
     }
 })
 
