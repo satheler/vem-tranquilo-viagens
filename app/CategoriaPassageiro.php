@@ -23,8 +23,8 @@ class CategoriaPassageiro extends Model
     public function add(array $input)
     {
         $validator = Validator::make($input, [
-            'tipo' => 'required|string',
-            'desconto' => 'required|numeric'
+            'tipo' => 'required|string|regex:/^[a-zA-Z]+$/',
+            'desconto' => 'required|numeric|max:100'
         ]);
 
         if ($validator->fails()) {

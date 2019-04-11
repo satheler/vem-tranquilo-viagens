@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class Cidade extends Migration
 {
-    private $databaseName = 'cidade';
+    private $databaseName = 'cidades';
     /**
      * Run the migrations.
      *

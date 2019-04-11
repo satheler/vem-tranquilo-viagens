@@ -57,7 +57,6 @@
 <script src="{{ asset('argon') }}/vendor/sweetalert2/dist/sweetalert2.js"></script>
 
 <script>
-
 let table;
 let url = window.location.pathname;
 
@@ -68,47 +67,8 @@ $(document).ready( function () {
 $('[data-remove-id]').on('click', async function () {
     let id = $(this).data('remove-id');
 
-    let { value } = await Swal.fire({
-        title: 'Você tem certeza que deseja inativar esse ônibus?',
-        input: 'text',
-        inputAttributes: {
-            autocapitalize: 'off'
-        },
-        inputPlaceholder: 'Informe o ocorrido...',
-        inputValidator: (value) => {
-            if (!value) {
-            return 'Este campo não pode ser vazio!'
-            }
-        },
-        text: "Atenção: Esta ação não poderá ser desfeita!",
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Sim, tenho certeza!',
-        cancelButtonText: 'Cancelar'
-    })
-
-    if(value){
-        axios.delete(`${url}/${id}`, { data: { observacao: value } })
-        .then(data => {
-            $(`[data-table-row-id="${id}"]`).remove();
-            Swal.fire('Ônibus inativado com sucesso!','','success')
-            console.log(data);
-        })
-        .catch((error) => {
-            console.error(error);
-            Swal.fire('Aconteceu um erro inesperado...','','error')
-        })
-    }
-})
-
-
-$('[data-available-id]').on('click', async function () {
-    let id = $(this).data('available-id');
-
     let response = await Swal.fire({
-        title: 'Você tem certeza que deseja mudar a disponibilidade deste ônibus?',
+        title: 'Você tem certeza que deseja remover este trecho?',
         type: 'question',
         showCancelButton: true,
         confirmButtonColor: '#28a745',
@@ -118,29 +78,18 @@ $('[data-available-id]').on('click', async function () {
     })
 
     if(response.value){
-        axios.put(`${url}/${id}`)
+        axios.delete(`${url}/${id}`)
         .then(data => {
-            Swal.fire('Estado do Ônibus alterado com sucesso!', '', 'success')
+            table.row(`[data-table-row-id="${id}"]`).remove();
+            table.draw();
+            Swal.fire('Trecho removido com sucesso!', '', 'success')
             console.log(data);
         })
         .catch((error) => {
             console.error(error);
             Swal.fire('Aconteceu um erro inesperado...', '', 'error' )
         })
-
-        //ALTERAR A BADGE DEPOIS
-        // $(`data-badge-available-id="${id}"`)
     }
-})
-
-$('[data-show-id]').on('click', function() {
-    let id = $(this).data('show-id');
-
-    axios.get(`${url}/${id}`)
-    .then(data => {
-        $(".modal-body").html(data.data)
-        $("#modal-infos").modal('show');
-    })
 })
 </script>
 @endpush

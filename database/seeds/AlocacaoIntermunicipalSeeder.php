@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class CidadeSeeder extends Seeder
+class AlocacaoIntermunicipalSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,8 +11,6 @@ class CidadeSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('cidade')->insert([
-            'nome' => 'Alegrete'
-        ]);
+        //
     }
 }

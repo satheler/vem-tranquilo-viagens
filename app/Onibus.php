@@ -49,13 +49,11 @@ class Onibus extends Model
         $this->modelo = $input['modelo'];
         $this->marca = $input['marca'];
 
-        $data_fabricacao = new DateTime($input['data_fabricacao']);
-        $data_fabricacao = $data_fabricacao->format('Y-d-m');
-        $this->data_fabricacao = $data_fabricacao;
+        $data_fabricacaoConverter = date_create_from_format('d/m/Y', $input['data_fabricacao']);
+        $this->data_fabricacao = $data_fabricacao->format('Y-m-d');
 
-        $data_compra = new DateTime($input['data_compra']);
-        $data_compra = $data_compra->format('Y-d-m');
-        $this->data_compra = $data_compra;
+        $data_compraConverter = date_create_from_format('d/m/Y', $input['data_compra']);
+        $this->data_compra = $data_compraConverter->format('Y-m-d');
 
         return $this;
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Trecho;
+use App\Cidade;
 use Exception;
 
 class TrechoController extends Controller
@@ -17,7 +18,7 @@ class TrechoController extends Controller
     {
         $trecho = new Trecho();
         $lista = $trecho->getAll();
-        return view('techo.main.index', compact('lista'));
+        return view('trajeto.trecho.index', compact('lista'));
     }
 
     /**
@@ -27,7 +28,10 @@ class TrechoController extends Controller
      */
     public function create()
     {
-        return view('trecho.main.create');
+        $cidades = new Cidade();
+        $lista = $cidades->getAll();
+        $lista = $lista->sortBy('nome');
+        return view('trajeto.trecho.create', compact('lista'));
     }
 
     /**
@@ -38,14 +42,14 @@ class TrechoController extends Controller
      */
     public function store(Request $request)
     {
-        $trecho = new FormaDePagamento();
+        $trecho = new Trecho();
         $validator = $trecho->add($request->input());
 
         if($validator === NULL) {
-            return redirect()->route('trecho.index')->withStatus(__('Trecho adicionado com sucesso.'));
+            return redirect()->route('trajeto_trecho.index')->withStatus(__('Trecho adicionado com sucesso.'));
         } else {
             return redirect()
-                    ->route('trecho.create')
+                    ->route('trajeto_trecho.create')
                     ->withErrors($validator)
                     ->withInput();
         }

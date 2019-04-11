@@ -17,8 +17,8 @@ class CreateTrechoTable extends Migration
     {
         Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->dateTime('horarioSaida');
-            $table->dateTime('horarioChegada');
+            $table->time('horarioSaida');
+            $table->time('horarioChegada');
             $table->double('quilometragem');
 
             $table->bigInteger('origem_id')->unsigned();

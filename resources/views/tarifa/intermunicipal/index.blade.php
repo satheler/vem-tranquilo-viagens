@@ -1,4 +1,4 @@
-@extends('frotas.index', ['title' => __('Tarifa Intermunicipal')])
+@extends('tarifa.index', ['title' => __('Tarifa Intermunicipal')])
 
 @section('infos')
     <div class="card-header border-0">
@@ -24,55 +24,18 @@
     </div>
     <div class="card-body">
         <div class="table-responsive py-4">
-            <table id="datatable-basic" class="table align-items-center table-flush dataTable">
+            <table id="datatable-basic" class="table align-items-center table-flush dataTable" data-order='[[0, "desc"]]'>
                 <thead class="thead-light">
                     <tr>
-                        <th scope="col"></th>
-                        <th scope="col">{{ __('Placa') }}</th>
-                        <th scope="col">{{ __('Chassi') }}</th>
-                        <th scope="col">{{ __('Banheiro') }}</th>
-                        <th scope="col">{{ __('Disponibilidade') }}</th>
-                        <th scope="col"></th>
+                        <th scope="col">{{ __('Data inicial de vigência') }}</th>
+                        <th scope="col">{{ __('Valor') }}</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($lista as $item)
                         <tr data-table-row-id={{ $item->id }}>
-                            <td>
-                                <button data-show-id={{ $item->id }} class="btn btn-icon btn-sm btn-primary" type="button">
-                                    <span class="btn-inner--icon"><i class="ni ni-single-copy-04"></i></span>
-                                </button>
-                            </td>
-                            <td>{{ $item->description->placa }}</td>
-                            <td>{{ $item->description->chassi }}</td>
-
-                            <td  align="center">
-                                @if ($item->banheiro)
-                                    <span class="badge badge-success">Possui</span>
-                                @else
-                                    <span class="badge badge-warning">Não possui</span>
-                                @endif
-                            </td>
-
-                            <td align="center">
-                                @if ($item->description->disponivel)
-                                    <span data-badge-available-id="{{ $item->id }}" class="badge badge-success">Disponível</span>
-                                @else
-                                    <span data-badge-available-id="{{ $item->id }}" class="badge badge-warning">Em manutenção</span>
-                                @endif
-                            </td>
-
-                            <td class="text-right">
-                                <div class="dropdown">
-                                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                        <a class="dropdown-item" data-available-id="{{ $item->id }}" href="#">{{ __('Em manutenção') }}</a>
-                                        <a class="dropdown-item" data-remove-id="{{ $item->id }}" href="#">{{ __('Deixar inativo') }}</a>
-                                    </div>
-                                </div>
-                            </td>
+                            <td>{{ (new DateTime($item->description->data))->format('d/m/Y') }}</td>
+                            <td>{{ sprintf("R$ %.2f", $item->description->valor) }}</td>
                         </tr>
                     @endforeach
                 </tbody>

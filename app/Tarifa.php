@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Exception;
 use Validator;
+use DateTime;
 
 class Tarifa extends Model
 {
@@ -27,9 +28,10 @@ class Tarifa extends Model
 
     public function add(array $input)
     {
+        $dateToday = new DateTime();
         $validator = Validator::make($input, [
-            'valor' => 'required|double',
-            'data' => 'after:date'
+            'valor' => 'required|numeric|min:0.01',
+            'data' => 'required|date_format:d/m/Y|after:'. $dateToday->format('d/m/Y')
         ]);
 
         if ($validator->fails()) {
@@ -37,7 +39,9 @@ class Tarifa extends Model
         }
 
         $this->valor = $input['valor'];
-        $this->data = $input['data'];
+
+        $dataConverter = date_create_from_format('d/m/Y', $input['data']);
+        $this->data = $dataConverter->format('Y-m-d');
 
         return $this;
     }

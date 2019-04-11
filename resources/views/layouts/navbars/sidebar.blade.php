@@ -203,6 +203,11 @@
                                             {{ __('Trajeto Intermunicipal') }}
                                         </a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('trajeto_trecho.index') }}">
+                                            {{ __('Trechos') }}
+                                        </a>
+                                    </li>
                                 @endif
                             </ul>
                         </div>

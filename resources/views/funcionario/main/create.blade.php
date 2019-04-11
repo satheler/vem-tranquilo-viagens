@@ -38,15 +38,13 @@
                                     </div>
 
                                     <div class="col-lg-6">
-                                        <div class="row">
-                                            <label class="form-control-label" for="form-control-label"> {{__('FUNÇÃO')}} </label>
-                                            <select name="tipo" required>
-                                                <option value="" disabled selected>Selecione uma função...</option>
-                                                @foreach ($lista as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->nome }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                        <label class="form-control-label" for="form-control-label"> {{__('FUNÇÃO')}} </label>
+                                        <select name="tipo"  data-size="4" data-live-search="true" required>
+                                            <option value="" disabled selected>Selecione uma função...</option>
+                                            @foreach ($lista as $item)
+                                                <option value="{{ $item->id }}">{{ $item->nome }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
 
