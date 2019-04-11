@@ -87,106 +87,127 @@
                 </li>
                 <!-- Página Inicial :: FIM -->
 
-                 <!-- Passageiro :: INICIO -->
-                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('categoria_passageiro.index') }}">
-                        <i class="fas fa-users"></i> {{ __('Categoria de Passageiros') }}
-                    </a>
-                </li>
+                <!-- Passageiro :: INICIO -->
+                @if (@auth()->user()->tipo_usuario_id === 1)
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('categoria_passageiro.index') }}">
+                            <i class="fas fa-users"></i> {{ __('Categoria de Passageiros') }}
+                        </a>
+                    </li>
+                @endif
                 <!-- Passageiro :: FIM -->
 
                  <!-- Funcionário :: INICIO -->
-                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('funcionario.index') }}">
-                        <i class="fas fa-user-cog"></i> {{ __('Funcionários') }}
-                    </a>
-                </li>
+                 @if (@auth()->user()->tipo_usuario_id === 1)
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('funcionario.index') }}">
+                            <i class="fas fa-user-cog"></i> {{ __('Funcionários') }}
+                        </a>
+                    </li>
+                @endif
                 <!-- Funcionário :: FIM -->
 
                  <!-- Pagamento :: INICIO -->
-                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('pagamento.index') }}">
-                        <i class="fas fa-money-bill"></i> {{ __('Formas de Pagamentos') }}
-                    </a>
-                </li>
+                 @if (@auth()->user()->tipo_usuario_id === 1)
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('pagamento.index') }}">
+                            <i class="fas fa-money-bill"></i> {{ __('Formas de Pagamentos') }}
+                        </a>
+                    </li>
+                @endif
                 <!-- Pagamento :: FIM -->
 
                 <!-- Gerenciar frotas :: INICIO -->
-                <li class="nav-item">
-                    <a class="nav-link" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
-                        <i class="fas fa-bus"></i>
-                        <span class="nav-link-text">{{ __('Gerenciar frotas') }}</span>
-                    </a>
+                @if (@auth()->user()->tipo_usuario_id === 3)
 
-                    <div class="collapse" id="navbar-examples">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('onibus_urbano.index') }}">
-                                    {{ __('Ônibus Urbano') }}
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('onibus_intermunicipal.index') }}">
-                                    {{ __('Ônibus Intermunicipal') }}
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('onibus_inativo.index') }}">
-                                    {{ __('Ônibus Inativos') }}
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
+                            <i class="fas fa-bus"></i>
+                            <span class="nav-link-text">{{ __('Gerenciar frotas') }}</span>
+                        </a>
+
+                        <div class="collapse" id="navbar-examples">
+                            <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('onibus_urbano.index') }}">
+                                        {{ __('Ônibus Urbano') }}
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('onibus_intermunicipal.index') }}">
+                                            {{ __('Ônibus Intermunicipal') }}
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('onibus_inativo.index') }}">
+                                            {{ __('Ônibus Inativos') }}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                @endif
                 <!-- Gerenciar frotas :: FIM -->
 
 
                 <!-- Gerenciar tarifas :: INICIO -->
-                <li class="nav-item">
-                    <a class="nav-link" href="#navbar-examples1" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
-                        <i class="ni ni-tag"></i>
-                        <span class="nav-link-text">{{ __('Gerenciar tarifas') }}</span>
-                    </a>
+                @if (@auth()->user()->tipo_usuario_id === 1 || @auth()->user()->tipo_usuario_id === 2 )
+                    <li class="nav-item">
+                        <a class="nav-link" href="#navbar-examples1" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
+                            <i class="ni ni-tag"></i>
+                            <span class="nav-link-text">{{ __('Gerenciar tarifas') }}</span>
+                        </a>
 
-                    <div class="collapse" id="navbar-examples1">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('tarifa_urbano.index') }}">
-                                    {{ __('Tarifa Urbano') }}
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('tarifa_intermunicipal.index') }}">
-                                    {{ __('Tarifa Intermunicipal') }}
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                        <div class="collapse" id="navbar-examples1">
+                            <ul class="nav nav-sm flex-column">
+                                @if (@auth()->user()->tipo_usuario_id === 2)
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('tarifa_urbano.index') }}">
+                                            {{ __('Tarifa Urbano') }}
+                                        </a>
+                                    </li>
+                                @endif
+                                @if (@auth()->user()->tipo_usuario_id === 1)
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('tarifa_intermunicipal.index') }}">
+                                            {{ __('Tarifa Intermunicipal') }}
+                                        </a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </div>
+                    </li>
+                @endif
                 <!-- Gerenciar tarifas :: FIM -->
 
                 <!-- Gerenciar trajeto :: INICIO -->
-                <li class="nav-item">
-                    <a class="nav-link" href="#navbar-examples2" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
-                        <i class="fas fa-road"></i>
-                        <span class="nav-link-text">{{ __('Gerenciar trajeto') }}</span>
-                    </a>
+                @if (@auth()->user()->tipo_usuario_id === 1 || @auth()->user()->tipo_usuario_id === 2 )
+                    <li class="nav-item">
+                        <a class="nav-link" href="#navbar-examples2" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
+                            <i class="fas fa-road"></i>
+                            <span class="nav-link-text">{{ __('Gerenciar trajeto') }}</span>
+                        </a>
 
-                    <div class="collapse" id="navbar-examples2">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('trajeto_urbano.index') }}">
-                                    {{ __('Trajeto Urbano') }}
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('trajeto_intermunicipal.index') }}">
-                                    {{ __('Trajeto Intermunicipal') }}
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                        <div class="collapse" id="navbar-examples2">
+                            <ul class="nav nav-sm flex-column">
+                                @if (@auth()->user()->tipo_usuario_id === 2)
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('trajeto_urbano.index') }}">
+                                            {{ __('Trajeto Urbano') }}
+                                        </a>
+                                    </li>
+                                @endif
+                                @if (@auth()->user()->tipo_usuario_id === 1)
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('trajeto_intermunicipal.index') }}">
+                                            {{ __('Trajeto Intermunicipal') }}
+                                        </a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </div>
+                    </li>
+                @endif
                 <!-- Gerenciar trajeto :: FIM -->
             </ul>
         </div>

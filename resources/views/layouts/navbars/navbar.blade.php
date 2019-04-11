@@ -1,7 +1,7 @@
-{{-- @auth() --}}
+@auth()
     @include('layouts.navbars.navs.auth')
-{{-- @endauth --}}
+@endauth
 
-{{-- @guest()
+@guest()
     @include('layouts.navbars.navs.guest')
-@endguest --}}
+@endguest

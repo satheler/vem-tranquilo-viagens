@@ -9,9 +9,19 @@
                 <div class="card bg-secondary shadow border-0">
                     <div class="card-body px-lg-5 py-lg-5">
                         <div class="text-center text-muted mb-4">
-                            <small>
-                                {{ __('Entre com as suas credenciais') }}
-                            </small>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <a class="navbar-bran" href="{{ route('home') }}">
+                                        <img src="{{ asset('argon') }}/img/brand/logo.png" class="navbar-brand-img" alt="..." width="90%" height="90%" style="">
+                                    </a>
+                                </div>
+                                <div class="col-md-12 mt-3">
+                                    <small>
+                                        {{ __('Entre com as suas credenciais') }}
+                                    </small>
+                                </div>
+                            </div>
+
                         </div>
                         <form role="form" method="POST" action="{{ route('login') }}">
                             @csrf
@@ -21,7 +31,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                                     </div>
-                                    <input class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('Email') }}" type="email" name="email" value="{{ old('email') }}" value="admin@argon.com" required autofocus>
+                                    <input class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('Email') }}" type="email" name="email" value="{{ old('email') ? old('email') : 'admin@mail.com' }}" required autofocus>
                                 </div>
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback" style="display: block;" role="alert">
@@ -34,7 +44,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                     </div>
-                                    <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="{{ __('Password') }}" type="password" value="secret" required>
+                                    <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="{{ __('Password') }}" type="password" value="123456" required>
                                 </div>
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback" style="display: block;" role="alert">
@@ -45,28 +55,29 @@
                             <div class="custom-control custom-control-alternative custom-checkbox">
                                 <input class="custom-control-input" name="remember" id="customCheckLogin" type="checkbox" {{ old('remember') ? 'checked' : '' }}>
                                 <label class="custom-control-label" for="customCheckLogin">
-                                    <span class="text-muted">{{ __('Remember me') }}</span>
+                                    <span class="text-muted">{{ __('Lembrar-me') }}</span>
                                 </label>
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-primary my-4">{{ __('Sign in') }}</button>
+                                <button type="submit" class="btn btn-primary my-4">{{ __('Entrar') }}</button>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-6">
+                    <div class="col-6 text-right"></div>
+                    <div class="col-6 text-right">
                         @if (Route::has('password.request'))
                             <a href="{{ route('password.request') }}" class="text-light">
-                                <small>{{ __('Forgot password?') }}</small>
+                                <small>{{ __('Esqueceu sua senha?') }}</small>
                             </a>
                         @endif
                     </div>
-                    <div class="col-6 text-right">
+                    {{-- <div class="col-6 text-right">
                         <a href="{{ route('register') }}" class="text-light">
                             <small>{{ __('Create new account') }}</small>
                         </a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

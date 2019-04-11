@@ -41,21 +41,21 @@
                 <p>Carregando... Aguarde...</p>
             </div>
         </div>
-        {{-- @auth() --}}
-            {{-- <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @auth()
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
-            </form> --}}
+            </form>
             @include('layouts.navbars.sidebar')
-        {{-- @endauth --}}
+        @endauth
 
         <div class="main-content">
             @include('layouts.navbars.navbar')
             @yield('content')
         </div>
 
-        {{-- @guest()
+        @guest()
             @include('layouts.footers.guest')
-        @endguest --}}
+        @endguest
 
         <script src="{{ asset('argon') }}/vendor/jquery/dist/jquery.min.js"></script>
         <script src="{{ asset('argon') }}/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

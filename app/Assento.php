@@ -9,7 +9,7 @@ class Assento extends Model
     protected $table = 'assento';
 
     public function categoria() {
-        return $this->hasOne('App\categoriaOnibus', 'id', 'categoria_id');
+        return $this->hasOne('App\CategoriaOnibus', 'id', 'categoria_id');
     }
     public function getAll()
     {
