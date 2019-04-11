@@ -50,7 +50,6 @@ class OnibusIntermunicipal extends Model
         $onibusAdd = $onibus->add($input);
 
         if(($onibusAdd instanceof \Illuminate\Validation\Validator)) {
-            // die ($onibusAdd->messages());
             return $onibusAdd;
         }
 

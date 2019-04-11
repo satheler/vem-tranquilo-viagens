@@ -44,10 +44,14 @@ class OnibusUrbano extends Model
         $this->arCondicionado = $input['arCondicionado'];
 
         $onibus = new Onibus();
-        $data = $onibus->add($input);
+        $onibusAdd = $onibus->add($input);
+
+        if(($onibusAdd instanceof \Illuminate\Validation\Validator)) {
+            return $onibusAdd;
+        }
 
         $this->save();
-        $this->description()->save($data);
+        $this->description()->save($onibusAdd);
     }
 
     public function edit(int $id)
