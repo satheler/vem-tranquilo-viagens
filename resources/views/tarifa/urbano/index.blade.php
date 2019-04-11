@@ -28,30 +28,20 @@
                     <tr>
                         <th scope="col">{{ __('Cidade') }}</th>
                         <th scope="col">{{ __('Licitação') }}</th>
+                        <th scope="col">{{ __('Valor') }}</th>
                         <th scope="col">{{ __('Valor Especial') }}</th>
                         <th scope="col">{{ __('Data') }}</th>
-                        <th scope="col">Ações</th>
                     </tr>
                 </thead>
+
                 <tbody>
                     @foreach ($lista as $item)
                         <tr data-table-row-id={{ $item->id }}>
-                            <td>{{ $item->cidade_id }}</td>
+                            <td>{{ $item->cidade->nome }}</td>
                             <td>{{ $item->licitacao }}</td>
-                            <td>{{ $item->valorEspecial }}</td>
-                            <td>{{ $item->data }}</td>
-
-                            <td align="center">
-                                <div class="dropdown">
-                                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                        <a class="dropdown-item" data-available-id="{{ $item->id }}" href="#">{{ __('Em manutenção') }}</a>
-                                        <a class="dropdown-item" data-remove-id="{{ $item->id }}" href="#">{{ __('Deixar inativo') }}</a>
-                                    </div>
-                                </div>
-                            </td>
+                            <td>{{ sprintf('RS %.2f', $item->description->valor) }}</td>
+                            <td>{{ sprintf('RS %.2f', $item->valor_especial) }}</td>
+                            <td>{{ (new DateTime($item->description->data))->format('d/m/Y') }}</td>
                         </tr>
                     @endforeach
                 </tbody>

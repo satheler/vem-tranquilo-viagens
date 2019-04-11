@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use Validator;
 use Exception;
+use App\Tarifa;
 
 class TarifaUrbano extends Model
 {
@@ -32,12 +33,14 @@ class TarifaUrbano extends Model
 
     public function add(array $input)
     {
-
         $validator = Validator::make($input, [
-            'cidade_id' => 'exists:cidades,id', //Verifica se a cidade existe na tabela cidade e coluna cidade.
+            'cidade_id' => 'exists:cidades,id',
             'licitacao' => 'required|unique:tarifa_urbano',
             'valorEspecial' => 'required|numeric'
         ]);
+
+        // var_dump($input);
+        // exit;
 
         if ($validator->fails()) {
             return $validator;
@@ -50,7 +53,11 @@ class TarifaUrbano extends Model
         $tarifa = new Tarifa();
         $tarifaAdd = $tarifa->add($input);
 
+        if(($tarifaAdd instanceof \Illuminate\Validation\Validator)) {
+            return $tarifaAdd;
+        }
+
         $this->save();
-        // $this->description()->save($tarifaAdd);
+        $this->description()->save($tarifaAdd);
     }
 }
