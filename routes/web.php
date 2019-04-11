@@ -49,4 +49,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('funcionario', 'FuncionarioController');
 
     Route::resource('pagamento', 'FormaDePagamentoController');
+
+    Route::prefix('alocacao')->name('alocacao_')->group(function () {
+        Route::resource('urbano', 'AlocacaoUrbanoController');
+        Route::resource('intermunicipal', 'AlocacaoIntermunicipalController');
+    });
 });
