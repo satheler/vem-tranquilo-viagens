@@ -15,7 +15,7 @@ class Tarifa extends Model
         return $this->morphTo();
     }
 
-    protected function getAll()
+    public function getAll()
     {
         return $this->all();
     }

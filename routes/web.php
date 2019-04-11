@@ -24,28 +24,28 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
     Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
     Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
+
+    Route::prefix('onibus')->name('onibus_')->group(function () {
+        Route::resource('urbano', 'OnibusUrbanoController');
+        Route::resource('intermunicipal', 'OnibusIntermunicipalController');
+        Route::resource('inativo', 'OnibusInativoController');
+    });
+
+    Route::prefix('trajeto')->name('trajeto_')->group(function () {
+        Route::resource('urbano', 'TrajetoUrbanoController');
+        Route::resource('intermunicipal', 'TrajetoIntermunicipalController');
+    });
+
+    Route::prefix('tarifa')->name('tarifa_')->group(function () {
+        Route::resource('urbano', 'TarifaUrbanoController');
+        Route::resource('intermunicipal', 'TarifaIntermunicipalController');
+    });
+
+    Route::prefix('categoria')->name('categoria_')->group(function () {
+        Route::resource('passageiro', 'CategoriaPassageiroController');
+    });
+
+    Route::resource('funcionario', 'FuncionarioController');
+
+    Route::resource('pagamento', 'FormaDePagamentoController');
 });
-
-Route::prefix('onibus')->name('onibus_')->group(function () {
-    Route::resource('urbano', 'OnibusUrbanoController');
-    Route::resource('intermunicipal', 'OnibusIntermunicipalController');
-    Route::resource('inativo', 'OnibusInativoController');
-});
-
-Route::prefix('trajeto')->name('trajeto_')->group(function () {
-    Route::resource('urbano', 'TrajetoUrbanoController');
-    Route::resource('intermunicipal', 'TrajetoIntermunicipalController');
-});
-
-Route::prefix('tarifa')->name('tarifa_')->group(function () {
-    Route::resource('urbano', 'TarifaUrbanoController');
-    Route::resource('intermunicipal', 'TarifaIntermunicipalController');
-});
-
-Route::prefix('categoria')->name('categoria_')->group(function () {
-    Route::resource('passageiro', 'CategoriaPassageiroController');
-});
-
-Route::resource('funcionario', 'FuncionarioController');
-
-Route::resource('pagamento', 'FormaDePagamentoController');
