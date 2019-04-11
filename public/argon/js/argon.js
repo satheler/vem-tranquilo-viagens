@@ -61,7 +61,7 @@ var Datepicker = (function() {
 })()
 
 var BootstrapSelect = (function() {
-    $('select').selectpicker();
+    $('select[bootstrapSelect]').selectpicker();
 })()
 
 //

@@ -34,24 +34,23 @@ class TarifaUrbano extends Model
     {
 
         $validator = Validator::make($input, [
-            'cidade_id' => 'exists:cidade,id', //Verifica se a cidade existe na tabela cidade e coluna cidade.
-            'licitacao' => 'required|unique:tarifa',
-            'valorEspecial' => 'required|integer'
-
+            'cidade_id' => 'exists:cidades,id', //Verifica se a cidade existe na tabela cidade e coluna cidade.
+            'licitacao' => 'required|unique:tarifa_urbano',
+            'valorEspecial' => 'required|numeric'
         ]);
 
         if ($validator->fails()) {
             return $validator;
         }
 
-        $this->cidade = $input['cidade_id'];
+        $this->cidade_id = $input['cidade_id'];
         $this->licitacao = $input['licitacao'];
-        $this->valorEspecial = $input['valor_especial'];
+        $this->valor_especial = $input['valorEspecial'];
 
         $tarifa = new Tarifa();
-        $data = $tarifa->add($input);
+        $tarifaAdd = $tarifa->add($input);
 
         $this->save();
-        $this->description()->save($data);
+        // $this->description()->save($tarifaAdd);
     }
 }

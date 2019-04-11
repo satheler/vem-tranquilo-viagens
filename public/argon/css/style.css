@@ -456,3 +456,9 @@ div.dropdown.bootstrap-select button.btn.dropdown-toggle.btn-light.bs-placeholde
     height: 46px !important;
     outline: none !important;
 }
+
+/** Multi-select */
+
+.ms-container {
+    width: auto !important;
+}

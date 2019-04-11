@@ -23,33 +23,29 @@
 
                             <h6 class="heading-small text-muted mb-4">{{ __('Informações do trajeto') }}</h6>
                             <div class="pl-lg-4">
-                                <div class="row">
+                                <div class="row clearfix">
                                     <div class="col-md-3">
-                                        <div class="form-group{{ $errors->has('cidade') ? ' has-danger' : '' }}">
-                                            <label class="form-control-label" for="input-cidade">{{ __('CIDADE') }}</label>
-                                            <input type="text" name="cidade_id" id="input-cidade" class="form-control form-control-alternative{{ $errors->has('cidade') ? ' is-invalid' : '' }}" placeholder="{{ __('Cidade') }}" value="{{ old('Cidade') }}" required autofocus>
-
-                                            @if ($errors->has('cidade'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('Cidade') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
+                                        <label class="form-control-label" for="form-control-label"> {{__('CIDADE')}} </label>
+                                        <select name="cidade_id"  data-size="4" data-live-search="true" required>
+                                            <option value="" disabled selected>Selecione uma cidade...</option>
+                                            @foreach ($lista as $item)
+                                                <option value="{{ $item->id }}">{{ $item->nome }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group{{ $errors->has('licitacao') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-licitacao">{{ __('LICITAÇÃO') }}</label>
-                                            <input type="text" name="licitacao" id="input-licitacao" class="form-control form-control-alternative{{ $errors->has('licitacao') ? ' is-invalid' : '' }}" placeholder="{{ __('Licitacao') }}" value="{{ old('Licitação') }}" required autofocus>
+                                            <input type="text" name="licitacao" id="input-licitacao" class="form-control form-control-alternative{{ $errors->has('licitacao') ? ' is-invalid' : '' }}" placeholder="{{ __('Licitação') }}" value="{{ old('Licitação') }}" required autofocus>
 
                                             @if ($errors->has('licitacao'))
                                                 <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('Licitação') }}</strong>
+                                                    <strong>{{ $errors->first('licitacao') }}</strong>
                                                 </span>
                                             @endif
                                         </div>
                                     </div>
-
                                     <div class="col-md-3">
                                         <div class="form-group{{ $errors->has('valorEspecial') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-valorEspecial">{{ __('VALOR ESPECIAL') }}</label>
@@ -74,7 +70,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
                                 </div>
 
                                 {{-- END FORM --}}
@@ -99,7 +94,7 @@
     <script>
         $(document).ready(function(){
             $('[data]').mask('dd/mm/yyyy', {placeholder: "__/__/____"});
-            $('[money]').mask('#.##0,00', {reverse: true});
+            $('[money]').mask('###0.00', {reverse: true});
         })
     </script>
 @endpush

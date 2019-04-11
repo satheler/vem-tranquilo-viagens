@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\TarifaUrbano;
+use App\Cidade;
 use Exception;
 
 class TarifaUrbanoController extends Controller
@@ -27,7 +28,10 @@ class TarifaUrbanoController extends Controller
      */
     public function create()
     {
-        return view('tarifa.urbano.create');
+        $cidades = new Cidade();
+        $lista = $cidades->getAll();
+        $lista = $lista->sortBy('nome');
+        return view('tarifa.urbano.create', compact('lista'));
     }
 
     /**
@@ -42,10 +46,10 @@ class TarifaUrbanoController extends Controller
         $validator = $tarifa->add($request->input());
 
         if($validator === NULL) {
-            return redirect()->route('tarifa.urbano.index')->withStatus(__('Tarifa adicionada com sucesso.'));
+            return redirect()->route('tarifa_urbano.index')->withStatus(__('Tarifa adicionada com sucesso.'));
         } else {
             return redirect()
-                    ->route('tarifa.urbano.create')
+                    ->route('tarifa_urbano.create')
                     ->withErrors($validator)
                     ->withInput();
         }

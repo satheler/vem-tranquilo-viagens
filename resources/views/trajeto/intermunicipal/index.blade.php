@@ -1,4 +1,4 @@
-@extends('frotas.index', ['title' => __('Trajeto Intermunicipal')])
+@extends('trajeto.index', ['title' => __('Trajeto Intermunicipal')])
 
 @section('infos')
     <div class="card-header border-0">
@@ -28,11 +28,10 @@
                 <thead class="thead-light">
                     <tr>
                         <th scope="col"></th>
-                        <th scope="col">{{ __('Placa') }}</th>
-                        <th scope="col">{{ __('Chassi') }}</th>
-                        <th scope="col">{{ __('Banheiro') }}</th>
-                        <th scope="col">{{ __('Disponibilidade') }}</th>
-                        <th scope="col"></th>
+                        <th scope="col">{{ __('Cidade de origem') }}</th>
+                        <th scope="col">{{ __('Cidade destino') }}</th>
+                        <th scope="col">{{ __('Tipo do trajeto') }}</th>
+                        <th scope="col">{{ __('Quantidade de trechos') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,36 +42,24 @@
                                     <span class="btn-inner--icon"><i class="ni ni-single-copy-04"></i></span>
                                 </button>
                             </td>
-                            <td>{{ $item->description->placa }}</td>
-                            <td>{{ $item->description->chassi }}</td>
 
-                            <td  align="center">
-                                @if ($item->banheiro)
-                                    <span class="badge badge-success">Possui</span>
-                                @else
-                                    <span class="badge badge-warning">Não possui</span>
-                                @endif
-                            </td>
+                            <td>{{ $item->trechos[0]->origem->nome }}</td>
+                            <td>{{ $item->trechos[count($item->trechos) - 1]->destino->nome }}</td>
+                            <td>
+                            @if (@count($item->trechos) === 1)
+                            Direto
+                            @else
+                            Semi-direto
+                            @endif
+                        </td>
+                        <td align="center">
+                            @if (@count($item->trechos) === 1)
+                            <span class="badge badge-pill badge-warning">Não se aplica</span>
+                            @else
+                            <span class="badge badge-pill badge-info">{{ count($item->trechos) }}</span>
+                            @endif
+                        </td>
 
-                            <td align="center">
-                                @if ($item->description->disponivel)
-                                    <span data-badge-available-id="{{ $item->id }}" class="badge badge-success">Disponível</span>
-                                @else
-                                    <span data-badge-available-id="{{ $item->id }}" class="badge badge-warning">Em manutenção</span>
-                                @endif
-                            </td>
-
-                            <td class="text-right">
-                                <div class="dropdown">
-                                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                        <a class="dropdown-item" data-available-id="{{ $item->id }}" href="#">{{ __('Em manutenção') }}</a>
-                                        <a class="dropdown-item" data-remove-id="{{ $item->id }}" href="#">{{ __('Deixar inativo') }}</a>
-                                    </div>
-                                </div>
-                            </td>
                         </tr>
                     @endforeach
                 </tbody>

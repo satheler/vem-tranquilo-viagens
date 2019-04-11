@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\TrajetoIntermunicipal;
+use App\Trecho;
 use Exception;
 
 class TrajetoIntermunicipalController extends Controller
@@ -27,7 +28,9 @@ class TrajetoIntermunicipalController extends Controller
      */
     public function create()
     {
-        return view('trajeto.intermunicipal.create');
+        $trechos = new Trecho();
+        $lista = $trechos->getAll();
+        return view('trajeto.intermunicipal.create', compact('lista'));
     }
 
     /**
@@ -38,14 +41,14 @@ class TrajetoIntermunicipalController extends Controller
      */
     public function store(Request $request)
     {
-        $trajeto = new FormaDePagamento();
+        $trajeto = new TrajetoIntermunicipal();
         $validator = $trajeto->add($request->input());
 
         if($validator === NULL) {
-            return redirect()->route('trajeto.intermunicipal.index')->withStatus(__('Trajeto adicionado com sucesso.'));
+            return redirect()->route('trajeto_intermunicipal.index')->withStatus(__('Trajeto adicionado com sucesso.'));
         } else {
             return redirect()
-                    ->route('trajeto.intermunicipal.create')
+                    ->route('trajeto_intermunicipal.create')
                     ->withErrors($validator)
                     ->withInput();
         }
