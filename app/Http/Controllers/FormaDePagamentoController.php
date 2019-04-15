@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\FormaDePagamento;
+use Exception;
 
 class FormaDePagamentoController extends Controller
 {
@@ -15,8 +16,8 @@ class FormaDePagamentoController extends Controller
     public function index()
     {
         $pagamento = new FormaDePagamento();
-        $listaDePagamentos = $pagamento->getAll();
-        return view('xxx', compact('listaDePagamentos'));
+        $lista = $pagamento->getAll();
+        return view('formadepagamento.main.index', compact('lista'));
     }
 
     /**
@@ -26,7 +27,7 @@ class FormaDePagamentoController extends Controller
      */
     public function create()
     {
-        return view('xxx');
+        return view('formadepagamento.main.create');
     }
 
     /**
@@ -37,15 +38,24 @@ class FormaDePagamentoController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-
+        // try {
             $pagamento = new FormaDePagamento();
-            $pagamento->add($request->input());
-            return response(["status" => "Forma de Pagamento cadastrada com sucesso"], 201);
+            $validator = $pagamento->add($request->input());
 
-        } catch (Exception $e) {
-            return response($e->getMessage(), 400);
-        }
+            if($validator === NULL) {
+                return redirect()->route('pagamento.index')->withStatus(__('Forma de pagamento adicionada com sucesso.'));
+            } else {
+                return redirect()
+                        ->route('pagamento.create')
+                        ->withErrors($validator)
+                        ->withInput();
+            }
+
+        // } catch (Exception $e) {
+        //     $errors = $e->getMessage();
+        //     return view('formadepagamento.main.create', compact('errors'));
+        //     return response($e->getMessage(), 400);
+        // }
     }
 
     /**
@@ -57,8 +67,8 @@ class FormaDePagamentoController extends Controller
     public function show($id)
     {
         $pagamento = new FormaDePagamento();
-        $pagamento = $pagamento->get($id);
-        return response($pagamento->toJson(), 200);
+        $item = $pagamento->get($id);
+        return view('passageiro.main.show', compact('item'));
     }
 
     /**
@@ -103,15 +113,7 @@ class FormaDePagamentoController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            $pagamento = FormaDePagamento::where('id', $id)->first();
-
-            if($pagamento) {
-
-                return $pagamento->delete();
-            }
-        } catch (Exception $e) {
-            return response($e->getMessage(), 400);
-        }
+        $pagamento = new FormaDePagamento();
+        return response($pagamento->remove($id), 204);
     }
 }

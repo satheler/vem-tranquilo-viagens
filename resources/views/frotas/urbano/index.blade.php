@@ -7,7 +7,7 @@
                 <h3 class="mb-0">{{ __('Ônibus Urbano') }}</h3>
             </div>
             <div class="col-4 text-right">
-                <a href="{{ route('urbano.create') }}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Adicionar ônibus"><i class="fas fa-plus"></i></a>
+                <a href="{{ route('onibus_urbano.create') }}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Adicionar ônibus"><i class="fas fa-plus"></i></a>
             </div>
         </div>
     </div>
@@ -37,18 +37,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($listaDeOnibus as $onibus)
-                        <tr data-table-row-id={{ $onibus->id }}>
+                    @foreach ($lista as $item)
+                        <tr data-table-row-id={{ $item->id }}>
                             <td>
-                                <button data-show-id={{ $onibus->id }} class="btn btn-icon btn-sm btn-primary" type="button">
+                                <button data-show-id={{ $item->id }} class="btn btn-icon btn-sm btn-primary" type="button">
                                     <span class="btn-inner--icon"><i class="ni ni-single-copy-04"></i></span>
                                 </button>
                             </td>
-                            <td>{{ $onibus->description->placa }}</td>
-                            <td>{{ $onibus->description->chassi }}</td>
-                            <td>{{ $onibus->lotacao }}</td>
+                            <td>{{ $item->description->placa }}</td>
+                            <td>{{ $item->description->chassi }}</td>
+                            <td>{{ $item->lotacao }}</td>
                             <td  align="center">
-                                @if ($onibus->arCondicionado)
+                                @if ($item->arCondicionado)
                                     <span class="badge badge-success">Possui</span>
                                 @else
                                     <span class="badge badge-warning">Não possui</span>
@@ -56,7 +56,7 @@
                             </td>
 
                             <td  align="center">
-                                @if ($onibus->acessibilidade)
+                                @if ($item->acessibilidade)
                                     <span class="badge badge-success">Possui</span>
                                 @else
                                     <span class="badge badge-warning">Não possui</span>
@@ -64,10 +64,10 @@
                             </td>
 
                             <td align="center">
-                                @if ($onibus->description->disponivel)
-                                    <span data-badge-available-id="{{ $onibus->id }}" class="badge badge-success">Disponível</span>
+                                @if ($item->description->disponivel)
+                                    <span data-badge-available-id="{{ $item->id }}" class="badge badge-success">Disponível</span>
                                 @else
-                                    <span data-badge-available-id="{{ $onibus->id }}" class="badge badge-warning">Em manutenção</span>
+                                    <span data-badge-available-id="{{ $item->id }}" class="badge badge-warning">Em manutenção</span>
                                 @endif
                             </td>
 
@@ -77,8 +77,8 @@
                                         <i class="fas fa-ellipsis-v"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                        <a class="dropdown-item" data-available-id="{{ $onibus->id }}" href="#">{{ __('Em manutenção') }}</a>
-                                        <a class="dropdown-item" data-remove-id="{{ $onibus->id }}" href="#">{{ __('Deixar inativo') }}</a>
+                                        <a class="dropdown-item" data-available-id="{{ $item->id }}" href="#">{{ __('Em manutenção') }}</a>
+                                        <a class="dropdown-item" data-remove-id="{{ $item->id }}" href="#">{{ __('Deixar inativo') }}</a>
                                     </div>
                                 </div>
                             </td>

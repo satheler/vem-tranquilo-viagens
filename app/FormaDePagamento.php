@@ -11,15 +11,17 @@ class FormaDePagamento extends Model
 {
     protected $table = 'forma_de_pagamento';
 
-    public function description()
-    {
-        return $this->morphTo();
-    }
-
     public function getAll()
     {
-        return $this::all();
+        return $this->all();
     }
+
+    public function get(int $id)
+    {
+        $item = $this->find($id);
+        return $item;
+    }
+
 
     public function add(array $input)
     {
@@ -29,7 +31,7 @@ class FormaDePagamento extends Model
         ]);
 
         if ($validator->fails()) {
-            throw new Exception($validator->messages());
+            return $validator;
         }
 
         $this->forma = $input['forma'];
@@ -51,5 +53,10 @@ class FormaDePagamento extends Model
         $pagamento->forma = $input['forma'];
         $pagamento->intermunicipal = $input['intermunicipal'];
         $pagamento->save();
+    }
+
+    public function remove(int $id)
+    {
+        return $this->destroy($id);
     }
 }

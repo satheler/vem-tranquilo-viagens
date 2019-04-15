@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Exception;
 use Validator;
+use DateTime;
 
 class Tarifa extends Model
 {
@@ -15,24 +16,42 @@ class Tarifa extends Model
         return $this->morphTo();
     }
 
-    protected function getAll()
+    public function getAll()
     {
-        return $this::all();
+        return $this->all();
+    }
+
+    public function get(int $id){
+        $tarifa = $this->find($id);
+        return $tarifa;
     }
 
     public function add(array $input)
     {
+        $dateToday = new DateTime();
+        $idUltimaData = Tarifa::orderBy('data', 'desc')->first();
+        $ultimaData = new DateTime('yesterday');
+
+        if($idUltimaData != null)
+        {
+            $ultimaData = $idUltimaData->data;
+            $ultimaData = date_create_from_format('Y-m-d', $ultimaData);
+        }
+
         $validator = Validator::make($input, [
-            'valor' => 'required|double',
-            'data' => 'required|date'
+            'valor' => 'required|numeric|min:0.01',
+            'data' => 'required|date_format:d/m/Y|after:'. $dateToday->format('d/m/Y'),
+            'data' => 'date_format:d/m/Y|after:'. $ultimaData->format('d/m/Y')
         ]);
 
         if ($validator->fails()) {
-            throw new Exception($validator->messages());
+            return $validator;
         }
 
         $this->valor = $input['valor'];
-        $this->data = $input['data'];
+
+        $dataConverter = date_create_from_format('d/m/Y', $input['data']);
+        $this->data = $dataConverter->format('Y-m-d');
 
         return $this;
     }

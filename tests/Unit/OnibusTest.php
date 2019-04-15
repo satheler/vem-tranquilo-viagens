@@ -2,10 +2,15 @@
 
 namespace Tests\Unit;
 
-use App\OnibusUrbano;;
+use App\OnibusUrbano;
+use App\OnibusIntermunicipal;
+use App\Cidade;
+use App\Assento;
+use App\AssentoOnibus;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use DateTime;
 
 class OnibusTest extends TestCase    
 {
@@ -14,85 +19,75 @@ class OnibusTest extends TestCase
      *
      * @return void
      */
-      
 
-   
-     //Função de teste de disponibilidade do Onibus - Verifica se o ônibus está cadastrado
-    public function testDisponibilidade()
+    public function testOnibusUrbano()
     {
-      $o = new OnibusUrbano();
-      $test = $o->add([
-         "disponibilidade" => true
-         ]);
-       $this->assertEquals(true, $o->getDisponibilidade());
-     
-    }
-     //Função de teste a acessibilidade do ônibus - Verifica se o ônibus está acessivel 
-    public function testAcessibilidade()
-    {
-      $o = new OnibusUrbano();
-      $test = $o->add([
-         "acessibilidade"=> false
-      ]);
-       $this->assertEquals(true, $o->getAcessibilidade()());
-      
-    }
-     //Função de teste o custo da manutenção do ônibus 
-    public function testCustoManutencao()
-    {
-      $o = new OnibusUrbano();
-      $test = $o->add([
-         "custoManutencao"=> 199.99
-      ]);
-       $this->assertEquals(1219, $o->getCustoManutencao());
-      
-    }
-     //Função de teste e validação o número do chassi do ônibus 
-    public function testChassi()
-    {
-      $o = new OnibusUrbano();
-      $test = $o->add([
-         "chassi" => "17bhklsdbaabsdaDD"
-      ]);
-       $this->assertEquals("aaaaaaaaaaaaaaaaa", $Onibustdd->getChassi());
-    
-    }
-     //Função de teste e validação da placa do ônibus 
-    public function testPlaca()
-    {
-      $o = new OnibusUrbano();
-      $test = $o->add([
-            "placa" => "HGG5547"
-      ]);
-       $this->assertEquals("aaaaaaa", $o->getPlaca());
-      
-      
-    }
-    //Função de teste de tipo - Compara tipo da variável é o mesmo tipo da comparada
-    public function testType()
-    {
-      $o = new OnibusUrbano();
+        $o = new OnibusUrbano();
         $test = $o->add([
-         "chassi" => "17bhklsdbaabsdaDD"
-      ]);
-        $this->assertInternalType('int', $o->getDisponibilidade());
-      
-    }
-   //  public function testedetamanhodecaractere()
-   //  {
-   //      $o = new OnibusUrbano();
-   //      $test = $o->add([
-   //          "lotacao" => 1,
-   //          "arCondicionado" => true,
-   //          "disponivel" => true,
-   //          "acessibilidade" => true,
-   //          "custoManutencao" => 1.00,
-   //          "chassi" => "17bhklsdbaabsdaDD",
-   //          "placa" => "HGG5547",
-   //      ]);
+            "lotacao" => 35,
+            "arCondicionado" => true,
+            "disponivel" => false,
+            "acessibilidade" => false,
+            "chassi" => "uhs85j032jkladlka",
+            "placa" => "sqk9126",
+            "modelo"=> 'fusca',
+            "marca"=> 'fiat',
+            "data_compra"=> '10/04/2019',
+            "data_fabricacao"=> '10/04/2019',
+        ]);
 
-   //      $this->assertTrue($test === true);
-   //  }
+        $this->assertTrue($test === true);
+    }
+    public function testOnibusUrbanoDois()
+    {
+        $o = new OnibusUrbano();
+        $test = $o->add([
+            "lotacao" => 45,
+            "arCondicionado" => true,
+            "acessibilidade" => false,
+            "chassi" => "jugf85j032jkladlk",
+            "placa" => "sqs1126",
+            "modelo"=> 'fusca',
+            "marca" => 'fiat',
+            "data_compra"=> '10/04/2019',
+            "data_fabricacao"=> '09/04/2019'
+          
+        ]);
+
+        $this->assertTrue($test === true);
+    }
+
+    public function testOnibusIntermunicipal()
+    {
+        $o = new OnibusIntermunicipal();
+        $test = $o->add([
+          "banheiro"=> true, 
+          "acessibilidade" => false,
+          "chassi" => "juhs85jfkcjkladl3",
+          "placa" => "snh2151",
+          "modelo"=> 'fusca',
+          "marca"=> 'fiat',
+          "data_compra"=> '10/04/2019',
+          "data_fabricacao"=> '09/10/2019'
+         
+        ]);
+
+        $this->assertTrue($test === true);
+    }
+
+    public function testOnibusIntermunicipalDois()
+    {
+        $o = new OnibusIntermunicipal();
+        $test = $o->add([
+            "banheiro"=> true, 
+            "acessibilidade" => false,
+            "chassi" => "juhs85jfh5jkladl2",
+            "placa" => "snh9050",
+            
+        ]);
+
+        $this->assertTrue($test === true);
+    }
     
 
 }

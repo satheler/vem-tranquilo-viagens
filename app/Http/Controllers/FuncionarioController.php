@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Funcionario;
+use App\TipoFuncionario;
+use Exception;
 
 class FuncionarioController extends Controller
 {
@@ -15,8 +17,8 @@ class FuncionarioController extends Controller
     public function index()
     {
         $funcionario = new Funcionario();
-        $listaDeFuncionarios = $funcionario->getAll();
-        return view('funcionario', compact('listaDeFuncionarios'));
+        $lista = $funcionario->getAll();
+        return view('funcionario.main.index', compact('lista'));
     }
 
     /**
@@ -26,7 +28,9 @@ class FuncionarioController extends Controller
      */
     public function create()
     {
-        return view('cadastroFuncionario');
+        $tipos_funcionario = new TipoFuncionario();
+        $lista = $tipos_funcionario->getAll();
+        return view('funcionario.main.create', compact('lista'));
     }
 
     /**
@@ -37,14 +41,16 @@ class FuncionarioController extends Controller
      */
     public function store(Request $request)
     {
-        try {
+        $funcionario = new Funcionario();
+        $validator = $funcionario->add($request->input());
 
-            $funcionario = new Funcionario();
-            $funcionario->add($request->input());
-            return response(["status" => "Funcionário cadastrado com sucesso"], 201);
-
-        } catch (Exception $e) {
-            return response($e->getMessage(), 400);
+        if($validator === NULL) {
+            return redirect()->route('funcionario.index')->withStatus(__('Funcionário adicionado com sucesso.'));
+        } else {
+            return redirect()
+                    ->route('funcionario.create')
+                    ->withErrors($validator)
+                    ->withInput();
         }
     }
 
@@ -57,8 +63,8 @@ class FuncionarioController extends Controller
     public function show($id)
     {
         $funcionario = new Funcionario();
-        $funcionario = $funcionario->get($id);
-        return response($funcionario->toJson(), 200);
+        $item = $funcionario->get($id);
+        return view('funcionario.main.show', compact('item'));
     }
 
     /**
@@ -103,14 +109,7 @@ class FuncionarioController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            $funcionario = Funcionario::where('id', $id)->first();
-            if($funcionario) {
-                return $funcionario->delete();
-            }
-
-        } catch (Exception $e) {
-            return response($e->getMessage(), 400);
-        }
+        $funcionario = new Funcionario();
+        return response($funcionario->remove($id), 204);
     }
 }

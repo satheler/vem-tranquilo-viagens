@@ -11,67 +11,50 @@ class Trecho extends Model
 {
     protected $table = 'trecho';
 
-    public function description()
-    {
-        return $this->morphTo();
-    }
-
     public function getAll()
     {
         return $this->all();
     }
 
+    public function origem() {
+        return $this->hasOne('App\Cidade', 'id', 'origem_id');
+    }
+
+    public function destino() {
+        return $this->hasOne('App\Cidade', 'id', 'destino_id');
+    }
+
+    public function get(int $id){
+        $trecho = $this->find($id);
+        return $trecho;
+    }
+
     public function add(array $input)
     {
         $validator = Validator::make($input, [
-            'valor' => 'required|integer',
-            'horarioSaida' => 'required|time',
-            'horarioChegada' => 'required|time',
-            'origem'=> 'exists:cidade,cidade',
-            'destino'=>'exists:cidade,cidade'
+            'quilometragem' => 'required|numeric|min:0.1',
+            'horarioSaida' => 'required|date_format:H:i',
+            'horarioChegada' => 'required|date_format:H:i',
+            'origem_id'=> 'required|exists:cidades,id',
+            'destino_id'=>'required|exists:cidades,id|different:origem_id',
         ]);
 
         if ($validator->fails()) {
-            throw new Exception($validator->messages());
+            return $validator;
         }
 
-        $this->valor = $input['valor'];
+        $this->origem_id = $input['origem_id'];
+        $this->destino_id = $input['destino_id'];
+
+        $this->quilometragem = $input['quilometragem'];
         $this->horarioSaida = $input['horarioSaida'];
         $this->horarioChegada = $input['horarioChegada'];
-        $this->origem = $input['origem'];
-        $this->destino = $input['destino'];
 
         $this->save();
     }
-    public function edit(int $id, array $input)
+
+    public function remove(int $id)
     {
-        $trecho = $this->find($id);
-
-        $validator = Validator::make($input, [
-            'valor' => 'required|integer',
-            'horarioSaida' => 'required|time',
-            'horarioChegada' => 'required|time',
-            'origem'=> 'exists:cidade,cidade',
-            'destino'=>'exists:cidade,cidade'
-        ]);
-
-        if ($validator->fails()) {
-            throw new Exception($validator->messages());
-        }
-
-        $trecho->valor = $input['valor'];
-        $trecho->horarioSaida = $input['horarioSaida'];
-        $trecho->horarioChegada = $input['horarioChegada'];
-        $trecho->origem = $input['origem'];
-        $trecho->destino = $input['destino'];
-
-        $trecho->save();
+        return $this->destroy($id);
     }
-
-
-    // public function destroy(int $id){
-
-    //     $this::destroy($id);
-    //     //return response();
-    // }
 }

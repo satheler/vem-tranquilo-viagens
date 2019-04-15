@@ -1,7 +1,7 @@
 @extends('layouts.app', ['title' => __('Adicionar Ônibus')])
 
 @section('content')
-    @include('users.partials.header', ['title' => __('Adicionar Ônibus')])   
+    @include('users.partials.header', ['title' => __('Adicionar Ônibus')])
 
     <div class="container-fluid mt--7">
         <div class="row">
@@ -10,7 +10,7 @@
                     <div class="card-header bg-white border-0">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <a href="{{ route('urbano.index') }}" class="btn btn-sm btn-primary">{{ __('Voltar') }}</a>
+                                <a href="{{ route('onibus_urbano.index') }}" class="btn btn-sm btn-primary">{{ __('Voltar') }}</a>
                             </div>
                             <div class="col-4 text-right">
                                 <h3 class="mb-0">{{ __('Adicionar Ônibus') }}</h3>
@@ -18,14 +18,14 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{ route('urbano.store') }}" autocomplete="off">
+                        <form method="post" action="{{ route('onibus_urbano.store') }}" autocomplete="off">
                             @csrf
-                            
+
                             <h6 class="heading-small text-muted mb-4">{{ __('Informações do ônibus') }}</h6>
                             <div class="pl-lg-4">
                                 <div class="form-group{{ $errors->has('chassi') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="input-chassi">{{ __('CHASSI') }}</label>
-                                    <input type="text" name="chassi" id="input-chassi" class="form-control form-control-alternative{{ $errors->has('chassi') ? ' is-invalid' : '' }}" placeholder="{{ __('chassi') }}" value="{{ old('chassi') }}" required autofocus>
+                                    <label class="form-control-label" for="input-chassi">{{ __('Chassi') }}</label>
+                                    <input type="text" name="chassi" id="input-chassi" class="form-control form-control-alternative{{ $errors->has('Chassi') ? ' is-invalid' : '' }}" placeholder="{{ __('chassi') }}" value="{{ old('chassi') }}" required autofocus>
 
                                     @if ($errors->has('chassi'))
                                         <span class="invalid-feedback" role="alert">
@@ -44,11 +44,11 @@
                                     @endif
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <div class="form-group{{ $errors->has('marca') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-marca">{{ __('Marca') }}</label>
                                             <input type="text" name="marca" id="input-password" class="form-control form-control-alternative{{ $errors->has('marca') ? ' is-invalid' : '' }}" placeholder="{{ __('Marca') }}" value="" required>
-                                            
+
                                             @if ($errors->has('marca'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $errors->first('Marca') }}</strong>
@@ -56,11 +56,11 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <div class="form-group{{ $errors->has('modelo') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-modelo">{{ __('Modelo') }}</label>
                                             <input type="text" name="modelo" id="input-modelo" class="form-control form-control-alternative{{ $errors->has('modelo') ? ' is-invalid' : '' }}" placeholder="{{ __('Modelo') }}" value="" required>
-                                            
+
                                             @if ($errors->has('modelo'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $errors->first('Modelo') }}</strong>
@@ -68,26 +68,14 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <div class="form-group{{ $errors->has('locacao') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-lotacao">{{ __('Lotação') }}</label>
                                             <input type="number" name="lotacao" id="input-lotacao" class="form-control form-control-alternative{{ $errors->has('lotacao') ? ' is-invalid' : '' }}" placeholder="{{ __('Lotação') }}" value="" required>
-                                            
+
                                             @if ($errors->has('lotacao'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $errors->first('Lotação') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group{{ $errors->has('custoManutencao') ? ' has-danger' : '' }}">
-                                            <label class="form-control-label" for="input-custoManutencao">{{ __('Custo Manutenção') }}</label>
-                                            <input type="number" name="custoManutencao" id="input-custoManutencao" class="form-control form-control-alternative{{ $errors->has('cor') ? ' is-invalid' : '' }}" placeholder="{{ __('Custo Manutenção') }}" value="" required>
-                                            
-                                            @if ($errors->has('custoManutencao'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('custoManutencao') }}</strong>
                                                 </span>
                                             @endif
                                         </div>
@@ -102,7 +90,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                                 </div>
-                                                <input class="form-control datepicker" placeholder="Clique para selecionar a data" type="text" value="">
+                                                <input name="data_compra" class="form-control datepicker" placeholder="Clique para selecionar a data" type="text" value="">
                                             </div>
                                         </div>
                                     </div>
@@ -113,7 +101,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                                 </div>
-                                                <input class="form-control datepicker" placeholder="Clique para selecionar a data" type="text" value="">
+                                                <input name="data_fabricacao" class="form-control datepicker" placeholder="Clique para selecionar a data" type="text" value="">
                                             </div>
                                         </div>
                                     </div>
@@ -173,7 +161,7 @@
                 </div>
             </div>
         </div>
-        
+
         @include('layouts.footers.auth')
     </div>
 @endsection

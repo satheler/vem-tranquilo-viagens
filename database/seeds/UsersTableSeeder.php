@@ -12,11 +12,41 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        /**
+         * Usuário: Administrador geral
+         */
         DB::table('users')->insert([
-            'name' => 'Username',
-            'email' => 'user@email.com',
+            'name' => 'Administrador Geral',
+            'email' => 'admin@mail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('123456'),
+            'tipo_usuario_id' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        /**
+         * Usuário: Gerente local
+         */
+        DB::table('users')->insert([
+            'name' => 'Gerente Local',
+            'email' => 'local@mail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('123456'),
+            'tipo_usuario_id' => 2,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        /**
+         * Usuário: Secretário
+         */
+        DB::table('users')->insert([
+            'name' => 'Secretário',
+            'email' => 'secretario@mail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('123456'),
+            'tipo_usuario_id' => 3,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

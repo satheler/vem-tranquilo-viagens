@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\TrajetoIntermunicipal;
+use App\Trecho;
+use Exception;
 
 class TrajetoIntermunicipalController extends Controller
 {
@@ -14,8 +17,8 @@ class TrajetoIntermunicipalController extends Controller
     public function index()
     {
         $trajeto = new TrajetoIntermunicipal();
-        $listaDeTrajetos = $trajeto->getAll();
-        return view('trajetoIntermunicipal', compact('listaDeTrajetos'));
+        $lista = $trajeto->getAll();
+        return view('trajeto.intermunicipal.index', compact('lista'));
     }
 
     /**
@@ -25,7 +28,9 @@ class TrajetoIntermunicipalController extends Controller
      */
     public function create()
     {
-        return view('Formulário trajetoIntermunicipal');
+        $trechos = new Trecho();
+        $lista = $trechos->getAll();
+        return view('trajeto.intermunicipal.create', compact('lista'));
     }
 
     /**
@@ -36,14 +41,16 @@ class TrajetoIntermunicipalController extends Controller
      */
     public function store(Request $request)
     {
-        try {
+        $trajeto = new TrajetoIntermunicipal();
+        $validator = $trajeto->add($request->input());
 
-            $trajeto = new TrajetoIntermunicipal();
-            $trajeto->add($request->input());
-            return response(["status" => "Trajeto cadastrado com sucesso"], 201);
-
-        } catch (Exception $e) {
-            return response($e->getMessage(), 400);
+        if($validator === NULL) {
+            return redirect()->route('trajeto_intermunicipal.index')->withStatus(__('Trajeto adicionado com sucesso.'));
+        } else {
+            return redirect()
+                    ->route('trajeto_intermunicipal.create')
+                    ->withErrors($validator)
+                    ->withInput();
         }
     }
 
@@ -56,8 +63,8 @@ class TrajetoIntermunicipalController extends Controller
     public function show($id)
     {
         $trajeto = new TrajetoIntermunicipal();
-        $trajeto = $trajeto->get($id);
-        return response($trajeto->toJson(), 200);
+        $item = $trajeto->get($id);
+        return view('trajeto.intermunicipal.show', compact('item'));
     }
 
     /**
@@ -102,6 +109,7 @@ class TrajetoIntermunicipalController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $trajeto = new TrajetoIntermunicipal();
+        return $trajeto->disable($id, $request->input());
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\TrajetoUrbano;
+use Exception;
 
 class TrajetoUrbanoController extends Controller
 {
@@ -13,9 +15,9 @@ class TrajetoUrbanoController extends Controller
      */
     public function index()
     {
-        $trajeto = new TrajetoLocal();
-        $listaDeTrajetos = $trajeto->getAll();
-        return view('trajetoLocal', compact('listaDeTrajetos'));
+        $trajeto = new TrajetoUrbano();
+        $lista = $trajeto->getAll();
+        return view('trajeto.urbano.index', compact('lista'));
     }
 
     /**
@@ -25,7 +27,7 @@ class TrajetoUrbanoController extends Controller
      */
     public function create()
     {
-        return view('Formulario trajetoLocal');
+        return view('trajeto.urbano.create');
     }
 
     /**
@@ -36,14 +38,16 @@ class TrajetoUrbanoController extends Controller
      */
     public function store(Request $request)
     {
-        try {
+        $trajeto = new TrajetoUrbano();
+        $validator = $trajeto->add($request->input());
 
-            $trajeto = new TrajetoLocal();
-            $trajeto->add($request->input());
-            return response(["status" => "Trajeto cadastrado com sucesso"], 201);
-
-        } catch (Exception $e) {
-            return response($e->getMessage(), 400);
+        if($validator === NULL) {
+            return redirect()->route('trajeto.urbano.index')->withStatus(__('Trajeto adicionado com sucesso.'));
+        } else {
+            return redirect()
+                    ->route('trajeto.urbano.create')
+                    ->withErrors($validator)
+                    ->withInput();
         }
     }
 
@@ -55,9 +59,9 @@ class TrajetoUrbanoController extends Controller
      */
     public function show($id)
     {
-        $trajeto = new TrajetoLocal();
-        $trajeto = $trajeto->get($id);
-        return response($trajeto->toJson(), 200);
+        $trajeto = new TrajetoUrbano();
+        $item = $trajeto->get($id);
+        return view('trajeto.urbano.show', compact('item'));
     }
 
     /**
@@ -68,7 +72,7 @@ class TrajetoUrbanoController extends Controller
      */
     public function edit($id)
     {
-        $trajeto = new TrajetoLocal();
+        $trajeto = new TrajetoUrbano();
         $listaDeTrajetos = $trajeto->getAll();
         $trajetoEditado = $listaDeTrajetos[$id];
         return "Formulario de edição para o".$trajetoEditado->toJson();
@@ -84,11 +88,9 @@ class TrajetoUrbanoController extends Controller
     public function update(Request $request, $id)
     {
         try {
-
-            $trajetoEditado = new TrajetoLocal();
+            $trajetoEditado = new TrajetoUrbano();
             $trajetoEditado->edit($id);
             return response(["status" => "Trajeto atualizado com sucesso"], 202);
-
         } catch (Exception $e) {
             return response($e->getMessage(), 400);
         }
@@ -102,6 +104,7 @@ class TrajetoUrbanoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $trajeto = new TrajetoUrbano();
+        return $trajeto->disable($id, $request->input());
     }
 }

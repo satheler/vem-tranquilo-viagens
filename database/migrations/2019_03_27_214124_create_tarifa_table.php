@@ -16,11 +16,11 @@ class CreateTarifaTable extends Migration
     {
         Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('valor');
+            $table->float('valor');
             $table->date('data');
 
-            $table->bigInteger('description_id')->unsigned();
-            $table->string('description_type');
+            $table->bigInteger('description_id')->unsigned()->nullable();
+            $table->string('description_type')->nullable();
 
             $table->timestamps();
         });

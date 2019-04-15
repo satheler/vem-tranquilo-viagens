@@ -11,14 +11,9 @@ class TrajetoIntermunicipal extends Model
 {
     protected $table = 'trajeto_intermunicipal';
 
-    public function trecho()
+    public function trechos()
     {
-        return $this->belongsToMany('App\Trecho', 'trajeto_trecho');
-    }
-
-    public function description()
-    {
-        return $this->morphTo();
+        return $this->belongsToMany('App\Trecho', 'trajeto_trecho', 'trajeto_id', 'trecho_id');
     }
 
     public function getAll()
@@ -26,41 +21,25 @@ class TrajetoIntermunicipal extends Model
         return $this->all();
     }
 
+    public function get(int $id){
+        $trajeto = $this->find($id);
+        return $trajeto;
+    }
+
     public function add(array $input)
     {
         $validator = Validator::make($input, [
-            'listaDeTrechos' => 'required|string',
+            'trechos' => 'required|array',
         ]);
-
-        if ($validator->fails()) {
-            throw new Exception($validator->messages());
-        }
-
-        $this->listaDeTrechos = $input['listaDeTrechos'];
 
         $this->save();
+        $this->trechos()->attach($input['trechos']);
     }
-    public function edit(int $id, array $input)
+
+
+    public function remove(int $id)
     {
-        $trajeto = $this->find($id);
-
-        $validator = Validator::make($input, [
-            'listaDeTrechos' => 'required|string',
-        ]);
-
-        if ($validator->fails()) {
-            throw new Exception($validator->messages());
-        }
-
-        $trajeto->listaDeTrechos = $input['listaDeTrechos'];
-
-        $trajeto->save();
+        //
     }
-
-    // public function destroy(int $id){
-
-    //     $this->destroy($id);
-    //     //return response();
-    // }
 
 }

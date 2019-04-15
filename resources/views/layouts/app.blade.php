@@ -7,7 +7,8 @@
 
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name') }}@isset($title) :: {{ $title }} @endisset</title>
+        <title>@isset($title) {{ $title }} :: @endisset{{ config('app.name') }}</title>
+
         <!-- Favicon -->
         <link href="{{ asset('argon') }}/img/brand/favicon.png" rel="icon" type="image/png">
         <!-- Fonts -->
@@ -16,29 +17,45 @@
         <link href="{{ asset('argon') }}/vendor/nucleo/css/nucleo.css" rel="stylesheet">
         <link href="{{ asset('argon') }}/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
         <!-- Page plugins -->
+        <link type="text/css" href="{{ asset('argon') }}/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
         @stack('css')
         <!-- Argon CSS -->
-        <link type="text/css" href="{{ asset('argon') }}/css/argon.css?v=1.0.0" rel="stylesheet">
+        <link type="text/css" href="{{ asset('argon') }}/css/argon.min.css?v=1.0.0" rel="stylesheet">
         <!-- Custom CSS -->
         <link type="text/css" href="{{ asset('argon') }}/css/style.css" rel="stylesheet">
 
     </head>
     <body class="{{ $class ?? '' }}">
-        {{-- @auth() --}}
-            {{-- <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        <div class="page-loader-wrapper">
+            <div class="loader">
+                <div class="preloader">
+                    <div class="spinner-layer pl-indigo">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
+                <p>Carregando... Aguarde...</p>
+            </div>
+        </div>
+        @auth()
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
-            </form> --}}
+            </form>
             @include('layouts.navbars.sidebar')
-        {{-- @endauth --}}
+        @endauth
 
         <div class="main-content">
             @include('layouts.navbars.navbar')
             @yield('content')
         </div>
 
-        {{-- @guest()
+        @guest()
             @include('layouts.footers.guest')
-        @endguest --}}
+        @endguest
 
         <script src="{{ asset('argon') }}/vendor/jquery/dist/jquery.min.js"></script>
         <script src="{{ asset('argon') }}/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -49,10 +66,12 @@
         <script src="{{ asset('argon') }}/vendor/promise-polyfill/dist/polyfill.min.js"></script>
         <script src="{{ asset('argon') }}/vendor/axios/dist/axios.min.js"></script>
 
+        <!-- Plugins -->
         @stack('js')
+        <script src="{{ asset('argon') }}/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
 
         <!-- Argon JS -->
-        <script src="{{ asset('argon') }}/js/script.js"></script>
         <script src="{{ asset('argon') }}/js/argon.js?v=1.0.0"></script>
+        <script src="{{ asset('argon') }}/js/script.js"></script>
     </body>
 </html>

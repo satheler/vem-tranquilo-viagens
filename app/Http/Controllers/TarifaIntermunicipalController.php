@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\TarifaIntermunicipal;
+use Exception;
 
 class TarifaIntermunicipalController extends Controller
 {
@@ -15,8 +16,8 @@ class TarifaIntermunicipalController extends Controller
     public function index()
     {
         $tarifa = new TarifaIntermunicipal();
-        $listaDeTarifas = $tarifa->getAll();
-        return view('tarifaIntermunicipal', compact('listaDeTarifas'));
+        $lista = $tarifa->getAll();
+        return view('tarifa.intermunicipal.index', compact('lista'));
     }
 
     /**
@@ -26,7 +27,7 @@ class TarifaIntermunicipalController extends Controller
      */
     public function create()
     {
-        //
+        return view('tarifa.intermunicipal.create');
     }
 
     /**
@@ -37,14 +38,16 @@ class TarifaIntermunicipalController extends Controller
      */
     public function store(Request $request)
     {
-        try {
+        $tarifa = new TarifaIntermunicipal();
+        $validator = $tarifa->add($request->input());
 
-            $tarifa = new TarifaIntermunicipal();
-            $tarifa->add($request->input());
-            return response(["status" => "Tarifa alterada com sucesso"], 201);
-
-        } catch (Exception $e) {
-            return response($e->getMessage(), 400);
+        if(!($validator instanceof \Illuminate\Validation\Validator)) {
+            return redirect()->route('tarifa_intermunicipal.index')->withStatus(__('Tarifa intermunicipal adicionada com sucesso.'));
+        } else {
+            return redirect()
+                    ->route('tarifa_intermunicipal.create')
+                    ->withErrors($validator)
+                    ->withInput();
         }
     }
 
@@ -57,8 +60,8 @@ class TarifaIntermunicipalController extends Controller
     public function show($id)
     {
         $tarifa = new TarifaIntermunicipal();
-        $tarifa = $tarifa->get($id);
-        return response($tarifa->toJson(), 200);
+        $item = $tarifa->get($id);
+        return view('tarifa.intermunicipal.show', compact('item'));
     }
 
     /**

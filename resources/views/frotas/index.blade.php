@@ -90,9 +90,10 @@ $('[data-remove-id]').on('click', async function () {
     })
 
     if(value){
-        axios.delete(`${url}/${id}`, { data: { message: value } })
+        axios.delete(`${url}/${id}`, { data: { observacao: value } })
         .then(data => {
-            $(`[data-table-row-id="${id}"]`).remove();
+            table.row(`[data-table-row-id="${id}"]`).remove();
+            table.draw();
             Swal.fire('Ônibus inativado com sucesso!','','success')
             console.log(data);
         })
@@ -122,14 +123,16 @@ $('[data-available-id]').on('click', async function () {
         .then(data => {
             Swal.fire('Estado do Ônibus alterado com sucesso!', '', 'success')
             console.log(data);
+
+            $(`[data-badge-available-id="${id}"]`).attr('class').includes('badge-warning') ?
+            $(`[data-badge-available-id="${id}"]`).removeClass('badge-warning').addClass('badge-success').text('Disponivel') :
+            $(`[data-badge-available-id="${id}"]`).removeClass('badge-success').addClass('badge-warning').text('Em manutenção')
         })
         .catch((error) => {
             console.error(error);
             Swal.fire('Aconteceu um erro inesperado...', '', 'error' )
         })
 
-        //ALTERAR A BADGE DEPOIS
-        // $(`data-badge-available-id="${id}"`)
     }
 })
 
@@ -141,7 +144,6 @@ $('[data-show-id]').on('click', function() {
         $(".modal-body").html(data.data)
         $("#modal-infos").modal('show');
     })
-
 })
 </script>
 @endpush

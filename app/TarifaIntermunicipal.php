@@ -3,13 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
-use Validator;
-use Exception;
+use App\Tarifa;
 
 class TarifaIntermunicipal extends Model
 {
-    protected $table= 'tarifa_intermunicipal';
+
+    protected $table = 'tarifa_intermunicipal';
 
     public function description()
     {
@@ -21,12 +20,22 @@ class TarifaIntermunicipal extends Model
         return $this->all();
     }
 
-    public function add(array $input)
-    {
-    $tarifa = new Tarifa();
-    $data = $tarifa->add($input);
-
-    $this->save();
-    $this->description()->save($data);
+    public function get(int $id){
+        $tarifa = $this->find($id);
+        return $tarifa;
     }
+
+    public function add(array $input) {
+        $tarifa = new Tarifa();
+        $tarifaAdd = $tarifa->add($input);
+
+        if(($tarifaAdd instanceof \Illuminate\Validation\Validator)) {
+            return $tarifaAdd;
+        }
+
+        $this->save();
+        $this->description()->save($tarifaAdd);
+    }
+
+
 }

@@ -9,11 +9,10 @@ use Exception;
 
 class Funcionario extends Model
 {
-    protected $table = 'funcionario';
+    protected $table = 'funcionarios';
 
-    public function description()
-    {
-        return $this->morphTo();
+    public function tipo() {
+        return $this->hasOne('App\TipoFuncionario', 'id', 'tipo_id');
     }
 
     public function getAll()
@@ -21,38 +20,49 @@ class Funcionario extends Model
         return $this->all();
     }
 
+    public function get(int $id){
+        $funcionario = $this->find($id);
+        return $funcionario;
+    }
+
     public function add(array $input)
     {
         $validator = Validator::make($input, [
             'nome' => 'required|string',
-            'tipo' => 'exists:tipo,nome'
+            'tipo' => 'required|exists:tipos_funcionario,id'
         ]);
 
         if ($validator->fails()) {
-            throw new Exception($validator->messages());
+            return $validator;
         }
         //Funcionario::where('id', $id)->first();
 
         $this->nome = $input['nome'];
-        $this->id = $input['tipo'];
+        $this->tipo_id = $input['tipo'];
 
         $this->save();
     }
+
     public function edit(int $id, array $input)
     {
         $funcionario = $this->find($id);
 
         $validator = Validator::make($input, [
             'nome' => 'required|string',
-            'tipo' => 'exists:tipo,tipo'
+            'tipo_id' => 'required|exists:tipos_funcionario,id'
 
         ]);
         if ($validator->fails()) {
-            throw new Exception($validator->messages());
+            return $validator;
         }
         $funcionario->nome = $input['nome'];
-        $funcionario->tipo = $input['tipo'];
+        $funcionario->tipo = $input['tipo_id'];
 
         $funcionario->save();
+    }
+
+    public function remove(int $id)
+    {
+        return $this->destroy($id);
     }
 }
