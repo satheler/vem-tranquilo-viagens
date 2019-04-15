@@ -35,6 +35,7 @@ class Funcionario extends Model
         if ($validator->fails()) {
             return $validator;
         }
+        //Funcionario::where('id', $id)->first();
 
         $this->nome = $input['nome'];
         $this->tipo_id = $input['tipo'];
