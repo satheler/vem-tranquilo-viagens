@@ -48,6 +48,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('funcionario', 'FuncionarioController');
 
+    Route::resource('gerir_funcionarios', 'GerirFuncionariosController');
+
     Route::resource('pagamento', 'FormaDePagamentoController');
 
     Route::prefix('alocacao')->name('alocacao_')->group(function () {
