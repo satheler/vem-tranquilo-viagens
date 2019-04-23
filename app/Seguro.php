@@ -8,10 +8,6 @@ class Seguro extends Model
 {
     protected $table = 'seguro';
 
-    public function frota() {
-        return $this->hasOne('App\Frota', 'id', 'frota_id');
-    }
-
     public function getAll()
     {
         return $this->all();

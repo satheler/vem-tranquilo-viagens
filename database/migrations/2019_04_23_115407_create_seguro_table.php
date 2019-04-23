@@ -17,9 +17,9 @@ class CreateSeguroTable extends Migration
         Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('empresa');
-            $table->integer('valor');
+            $table->double('valor');
             $table->string('assegura');
-            $table->bigInteger('frota_id');
+            $table->string('tipo');//pode ser um enum tb
             $table->timestamps();
         });
     }

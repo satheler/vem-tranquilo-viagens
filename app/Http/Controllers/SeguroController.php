@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Seguro;
+use App\Frota;
 
 class SeguroController extends Controller
 {
@@ -16,7 +18,9 @@ class SeguroController extends Controller
         $seguro = new Seguro();
         $lista = $seguro->getAll();
         //return view('seguro.index', compact('lista'));
-        return $lista;
+        $frota = new Frota();
+        $listaFrota = $frota->getAll();
+        return $lista.$listaFrota;
     }
 
     /**

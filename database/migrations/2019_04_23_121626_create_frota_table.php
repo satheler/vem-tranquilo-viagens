@@ -16,7 +16,8 @@ class CreateFrotaTable extends Migration
     {
         Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('onibus_id');
+            $table->string('nome');
+            $table->bigInteger('seguro_id');
             $table->timestamps();
         });
     }

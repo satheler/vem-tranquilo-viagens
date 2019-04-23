@@ -15,6 +15,10 @@ class OnibusIntermunicipal extends Model
         return $this->hasMany('App\AssentoOnibus',  'onibus_id', 'id');
     }
 
+    public function frota() {
+        return $this->hasOne('App\Frota', 'id', 'frota_id');
+    }
+
     public function description()
     {
         return $this->morphOne('App\Onibus', 'description');

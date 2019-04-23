@@ -6,8 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Frota extends Model
 {
+    protected $table = 'frota';
+
     public function onibus()
     {
-        return $this->hasMany('App\Onibus', 'id', 'onibus_id');
+        return $this->hasMany('App\Seguro', 'id', 'seguro_id');
+    }
+    public function getAll()
+    {
+        return $this->all();
     }
 }

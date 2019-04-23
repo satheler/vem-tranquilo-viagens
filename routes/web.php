@@ -55,10 +55,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('intermunicipal', 'AlocacaoIntermunicipalController');
     });
 
+
+});
+
 //    Route::prefix('seguro')->name('seguro_')->group(function () {
 //        Route::resource('seguro', 'SeguroController');
 //    });
 
-    Route::resource('seguro', 'SeguroController');
-
-});
+Route::resource('seguro', 'SeguroController');

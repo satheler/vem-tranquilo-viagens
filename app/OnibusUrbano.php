@@ -15,6 +15,10 @@ class OnibusUrbano extends Model
         return $this->morphOne('App\Onibus', 'description');
     }
 
+    public function frota() {
+        return $this->hasOne('App\Frota', 'id', 'frota_id');
+    }
+
     public function getAll()
     {
         return $this->whereHas('description', function ($query) {
