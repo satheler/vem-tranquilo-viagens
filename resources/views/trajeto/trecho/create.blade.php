@@ -86,7 +86,6 @@
 
 <script>
     $(document).ready(function(){
-        $('[time]').mask('00:00');
         $('[km]').mask('###0.0', {reverse: true});
     })
     </script>
