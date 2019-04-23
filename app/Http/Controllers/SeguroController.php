@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Seguro;
 use App\Frota;
+use App\Onibus;
+use App\OnibusIntermunicipal;
+use App\OnibusUrbano;
 
 class SeguroController extends Controller
 {
@@ -16,11 +19,24 @@ class SeguroController extends Controller
     public function index()
     {
         $seguro = new Seguro();
-        $lista = $seguro->getAll();
-        //return view('seguro.index', compact('lista'));
         $frota = new Frota();
+        $onibusUrbano = new OnibusUrbano();
+        $onibusInter = new OnibusIntermunicipal();
+
+        $listaSeguro = $seguro->getAll();
         $listaFrota = $frota->getAll();
-        return $lista.$listaFrota;
+        $listaOnibusUrbano = $onibusUrbano->getAll();
+        $listaOnibusInter = $onibusInter->getAll();
+
+        $frotaUrbano;
+        $frotaIntermunicipal;
+
+
+
+        return $onibusUrbano->getFrota(1);
+
+        //return view('seguro.index', compact('lista'));
+
     }
 
     /**

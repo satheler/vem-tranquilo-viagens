@@ -19,7 +19,7 @@ class CreateSeguroTable extends Migration
             $table->string('empresa');
             $table->double('valor');
             $table->string('assegura');
-            $table->string('tipo');//pode ser um enum tb
+            $table->bigInteger('tipo_id');
             $table->timestamps();
         });
     }

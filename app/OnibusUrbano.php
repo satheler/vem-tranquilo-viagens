@@ -33,6 +33,21 @@ class OnibusUrbano extends Model
         return $onibus;
     }
 
+    public function getFrota(int $id)
+    {
+
+        $frota = $this->where('frota_id', $id)->get();
+
+        foreach($frota as $bus => $onibus)
+        {
+            $bus = $this->get($onibus->id);
+        }
+
+        return $bus;
+    }
+
+
+
     public function add(array $input)
     {
         $validator = Validator::make($input, [
