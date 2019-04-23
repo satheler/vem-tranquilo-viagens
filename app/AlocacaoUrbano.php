@@ -8,26 +8,34 @@ class AlocacaoUrbano extends Model
 {
     protected $table = 'alocacao_urbano';
 
-    public function onibus() {
+    public function onibus()
+    {
         return $this->hasOne('App\OnibusUrbano', 'id', 'onibus_id');
     }
-    public function trajeto() {
+
+    public function trajeto()
+    {
         return $this->hasOne('App\TrajetoUrbano', 'id', 'trajeto_id');
     }
-    public function motorista() {
+
+    public function motorista()
+    {
         return $this->hasOne('App\Funcionario', 'id', 'motorista_id');
     }
-    public function cobrador() {
+
+    public function cobrador()
+    {
         return $this->hasOne('App\Funcionario', 'id', 'cobrador_id');
     }
+
     public function getAll()
     {
         return $this->all();
     }
 
-    public function get(int $id){
-        $alocacao = $this->find($id);
-        return $alocacao;
+    public function get(int $id)
+    {
+        return $this->find($id);
     }
 
     public function add(array $input)
@@ -35,10 +43,10 @@ class AlocacaoUrbano extends Model
         $validator = Validator::make($input, [
             'onibus_id' => 'exists:onibus,id',
             'trajeto_id' => 'exists:trajeto_urbano,id',
-            'motorita_id'=>'exists:funcionario, id',
-            'cobrador_id'=>'exists:funcionario, id',
-            'motorista_id'=>'required_if:tipos_funcionario,1',
-            'cobrador_id' => 'required_if:tipos_funcionario,2'
+            'motorita_id' => 'exists:funcionario, id',
+            'cobrador_id' => 'exists:funcionario, id',
+            'motorista_id' => 'required_if:tipos_funcionario,1',
+            'cobrador_id' => 'required_if:tipos_funcionario,2',
         ]);
 
         if ($validator->fails()) {
@@ -59,10 +67,10 @@ class AlocacaoUrbano extends Model
         $validator = Validator::make($input, [
             'onibus_id' => 'exists:onibus,id',
             'trajeto_id' => 'exists:trajeto_urbano,id',
-            'motorita_id'=>'exists:funcionario, id',
-            'cobrador_id'=>'exists:funcionario, id',
-            'motorista_id'=>'required_if:tipos_funcionario,1',
-            'cobrador_id' => 'required_if:tipos_funcionario,2'
+            'motorita_id' => 'exists:funcionario, id',
+            'cobrador_id' => 'exists:funcionario, id',
+            'motorista_id' => 'required_if:tipos_funcionario,1',
+            'cobrador_id' => 'required_if:tipos_funcionario,2',
         ]);
         if ($validator->fails()) {
             return $validator;
