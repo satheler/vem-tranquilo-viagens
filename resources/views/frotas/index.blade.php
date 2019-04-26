@@ -105,23 +105,58 @@ $('[data-remove-id]').on('click', async function () {
 })
 
 
-$('[data-available-id]').on('click', async function () {
+$('[data-available-id][data-manutencao=true]').on('click', vaiParaManutencao)
+
+async function vaiParaManutencao() {
     let id = $(this).data('available-id');
 
-    let response = await Swal.fire({
-        title: 'Você tem certeza que deseja mudar a disponibilidade deste ônibus?',
-        type: 'question',
-        showCancelButton: true,
-        confirmButtonColor: '#28a745',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Sim, tenho certeza!',
-        cancelButtonText: 'Não, cancelar'
-    })
-
-    if(response.value){
-        axios.put(`${url}/${id}`)
+Swal.mixin({
+  input: 'text',
+  confirmButtonText: 'Próximo &rarr;',
+  cancelButtonText: 'Cancelar',
+  showCancelButton: true,
+  progressSteps: ['1', '2']
+}).queue([
+  {
+    title: 'Descrição',
+    text: 'O que aconteceu?',
+    input: 'text',
+        inputAttributes: {
+            autocapitalize: 'off'
+        },
+        inputPlaceholder: 'Informe o ocorrido...',
+        inputValidator: (value) => {
+            if (!value) {
+            return 'Este campo não pode ser vazio!'
+            }
+        },
+  },
+  {
+    title: 'Valor',
+    text: 'Insira o valor total da  manutenção?',
+    input: 'text',
+        inputAttributes: {
+            autocapitalize: 'off'
+        },
+        inputPlaceholder: '0,00',
+        inputValidator: (value) => {
+            if (!value) {
+            return 'Este campo não pode ser vazio!'
+            }
+        },
+  },
+]).then(data => {
+        console.log(data.value);
+        axios.put(`${url}/${id}`, {
+            goManutencao: true,
+            motivo: data.value[0],
+             valor: data.value[1]
+        })
         .then(data => {
             Swal.fire('Estado do Ônibus alterado com sucesso!', '', 'success')
+            $(this).attr("data-manutencao", false)
+            $(this).attr("onclick", "sairDaManutencao()")
+
             console.log(data);
 
             $(`[data-badge-available-id="${id}"]`).attr('class').includes('badge-warning') ?
@@ -133,8 +168,43 @@ $('[data-available-id]').on('click', async function () {
             Swal.fire('Aconteceu um erro inesperado...', '', 'error' )
         })
 
+  }).catch(e)
+}
+
+$('[data-available-id][data-manutencao=false]').on('click', sairDaManutencao)
+
+async function sairDaManutencao() {
+    //console.log("Estou em manutenção e preciso de outro modal");
+    let id = $(this).data('available-id');
+    let response = await Swal.fire({
+        title: 'A manutenção deste ônibus já está pronta?',
+        type: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim, já está!',
+        cancelButtonText: 'Não, cancelar!'
+    })
+    if(response.value){
+        axios.put(`${url}/${id}`,{
+            goManutencao: false
+        })
+        .then(data => {
+            Swal.fire('Estado do Ônibus alterado com sucesso!', '', 'success')
+            $(this).attr("data-manutencao", true)
+            $(this).attr("onclick", "vaiParaManutencao()")
+
+            $(`[data-badge-available-id="${id}"]`).attr('class').includes('badge-warning') ?
+            $(`[data-badge-available-id="${id}"]`).removeClass('badge-warning').addClass('badge-success').text('Disponivel') :
+            $(`[data-badge-available-id="${id}"]`).removeClass('badge-success').addClass('badge-warning').text('Em manutenção')
+        })
+        .catch((error) => {
+            console.error(error);
+            Swal.fire('Aconteceu um erro inesperado...', '', 'error' )
+        })
     }
-})
+
+}
 
 $('[data-show-id]').on('click', function() {
     let id = $(this).data('show-id');

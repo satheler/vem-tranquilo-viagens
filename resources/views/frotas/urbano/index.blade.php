@@ -65,9 +65,9 @@
 
                             <td align="center">
                                 @if ($item->description->disponivel)
-                                    <span data-badge-available-id="{{ $item->id }}" class="badge badge-success">Disponível</span>
+                                    <span  data-badge-available-id="{{ $item->id }}" class="badge badge-success">Disponível</span>
                                 @else
-                                    <span data-badge-available-id="{{ $item->id }}" class="badge badge-warning">Em manutenção</span>
+                                    <span isManutencao data-badge-available-id="{{ $item->id }}" class="badge badge-warning">Em manutenção</span>
                                 @endif
                             </td>
 
@@ -77,7 +77,7 @@
                                         <i class="fas fa-ellipsis-v"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                        <a class="dropdown-item" data-available-id="{{ $item->id }}" href="#">{{ __('Em manutenção') }}</a>
+                                        <a class="dropdown-item" data-manutencao=@if ($item->description->disponivel) true @else false @endif data-available-id="{{ $item->id }}" href="#">{{ __('Em manutenção') }}</a>
                                         <a class="dropdown-item" data-remove-id="{{ $item->id }}" href="#">{{ __('Deixar inativo') }}</a>
                                     </div>
                                 </div>
