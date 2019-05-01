@@ -25,6 +25,8 @@ class Funcionario extends Model
         return $funcionario;
     }
 
+
+
     public function add(array $input)
     {
         $validator = Validator::make($input, [

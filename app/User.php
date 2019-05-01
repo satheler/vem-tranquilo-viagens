@@ -36,4 +36,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function cidade() {
+        return $this->hasOne('App\Cidade', 'id', 'cidade_id');
+    }
 }
