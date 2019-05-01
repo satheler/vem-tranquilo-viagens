@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\AlocacaoUrbano;
+
+use App\TrajetoUrbano;
+
 use Exception;
 
 class AlocacaoUrbanoController extends Controller
@@ -27,7 +30,10 @@ class AlocacaoUrbanoController extends Controller
      */
     public function create()
     {
-        return view('alocacao.urbano.main.create');
+        $lista = [];
+        $trajetosUrbanos = new TrajetoUrbano();
+        $lista["trajetos"] = $trajetosUrbanos->getAll();
+        return view('alocacao.urbano.main.create', compact('lista'));
     }
 
     /**

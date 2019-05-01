@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\TrajetoUrbano;
+use App\Cidade;
 use Exception;
 
 class TrajetoUrbanoController extends Controller
@@ -27,7 +28,9 @@ class TrajetoUrbanoController extends Controller
      */
     public function create()
     {
-        return view('trajeto.urbano.create');
+        $cidades = new Cidade();
+        $lista["cidades"] = $cidades->getAll();
+        return view('trajeto.urbano.create', compact('lista'));
     }
 
     /**
@@ -42,10 +45,10 @@ class TrajetoUrbanoController extends Controller
         $validator = $trajeto->add($request->input());
 
         if($validator === NULL) {
-            return redirect()->route('trajeto.urbano.index')->withStatus(__('Trajeto adicionado com sucesso.'));
+            return redirect()->route('trajeto_urbano.index')->withStatus(__('Trajeto adicionado com sucesso.'));
         } else {
             return redirect()
-                    ->route('trajeto.urbano.create')
+                    ->route('trajeto_urbano.create')
                     ->withErrors($validator)
                     ->withInput();
         }
