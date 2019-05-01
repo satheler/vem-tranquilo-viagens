@@ -4,7 +4,7 @@
     <div class="card-header border-0">
         <div class="row align-items-center">
             <div class="col-8">
-                <h3 class="mb-0">{{ __('Trajeto Urbano') }}</h3>
+                <h3 class="mb-0">{{ __('Trajeto Urbano') }} - {{ Auth::user()->cidade->nome }}</h3>
             </div>
             <div class="col-4 text-right">
                 <a href="{{ route('trajeto_urbano.create') }}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Adicionar Trajeto Urbano"><i class="fas fa-plus"></i></a>
@@ -27,10 +27,8 @@
                 <thead class="thead-light">
                     <tr>
                         <th scope="col"></th>
-                        <th scope="col">{{ __('Origem') }}</th>
-                        <th scope="col">{{ __('Destino') }}</th>
                         <th scope="col">{{ __('Terminal') }}</th>
-                        <th scope="col">{{ __('Valor') }}</th>
+                        <th scope="col">{{ __('Quilometragem do percurso') }}</th>
                         <th scope="col">{{ __('Horario saída') }}</th>
                         <th scope="col">{{ __('Horario chegada') }}</th>
                         <th scope="col">Ações</th>
@@ -44,10 +42,8 @@
                                     <span class="btn-inner--icon"><i class="ni ni-single-copy-04"></i></span>
                                 </button>
                             </td>
-                            <td>{{ $item->origem }}</td>
-                            <td>{{ $item->destino }}</td>
                             <td>{{ $item->terminal }}</td>
-                            <td>{{ $item->valor }}</td>
+                            <td>{{ sprintf('%.2f', $item->quilometragem) }} km</td>
                             <td>{{ $item->horarioSaida }}</td>
                             <td>{{ $item->horarioChegada }}</td>
 
