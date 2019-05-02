@@ -168,7 +168,10 @@ Swal.mixin({
             Swal.fire('Aconteceu um erro inesperado...', '', 'error' )
         })
 
-  }).catch(e)
+  }).catch((error) => {
+            console.error(error);
+            Swal.fire('Aconteceu um erro inesperado...', '', 'error' )
+        })
 }
 
 $('[data-available-id][data-manutencao=false]').on('click', sairDaManutencao)
@@ -188,8 +191,10 @@ async function sairDaManutencao() {
     if(response.value){
         axios.put(`${url}/${id}`,{
             goManutencao: false
+
         })
         .then(data => {
+            console.log("Entrei aqui")
             Swal.fire('Estado do Ônibus alterado com sucesso!', '', 'success')
             $(this).attr("data-manutencao", true)
             $(this).attr("onclick", "vaiParaManutencao()")

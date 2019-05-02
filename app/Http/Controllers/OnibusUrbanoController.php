@@ -105,6 +105,7 @@ class OnibusUrbanoController extends Controller
             }
             $onibuseditado->edit($id);
             return response(["status" => "Ônibus atualizado com sucesso"], 202);
+            //return response(["status" => "foi também"], 202);
 
         } catch (Exception $e) {
             return response($e->getMessage(), 400);
