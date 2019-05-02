@@ -81,6 +81,11 @@ class SeguroController extends Controller
      */
     public function show($id)
     {
+        $seguro = new Seguro();
+        $item = $seguro->get($id);
+
+        return $item->toJson();
+        //return view('seguro.show', compact('item'));
 
     }
 
