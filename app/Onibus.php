@@ -28,7 +28,7 @@ class Onibus extends Model
 
     public function getAll()
     {
-        return $this->where('inativo', true)->get();
+        return $this->all();
     }
 
     public function add(array $input)

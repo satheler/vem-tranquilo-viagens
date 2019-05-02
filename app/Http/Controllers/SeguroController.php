@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Seguro;
-use App\Frota;
+use App\TipoSeguro;
 use App\Onibus;
 use App\OnibusIntermunicipal;
 use App\OnibusUrbano;
@@ -18,7 +18,7 @@ class SeguroController extends Controller
      */
     public function index()
     {
-        $seguro = new Trecho();
+        $seguro = new Seguro();
         $lista = $seguro->getAll();
         return view('seguroonibus.seguro.index', compact('lista'));
 
@@ -31,9 +31,11 @@ class SeguroController extends Controller
      */
     public function create()
     {
-        $seguro = new Seguro();
-        $lista = $seguro->getAll();
-        return view('seguroonibus.seguro.main.create', compact('lista'));
+        $onibus = new Onibus();
+        $tipo = new TipoSeguro();
+        $lista["onibus"] = $onibus->getAll();
+        $lista["tipo"] = $tipo->getAll();
+        return view('seguroonibus.seguro.create', compact('lista'));
     }
 
     /**
@@ -69,8 +71,7 @@ class SeguroController extends Controller
         $seguro = new Seguro();
         $item = $seguro->get($id);
 
-        return $item->toJson();
-        //return view('seguro.show', compact('item'));
+        return view('seguroonibus.seguro.show', compact('item'));
 
     }
 
