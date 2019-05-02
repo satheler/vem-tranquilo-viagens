@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\AlocacaoUrbano;
-
 use App\TrajetoUrbano;
+use App\Funcionario;
+use App\OnibusUrbano;
 
 use Exception;
+use Auth;
 
 class AlocacaoUrbanoController extends Controller
 {
@@ -30,9 +32,16 @@ class AlocacaoUrbanoController extends Controller
      */
     public function create()
     {
-        $lista = [];
         $trajetosUrbanos = new TrajetoUrbano();
         $lista["trajetos"] = $trajetosUrbanos->getAll();
+
+        $onibus = new OnibusUrbano();
+        $lista["onibus"] = $onibus->getByCidade(Auth::user()->cidade_id);
+
+        $funcionarios = new Funcionario();
+        $lista["motoristas"] = $funcionarios->getByTipoId(1);
+        $lista["cobradores"] = $funcionarios->getByTipoId(2);
+        $lista["auxiliares"] = $funcionarios->getByTipoId(3);
         return view('alocacao.urbano.main.create', compact('lista'));
     }
 
@@ -48,10 +57,10 @@ class AlocacaoUrbanoController extends Controller
         $validator = $alocacao->add($request->input());
 
         if($validator === NULL) {
-            return redirect()->route('alocacao.urbano.index')->withStatus(__('Alocação de Funcionario feita com sucesso.'));
+            return redirect()->route('alocacao_urbano.index')->withStatus(__('Alocação de Funcionario feita com sucesso.'));
         } else {
             return redirect()
-                    ->route('alocacao.urbano.create')
+                    ->route('alocacao_urbano.create')
                     ->withErrors($validator)
                     ->withInput();
         }
