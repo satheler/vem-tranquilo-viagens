@@ -6,6 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateRegistroManutencaosTable extends Migration
 {
+
+    private $databaseName = 'registro_manutencao';
     /**
      * Run the migrations.
      *
@@ -13,10 +15,13 @@ class CreateRegistroManutencaosTable extends Migration
      */
     public function up()
     {
-        Schema::create('registro_manutencaos', function (Blueprint $table) {
+        Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('motivo');
             $table->double('valor');
+
+            $table->unsignedBigInteger('onibus_id');
+            $table->foreign('onibus_id')->references('id')->on('onibus');
 
             $table->timestamps();
         });

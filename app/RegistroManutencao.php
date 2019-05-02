@@ -8,7 +8,7 @@ use Validator;
 
 class RegistroManutencao extends Model
 {
-    protected $table = 'manutencao';
+    protected $table = 'registro_manutencao';
 
     public function getAll()
     {

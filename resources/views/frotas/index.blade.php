@@ -55,6 +55,7 @@
 <script src="{{ asset('argon') }}/vendor/datatables/dist/js/buttons.print.min.js"></script>
 <script src="{{ asset('argon') }}/vendor/datatables/dist/js/dataTables.select.min.js"></script>
 <script src="{{ asset('argon') }}/vendor/sweetalert2/dist/sweetalert2.js"></script>
+<script src="{{ asset('argon') }}/vendor/jquery-mask/dist/jquery.mask.min.js"></script>
 
 <script>
 
@@ -132,11 +133,15 @@ Swal.mixin({
         },
   },
   {
+    onOpen: () => {
+        $('[money]').mask('###0.00', { reverse: true });
+    },
     title: 'Valor',
     text: 'Insira o valor total da  manutenção?',
     input: 'text',
         inputAttributes: {
-            autocapitalize: 'off'
+            autocapitalize: 'off', 
+            money: ''
         },
         inputPlaceholder: '0,00',
         inputValidator: (value) => {
@@ -146,22 +151,28 @@ Swal.mixin({
         },
   },
 ]).then(data => {
-        console.log(data.value);
+
+    if(data.dismiss) {
+        return
+    }
         axios.put(`${url}/${id}`, {
             goManutencao: true,
             motivo: data.value[0],
-             valor: data.value[1]
+            valor: data.value[1]
         })
         .then(data => {
             Swal.fire('Estado do Ônibus alterado com sucesso!', '', 'success')
             $(this).attr("data-manutencao", false)
             $(this).attr("onclick", "sairDaManutencao()")
 
-            console.log(data);
-
             $(`[data-badge-available-id="${id}"]`).attr('class').includes('badge-warning') ?
             $(`[data-badge-available-id="${id}"]`).removeClass('badge-warning').addClass('badge-success').text('Disponivel') :
             $(`[data-badge-available-id="${id}"]`).removeClass('badge-success').addClass('badge-warning').text('Em manutenção')
+        })
+        .then(data => {
+            setTimeout(() => {
+                location.reload();
+            }, 1000);
         })
         .catch((error) => {
             console.error(error);
@@ -178,7 +189,9 @@ $('[data-available-id][data-manutencao=false]').on('click', sairDaManutencao)
 
 async function sairDaManutencao() {
     //console.log("Estou em manutenção e preciso de outro modal");
-    let id = $(this).data('available-id');
+    let id = $(this).attr('data-available-id');
+    console.log(id);
+    
     let response = await Swal.fire({
         title: 'A manutenção deste ônibus já está pronta?',
         type: 'question',
@@ -191,17 +204,26 @@ async function sairDaManutencao() {
     if(response.value){
         axios.put(`${url}/${id}`,{
             goManutencao: false
-
         })
         .then(data => {
-            console.log("Entrei aqui")
+
+            if(data.dismiss) {
+                return
+            }
+
             Swal.fire('Estado do Ônibus alterado com sucesso!', '', 'success')
             $(this).attr("data-manutencao", true)
+            $(this).attr("data-available-id", id)
             $(this).attr("onclick", "vaiParaManutencao()")
 
             $(`[data-badge-available-id="${id}"]`).attr('class').includes('badge-warning') ?
             $(`[data-badge-available-id="${id}"]`).removeClass('badge-warning').addClass('badge-success').text('Disponivel') :
             $(`[data-badge-available-id="${id}"]`).removeClass('badge-success').addClass('badge-warning').text('Em manutenção')
+        })
+        .then(data => {
+            setTimeout(() => {
+                location.reload();
+            }, 1000);
         })
         .catch((error) => {
             console.error(error);

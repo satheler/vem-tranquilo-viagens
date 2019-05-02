@@ -100,11 +100,17 @@ class OnibusUrbanoController extends Controller
         try {
             $onibuseditado = new OnibusUrbano();
             if($request->input('goManutencao')){
-                return response(["status" => "foi"], 202);
+                $validator = $onibuseditado->manutencao($request->input(), $id);
+
+                if($validator instanceof \Illuminate\Validation\Validator) {
+                    return response(["status" => "FALHA", "falhas" => $validator], 400);
+                } else {
+                    return response(["status" => "Manutenção registrada com sucesso."], 202);
+                }
 
             }
             $onibuseditado->edit($id);
-            return response(["status" => "Ônibus atualizado com sucesso"], 202);
+            return response(["status" => "Manutenção finalizada com sucesso."], 202);
             //return response(["status" => "foi também"], 202);
 
         } catch (Exception $e) {
