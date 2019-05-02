@@ -26,19 +26,24 @@
             <table id="datatable-basic" class="table align-items-center table-flush dataTable">
                 <thead class="thead-light">
                     <tr>
+                        <th width="45%" scope="col">{{ __('Expediente') }}</th>
+                        <th width="45%" scope="col">{{ __('Terminal') }}</th>
                         <th width="45%" scope="col">{{ __('Placa do ônibus') }}</th>
-                        <th width="45%" scope="col">{{ __('Trajeto') }}</th>
-                        <th width="45%" scope="col">{{ __('Nome motorista') }}</th>
-                        <th width="45%" scope="col">{{ __('Nome cobrador') }}</th>
+                        <th width="45%" scope="col">{{ __('Nome do motorista') }}</th>
+                        <th width="45%" scope="col">{{ __('Nome do cobrador') }}</th>
+                        <th width="45%" scope="col">{{ __('Nome do auxiliar') }}</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($lista as $item)
                         <tr data-table-row-id={{ $item->id }}>
+                            <td>{{ $item->horarioInicio }} - {{ $item->horarioFim }}</td>
+                            <td>{{ $item->trajeto->terminal }}</td>
                             <td>{{ $item->onibus->description->placa }}</td>
-                            <td>{{ $item->trajeto }}</td>
-                            <td>{{ $item->motorista }}</td>
-                            <td>{{ $item->cobrador }}</td>
+                            <td>{{ $item->motorista->nome }}</td>
+                            <td>{{ $item->cobrador->nome }}</td>
+                            <td>@if (@isset($item->auxiliar->nome)) {{ $item->auxiliar->nome }} @else Não possui @endif
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

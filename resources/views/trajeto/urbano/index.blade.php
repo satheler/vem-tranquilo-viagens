@@ -53,8 +53,7 @@
                                         <i class="fas fa-ellipsis-v"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                        <a class="dropdown-item" data-available-id="{{ $item->id }}" href="#">{{ __('Em manutenção') }}</a>
-                                        <a class="dropdown-item" data-remove-id="{{ $item->id }}" href="#">{{ __('Deixar inativo') }}</a>
+                                        <a class="dropdown-item" data-remove-id="{{ $item->id }}" href="#">{{ __('Remover') }}</a>
                                     </div>
                                 </div>
                             </td>

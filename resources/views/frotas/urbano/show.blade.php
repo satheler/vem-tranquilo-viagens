@@ -1,14 +1,20 @@
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
         <div class="form-group">
-            <label class="form-control-label" for="input-chassi">{{ __('CHASSI') }}</label>
+            <label class="form-control-label" for="input-chassi">{{ __('Chassi') }}</label>
             <input type="text" name="chassi" id="input-chassi" class="form-control form-control-alternative" value="{{ $item->description->chassi }}"  readonly>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
         <div class="form-group">
             <label class="form-control-label" for="input-placa">{{ __('Placa') }}</label>
             <input type="text" name="placa" id="input-placa" class="form-control form-control-alternative" value="{{ $item->description->placa }}"  readonly>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="form-control-label" for="input-placa">{{ __('Cidade') }}</label>
+            <input type="text" name="placa" id="input-placa" class="form-control form-control-alternative" value="{{ $item->cidade->nome }}"  readonly>
         </div>
     </div>
 </div>
