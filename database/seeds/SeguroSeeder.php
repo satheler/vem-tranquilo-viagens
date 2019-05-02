@@ -16,7 +16,7 @@ class SeguroSeeder extends Seeder
             'empresa' => 'VemTranquiloSeguros',
             'valor' => 100,
             'assegura' => 'Acidentes na rodovia',
-            'tipo' => 'Comum'
+            'tipo_id' => '1'
         ]);
     }
 }

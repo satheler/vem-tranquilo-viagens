@@ -2,11 +2,16 @@
 
 namespace App;
 
+use Validator;
 use Illuminate\Database\Eloquent\Model;
 
 class Seguro extends Model
 {
     protected $table = 'seguro';
+
+    public function tipo() {
+        return $this->hasOne('App\TipoSeguro', 'id', 'tipo_id');
+    }
 
     public function getAll()
     {
@@ -18,15 +23,13 @@ class Seguro extends Model
         return $seguro;
     }
 
-
-
     public function add(array $input)
     {
         $validator = Validator::make($input, [
             'empresa' => 'required|string',
-            'valor' => 'required|integer',
+            'valor' => 'required|numeric|min:0.01',
             'assegura' => 'required|string',
-            'tipo_id' => 'required|exists:tipos_seguro,id'//enum dos tipos de seguro
+            'tipo_id' => 'required|exists:tipo_seguro,id'//enum dos tipos de seguro
 
         ]);
 
@@ -41,5 +44,5 @@ class Seguro extends Model
 
         $this->save();
     }
-
+    
 }

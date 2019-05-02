@@ -9,7 +9,7 @@ class Frota extends Model
 {
     protected $table = 'frota';
 
-    public function onibus()
+    public function seguro()
     {
         return $this->hasMany('App\Seguro', 'id', 'seguro_id');
     }

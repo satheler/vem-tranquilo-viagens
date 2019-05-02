@@ -46,7 +46,9 @@ class SeguroController extends Controller
      */
     public function create()
     {
-        //
+        $seguro = new Seguro();
+        $lista = $seguro->getAll();
+        return view('seguro.main.create', compact('lista'));
     }
 
     /**
@@ -57,7 +59,18 @@ class SeguroController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $seguro = new Seguro();
+        $validator = $seguro->add($request->input());
+
+        if($validator == NULL) {
+            return "cadastrado";
+            //return redirect()->route('seguro.index')->withStatus(__('Seguro adicionado com sucesso.'));
+        } else {
+            return redirect()
+                    ->route('seguro.create')
+                    ->withErrors($validator)
+                    ->withInput();
+        }
     }
 
     /**
@@ -68,7 +81,7 @@ class SeguroController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**

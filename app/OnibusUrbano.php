@@ -40,7 +40,7 @@ class OnibusUrbano extends Model
 
         foreach($frota as $bus => $onibus)
         {
-            $bus = $this->get($onibus->id);
+            $bus .= $this->get($onibus->id);
         }
 
         return $bus;
