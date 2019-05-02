@@ -20,12 +20,14 @@ class Funcionario extends Model
         return $this->all();
     }
 
+    public function getByTipoId(int $tipo_id) {
+        return $this->where('tipo_id', $tipo_id)->get();
+    }
+
     public function get(int $id){
         $funcionario = $this->find($id);
         return $funcionario;
     }
-
-
 
     public function add(array $input)
     {
