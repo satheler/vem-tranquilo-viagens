@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             OnibusSeeder::class,
             CategoriaOnibusSeeder::class,
             TrechosSeeder::class,
+            FuncionarioSeeder::class,
+            TrajetoUrbanoSeeder::class
             // AlocacaoUrbanoSeeder::class
         ]);
     }
