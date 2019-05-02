@@ -18,7 +18,7 @@ class Onibus extends Model
 
     public function seguro()
     {
-        return $this->hasMany('App\SeguroOnibus', 'id', 'onibus_id');
+        return $this->belongsToMany('App\Seguro', 'seguro_onibus', 'onibus_id', 'seguro_id');
     }
 
     public function get($id)

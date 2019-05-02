@@ -51,10 +51,10 @@ class SeguroController extends Controller
 
         if($validator == NULL) {
 
-            return redirect()->route('seguroonibus.seguro.index')->withStatus(__('Seguro adicionado com sucesso.'));
+            return redirect()->route('seguro.index')->withStatus(__('Seguro adicionado com sucesso.'));
         } else {
             return redirect()
-                    ->route('seguroonibus.seguro.create')
+                    ->route('seguro.create')
                     ->withErrors($validator)
                     ->withInput();
         }

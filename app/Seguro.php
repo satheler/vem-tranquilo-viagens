@@ -15,7 +15,7 @@ class Seguro extends Model
     }
 
     public function onibus() {
-        return $this->hasMany('App\SeguroOnibus', 'id', 'onibus_id');
+        return $this->belongsToMany('App\Onibus', 'seguro_onibus', 'seguro_id', 'onibus_id');
     }
 
     public function getAll()
@@ -36,7 +36,8 @@ class Seguro extends Model
             'assegura' => 'required|string',
             'data_vigencia' => 'required|date_format:d/m/Y|after:'. now()->format('d/m/Y'),
             'data_inicio' => 'required|date_format:d/m/Y|before:data_vigencia',
-            'tipo_id' => 'required|exists:tipo_seguro,id'
+            'tipo_id' => 'required|exists:tipo_seguro,id',
+            'onibus' => 'required|array'
 
         ]);
 
@@ -58,6 +59,7 @@ class Seguro extends Model
         $this->vigente = true;
 
         $this->save();
+        $this->onibus()->attach($input['onibus']);
     }
 
     public function edit(int $id, array $input)
