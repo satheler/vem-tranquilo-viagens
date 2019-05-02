@@ -18,24 +18,9 @@ class SeguroController extends Controller
      */
     public function index()
     {
-        $seguro = new Seguro();
-        $frota = new Frota();
-        $onibusUrbano = new OnibusUrbano();
-        $onibusInter = new OnibusIntermunicipal();
-
-        $listaSeguro = $seguro->getAll();
-        $listaFrota = $frota->getAll();
-        $listaOnibusUrbano = $onibusUrbano->getAll();
-        $listaOnibusInter = $onibusInter->getAll();
-
-        $frotaUrbano;
-        $frotaIntermunicipal;
-
-
-
-        return $onibusUrbano->getFrota(1);
-
-        //return view('seguro.index', compact('lista'));
+        $seguro = new Trecho();
+        $lista = $seguro->getAll();
+        return view('seguroonibus.seguro.index', compact('lista'));
 
     }
 
@@ -48,7 +33,7 @@ class SeguroController extends Controller
     {
         $seguro = new Seguro();
         $lista = $seguro->getAll();
-        return view('seguro.main.create', compact('lista'));
+        return view('seguroonibus.seguro.main.create', compact('lista'));
     }
 
     /**
@@ -63,11 +48,11 @@ class SeguroController extends Controller
         $validator = $seguro->add($request->input());
 
         if($validator == NULL) {
-            return "cadastrado";
-            //return redirect()->route('seguro.index')->withStatus(__('Seguro adicionado com sucesso.'));
+
+            return redirect()->route('seguroonibus.seguro.index')->withStatus(__('Seguro adicionado com sucesso.'));
         } else {
             return redirect()
-                    ->route('seguro.create')
+                    ->route('seguroonibus.seguro.create')
                     ->withErrors($validator)
                     ->withInput();
         }

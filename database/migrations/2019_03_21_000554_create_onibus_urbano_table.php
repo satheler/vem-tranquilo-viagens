@@ -21,7 +21,6 @@ class CreateOnibusUrbanoTable extends Migration
 
             $table->integer('lotacao');
             $table->boolean('arCondicionado');
-            $table->bigInteger('frota_id');
 
             $table->timestamps();
         });

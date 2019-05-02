@@ -16,6 +16,11 @@ class Onibus extends Model
         return $this->morphTo();
     }
 
+    public function seguro()
+    {
+        return $this->hasMany('App\SeguroOnibus', 'id', 'onibus_id');
+    }
+
     public function get($id)
     {
         return $this->find($id);

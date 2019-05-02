@@ -19,7 +19,13 @@ class CreateSeguroTable extends Migration
             $table->string('empresa');
             $table->double('valor');
             $table->string('assegura');
-            $table->bigInteger('tipo_id');
+            $table->date('data_inicio');
+            $table->date('data_vigencia');
+            $table->boolean('vigente');
+
+            $table->unsignedBigInteger('tipo_id')->default(0);
+            $table->foreign('tipo_id')->references('id')->on('tipo_seguro');
+
             $table->timestamps();
         });
     }

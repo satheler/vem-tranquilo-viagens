@@ -4,9 +4,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFrotaTable extends Migration
+class SeguroOnibus extends Migration
 {
-    private $databaseName = 'frota';
     /**
      * Run the migrations.
      *
@@ -14,10 +13,15 @@ class CreateFrotaTable extends Migration
      */
     public function up()
     {
-        Schema::create($this->databaseName, function (Blueprint $table) {
+        Schema::create('seguro_onibus', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nome');
-            $table->bigInteger('seguro_id');
+
+            $table->unsignedBigInteger('seguro_id');
+            $table->foreign('seguro_id')->references('id')->on('seguro');
+
+            $table->unsignedBigInteger('onibus_id');
+            $table->foreign('onibus_id')->references('id')->on('onibus');
+
             $table->timestamps();
         });
     }
@@ -29,6 +33,6 @@ class CreateFrotaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists($this->databaseName);
+        Schema::dropIfExists('seguro_onibus');
     }
 }

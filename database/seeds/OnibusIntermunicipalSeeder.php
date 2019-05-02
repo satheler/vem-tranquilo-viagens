@@ -15,7 +15,6 @@ class OnibusIntermunicipalSeeder extends Seeder
         DB::table('onibus_intermunicipal')->insert([
             'id' => 1,
             'categoria' => leito,
-            'frota_id' => 1,
             'valor' => 12,
         ]);
 
