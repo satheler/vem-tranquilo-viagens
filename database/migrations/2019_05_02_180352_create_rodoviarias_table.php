@@ -4,9 +4,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFuncionariosTable extends Migration
+class CreateRodoviariasTable extends Migration
 {
-    private $databaseName = 'funcionarios';
     /**
      * Run the migrations.
      *
@@ -14,14 +13,9 @@ class CreateFuncionariosTable extends Migration
      */
     public function up()
     {
-        Schema::create($this->databaseName, function (Blueprint $table) {
+        Schema::create('rodoviarias', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nome');
-            $table->bigInteger('tipo_id');
-            $table->bigInteger('local_id');
-            $table->bigInteger('cidade_id');
-            
-            
             $table->timestamps();
         });
     }
@@ -33,6 +27,6 @@ class CreateFuncionariosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists($this->databaseName);
+        Schema::dropIfExists('rodoviarias');
     }
 }

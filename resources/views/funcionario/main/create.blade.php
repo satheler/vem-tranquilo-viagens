@@ -41,7 +41,28 @@
                                         <label class="form-control-label" for="form-control-label"> {{__('FUNÇÃO')}} </label>
                                         <select bootstrapSelect name="tipo"  data-size="4" data-live-search="true" required>
                                             <option value="" disabled selected>Selecione uma função...</option>
-                                            @foreach ($lista as $item)
+                                            @foreach ($lista["funcionarios"] as $item)
+                                                <option value="{{ $item->id }}">{{ $item->nome }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">  
+                                    <div class="col-lg-6">
+                                        <label class="form-control-label" for="form-control-label"> {{__('LOCAL')}} </label>
+                                        <select bootstrapSelect name="local"  data-size="4" data-live-search="true" required>
+                                            <option value="" disabled selected>Selecione o local de trabalho...</option>
+                                            @foreach ($lista["rodoviarias"] as $item)
+                                                <option value="{{ $item->id }}">{{ $item->nome }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <label class="form-control-label" for="form-control-label"> {{__('CIDADE')}} </label>
+                                        <select bootstrapSelect name="cidade"  data-size="4" data-live-search="true" required>
+                                            <option value="" disabled selected>Selecione a cidade de trabalho...</option>
+                                            @foreach ($lista['cidades'] as $item)
                                                 <option value="{{ $item->id }}">{{ $item->nome }}</option>
                                             @endforeach
                                         </select>
