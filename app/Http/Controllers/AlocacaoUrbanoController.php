@@ -57,7 +57,7 @@ class AlocacaoUrbanoController extends Controller
         $validator = $alocacao->add($request->input());
 
         if($validator === NULL) {
-            return redirect()->route('alocacao_urbano.index')->withStatus(__('Alocação de Funcionario feita com sucesso.'));
+            return redirect()->route('alocacao_urbano.index')->withStatus(__('Alocação de Funcionario realizada com sucesso.'));
         } else {
             return redirect()
                     ->route('alocacao_urbano.create')
@@ -87,10 +87,21 @@ class AlocacaoUrbanoController extends Controller
      */
     public function edit($id)
     {
+        $trajetosUrbanos = new TrajetoUrbano();
+        $lista["trajetos"] = $trajetosUrbanos->getAll();
+
+        $onibus = new OnibusUrbano();
+        $lista["onibus"] = $onibus->getByCidade(Auth::user()->cidade_id);
+
+        $funcionarios = new Funcionario();
+        $lista["motoristas"] = $funcionarios->getByTipoId(1);
+        $lista["cobradores"] = $funcionarios->getByTipoId(2);
+        $lista["auxiliares"] = $funcionarios->getByTipoId(3);
+
         $alocacao = new AlocacaoUrbano();
-        $listaDeAlocacoes = $alocacao->getAll();
-        $alocacaoEditada = $listaDeAlocacoes[$id];
-        return "Formulario de edição para o".$alocacaoEditada->toJson();
+        $lista["alocacao"] = $alocacao->get($id);
+
+        return view('alocacao.urbano.main.edit', compact('lista'));
     }
 
     /**
@@ -102,14 +113,16 @@ class AlocacaoUrbanoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try {
+        $alocacao = new AlocacaoUrbano();
+        $validator = $alocacao->edit($id, $request->input());
 
-            $alocacaoEditada = new AlocacaoUrbano();
-            $alocacaoEditada->edit($id);
-            return response(["status" => "Alocação de funcionário atualizada com sucesso"], 202);
-
-        } catch (Exception $e) {
-            return response($e->getMessage(), 400);
+        if($validator === NULL) {
+            return redirect()->route('alocacao_urbano.index')->withStatus(__('Alocação de Funcionario editada com sucesso.'));
+        } else {
+            return redirect()
+                    ->route('alocacao_urbano.edit', $id)
+                    ->withErrors($validator)
+                    ->withInput();
         }
     }
 
@@ -122,6 +135,6 @@ class AlocacaoUrbanoController extends Controller
     public function destroy($id)
     {
         $alocacao = new AlocacaoUrbano();
-        return response($alocacao->remove($id), 204);
+        return response($alocacao->inactivate($id), 204);
     }
 }
