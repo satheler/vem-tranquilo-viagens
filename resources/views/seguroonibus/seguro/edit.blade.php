@@ -1,7 +1,7 @@
-@extends('layouts.app', ['title' => __('User Management')])
+@extends('layouts.app', ['title' => __('Editar Seguro')])
 
 @section('content')
-    @include('users.partials.header', ['title' => __('Edit User')])   
+    {{-- @include('seguros.partials.header', ['title' => __('Editar seguro')]) --}}
 
     <div class="container-fluid mt--7">
         <div class="row">
@@ -10,53 +10,49 @@
                     <div class="card-header bg-white border-0">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h3 class="mb-0">{{ __('User Management') }}</h3>
+                                <h3 class="mb-0">{{ __('seguro') }}</h3>
                             </div>
                             <div class="col-4 text-right">
-                                <a href="{{ route('user.index') }}" class="btn btn-sm btn-primary">{{ __('Back to list') }}</a>
+                                <a href="{{ route('seguro.index') }}" class="btn btn-sm btn-primary">{{ __('Back to list') }}</a>
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{ route('user.update', $user) }}" autocomplete="off">
+                        <form method="post" action="{{ route('seguro.update', $lista['seguro']->id) }}" autocomplete="off">
                             @csrf
                             @method('put')
 
-                            <h6 class="heading-small text-muted mb-4">{{ __('User information') }}</h6>
+                            <h6 class="heading-small text-muted mb-4">{{ __('seguro information') }}</h6>
                             <div class="pl-lg-4">
-                                <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="input-name">{{ __('Name') }}</label>
-                                    <input type="text" name="name" id="input-name" class="form-control form-control-alternative{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', $user->name) }}" required autofocus>
+                                <div class="form-group{{ $errors->has('empresa') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="input-empresa">{{ __('empresa') }}</label>
+                                    <input type="text" empresa="empresa" id="input-empresa" class="form-control form-control-alternative{{ $errors->has('empresa') ? ' is-invalid' : '' }}" placeholder="{{ __('empresa') }}" value="{{ old('empresa', $lista['seguro']->empresa) }}" required autofocus>
 
-                                    @if ($errors->has('name'))
+                                    @if ($errors->has('empresa'))
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('name') }}</strong>
+                                            <strong>{{ $errors->first('empresa') }}</strong>
                                         </span>
                                     @endif
                                 </div>
-                                <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="input-email">{{ __('Email') }}</label>
-                                    <input type="email" name="email" id="input-email" class="form-control form-control-alternative{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('Email') }}" value="{{ old('email', $user->email) }}" required>
+                                <div class="form-group{{ $errors->has('valor') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="input-valor">{{ __('valor') }}</label>
+                                    <input type="valor" empresa="valor" id="input-valor" class="form-control form-control-alternative{{ $errors->has('valor') ? ' is-invalid' : '' }}" placeholder="{{ __('valor') }}" value="{{ old('valor', $lista['seguro']->valor) }}" required>
 
-                                    @if ($errors->has('email'))
+                                    @if ($errors->has('valor'))
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('email') }}</strong>
+                                            <strong>{{ $errors->first('valor') }}</strong>
                                         </span>
                                     @endif
                                 </div>
-                                <div class="form-group{{ $errors->has('password') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="input-password">{{ __('Password') }}</label>
-                                    <input type="password" name="password" id="input-password" class="form-control form-control-alternative{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="{{ __('Password') }}" value="">
-                                    
-                                    @if ($errors->has('password'))
+                                <div class="form-group{{ $errors->has('assegura') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="input-assegura">{{ __('assegura') }}</label>
+                                    <input type="assegura" empresa="assegura" id="input-assegura" class="form-control form-control-alternative{{ $errors->has('assegura') ? ' is-invalid' : '' }}" placeholder="{{ __('assegura') }}" value="">
+
+                                    @if ($errors->has('assegura'))
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('password') }}</strong>
+                                            <strong>{{ $errors->first('assegura') }}</strong>
                                         </span>
                                     @endif
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-control-label" for="input-password-confirmation">{{ __('Confirm Password') }}</label>
-                                    <input type="password" name="password_confirmation" id="input-password-confirmation" class="form-control form-control-alternative" placeholder="{{ __('Confirm Password') }}" value="">
                                 </div>
 
                                 <div class="text-center">
@@ -68,7 +64,7 @@
                 </div>
             </div>
         </div>
-        
+
         @include('layouts.footers.auth')
     </div>
 @endsection

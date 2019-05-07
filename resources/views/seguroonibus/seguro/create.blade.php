@@ -25,9 +25,11 @@
                         <form method="post" action="{{ route('seguro.store') }}" autocomplete="off">
                             @csrf
 
-                            <h6 class="heading-small text-muted mb-4">{{ __('Ônibus vinculados ao seguro') }}</h6>
+                            <h6 class="heading-small text-muted mb-4">{{ __('Insira as informações para adicionar o seguro') }}</h6>
                             <div class="pl-lg-4">
                                 <div class="ms-container">
+                                    <label class="form-control-label text-right" for="input-empresa">{{ __('LISTA DE ÔNIBUS') }}</label>
+                                    <label class="form-control-label text-right" for="input-empresa">{{ __('LISTA DE ÔNIBUS ASSEGURADOS') }}</label>
                                     <select multiple="multiple" name="onibus[]">
                                         @foreach ($lista["onibus"] as $item)
                                             <option value="{{ $item->id }}">{{ $item->placa}} - {{ $item->marca }}</option>
@@ -35,7 +37,7 @@
                                     </select>
                                 </div>
 
-                                <div class="row">
+                                <div class="row mt-3">
                                         <div class="col-md-4">
                                             <label class="form-control-label" for="input-empresa">{{ __('EMPRESA') }}</label>
                                             @if ($errors->has('empresa'))
@@ -55,7 +57,7 @@
                                                     </span>
                                                 @endif
                                             <div class="form-group{{ $errors->has('valor') ? ' has-danger' : '' }}">
-                                                <input type="text" km name="valor" id="input-valor" class="form-control form-control-alternative{{ $errors->has('valor') ? ' is-invalid' : '' }}" placeholder="{{ __('Insira o valor...') }}" value="{{ old('valor') }}" required>
+                                                <input type="text" money name="valor" maxlength="10" id="input-valor" class="form-control form-control-alternative{{ $errors->has('valor') ? ' is-invalid' : '' }}" placeholder="{{ __('Insira o valor...') }}" value="{{ old('valor') }}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -102,21 +104,6 @@
                                             </div>
                                         </div>
 
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label class="form-control-label" for="tipo_id"> {{__('TIPO')}} </label>
-                                        <select bootstrapSelect name="tipo_id" data_inicio-size="4" data_inicio-live-search="true" required>
-                                            <option value="{{ old('tipo_id') }}" disabled selected>Selecione o tipo...</option>
-                                            @foreach ($lista["tipo"] as $item)
-                                            <option value="{{ $item->id }}">{{ $item->nome }}</option>
-                                            @endforeach
-                                        </select>
-                                        @if ($errors->has('tipo_id'))
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('tipo_id') }}</strong>
-                                            </span>
-                                        @endif
                                     </div>
 
                                 {{-- END FORM --}}

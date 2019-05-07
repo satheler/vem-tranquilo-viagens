@@ -214,6 +214,16 @@
                     </li>
                 @endif
                 <!-- Gerenciar trajeto :: FIM -->
+
+                <!-- Gerenciar seguros :: INICIO -->
+                @if (@auth()->user()->tipo_usuario_id === 1)
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('seguro.index') }}">
+                        <i class="fas fa-user-cog"></i> {{ __('Gerenciar Seguros') }}
+                    </a>
+                </li>
+                @endif
+                <!-- Gerenciar seguros :: FIM -->
             </ul>
         </div>
     </div>

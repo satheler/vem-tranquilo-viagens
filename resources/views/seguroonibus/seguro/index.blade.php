@@ -33,7 +33,6 @@
                         <th scope="col">{{ __('Assegura') }}</th>
                         <th scope="col">{{ __('Data Inicial') }}</th>
                         <th scope="col">{{ __('Data Vigência') }}</th>
-                        <th scope="col">{{ __('Tipo') }}</th>
                         <th scope="col">Ações</th>
                     </tr>
                 </thead>
@@ -50,7 +49,6 @@
                             <td>{{ $item->assegura }}</td>
                             <td>{{ $item->data_inicio }}</td>
                             <td>{{ $item->data_vigencia }}</td>
-                            <td>{{ $item->tipo->nome }}</td>
 
                             <td class="text-right">
                                 <div class="dropdown">
@@ -58,7 +56,7 @@
                                         <i class="fas fa-ellipsis-v"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                        <a class="dropdown-item" data-remove-id="{{ $item->id }}" href="#">{{ __('Editar') }}</a>
+                                        <a class="dropdown-item" href="{{ \Request::url() }}/{{ $item->id }}/edit">{{ __('Editar') }}</a>
                                     </div>
                                 </div>
                             </td>
