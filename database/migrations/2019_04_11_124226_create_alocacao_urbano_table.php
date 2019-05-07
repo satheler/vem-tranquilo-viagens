@@ -36,6 +36,8 @@ class CreateAlocacaoUrbanoTable extends Migration
             $table->time('horarioInicio');
             $table->time('horarioFim');
 
+            $table->boolean('ativo')->default(true);
+
             $table->timestamps();
         });
     }
