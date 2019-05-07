@@ -113,10 +113,9 @@ async function vaiParaManutencao() {
 
 Swal.mixin({
   input: 'text',
-  confirmButtonText: 'Próximo &rarr;',
+  confirmButtonText: 'Confirmar &rarr;',
   cancelButtonText: 'Cancelar',
-  showCancelButton: true,
-  progressSteps: ['1', '2']
+  showCancelButton: true
 }).queue([
   {
     title: 'Descrição',
@@ -132,33 +131,33 @@ Swal.mixin({
             }
         },
   },
-  {
-    onOpen: () => {
-        $('[money]').mask('###0.00', { reverse: true });
-    },
-    title: 'Valor',
-    text: 'Insira o valor total da  manutenção?',
-    input: 'text',
-        inputAttributes: {
-            autocapitalize: 'off', 
-            money: ''
-        },
-        inputPlaceholder: '0,00',
-        inputValidator: (value) => {
-            if (!value) {
-            return 'Este campo não pode ser vazio!'
-            }
-        },
-  },
+//   {
+//     onOpen: () => {
+//         $('[money]').mask('###0.00', { reverse: true });
+//     },
+//     title: 'Valor',
+//     text: 'Insira o valor total da  manutenção?',
+//     input: 'text',
+//         inputAttributes: {
+//             autocapitalize: 'off', 
+//             money: ''
+//         },
+//         inputPlaceholder: '0,00',
+//         inputValidator: (value) => {
+//             if (!value) {
+//             return 'Este campo não pode ser vazio!'
+//             }
+//         },
+//   },
 ]).then(data => {
 
     if(data.dismiss) {
         return
     }
-        axios.put(`${url}/${id}`, {
+        console.log("Estou em manutenção e preciso de outro modal");
+        axios.put(`${url}/${id}`, {       
             goManutencao: true,
-            motivo: data.value[0],
-            valor: data.value[1]
+            motivo: data.value[0]
         })
         .then(data => {
             Swal.fire('Estado do Ônibus alterado com sucesso!', '', 'success')

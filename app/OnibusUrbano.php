@@ -73,9 +73,9 @@ class OnibusUrbano extends Model
     {
         $validator = Validator::make($input, [
             'motivo' => 'required|string',
-            'valor' => 'required|numeric',
+            // 'valor' => 'required|numeric',
         ]);
-
+        
         if ($validator->fails()) {
             return $validator;
         }
@@ -86,7 +86,7 @@ class OnibusUrbano extends Model
         
         $registro = new RegistroManutencao();
         $registro->motivo = $input['motivo'];
-        $registro->valor = $input['valor'];
+        // $registro->valor = $input['valor'];
         
         $onibus->manutencoes()->save($registro);
         $onibus->description()->save($description);
