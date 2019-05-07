@@ -21,8 +21,6 @@
                         <form method="post" action="{{ route('alocacao_urbano.store') }}" autocomplete="off">
                             @csrf
 
-                            {{ $errors }}
-
                             <h6 class="heading-small text-muted mb-4">{{ __('Informações da alocação') }}</h6>
                             <div class="pl-lg-12">
                                 <div class="row clearfix justify-content-center">
@@ -72,43 +70,56 @@
                                 </div>
 
                                 <div class="row clearfix">
-                                    <div class="col-lg-3">
-                                        <label class="form-control-label" for="form-control-label"> {{__('ONIBUS')}} </label>
+                                    <div class="col-lg-3 form-group{{ $errors->has('onibus') ? ' has-danger' : '' }}">
+                                        <label class="form-control-label{{ $errors->has('onibus') ? ' text-warning' : '' }}" for="form-control-label"> {{__('ONIBUS')}}</label>
                                         <select bootstrapSelect name="onibus"  data-size="4" data-live-search="true" required>
                                             <option value="" disabled selected>Selecione o ônibus...</option>
                                             @foreach ($lista["onibus"] as $item)
                                                 <option @if($errors->has('onibus') && ($errors->first('onibus') == $item->id) || old('onibus') == $item->id) selected @endif value="{{ $item->id }}">{{ $item->description->placa }}</option>
                                                 @endforeach
                                             </select>
+                                            @if ($errors->has('onibus'))
+                                                <label class="form-control-label invalid-feedback" for="form-control-label"> {{ $errors->first('onibus') }} </label>
+                                            @endif
                                         </div>
-                                        <div class="col-lg-3">
-                                            <label class="form-control-label" for="form-control-label"> {{__('MOTORISTA')}} </label>
-                                            <select bootstrapSelect name="motorista"  data-size="4" data-live-search="true" required>
+
+                                        <div class="col-lg-3 form-group{{ $errors->has('motorista_id') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label{{ $errors->has('motorista_id') ? ' text-warning' : '' }}" for="form-control-label"> {{__('MOTORISTA')}} </label>
+                                            <select bootstrapSelect name="motorista_id"  data-size="4" data-live-search="true" required>
                                                 <option value="" disabled selected>Selecione o motorista...</option>
                                                 @foreach ($lista["motoristas"] as $item)
-                                                <option @if($errors->has('motorista') && ($errors->first('motorista') == $item->id) || old('motorista') == $item->id) selected @endif value="{{ $item->id }}">{{ $item->nome }}</option>
+                                                <option @if($errors->has('motorista_id') && ($errors->first('motorista_id') == $item->id) || old('motorista_id') == $item->id) selected @endif value="{{ $item->id }}">{{ $item->nome }}</option>
                                                 @endforeach
                                             </select>
+                                            @if ($errors->has('motorista_id'))
+                                                <label class="form-control-label invalid-feedback" for="form-control-label"> {{ $errors->first('motorista_id') }} </label>
+                                            @endif
                                         </div>
 
                                         <div class="col-lg-3">
-                                            <label class="form-control-label" for="form-control-label"> {{__('COBRADOR')}} </label>
-                                            <select bootstrapSelect name="cobrador"  data-size="4" data-live-search="true" required>
+                                            <label class="form-control-label{{ $errors->has('cobrador_id') ? ' text-warning' : '' }}" for="form-control-label"> {{__('COBRADOR')}} </label>
+                                            <select bootstrapSelect name="cobrador_id"  data-size="4" data-live-search="true" required>
                                                 <option value="" disabled selected>Selecione o cobrador...</option>
                                                 @foreach ($lista["cobradores"] as $item)
-                                                <option @if($errors->has('cobrador') && ($errors->first('cobrador') == $item->id) || old('cobrador') == $item->id) selected @endif value="{{ $item->id }}">{{ $item->nome }}</option>
+                                                <option @if($errors->has('cobrador_id') && ($errors->first('cobrador_id') == $item->id) || old('cobrador_id') == $item->id) selected @endif value="{{ $item->id }}">{{ $item->nome }}</option>
                                                 @endforeach
                                             </select>
+                                            @if ($errors->has('cobrador_id'))
+                                                <label class="form-control-label invalid-feedback" for="form-control-label"> {{ $errors->first('cobrador_id') }} </label>
+                                            @endif
                                         </div>
 
                                         <div class="col-lg-3">
-                                            <label class="form-control-label" for="form-control-label"> {{__('AUXILIAR')}} </label>
-                                            <select bootstrapSelect name="auxiliar"  data-size="4" data-live-search="true">
-                                                <option value="" disabled selected>Selecione o auxilar...</option>
+                                            <label class="form-control-label{{ $errors->has('auxiliar_id') ? ' text-warning' : '' }}" for="form-control-label"> {{__('AUXILIAR')}} </label>
+                                            <select bootstrapSelect name="auxiliar_id"  data-size="4" data-live-search="true">
+                                                <option value selected>Selecione o auxilar...</option>
                                                 @foreach ($lista["auxiliares"] as $item)
-                                                <option @if($errors->has('auxiliar') && ($errors->first('auxiliar') == $item->id) || old('auxiliar') == $item->id) selected @endif value="{{ $item->id }}">{{ $item->nome }}</option>
+                                                <option @if($errors->has('auxiliar_id') && ($errors->first('auxiliar_id') == $item->id) || old('auxiliar_id') == $item->id) selected @endif value="{{ $item->id }}">{{ $item->nome }}</option>
                                                 @endforeach
                                         </select>
+                                        @if ($errors->has('auxiliar_id'))
+                                                <label class="form-control-label invalid-feedback" for="form-control-label"> {{ $errors->first('auxiliar_id') }} </label>
+                                            @endif
                                     </div>
                                 </div>
 

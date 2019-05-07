@@ -45,7 +45,7 @@ $('[data-remove-id]').on('click', async function () {
     let id = $(this).data('remove-id');
 
     let response = await Swal.fire({
-        title: 'Você tem certeza que deseja remover este funcionário?',
+        title: 'Você tem certeza que deseja inativar esta alocação?',
         type: 'question',
         showCancelButton: true,
         confirmButtonColor: '#28a745',
@@ -59,7 +59,7 @@ $('[data-remove-id]').on('click', async function () {
         .then(data => {
             table.row(`[data-table-row-id="${id}"]`).remove();
             table.draw();
-            Swal.fire('Funcionário removido com sucesso!', '', 'success')
+            Swal.fire('Alocação inativada com sucesso!', '', 'success')
             console.log(data);
         })
         .catch((error) => {
