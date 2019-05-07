@@ -10,10 +10,6 @@ class Seguro extends Model
 {
     protected $table = 'seguro';
 
-    public function tipo() {
-        return $this->hasOne('App\TipoSeguro', 'id', 'tipo_id');
-    }
-
     public function onibus() {
         return $this->belongsToMany('App\Onibus', 'seguro_onibus', 'seguro_id', 'onibus_id');
     }
@@ -24,20 +20,21 @@ class Seguro extends Model
     }
 
     public function get(int $id){
-        $seguro = $this->find($id);
-        return $seguro;
+        return $this->find($id);
     }
 
     public function add(array $input)
     {
+
         $validator = Validator::make($input, [
             'empresa' => 'required|string',
             'valor' => 'required|numeric|min:0.01',
             'assegura' => 'required|string',
             'data_vigencia' => 'required|date_format:d/m/Y|after:'. now()->format('d/m/Y'),
             'data_inicio' => 'required|date_format:d/m/Y|before:data_vigencia',
-            'tipo_id' => 'required|exists:tipo_seguro,id',
-            'onibus' => 'required|array'
+            'onibus' => 'required|array',
+            'onibus' => 'unique:seguro_onibus,onibus_id'
+
 
         ]);
 
@@ -46,7 +43,6 @@ class Seguro extends Model
         }
 
         $this->empresa = $input['empresa'];
-        $this->tipo_id = $input['tipo_id'];
         $this->valor = $input['valor'];
         $this->assegura = $input['assegura'];
 
@@ -74,7 +70,6 @@ class Seguro extends Model
             'data_vigencia' => 'required|date_format:d/m/Y|after:'. now()->format('d/m/Y'),
             'data_inicio' => 'required|date_format:d/m/Y|before:data_vigencia',
             'assegura' => 'required|string',
-            'tipo_id' => 'required|exists:tipo_seguro,id'
         ]);
 
         if ($validator->fails()) {
@@ -84,7 +79,6 @@ class Seguro extends Model
         $seguro->empresa = $input['empresa'];
         $seguro->valor = $input['valor'];
         $seguro->assegura = $input['assegura'];
-        $seguro->tipo_id = $input['tipo_id'];
 
         $dataConverterInicio = date_create_from_format('d/m/Y', $input['data_inicio']);
         $this->data_inicio = $dataConverterInicio->format('Y-m-d');

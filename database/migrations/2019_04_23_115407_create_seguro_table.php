@@ -23,9 +23,6 @@ class CreateSeguroTable extends Migration
             $table->date('data_vigencia');
             $table->boolean('vigente');
 
-            $table->unsignedBigInteger('tipo_id')->default(0);
-            $table->foreign('tipo_id')->references('id')->on('tipo_seguro');
-
             $table->timestamps();
         });
     }

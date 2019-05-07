@@ -32,9 +32,7 @@ class SeguroController extends Controller
     public function create()
     {
         $onibus = new Onibus();
-        $tipo = new TipoSeguro();
         $lista["onibus"] = $onibus->getAll();
-        $lista["tipo"] = $tipo->getAll();
         return view('seguroonibus.seguro.create', compact('lista'));
     }
 
@@ -83,7 +81,11 @@ class SeguroController extends Controller
      */
     public function edit($id)
     {
-        //
+        $seguro = new Seguro();
+        $onibus = new Onibus();
+        $lista["onibus"] = $onibus->getAll();
+        $lista["seguro"] = $seguro->get($id);
+        return view('seguroonibus.seguro.edit', compact('lista'));
     }
 
     /**
@@ -95,7 +97,20 @@ class SeguroController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+
+            $seguro = new Seguro();
+            $seguro->edit($id);
+
+            if($validator == NULL) {
+
+                return redirect()->route('seguro.index')->withStatus(__('Seguro editado com sucesso.'));
+            } else {
+                return redirect()
+                        ->route('seguro.edit')
+                        ->withErrors($validator)
+                        ->withInput();
+            }
     }
 
     /**
