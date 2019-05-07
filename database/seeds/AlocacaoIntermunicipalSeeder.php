@@ -11,6 +11,6 @@ class AlocacaoIntermunicipalSeeder extends Seeder
      */
     public function run()
     {
-        //
+
     }
 }

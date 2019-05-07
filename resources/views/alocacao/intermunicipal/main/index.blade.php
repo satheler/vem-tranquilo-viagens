@@ -1,13 +1,13 @@
-@extends('frotas.index', ['title' => __('Trajeto Urbano')])
+@extends('alocacao.intermunicipal.index', ['title' => __('Alocação de funcionários em trajetos intermunicipais')])
 
 @section('infos')
     <div class="card-header border-0">
         <div class="row align-items-center">
             <div class="col-8">
-                <h3 class="mb-0">{{ __('Trajeto Urbano') }} - {{ Auth::user()->cidade->nome }}</h3>
+                <h3 class="mb-0">{{ __('Alocação de funcionários em trajetos intermunicipais') }}</h3>
             </div>
             <div class="col-4 text-right">
-                <a href="{{ route('trajeto_urbano.create') }}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Adicionar Trajeto Urbano"><i class="fas fa-plus"></i></a>
+                <a href="{{ route('funcionario.create') }}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Adicionar Funcionário"><i class="fas fa-plus"></i></a>
             </div>
         </div>
     </div>
@@ -26,26 +26,16 @@
             <table id="datatable-basic" class="table align-items-center table-flush dataTable">
                 <thead class="thead-light">
                     <tr>
-                        <th scope="col"></th>
-                        <th scope="col">{{ __('Terminal') }}</th>
-                        <th scope="col">{{ __('Quilometragem do percurso') }}</th>
-                        <th scope="col">{{ __('Horario saída') }}</th>
-                        <th scope="col">{{ __('Horario chegada') }}</th>
-                        <th scope="col">Ações</th>
+                        <th width="45%" scope="col">{{ __('Nome') }}</th>
+                        <th width="45%" scope="col">{{ __('Tipo') }}</th>
+                        <th width="10%" scope="col">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($lista as $item)
                         <tr data-table-row-id={{ $item->id }}>
-                            <td>
-                                <button data-show-id={{ $item->id }} class="btn btn-icon btn-sm btn-primary" type="button">
-                                    <span class="btn-inner--icon"><i class="ni ni-single-copy-04"></i></span>
-                                </button>
-                            </td>
-                            <td>{{ $item->terminal }}</td>
-                            <td>{{ sprintf('%.2f', $item->quilometragem) }} km</td>
-                            <td>{{ $item->horarioSaida }}</td>
-                            <td>{{ $item->horarioChegada }}</td>
+                            <td>{{ $item->nome }}</td>
+                            <td>{{ $item->tipo->nome }}</td>
 
                             <td align="center">
                                 <div class="dropdown">

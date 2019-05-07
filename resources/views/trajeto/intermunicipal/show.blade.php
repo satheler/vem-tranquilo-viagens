@@ -8,7 +8,7 @@
                     <h5 class="checklist-title">Cidade de origem: <span> {{ $trecho->origem->nome }} </span></h5>
                 </div>
                 <div class="col-md-6">
-                    <h5 class="checklist-title">Horário de saida: <span> {{ $trecho->horarioSaida }} </span></h5>
+                    <h5 class="checklist-title">Horário de saida: <span> {{ $trecho->pivot->horarioSaida }} </span></h5>
                 </div>
             </div>
 
@@ -17,7 +17,7 @@
                     <h5 class="checklist-title">Cidade de destino: <span> {{ $trecho->destino->nome }} </span></h5>
                 </div>
                 <div class="col-md-6">
-                    <h5 class="checklist-title">Horário de chegada: <span> {{ $trecho->horarioChegada }} </span></h5>
+                    <h5 class="checklist-title">Horário de chegada: <span> {{ $trecho->pivot->horarioChegada }} </span></h5>
                 </div>
             </div>
         </li>

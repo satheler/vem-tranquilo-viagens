@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\OnibusUrbano;
+use App\Cidade;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,9 @@ class OnibusUrbanoController extends Controller
      */
     public function create()
     {
-        return view('frotas.urbano.create');
+        $cidades = new Cidade();
+        $lista["cidade"] = $cidades->getAll();
+        return view('frotas.urbano.create', compact('lista'));
         // return "Formulário cadastro";
         //return view('cadastroOnibusUrbano');
     }

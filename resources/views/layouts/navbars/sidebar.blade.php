@@ -214,6 +214,37 @@
                     </li>
                 @endif
                 <!-- Gerenciar trajeto :: FIM -->
+
+                <!-- Gerenciar alocação :: INICIO -->
+                @if (@auth()->user()->tipo_usuario_id === 1 || @auth()->user()->tipo_usuario_id === 2 )
+                    <li class="nav-item">
+                        <a class="nav-link" href="#navbar-alocacao" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
+                            <i class="fas fa-link"></i>
+                            <span class="nav-link-text">{{ __('Gerenciar alocação de funcionários') }}</span>
+                        </a>
+
+                        <div class="collapse" id="navbar-alocacao">
+                            <ul class="nav nav-sm flex-column">
+                                @if (@auth()->user()->tipo_usuario_id === 2)
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('alocacao_urbano.index') }}">
+                                            {{ __('Alocação Urbano') }}
+                                        </a>
+                                    </li>
+                                @endif
+                                @if (@auth()->user()->tipo_usuario_id === 1)
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('alocacao_intermunicipal.index') }}">
+                                            {{ __('Alocação Intermunicipal') }}
+                                        </a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </div>
+                    </li>
+                @endif
+                <!-- Gerenciar alocação :: FIM -->
+
             </ul>
         </div>
     </div>

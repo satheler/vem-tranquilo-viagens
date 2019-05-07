@@ -1,7 +1,7 @@
 @extends('layouts.app', ['title' => __('Adicionar Trajeto Urbano')])
 
 @section('content')
-    @include('users.partials.header', ['title' => __('Adicionar Trajeto Urbano')])
+    @include('users.partials.header', ['title' => __('Adicionar Trajeto Urbano - ' . Auth::user()->cidade->nome)])
 
     <div class="container-fluid mt--7">
         <div class="row">
@@ -23,32 +23,36 @@
 
                             <h6 class="heading-small text-muted mb-4">{{ __('Informações do trajeto') }}</h6>
                             <div class="pl-lg-4">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-3">
+                                        <div class="form-group{{ $errors->has('quilometragem') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label" for="input-quilometragem">{{ __('QUILOMETRAGEM') }}</label>
+                                            <input type="text" km name="quilometragem" id="input-quilometragem" class="form-control form-control-alternative{{ $errors->has('quilometragem') ? ' is-invalid' : '' }}" placeholder="Insira o quilometragem da passagem" value="{{ old('quilometragem') }}" required autofocus>
+
+                                            @if ($errors->has('quilometragem'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('quilometragem') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group{{ $errors->has('qntParadas') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label" for="input-qntParadas">{{ __('QUANTIDADE DE PARADAS') }}</label>
+                                            <input type="number" name="qntParadas" id="input-qntParadas" class="form-control form-control-alternative{{ $errors->has('Quantidade de Paradas') ? ' is-invalid' : '' }}" placeholder="{{ __('Quantidade de Paradas') }}" value="{{ old('qntParadas') }}" required autofocus>
+
+                                            @if ($errors->has('qntParadas'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('qntParadas') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group{{ $errors->has('origem') ? ' has-danger' : '' }}">
-                                            <label class="form-control-label" for="input-origem">{{ __('ORIGEM') }}</label>
-                                            <input type="text" name="origem_id" id="input-origem" class="form-control form-control-alternative{{ $errors->has('origem') ? ' is-invalid' : '' }}" placeholder="{{ __('Origem') }}" value="{{ old('Origem') }}" required autofocus>
-
-                                            @if ($errors->has('origem'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('Origem') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group{{ $errors->has('destino') ? ' has-danger' : '' }}">
-                                            <label class="form-control-label" for="input-destino">{{ __('DESTINO') }}</label>
-                                            <input type="text" name="destino_id" id="input-destino" class="form-control form-control-alternative{{ $errors->has('destino') ? ' is-invalid' : '' }}" placeholder="{{ __('Destino') }}" value="{{ old('Destino') }}" required autofocus>
-
-                                            @if ($errors->has('destino'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('Destino') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="form-group{{ $errors->has('terminal') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-terminal">{{ __('TERMINAL') }}</label>
                                             <input type="text" name="terminal" id="input-terminal" class="form-control form-control-alternative{{ $errors->has('terminal') ? ' is-invalid' : '' }}" placeholder="{{ __('Terminal') }}" value="{{ old('terminal') }}" required autofocus>
@@ -60,32 +64,7 @@
                                             @endif
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="form-group{{ $errors->has('valor') ? ' has-danger' : '' }}">
-                                            <label class="form-control-label" for="input-valor">{{ __('VALOR') }}</label>
-                                            <input type="text" money name="valor" id="input-valor" class="form-control form-control-alternative{{ $errors->has('Valor') ? ' is-invalid' : '' }}" placeholder="{{ __('Valor') }}" value="{{ old('Valor') }}" required autofocus>
 
-                                            @if ($errors->has('valor'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('Valor') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group{{ $errors->has('qntParadas') ? ' has-danger' : '' }}">
-                                            <label class="form-control-label" for="input-qntParadas">{{ __('QUANTIDADE DE PARADAS') }}</label>
-                                            <input type="number" name="qntParadas" id="input-qntParadas" class="form-control form-control-alternative{{ $errors->has('Quantidade de Paradas') ? ' is-invalid' : '' }}" placeholder="{{ __('Quantidade de Paradas') }}" value="{{ old('Quantidade de Paradas') }}" required autofocus>
-
-                                            @if ($errors->has('qntParadas'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('qntParadas') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
                                     <div class="col-md-3">
                                         <label class="form-control-label" for="input-horarioSaida">{{ __('HORÁRIO DE SAÍDA') }}</label>
                                         <div class="form-group">
@@ -93,7 +72,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="far fa-clock"></i></span>
                                                 </div>
-                                                <input time name='horarioSaida' class="form-control timepicker" placeholder="Selecione o horário de saída" type="text" value="">
+                                                <input time name='horarioSaida' class="form-control timepicker" placeholder="Selecione o horário de saída" type="text" value="{{ old('horarioSaida') }}" required>
                                             </div>
                                         </div>
                                     </div>
@@ -104,7 +83,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="far fa-clock"></i></span>
                                                 </div>
-                                                <input time name='horarioChegada' class="form-control timepicker" placeholder="Selecione o horário de chegada" type="text" value="">
+                                                <input time name='horarioChegada' class="form-control timepicker" placeholder="Selecione o horário de chegada" type="text" value="{{ old('horarioChegada') }}" required>
                                             </div>
                                         </div>
                                     </div>
@@ -131,8 +110,8 @@
 
     <script>
         $(document).ready(function(){
-            $('[time]').mask('00:00:00', {placeholder: "__:__:__"});
-            $('[money]').mask('#.##0,00', {reverse: true});
+            $('[time]').mask('00:00', {placeholder: "__:__"});
+            $('[km]').mask('###0.0', {reverse: true});
         })
     </script>
 @endpush

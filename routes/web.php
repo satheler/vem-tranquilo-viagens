@@ -34,6 +34,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::prefix('trajeto')->name('trajeto_')->group(function () {
         Route::resource('urbano', 'TrajetoUrbanoController');
         Route::resource('intermunicipal', 'TrajetoIntermunicipalController');
+        Route::get('intermunicipal/create/prepare', 'TrajetoIntermunicipalController@prepareCreate')->name('intermunicipal.create.prepare');
+        Route::get('intermunicipal/create/{qntTrechos}', 'TrajetoIntermunicipalController@create');
         Route::resource('trecho', 'TrechoController');
     });
 

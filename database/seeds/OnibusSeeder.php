@@ -15,6 +15,7 @@ class OnibusSeeder extends Seeder
         DB::table('onibus_urbano')->insert([
             'id' => 1,
             'lotacao' => 50,
+            'cidade_id' => 1,
             'arCondicionado' => false,
         ]);
 
@@ -36,6 +37,7 @@ class OnibusSeeder extends Seeder
         DB::table('onibus_urbano')->insert([
             'id' => 2,
             'lotacao' => 25,
+            'cidade_id' => 2,
             'arCondicionado' => false,
         ]);
 

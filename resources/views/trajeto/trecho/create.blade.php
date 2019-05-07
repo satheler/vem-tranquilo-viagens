@@ -23,38 +23,35 @@
 
                             <h6 class="heading-small text-muted mb-4">{{ __('Informações do trecho') }}</h6>
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <label class="form-control-label" for="origem_id"> {{__('ORIGEM')}} </label>
-                                        <select bootstrapSelect name="origem_id" data-size="4" data-live-search="true" required>
-                                            <option value="{{ old('origem_id') }}" disabled selected>Selecione a origem...</option>
+                                    <div class="col-md-4">
+                                        <label class="form-control-label" for="origem"> {{__('ORIGEM')}} </label>
+                                        <select bootstrapSelect name="origem" data-size="4" data-live-search="true" required>
+                                            <option value="{{ old('origem') }}" disabled @if(!$errors->has('origem')) selected @endif>Selecione a origem...</option>
                                             @foreach ($lista as $item)
-                                            <option value="{{ $item->id }}">{{ $item->nome }}</option>
+                                            <option @if($errors->has('origem') && ($errors->first('origem') == $item->id)) selected @endif value="{{ $item->id }}">{{ $item->nome }}</option>
                                             @endforeach
                                         </select>
-                                        @if ($errors->has('origem_id'))
+                                        @if ($errors->has('origem'))
                                             <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('origem_id') }}</strong>
+                                                <strong>{{ $errors->first('origem') }}</strong>
                                             </span>
                                         @endif
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <label class="form-control-label" for="destino_id"> {{__('DESTINO')}} </label>
-                                        <select bootstrapSelect name="destino_id" data-size="4" data-live-search="true" required>
-                                            <option value="{{ old('destino_id') }}" disabled selected>Selecione o destino...</option>
+                                    <div class="col-md-4">
+                                        <label class="form-control-label" for="destino"> {{__('DESTINO')}} </label>
+                                        <select bootstrapSelect name="destino" data-size="4" data-live-search="true" required>
+                                            <option value="{{ old('destino') }}" disabled @if(!$errors->has('destino')) selected @endif>Selecione o destino...</option>
                                             @foreach ($lista as $item)
-                                            <option value="{{ $item->id }}">{{ $item->nome }}</option>
+                                            <option @if($errors->has('destino') && ($errors->first('destino') == $item->id)) selected @endif value="{{ $item->id }}">{{ $item->nome }}</option>
                                             @endforeach
                                         </select>
-                                        @if ($errors->has('destino_id'))
+                                        @if ($errors->has('destino'))
                                             <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('destino_id') }}</strong>
+                                                <strong>{{ $errors->first('destino') }}</strong>
                                             </span>
                                         @endif
                                     </div>
-                                </div>
-                                <br />
-                                <div class="row">
                                     <div class="col-md-4">
                                         <label class="form-control-label" for="input-quilometragem">{{ __('QUILOMETRAGEM') }}</label>
                                         @if ($errors->has('quilometragem'))
@@ -66,28 +63,7 @@
                                             <input type="text" km name="quilometragem" id="input-quilometragem" class="form-control form-control-alternative{{ $errors->has('quilometragem') ? ' is-invalid' : '' }}" placeholder="{{ __('Insira a quilometragem...') }}" value="{{ old('quilometragem') }}" required>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <label class="form-control-label" for="input-horarioSaida">{{ __('HORÁRIO DE SAÍDA') }}</label>
-                                        <div class="form-group">
-                                            <div class="input-group input-group-alternative">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="far fa-clock"></i></span>
-                                                </div>
-                                                <input time name='horarioSaida' placeholder="__:__" class="form-control" placeholder="Selecione o horário de saída" type="text" value="{{ old('horarioSaida') }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label class="form-control-label" for="input-horarioChegada">{{ __('HORÁRIO DE CHEGADA') }}</label>
-                                        <div class="form-group">
-                                            <div class="input-group input-group-alternative">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="far fa-clock"></i></span>
-                                                </div>
-                                                <input time name='horarioChegada' placeholder="__:__" class="form-control" type="text" value="{{ old('horarioChegada') }}">
-                                            </div>
-                                        </div>
-                                    </div>
+
                                 </div>
 
                                 {{-- END FORM --}}
@@ -110,7 +86,6 @@
 
 <script>
     $(document).ready(function(){
-        $('[time]').mask('00:00');
         $('[km]').mask('###0.0', {reverse: true});
     })
     </script>

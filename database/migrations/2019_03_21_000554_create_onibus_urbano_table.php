@@ -22,6 +22,9 @@ class CreateOnibusUrbanoTable extends Migration
             $table->integer('lotacao');
             $table->boolean('arCondicionado');
 
+            $table->unsignedBigInteger('cidade_id');
+            $table->foreign('cidade_id')->references('id')->on('cidades');
+
             $table->timestamps();
         });
     }

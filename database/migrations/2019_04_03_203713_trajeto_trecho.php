@@ -18,7 +18,13 @@ class TrajetoTrecho extends Migration
             $table->bigIncrements('id');
 
             $table->bigInteger('trajeto_id')->unsigned();
+            $table->foreign('trajeto_id')->references('id')->on('trajeto_intermunicipal');
+
             $table->bigInteger('trecho_id')->unsigned();
+            $table->foreign('trecho_id')->references('id')->on('trajeto_trecho');
+
+            $table->time('horarioSaida');
+            $table->time('horarioChegada');
 
             $table->timestamps();
         });
