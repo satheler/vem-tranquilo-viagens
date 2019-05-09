@@ -89,7 +89,7 @@
                                             <select bootstrapSelect name="motorista_id"  data-size="4" data-live-search="true" required>
                                                 <option value="" disabled selected>Selecione o motorista...</option>
                                                 @foreach ($lista["motoristas"] as $item)
-                                                <option @if($errors->has('motorista_id') && ($errors->first('motorista_id') == $item->id) || old('motorista_id', $lista["alocacao"]->motorista->id) == $item->id) selected @endif value="{{ $item->id }}">{{ $item->nome }}</option>
+                                                <option @if($errors->has('motorista_id') && ($errors->first('motorista_id') == $item->id) || old('motorista_id', $lista["alocacao"]->motorista_id) == $item->id) selected @endif value="{{ $item->id }}">{{ $item->nome }}</option>
                                                 @endforeach
                                             </select>
                                             @if ($errors->has('motorista_id'))
@@ -102,7 +102,7 @@
                                             <select bootstrapSelect name="cobrador_id"  data-size="4" data-live-search="true" required>
                                                 <option value="" disabled selected>Selecione o cobrador...</option>
                                                 @foreach ($lista["cobradores"] as $item)
-                                                <option @if($errors->has('cobrador_id') && ($errors->first('cobrador_id') == $item->id) || old('cobrador_id', $lista["alocacao"]->cobrador->id) == $item->id) selected @endif value="{{ $item->id }}">{{ $item->nome }}</option>
+                                                <option @if($errors->has('cobrador_id') && ($errors->first('cobrador_id') == $item->id) || old('cobrador_id', $lista["alocacao"]->cobrador_id) == $item->id) selected @endif value="{{ $item->id }}">{{ $item->nome }}</option>
                                                 @endforeach
                                             </select>
                                             @if ($errors->has('cobrador_id'))
@@ -115,7 +115,7 @@
                                             <select bootstrapSelect name="auxiliar_id"  data-size="4" data-live-search="true">
                                                 <option value selected>Selecione o auxilar...</option>
                                                 @foreach ($lista["auxiliares"] as $item)
-                                                <option @if($errors->has('auxiliar_id') && ($errors->first('auxiliar_id') == $item->id) || old('auxiliar_id', $lista["alocacao"]->auxiliar->id) == $item->id) selected @endif value="{{ $item->id }}">{{ $item->nome }}</option>
+                                                <option @if($errors->has('auxiliar_id') && ($errors->first('auxiliar_id') == $item->id) || old('auxiliar_id', $lista["alocacao"]->auxiliar_id) == $item->id) selected @endif value="{{ $item->id }}">{{ $item->nome }}</option>
                                                 @endforeach
                                         </select>
                                         @if ($errors->has('auxiliar_id'))
