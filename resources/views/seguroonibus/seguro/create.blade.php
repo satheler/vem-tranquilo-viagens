@@ -28,13 +28,25 @@
                             <h6 class="heading-small text-muted mb-4">{{ __('Insira as informações para adicionar o seguro') }}</h6>
                             <div class="pl-lg-4">
                                 <div class="ms-container">
-                                    <label class="form-control-label text-right" for="input-empresa">{{ __('LISTA DE ÔNIBUS') }}</label>
-                                    <label class="form-control-label text-right" for="input-empresa">{{ __('LISTA DE ÔNIBUS ASSEGURADOS') }}</label>
+                                        <div class="row clearfix">
+                                                <div class="col-md-6">
+                                                    <label class="form-control-label text-right" for="input-empresa">{{ __('LISTA DE ÔNIBUS') }}</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-control-label text-right" for="input-empresa">{{ __('LISTA DE ÔNIBUS ASSEGURADOS') }}</label>
+                                                </div>
+                                            </div>
+
                                     <select multiple="multiple" name="onibus[]">
                                         @foreach ($lista["onibus"] as $item)
                                             <option value="{{ $item->id }}">{{ $item->placa}} - {{ $item->marca }}</option>
                                         @endforeach
                                     </select>
+                                    @if ($errors->has('onibus'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('onibus') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
 
                                 <div class="row mt-3">

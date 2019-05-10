@@ -7,7 +7,7 @@
                 <h3 class="mb-0">{{ __('Lista de Seguros') }}</h3>
             </div>
             <div class="col-4 text-right">
-                <a href="{{ route('seguro.create') }}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Adicionar Trecho"><i class="fas fa-plus"></i></a>
+                <a href="{{ route('seguro.create') }}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Adicionar Seguro"><i class="fas fa-plus"></i></a>
             </div>
         </div>
     </div>
