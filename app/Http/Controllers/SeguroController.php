@@ -32,7 +32,16 @@ class SeguroController extends Controller
     public function create()
     {
         $onibus = new Onibus();
+        $seguro = new Seguro();
         $lista["onibus"] = $onibus->getAll();
+        $listaSeguro = $seguro->getAll();
+
+        foreach ($lista["onibus"] as $itemOnibus) {
+            foreach ($listaSeguro as $itemSeguro) {
+                $itemSeguro->disable($itemSeguro->id);
+            }
+        }
+
         return view('seguroonibus.seguro.create', compact('lista'));
     }
 
@@ -46,6 +55,7 @@ class SeguroController extends Controller
     {
         $seguro = new Seguro();
         $validator = $seguro->add($request->input());
+
 
         if($validator == NULL) {
 
@@ -81,10 +91,29 @@ class SeguroController extends Controller
      */
     public function edit($id)
     {
+
         $seguro = new Seguro();
         $onibus = new Onibus();
         $lista["onibus"] = $onibus->getAll();
+        $listaSeguro = $seguro->getAll();
         $lista["seguro"] = $seguro->get($id);
+
+        foreach ($lista["onibus"] as $itemOnibus) {
+            foreach ($listaSeguro as $itemSeguro) {
+                $itemSeguro->disable($itemSeguro->id);
+            }
+        }
+
+        $dataConverterInicio = date_create_from_format('Y-m-d', $lista['seguro']->data_inicio);
+        $dataInicio = $dataConverterInicio->format('d/m/Y');
+
+        $dataConverter = date_create_from_format('Y-m-d',  $lista['seguro']->data_vigencia);
+        $dataFim = $dataConverter->format('d/m/Y');
+
+
+        $lista["data"] = [];
+        array_push($lista["data"], $dataInicio, $dataFim);
+
         return view('seguroonibus.seguro.edit', compact('lista'));
     }
 
@@ -98,16 +127,15 @@ class SeguroController extends Controller
     public function update(Request $request, $id)
     {
 
-
             $seguro = new Seguro();
-            $seguro->edit($id);
+            $validator = $seguro->edit($id, $request->input());
 
             if($validator == NULL) {
 
                 return redirect()->route('seguro.index')->withStatus(__('Seguro editado com sucesso.'));
             } else {
                 return redirect()
-                        ->route('seguro.edit')
+                        ->route('seguro.edit', $id)
                         ->withErrors($validator)
                         ->withInput();
             }

@@ -23,6 +23,14 @@ class Seguro extends Model
         return $this->find($id);
     }
 
+    public function verificarValidade(array $listaOnibus){
+        foreach ($listaOnibus as $itemOnibus) {
+            if($itemOnibus->seguro()->vigente){
+                return $itemOnibus + " Possui um seguro vigente!";
+            }
+        }
+    }
+
     public function add(array $input)
     {
 
@@ -33,9 +41,7 @@ class Seguro extends Model
             'data_vigencia' => 'required|date_format:d/m/Y|after:'. now()->format('d/m/Y'),
             'data_inicio' => 'required|date_format:d/m/Y|before:data_vigencia',
             'onibus' => 'required|array',
-            'onibus' => 'unique:seguro_onibus,onibus_id'
-
-
+            'onibus' => 'unique:seguro_onibus,onibus_id'//Esta verificação não pode ser feita aqui
         ]);
 
         if ($validator->fails()) {
@@ -60,16 +66,16 @@ class Seguro extends Model
 
     public function edit(int $id, array $input)
     {
-        $seguro = $this->find($id);
-
-        $dateToday = new DateTime();
+        $seguro = $this->get($id);
 
         $validator = Validator::make($input, [
             'empresa' => 'required|string',
             'valor' => 'required|numeric|min:0.01',
+            'assegura' => 'required|string',
             'data_vigencia' => 'required|date_format:d/m/Y|after:'. now()->format('d/m/Y'),
             'data_inicio' => 'required|date_format:d/m/Y|before:data_vigencia',
-            'assegura' => 'required|string',
+            'onibus' => 'required|array',
+            'onibus' => 'unique:seguro_onibus,onibus_id'//Não pode ser feita aqui
         ]);
 
         if ($validator->fails()) {
@@ -81,26 +87,29 @@ class Seguro extends Model
         $seguro->assegura = $input['assegura'];
 
         $dataConverterInicio = date_create_from_format('d/m/Y', $input['data_inicio']);
-        $this->data_inicio = $dataConverterInicio->format('Y-m-d');
+        $seguro->data_inicio = $dataConverterInicio->format('Y-m-d');
 
         $dataConverter = date_create_from_format('d/m/Y', $input['data_vigencia']);
-        $this->data_vigencia = $dataConverter->format('Y-m-d');
+        $seguro->data_vigencia = $dataConverter->format('Y-m-d');
 
-        $this->vigente = true;
+        $seguro->vigente = true;
 
-        $seguro->save();
+        $seguro->update();
+        $seguro->onibus()->attach($input['onibus']);
 
     }
     public function disable(int $id)
     {
+        $seguro = new Seguro();
+        $item = $seguro->find($id);
+        if($item->data_vigencia == now()->format('Y-m-d')){
+            $item->vigente = false;
 
-        if($this->data_vigencia == now()){
-            $this->vigente = false;
         }
 
-        $this->save();
+        $item->save();
 
-        return $this;
+        return $item;
     }
 
 }
