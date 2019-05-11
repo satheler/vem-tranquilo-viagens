@@ -24,9 +24,19 @@ class Seguro extends Model
     }
 
     public function verificarValidade(array $listaOnibus){
+
+        $onibus = new Onibus();
+        $listaObjectOnibus = [];
+
         foreach ($listaOnibus as $itemOnibus) {
+            $item = $onibus->get($itemOnibus->id);
+            array_push($listaObjectOnibus, $item);
+        }
+
+        foreach ($listaObjectOnibus as $itemOnibus) {
             if($itemOnibus->seguro()->vigente){
-                return $itemOnibus + " Possui um seguro vigente!";
+                $validator = Validator::make($listaOnibus, ['onibus' => 'unique:seguro_onibus,onibus_id']);
+                return $validator;
             }
         }
     }
@@ -40,9 +50,10 @@ class Seguro extends Model
             'assegura' => 'required|string',
             'data_vigencia' => 'required|date_format:d/m/Y|after:'. now()->format('d/m/Y'),
             'data_inicio' => 'required|date_format:d/m/Y|before:data_vigencia',
-            'onibus' => 'required|array',
-            'onibus' => 'unique:seguro_onibus,onibus_id'//Esta verificação não pode ser feita aqui
+            'onibus' => 'required|array'
         ]);
+
+        //$validator = $this->verificarValidade($input['onibus']);
 
         if ($validator->fails()) {
             return $validator;
