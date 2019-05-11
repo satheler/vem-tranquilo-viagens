@@ -61,4 +61,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('ativas', 'RodoviariasController');
         Route::resource('inativas', 'RodoviariasInativasController');
     });
+    Route::prefix('/passagem_urbana')->name('passagem_urbana_')->group(function () {
+        Route::resource('ativas', 'PassagemUrbanaController');
+    });
 });
