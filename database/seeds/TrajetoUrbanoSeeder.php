@@ -18,6 +18,7 @@ class TrajetoUrbanoSeeder extends Seeder
             "horarioChegada" => '09:15:00',
             "quilometragem" => "5.00",
             "cidade_id" => 1,
+            'tarifa_id' => 1,
             "created_at" => now(),
             "updated_at" => now()
         ]);
@@ -29,6 +30,7 @@ class TrajetoUrbanoSeeder extends Seeder
             "horarioChegada" => '09:20:00',
             "quilometragem" => "4.50",
             "cidade_id" => 1,
+            'tarifa_id' => 1,
             "created_at" => now(),
             "updated_at" => now()
         ]);
@@ -40,6 +42,7 @@ class TrajetoUrbanoSeeder extends Seeder
             "horarioChegada" => '09:30:00',
             "quilometragem" => "3.00",
             "cidade_id" => 1,
+            'tarifa_id' => 1,
             "created_at" => now(),
             "updated_at" => now()
         ]);

@@ -16,6 +16,10 @@ class TarifaUrbano extends Model
         return $this->hasOne('App\Cidade', 'id', 'cidade_id');
     }
 
+    public function tarifa() {
+        return $this->hasOne('App\TarifaUrbano', 'id', 'tarifa_id');
+    }
+
     public function description()
     {
         return $this->morphOne('App\Tarifa', 'description');

@@ -25,6 +25,9 @@ class CreateTrajetoUrbanoTable extends Migration
             $table->unsignedBigInteger('cidade_id');
             $table->foreign('cidade_id')->references('id')->on('cidades');
 
+            $table->unsignedBigInteger('tarifa_id');
+            $table->foreign('tarifa_id')->references('id')->on('tarifa_urbano');
+
             $table->timestamps();
         });
     }
