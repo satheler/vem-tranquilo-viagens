@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\AlocacaoUrbano;
+use App\TarifaUrbano;
 
 class PassagemUrbanaController extends Controller
 {
@@ -13,7 +15,14 @@ class PassagemUrbanaController extends Controller
      */
     public function index()
     {
-        //
+        $alocacao = new AlocacaoUrbano();
+        $valor = new TarifaUrbano();
+
+        $lista["alocacao"] = $alocacao->getAll();
+        $lista["valor"] = $valor->getAll();
+
+        return view('passagem.urbana.index', compact('lista'));
+
     }
 
     /**
