@@ -14,7 +14,7 @@ class TarifaSeeder extends Seeder
     {
 
         DB::table('tarifa_urbano')->insert([
-            'cidade' => 'Alegrete',
+            'cidade_id' => 1,
             'licitacao' => 'test',
             'valor_especial' => 3.50,
         ]);
@@ -22,27 +22,10 @@ class TarifaSeeder extends Seeder
         DB::table('tarifa')->insert([
             'id' => 1,
             'valor' => 2.00,
-            'data' =>  date('Y-m-d'),
+            'data' =>  now(),
             'description_id' => 1,
-            'description_type' => 'App\Tarifa',
+            'description_type' => 'App\TarifaUrbano',
 
         ]);
-
-        DB::table('tarifa_urbano')->insert([
-            'id' => 2,
-            'cidade' => 'Uruguaiana',
-            'licitacao' => 'test',
-            'valor_especial' => 3.75,
-        ]);
-
-        DB::table('tarifa')->insert([
-            'id' => 2,
-            'valor' => 2.50,
-            'data' =>  date('Y-m-d'),
-            'description_id' => 2,
-            'description_type' => 'App\Tarifa',
-
-        ]);
-
     }
 }
