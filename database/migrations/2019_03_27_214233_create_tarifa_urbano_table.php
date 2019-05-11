@@ -19,7 +19,8 @@ class CreateTarifaUrbanoTable extends Migration
             $table->string('licitacao');
             $table->double('valor_especial');
 
-            $table->bigInteger('cidade_id');
+            $table->unsignedBigInteger('cidade_id');
+            $table->foreign('cidade_id')->references('id')->on('cidades');
 
             $table->timestamps();
         });
