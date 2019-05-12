@@ -48,12 +48,12 @@ class OnibusUrbanoController extends Controller
         $validator = $onibus->add($request->input());
 
         if($validator instanceof \Illuminate\Validation\Validator) {
-            return redirect()->route('onibus_urbano.index')->withStatus(__('Ônibus urbano adicionado com sucesso.'));
-        } else {
             return redirect()
-                    ->route('onibus_urbano.create')
-                    ->withErrors($validator)
-                    ->withInput();
+                ->route('onibus_urbano.create')
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            return redirect()->route('onibus_urbano.index')->withStatus(__('Ônibus urbano adicionado com sucesso.'));
         }
     }
 

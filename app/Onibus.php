@@ -50,7 +50,7 @@ class Onibus extends Model
         $this->marca = $input['marca'];
 
         $data_fabricacaoConverter = date_create_from_format('d/m/Y', $input['data_fabricacao']);
-        $this->data_fabricacao = $data_fabricacao->format('Y-m-d');
+        $this->data_fabricacao = $data_fabricacaoConverter->format('Y-m-d');
 
         $data_compraConverter = date_create_from_format('d/m/Y', $input['data_compra']);
         $this->data_compra = $data_compraConverter->format('Y-m-d');
