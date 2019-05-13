@@ -61,4 +61,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('ativas', 'RodoviariasController');
         Route::resource('inativas', 'RodoviariasInativasController');
     });
+
+    Route::prefix('/venda')->name('venda_')->group(function() {
+        Route::resource('intermunicipal', 'VendaPassagemIntermunicipal');
+    });
 });
