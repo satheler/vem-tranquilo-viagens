@@ -3,9 +3,9 @@
     <div class="container-fluid">
         <!-- Brand -->
         <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="{{ route('home') }}">{{ __('Painel de controle') }}</a>
-        @if (@isset(Auth::user()->cidade->nome))
+       @isset(Auth::user()->cidade)
             <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block cursor-none">{{ Auth::user()->cidade->nome }}</a>
-        @endif
+        @endisset
         {{-- <!-- Form -->
         <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
             <div class="form-group mb-0">
