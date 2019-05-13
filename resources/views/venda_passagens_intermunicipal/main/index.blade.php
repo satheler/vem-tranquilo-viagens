@@ -21,33 +21,33 @@
     <div class="card-body py-4">
         <form action="{{ route('venda_intermunicipal.create') }}" method="post">
             <div class="row justify-content-center">
-                <div class="col-lg-3 form-group{{ $errors->has('cidade') ? ' has-danger' : '' }}">
-                    <label class="form-control-label{{ $errors->has('cidade') ? ' text-warning' : '' }}" for="form-control-label"> {{__('ORIGEM')}}</label>
-                    <select bootstrapSelect name="cidade"  data-size="4" data-live-search="true" required>
-                        <option value="" disabled selected>Selecione a cidade...</option>
+                <div class="col-lg-3 form-group{{ $errors->has('origem') ? ' has-danger' : '' }}">
+                    <label class="form-control-label{{ $errors->has('origem') ? ' text-warning' : '' }} text-lighter" for="form-control-label"> {{__('ORIGEM')}}</label>
+                    <select bootstrapSelect name="origem"  data-size="4" data-live-search="true" required>
+                        <option value="" disabled selected>Selecione a origem...</option>
                         @foreach ($lista["cidade"] as $item)
-                            <option @if($errors->has('cidade') && ($errors->first('cidade') == $item->id) || old('cidade') == $item->id) selected @endif value="{{ $item->id }}">{{ $item->nome }}</option>
+                            <option @if($errors->has('origem') && ($errors->first('origem') == $item->id) || old('origem', Auth::user()->cidade_id) == $item->id) selected @endif value="{{ $item->id }}">{{ $item->nome }}</option>
                             @endforeach
                     </select>
-                    @if ($errors->has('cidade'))
-                        <label class="form-control-label invalid-feedback" for="form-control-label"> {{ $errors->first('cidade') }} </label>
+                    @if ($errors->has('origem'))
+                        <label class="form-control-label invalid-feedback" for="form-control-label"> {{ $errors->first('origem') }} </label>
                     @endif
 
                 </div>
-                <div class="col-lg-3 form-group{{ $errors->has('cidade') ? ' has-danger' : '' }}">
-                    <label class="form-control-label{{ $errors->has('cidade') ? ' text-warning' : '' }}" for="form-control-label"> {{__('DESTINO')}}</label>
-                    <select bootstrapSelect name="cidade"  data-size="4" data-live-search="true" required>
-                        <option value="" disabled selected>Selecione a cidade...</option>
+                <div class="col-lg-3 form-group{{ $errors->has('destino') ? ' has-danger' : '' }}">
+                    <label class="form-control-label{{ $errors->has('destino') ? ' text-warning' : '' }} text-lighter" for="form-control-label"> {{__('DESTINO')}}</label>
+                    <select bootstrapSelect name="destino"  data-size="4" data-live-search="true" required>
+                        <option value="" disabled selected>Selecione a destino...</option>
                         @foreach ($lista["cidade"] as $item)
-                            <option @if($errors->has('cidade') && ($errors->first('cidade') == $item->id) || old('cidade') == $item->id) selected @endif value="{{ $item->id }}">{{ $item->nome }}</option>
+                            <option @if($errors->has('destino') && ($errors->first('destino') == $item->id) || old('destino') == $item->id) selected @endif value="{{ $item->id }}">{{ $item->nome }}</option>
                             @endforeach
                     </select>
-                    @if ($errors->has('cidade'))
-                        <label class="form-control-label invalid-feedback" for="form-control-label"> {{ $errors->first('cidade') }} </label>
+                    @if ($errors->has('destino'))
+                        <label class="form-control-label invalid-feedback" for="form-control-label"> {{ $errors->first('destino') }} </label>
                     @endif
                 </div>
                 <div class="col-md-2">
-                    <label class="form-control-label" for="input-data">{{ __('DATA') }}</label>
+                    <label class="form-control-label text-lighter" for="input-data">{{ __('DATA') }}</label>
                     <div class="form-group">
                         <div class="input-group input-group-alternative">
                             <div class="input-group-prepend">
@@ -57,9 +57,11 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="text-center">
-                    <button type="submit" class="btn btn-success mt-4">{{ __('Pesquisar') }}</button>
+                <div class="text-center justify-content-center">
+                    <div>
+                        <label class="form-control-label">&nbsp;</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="margin-top: 2px"><i class="fas fa-search"></i> {{ __('Pesquisar') }}</button>
                 </div>
             </div>
         <form>

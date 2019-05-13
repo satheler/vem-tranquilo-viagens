@@ -12,7 +12,14 @@
     <div class="container-fluid mt--7">
         <div class="row">
             <div class="col">
-                <div class="card shadow">
+                <div class="card card bg-gradient-default border-0 shadow">
+                    @yield('infos')
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col">
+                <div class="card card bg-gradient-default border-0 shadow">
                     @yield('infos')
                 </div>
             </div>
