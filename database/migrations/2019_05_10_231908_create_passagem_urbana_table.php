@@ -21,9 +21,8 @@ class CreatePassagemUrbanaTable extends Migration
             $table->unsignedBigInteger('alocacao_urbana_id');
             $table->foreign('alocacao_urbana_id')->references('id')->on('alocacao_urbano');
 
-
-            $table->unsignedBigInteger('valor_id');
-            $table->foreign('valor_id')->references('id')->on('tarifa_urbano');//ACho que não pode ser assim
+            $table->unsignedBigInteger('categoria_id');
+            $table->foreign('categoria_id')->references('id')->on('categoria_passageiro');
 
             $table->timestamps();
         });

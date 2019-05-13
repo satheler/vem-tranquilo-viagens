@@ -16,7 +16,8 @@ class PassagemSeeder extends Seeder
             'id'=> 1,
             'data_venda' => now(),
             'alocacao_urbana_id' => 1,
-            'valor_id' => 1
+            'categoria_id' => 1
         ]);
     }
 }
+
