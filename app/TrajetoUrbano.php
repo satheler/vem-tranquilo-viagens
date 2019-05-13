@@ -15,6 +15,10 @@ class TrajetoUrbano extends Model
         return $this->hasOne('App\Cidade', 'id', 'endereco_id');
     }
 
+    public function tarifa() {
+        return $this->hasOne('App\TarifaUrbano', 'id', 'tarifa_id');
+    }
+
     public function getAll()
     {
         return $this->all();
