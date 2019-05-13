@@ -18,7 +18,11 @@ class CreateRegistroManutencaosTable extends Migration
         Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('motivo');
-            $table->double('valor')->nullable();
+            $table->string('oficina');
+            $table->double('orcamento');
+            $table->date('data_entrada');
+            $table->date('data_saida')->nullable();
+            $table->double('valor_final')->nullable();
             $table->string('observacao')->nullable();
 
             $table->unsignedBigInteger('onibus_id');
