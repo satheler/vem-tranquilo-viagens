@@ -271,6 +271,34 @@
                 </li>
             @endif
             <!-- Gerenciar rodoviarias :: FIM -->
+
+            <!-- Gerenciar venda de passagens :: INICIO -->
+            @if (@auth()->user()->tipo_usuario_id === 1)
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#navbar-venda-passagens" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-venda-passagens">
+                        <i class="fas fa-bus"></i>
+                        <span class="nav-link-text">{{ __('Venda passagem') }}</span>
+                    </a>
+
+                    <div class="collapse" id="navbar-venda-passagens">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('venda_intermunicipal.index') }}">
+                                    {{ __('Intermunicipal') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                {{-- <a class="nav-link" href="{{ route('venda_urbana.index') }}"> --}}
+                                <a class="nav-link" href="#">
+                                {{ __('Urbano') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            @endif
+            <!-- Gerenciar rodoviarias :: FIM -->
             </ul>
         </div>
     </div>
