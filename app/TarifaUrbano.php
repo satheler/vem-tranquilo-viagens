@@ -28,7 +28,7 @@ class TarifaUrbano extends Model
 
     public function get(int $id){
         $tarifa = $this->find($id);
-        return $trarifa;
+        return $tarifa;
     }
 
     public function add(array $input)
