@@ -57,12 +57,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('intermunicipal', 'AlocacaoIntermunicipalController');
     });
 
-    Route::prefix('/rodoviarias')->name('rodoviarias_')->group(function () {
+    Route::prefix('rodoviarias')->name('rodoviarias_')->group(function () {
         Route::resource('ativas', 'RodoviariasController');
         Route::resource('inativas', 'RodoviariasInativasController');
     });
 
-    Route::prefix('/venda')->name('venda_')->group(function() {
+    Route::prefix('venda')->name('venda_')->group(function() {
         Route::resource('intermunicipal', 'VendaPassagemIntermunicipal');
     });
 });
