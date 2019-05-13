@@ -108,6 +108,7 @@ class OnibusUrbanoController extends Controller
                 }
 
             }
+            return;
             $onibuseditado->edit($id);
             return response(["status" => "Manutenção finalizada com sucesso."], 202);
             //return response(["status" => "foi também"], 202);

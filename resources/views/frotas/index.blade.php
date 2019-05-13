@@ -115,7 +115,6 @@ async function vaiParaManutencao() {
     const t = {}
 
 const {value: formValues} = await Swal.fire({
-    // title: 'Multiple inputs',
     onOpen: () => {
          $('[money]').mask('###0.00', { reverse: true });
      },
@@ -123,7 +122,7 @@ const {value: formValues} = await Swal.fire({
      text: 'Insira o valor total da  manutenção?',
      input: 'text',
     inputAttributes: {
-        autocapitalize: 'off', 
+        autocapitalize: 'off',
         money: ''
     },
     inputPlaceholder: '0,00',
@@ -135,29 +134,41 @@ const {value: formValues} = await Swal.fire({
         const dia = now.getDate();
         const mes = now.getMonth();
         const ano = now.getFullYear();
-        console.log(dia, mes, ano);
-        
+
+        const dateArray = t.data.split("-");
+        console.log(dateArray);
+
+        if (ano < dateArray[0]) {
+            return 'Data inválida!'
+        } else if(mes < dateArray[1]){
+            return 'Data inválida!'
+        }else if(dia < dateArray[2]){
+            return 'Data inválida!'
+        }
+
         const {motivo, oficina, data} = t
-        
+        //console.log(t);
+        //console.log(value);
+
         if (!value || motivo === "" || oficina === "" || data === "") {
             return 'Todos os campos devem ser preenchidos!'
         }
     },
     html:
         '<div class="text-left">' +
-        '<label><b>Motivo</b></label>' +
+        '<label><b>Motivo:</b></label>' +
         '</div>' +
         '<input id="swal-input1" class="swal2-input" placeholder="O que aconteceu?">' +
         '<div class="text-left">' +
-        '<label><b>Oficina</b></label>' +
+        '<label><b>Oficina:</b></label>' +
         '</div>' +
         '<input id="swal-input2" class="swal2-input" placeholder="Nome da oficina">' +
         '<div class="text-left">' +
-        '<label><b>Data de entrada</b></label>' +
+        '<label><b>Data de entrada:</b></label>' +
         '</div>' +
-        '<input type="date" id="swal-input3" class="swal2-input" pattern="\d{1,2}/\d{1,2}/\d{4}">' +
+        '<input type="date" id="swal-input3" class="swal2-input" max="2019-12-31" min="2010-01-01">' +
         '<div class="text-left">' +
-        '<label><b>Orçamento</b></label>' +
+        '<label><b>Valor do Orçamento:</b></label>' +
         '</div>',
     focusConfirm: false,
 }).then(data => {
@@ -165,8 +176,8 @@ const {value: formValues} = await Swal.fire({
     if(data.dismiss) {
         return
     }
-        console.log("entrou aqui o/");
-        axios.put(`${url}/${id}`, {       
+        console.log(t, data.value);
+        axios.put(`${url}/${id}`, {
             goManutencao: true,
             valorOrcamento: data.value,
             motivo: t.motivo,
@@ -189,7 +200,7 @@ const {value: formValues} = await Swal.fire({
         })
         .catch((error) => {
             console.error(error);
-            Swal.fire('Aconteceu um erro inesperado...', '', 'error' )
+            Swal.fire('Aconteceu um erro inesperado....', '', 'error' )
         })
 
   }).catch((error) => {
@@ -201,30 +212,97 @@ const {value: formValues} = await Swal.fire({
 $('[data-available-id][data-manutencao=false]').on('click', sairDaManutencao)
 
 async function sairDaManutencao() {
-    //console.log("Estou em manutenção e preciso de outro modal");
+
     let id = $(this).attr('data-available-id');
-    console.log(id);
-    
-    let response = await Swal.fire({
-        title: 'A manutenção deste ônibus já está pronta?',
-        type: 'question',
-        showCancelButton: true,
-        confirmButtonColor: '#28a745',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Sim, já está!',
-        cancelButtonText: 'Não, cancelar!'
-    })
-    if(response.value){
-        axios.put(`${url}/${id}`,{
-            goManutencao: false
+    const t = {}
+
+    const {value: formValues} = await Swal.fire({
+    onOpen: () => {
+         $('[money]').mask('###0.00', { reverse: true });
+     },
+     title: 'Valor',
+     text: 'Insira o valor total da  manutenção?',
+     input: 'text',
+     showCancelButton: true,
+     confirmButtonColor: '#28a745',
+     cancelButtonColor: '#d33',
+     confirmButtonText: 'Ok',
+     cancelButtonText: 'Cancelar',
+    inputAttributes: {
+        autocapitalize: 'off',
+        money: ''
+    },
+    inputPlaceholder: '0,00',
+    inputValidator: (value) => {
+        t.obs = document.getElementById('swal-input1').value;
+        t.data = document.getElementById('swal-input2').value;
+        const now = new Date();
+        const dia = now.getDate();
+        const mes = now.getMonth();
+        const ano = now.getFullYear();
+
+        const dateArray = t.data.split("-");
+        console.log(dateArray);
+        console.log(dia);
+        console.log(mes);
+        console.log(ano);
+
+
+        if (ano < dateArray[0]) {
+            console.log(ano);
+            return 'Data inválida!'
+        } else if(mes + 1< dateArray[1]){
+            console.log(mes);
+            return 'Data inválida!'
+        }else if(dia < dateArray[2]){
+            console.log(dia);
+            return 'Data inválida!'
+        }
+        const {obs, data} = t
+        //console.log(t);
+        //console.log(value);
+
+        if (!value || data === "") {
+            return 'Valor e data são campos obrigatórios!'
+        }
+    },
+    html:
+        '<div class="text-left">' +
+        '<label><b>Observação:</b></label>' +
+        '</div>' +
+        '<input id="swal-input1" class="swal2-input" placeholder="Alguma observação?">' +
+        '<div class="text-left">' +
+        '<label><b>Data de Saída:</b></label>' +
+        '</div>' +
+        '<input type="date" id="swal-input2" class="swal2-input" max="2019-12-31" min="2010-01-01">' +
+        '<div class="text-left">' +
+        '<label><b>Valor Total da Manutenção:</b></label>' +
+        '</div>',
+    focusConfirm: false,
+
+    // let response = await Swal.fire({
+    //     title: 'A manutenção deste ônibus já está pronta?',
+    //     type: 'question',
+
+    // })
+    // if(response.value){
+    //     axios.put(`${url}/${id}`,{
+    //         goManutencao: false
+    //     })
+
+
+}).then(data => {
+
+    if(data.dismiss) {
+        return
+    }
+        console.log(t, data.value);
+        axios.put(`${url}/${id}`, {
+            valorTotal: data.value,
+            observacao: t.obs,
+            data: t.data
         })
-
-        
         .then(data => {
-
-            if(data.dismiss) {
-                return
-            }
 
             Swal.fire('Estado do Ônibus alterado com sucesso!', '', 'success')
             $(this).attr("data-manutencao", true)
@@ -244,8 +322,10 @@ async function sairDaManutencao() {
             console.error(error);
             Swal.fire('Aconteceu um erro inesperado...', '', 'error' )
         })
-    }
-
+    }).catch((error) => {
+            console.error(error);
+            Swal.fire('Aconteceu um erro inesperado...', '', 'error' )
+        })
 }
 
 $('[data-show-id]').on('click', function() {

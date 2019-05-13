@@ -10,7 +10,7 @@ use App\RegistroManutencao;
 class OnibusUrbano extends Model
 {
     protected $table = 'onibus_urbano';
-    
+
     public function manutencoes(){
         return $this->hasMany('App\RegistroManutencao', 'onibus_id', 'id');
     }
@@ -61,33 +61,58 @@ class OnibusUrbano extends Model
 
     public function edit(int $id)
     {
+        $validator = Validator::make($input, [
+            'observacao' => 'required|string',
+            'valorTotal' => 'required|numeric',
+            'data' => 'required|string',
+            ]);
+
+            if ($validator->fails()) {
+                return $validator;
+            }
+        return;
+
         $onibus = $this->find($id);
         $description = $onibus->description;
-        $description->disponivel = true;
+        //$description->disponivel = true;
 
+        $registro = new RegistroManutencao();
+        $registro->observacao = $input['observacao'];
+        $registro->valor_final = $input['valorTotal'];
+        $data_converter = date_create_from_format('Y-m-d', $input['data']);
+        $registro->data_saida = $data_converter;
+
+        $onibus->manutencoes()->save($registro);
         $onibus->description()->save($description);
         $onibus->save();
     }
 
     public function manutencao(array $input, int $id)
     {
+
         $validator = Validator::make($input, [
             'motivo' => 'required|string',
-            // 'valor' => 'required|numeric',
-        ]);
-        
-        if ($validator->fails()) {
-            return $validator;
-        }
+            'valorOrcamento' => 'required|numeric',
+            'oficina' => 'required|string',
+            'data' => 'required|string',
+            ]);
+
+            if ($validator->fails()) {
+                return $validator;
+            }
 
         $onibus = $this->find($id);
         $description = $onibus->description;
         $description->disponivel = false;
-        
+
         $registro = new RegistroManutencao();
         $registro->motivo = $input['motivo'];
-        // $registro->valor = $input['valor'];
-        
+        $registro->oficina = $input['oficina'];
+        $registro->orcamento = $input['valorOrcamento'];
+
+        $data_converter = date_create_from_format('Y-m-d', $input['data']);
+        $registro->data_entrada = $data_converter;
+
         $onibus->manutencoes()->save($registro);
         $onibus->description()->save($description);
         $onibus->save();
