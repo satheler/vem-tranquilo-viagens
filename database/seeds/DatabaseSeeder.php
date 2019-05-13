@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
             TrechosSeeder::class,
             FuncionarioSeeder::class,
             TrajetoUrbanoSeeder::class,
-            RodoviariasSeeder::class
+            RodoviariasSeeder::class,
+            TrajetoIntermunicipalSeeder::class
             // AlocacaoUrbanoSeeder::class
         ]);
     }

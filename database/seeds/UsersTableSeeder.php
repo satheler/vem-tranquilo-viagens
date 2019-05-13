@@ -60,7 +60,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'vendedor@mail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('123456'),
-            'tipo_usuario_id' => 3,
+            'tipo_usuario_id' => 4,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
