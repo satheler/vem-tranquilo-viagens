@@ -273,7 +273,7 @@
             <!-- Gerenciar rodoviarias :: FIM -->
 
             <!-- Gerenciar venda de passagens :: INICIO -->
-            @if (@auth()->user()->tipo_usuario_id === 1)
+            @if (@auth()->user()->tipo_usuario_id === 4)
 
                 <li class="nav-item">
                     <a class="nav-link" href="#navbar-venda-passagens" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-venda-passagens">
@@ -298,7 +298,7 @@
                     </div>
                 </li>
             @endif
-            <!-- Gerenciar rodoviarias :: FIM -->
+            <!-- Gerenciar venda de passagens :: FIM -->
             </ul>
         </div>
     </div>
