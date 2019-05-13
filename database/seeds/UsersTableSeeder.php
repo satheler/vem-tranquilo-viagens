@@ -56,11 +56,26 @@ class UsersTableSeeder extends Seeder
          * Usuário: Vendedor
          */
         DB::table('users')->insert([
-            'name' => 'Vendedor de passagens',
-            'email' => 'vendedor@mail.com',
+            'name' => 'Vendedor de passagens - Alegrete',
+            'email' => 'vendedor_ale@mail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('123456'),
             'tipo_usuario_id' => 4,
+            'cidade_id' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        /**
+         * Usuário: Vendedor
+         */
+        DB::table('users')->insert([
+            'name' => 'Vendedor de passagens - Santa Maria',
+            'email' => 'vendedor_sm@mail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('123456'),
+            'tipo_usuario_id' => 4,
+            'cidade_id' => 5,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
