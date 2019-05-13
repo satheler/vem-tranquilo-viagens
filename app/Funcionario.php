@@ -14,6 +14,14 @@ class Funcionario extends Model
     public function tipo() {
         return $this->hasOne('App\TipoFuncionario', 'id', 'tipo_id');
     }
+    
+    public function cidade() {
+        return $this->hasOne('App\Cidade', 'id', 'cidade_id');
+    }
+
+    public function local() {
+        return $this->hasOne('App\Rodoviaria', 'id', 'local_id');
+    }
 
     public function getAll()
     {
@@ -33,7 +41,9 @@ class Funcionario extends Model
     {
         $validator = Validator::make($input, [
             'nome' => 'required|string',
-            'tipo' => 'required|exists:tipos_funcionario,id'
+            'tipo' => 'required|exists:tipos_funcionario,id',
+            'local' => 'required|exists:rodoviarias,id',
+            'cidade' => 'required|exists:cidades,id'
         ]);
 
         if ($validator->fails()) {
@@ -43,6 +53,8 @@ class Funcionario extends Model
 
         $this->nome = $input['nome'];
         $this->tipo_id = $input['tipo'];
+        $this->local_id = $input['local'];
+        $this->cidade_id = $input['cidade'];
 
         $this->save();
     }
@@ -53,7 +65,9 @@ class Funcionario extends Model
 
         $validator = Validator::make($input, [
             'nome' => 'required|string',
-            'tipo_id' => 'required|exists:tipos_funcionario,id'
+            'tipo' => 'required|exists:tipos_funcionario,id',
+            'local' => 'required|exists:rodoviarias,id',
+            'cidade' => 'required|exists:cidades,id'
 
         ]);
         if ($validator->fails()) {
@@ -61,6 +75,8 @@ class Funcionario extends Model
         }
         $funcionario->nome = $input['nome'];
         $funcionario->tipo = $input['tipo_id'];
+        $funcionario->local = $input['local_id'];
+        $funcionario->cidade = $input['cidade_id'];
 
         $funcionario->save();
     }

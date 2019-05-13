@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Funcionario;
 use App\TipoFuncionario;
+use App\Cidade;
+use App\Rodoviaria;
 use Exception;
 
 class FuncionarioController extends Controller
@@ -29,7 +31,11 @@ class FuncionarioController extends Controller
     public function create()
     {
         $tipos_funcionario = new TipoFuncionario();
-        $lista = $tipos_funcionario->getAll();
+        $cidades = new Cidade();
+        $rodoviarias = new Rodoviaria();
+        $lista["funcionarios"] = $tipos_funcionario->getAll();
+        $lista["cidades"] = $cidades->getAll();
+        $lista["rodoviarias"] = $rodoviarias->getAll();
         return view('funcionario.main.create', compact('lista'));
     }
 
@@ -78,7 +84,7 @@ class FuncionarioController extends Controller
         $funcionario = new Funcionario();
         $listaDeFuncionarios = $funcionario->getAll();
         $funcionarioEditado = $listaDeFuncionarios[$id];
-        return "Formulario de edição para o".$funcionarioEditado->toJson();
+        return view('funcionario.main.edit', compact('funcionarioEditado'));
     }
 
     /**
