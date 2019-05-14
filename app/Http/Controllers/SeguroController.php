@@ -128,6 +128,7 @@ class SeguroController extends Controller
     {
 
             $seguro = new Seguro();
+            $seguro = $seguro->get($id);
             $validator = $seguro->edit($id, $request->input());
 
             if($validator == NULL) {

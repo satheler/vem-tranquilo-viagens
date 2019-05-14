@@ -88,7 +88,7 @@ class Seguro extends Model
             'data_vigencia' => 'required|date_format:d/m/Y|after:' . now()->format('d/m/Y'),
             'data_inicio' => 'required|date_format:d/m/Y|before:data_vigencia',
             'onibus' => 'required|array',
-            'onibus' => 'unique:seguro_onibus,onibus_id', //Não pode ser feita aqui
+            'onibus' => ''.$this->verificarValidade($input['onibus'])
         ]);
 
         if ($validator->fails()) {

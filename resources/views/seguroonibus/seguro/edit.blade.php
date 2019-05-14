@@ -42,7 +42,8 @@
 
                                         <select multiple="multiple" name="onibus[]">
                                             @foreach ($lista["onibus"] as $item)
-                                                <option value="{{ $item->id }}">Placa: {{ $item->placa}} - Marca: {{ $item->marca }} - Chassi: {{ $item->chassi }} - Modelo: {{ $item->modelo }} - Data Compra: {{ $item->data_compra }} - Tipo: {{$item->description_type}}</option>
+                                            <option value="{{ $item->id }}"><div class = "col-md-4">Placa: {{ $item->placa}} - Marca: {{ $item->marca }} - Chassi: {{ $item->chassi }} - Modelo: {{ $item->modelo }} - Data Compra: {{ $item->data_compra }} - Tipo: {{$item->description_type}} </div></option>
+                                            {{-- <option @if($errors->has('onibus') && ($errors->first('onibus') == $item->id) || old('onibus', $lista["seguro"]->onibus->id) == $item->id) selected @endif value="{{ $item->id }}">{{ $item->description->placa }}</option> --}}
                                             @endforeach
                                         </select>
 
@@ -57,7 +58,12 @@
                                             <label class="form-control-label text-right" for="input-empresa">{{ __('LISTA DE ÔNIBUS ASSEGURADOS') }}</label>
                                                 @foreach ($lista["seguro"]->onibus as $item)
                                                 <tr name="onibus[]">
-                                                    <td value="{{ $item->id }}">{{ $item->placa}} - {{ $item->marca }}</td>
+                                                    <td ><div> Placa: {{ $item->placa }}</div>
+                                                        <div>Marca: {{ $item->marca }}</div>
+                                                        <div>Chassi: {{ $item->chassi }}</div>
+                                                        <div>Modelo: {{ $item->modelo }}</div>
+                                                        <div>Data Compra: {{ $item->data_compra }}</div>
+                                                        <div>Tipo:  {{$item->description_type}} </div> </td>
                                                 </tr>
                                                 @endforeach
                                         </div>
@@ -157,3 +163,4 @@
     </script>
 
 @endpush
+
