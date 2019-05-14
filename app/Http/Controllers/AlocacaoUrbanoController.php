@@ -56,13 +56,15 @@ class AlocacaoUrbanoController extends Controller
         $alocacao = new AlocacaoUrbano();
         $validator = $alocacao->add($request->input());
 
-        if($validator === NULL) {
-            return redirect()->route('alocacao_urbano.index')->withStatus(__('Alocação de Funcionario realizada com sucesso.'));
-        } else {
+        if($validator instanceof \Illuminate\Validation\Validator) {
             return redirect()
                     ->route('alocacao_urbano.create')
                     ->withErrors($validator)
                     ->withInput();
+        } else {
+            return redirect()
+                ->route('alocacao_urbano.index')
+                ->withStatus(__('Alocação de Funcionario realizada com sucesso.'));
         }
     }
 
@@ -116,13 +118,15 @@ class AlocacaoUrbanoController extends Controller
         $alocacao = new AlocacaoUrbano();
         $validator = $alocacao->edit($id, $request->input());
 
-        if($validator === NULL) {
-            return redirect()->route('alocacao_urbano.index')->withStatus(__('Alocação de Funcionario editada com sucesso.'));
-        } else {
+        if($validator instanceof \Illuminate\Validation\Validator) {
             return redirect()
                     ->route('alocacao_urbano.edit', $id)
                     ->withErrors($validator)
                     ->withInput();
+        } else {
+            return redirect()
+                ->route('alocacao_urbano.index')
+                ->withStatus(__('Alocação de Funcionario realizada com sucesso.'));
         }
     }
 

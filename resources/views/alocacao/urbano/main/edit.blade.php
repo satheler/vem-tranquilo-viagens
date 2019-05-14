@@ -44,8 +44,13 @@
                                                 </div>
                                                 <input data name='data' class="form-control datepicker" placeholder="__/__/____" type="text" value="{{ old('data', date('d/m/Y', strtotime($lista["alocacao"]->data))) }}" required>
                                             </div>
+                                            @if ($errors->has('data'))
+                                                <label class="form-control-label invalid-feedback" for="form-control-label"> {{ $errors->first('data') }} </label>
+                                            @endif
                                         </div>
                                     </div>
+
+
                                     <div class="col-md-2">
                                         <label class="form-control-label" for="horarioInicio">INICIO</label>
                                         <div class="form-group">
