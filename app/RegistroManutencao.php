@@ -36,7 +36,8 @@ class RegistroManutencao extends Model
             'data_entrada' => 'required|string',
             'data_saida' => 'required|string',
             'valor_final' => 'required|numeric|min:0.01',
-            'observacao' => 'required|string'
+            'observacao' => 'required|string',
+            'onibus_id' => 'required|exists:onibus,id'
         ]);
 
         if ($validator->fails()) {
@@ -50,6 +51,7 @@ class RegistroManutencao extends Model
         $this->data_saida = $input['data_saida'];
         $this->valor_final = $input['valor_final'];
         $this->observacao = $input['observacao'];
+        $this->onibus_id = $input['onibus_id'];
 
         $this->save();
     }
