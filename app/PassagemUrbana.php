@@ -48,13 +48,13 @@ class PassagemUrbana extends Model
 
     public function agruparPorCategoria(TarifaUrbano $tarifa, PassagemUrbana $passagem)
     {
-        $categoria["categoria"] = $passagem->categoria;
-        $categoria["valores"] = [];
-        array_push($categoria["valores"], $passagem->calcularValorPassagem($tarifa, $passagem));
+        // $categoria["categoria"] = $passagem->categoria;
+        // $categoria["valores"] = [];
+        // array_push($categoria["valores"], $passagem->calcularValorPassagem($tarifa, $passagem));
 
-        //  $categoria = \DB::table('passagem_urbana')
-        //      ->select('categoria_id', \DB::raw($passagem->calcularValorPassagem($tarifa, $passagem) . ' as valor'))
-        //      ->groupBy('categoria_id');
+         $categoria = \DB::table('passagem_urbana')
+             ->select('categoria_id', \DB::raw('count(*) as as valor'))
+             ->groupBy('categoria_id');
 
         return $categoria;
 
