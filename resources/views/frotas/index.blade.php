@@ -111,7 +111,7 @@ $('[data-available-id][data-manutencao=true]').on('click', vaiParaManutencao)
 
 
 async function vaiParaManutencao() {
-    let id = $(this).data('available-id');
+    let id = $(this).data('data-available-id');
     const t = {}
 
 const {value: formValues} = await Swal.fire({
@@ -130,7 +130,7 @@ const {value: formValues} = await Swal.fire({
         t.motivo = document.getElementById('swal-input1').value;
         t.oficina = document.getElementById('swal-input2').value;
         t.data = document.getElementById('swal-input3').value;
-        
+
         const now = new Date();
         const then = new Date(t.data);
         if (now < then) {
@@ -162,6 +162,7 @@ const {value: formValues} = await Swal.fire({
         '<label><b>Valor do Orçamento:</b></label>' +
         '</div>',
     focusConfirm: false,
+    width: '800px'
 }).then(data => {
 
     if(data.dismiss) {
@@ -227,7 +228,7 @@ async function sairDaManutencao() {
     inputValidator: (value) => {
         t.obs = document.getElementById('swal-input1').value;
         t.data = document.getElementById('swal-input2').value;
-        
+
         const now = new Date();
         const then = new Date(t.data);
         if (now < then) {
@@ -289,11 +290,11 @@ async function sairDaManutencao() {
             $(`[data-badge-available-id="${id}"]`).removeClass('badge-warning').addClass('badge-success').text('Disponivel') :
             $(`[data-badge-available-id="${id}"]`).removeClass('badge-success').addClass('badge-warning').text('Em manutenção')
         })
-        // .then(data => {
-        //     setTimeout(() => {
-        //         location.reload();
-        //     }, 1000);
-        // })
+        .then(data => {
+            setTimeout(() => {
+                location.reload();
+            }, 1000);
+        })
         .catch((error) => {
             console.error(error);
             Swal.fire('Aconteceu um erro inesperado...', '', 'error' )
@@ -313,5 +314,56 @@ $('[data-show-id]').on('click', function() {
         $("#modal-infos").modal('show');
     })
 })
+
+//$('[data-register-id]').on('click')
+
+// async function mostrarRegistro() {
+//     let id = $(this).data('register-id');
+//     console.log(id);
+
+//         Swal.fire({
+//         html:
+//         '<div class="card-body">' +
+//         '<div class="table-responsive py-4">' +
+//         '<table id="datatable-manutencao" class="table align-items-center table-flush dataTable">' +
+//         '<thead class="thead-light">' +
+//         '<tr>' +
+//         '<th scope="col"></th>' +
+//         '<th scope="col">{{ __("Motivo") }}</th>' +
+//         '<th scope="col">{{ __("Oficina") }}</th>' +
+//         '<th scope="col">{{ __("Orçamento") }}</th>' +
+//         '<th scope="col">{{ __("Data de Entrada") }}</th>' +
+//         '<th scope="col">{{ __("Data de Saída") }}</th>' +
+//         '<th scope="col">{{ __("Valor Final") }}</th>' +
+//         '<th scope="col">{{ __("Observação") }}</th>' +
+//         '</tr>' +
+//         '</thead>' +
+//         '<tbody>' +
+//         '@foreach ($lista as $item)' +
+//         '<tr data-table-row-id={{ $item->id }}>' +
+//         '<td>{{ $item->motivo }}</td>' +
+//         '<td>{{ $item->oficina }}</td>' +
+//         '<td>{{ $item->orcamento }}</td>' +
+//         '<td>{{ $item->data_entrada }}</td>' +
+//         '<td>{{ $item->data_saida }}</td>' +
+//         '<td>{{ $item->valor_final }}</td>' +
+//         '<td>{{ $item->observacao }}</td>' +
+//         '</tr>' +
+//         '@endforeach' +
+//         '</tbody>' +
+//         '</table>' +
+//         '</div>' +
+//         '</div>',
+//     focusConfirm: false,
+//     width: '1200px'
+
+
+
+
+//     })
+//     }
+
 </script>
 @endpush
+
+

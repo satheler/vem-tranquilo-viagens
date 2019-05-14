@@ -24,8 +24,7 @@ class RegistroManutencao extends Model
     }
 
     public function get(int $id){
-        $registro = $this->where($id);
-        return $registro;
+        return $registro = $this->where('onibus_id', $id)->get();
     }
 
     public function add(array $input)
@@ -55,13 +54,12 @@ class RegistroManutencao extends Model
         $this->save();
     }
 
-    public function edit(int $id, array $input)
+    public function edit(array $input, int $id)
     {
-
         $registro = $this->find($id);
 
         $validator = Validator::make($input, [
-            'data_saida' => 'required|string',
+            'data' => 'required|string',
             'valorTotal' => 'required|numeric|min:0.01',
             'observacao' => 'required|string'
 
@@ -69,11 +67,11 @@ class RegistroManutencao extends Model
         if ($validator->fails()) {
             return $validator;
         }
-        
+
         $data_converter = date_create_from_format('Y-m-d', $input['data']);
-        $this->data_saida = $data_converter;
-        $this->valor_final = $input['valorTotal'];
-        $this->observacao = $input['observacao'];
+        $registro->data_saida = $data_converter;
+        $registro->valor_final = $input['valorTotal'];
+        $registro->observacao = $input['observacao'];
 
         $registro->save();
     }

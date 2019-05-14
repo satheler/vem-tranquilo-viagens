@@ -64,6 +64,7 @@ class OnibusUrbanoController extends Controller
      */
     public function show($id)
     {
+
         $onibus = new OnibusUrbano();
         $item = $onibus->get($id);
         return view('frotas.urbano.show', compact('item'));
@@ -98,23 +99,23 @@ class OnibusUrbanoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
         try {
             $onibuseditado = new OnibusUrbano();
             if($request->input('goManutencao')){
                 $validator = $onibuseditado->manutencao($request->input(), $id);
-                
+
                 if($validator instanceof \Illuminate\Validation\Validator) {
                     return response(["status" => "FALHA", "falhas" => $validator], 400);
                 } else {
                     return response(["status" => "Manutenção registrada com sucesso."], 202);
                 }
-                
+
             }
             $registroEditado = new RegistroManutencao();
             $registro =$registroEditado->getId($id);
-            // return;
-            // $regId = $registroEditado->id;
+
+            //$regId = $registro->id;
             $registroEditado->edit($request->input(), $registro->id);
             $onibuseditado->edit($id);
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\RegistroManutencao;
+use App\OnibusUrbano;
 use Exception;
 
 class RegistroManutencaoController extends Controller
@@ -63,8 +64,9 @@ class RegistroManutencaoController extends Controller
     public function show($id)
     {
         $registro = new RegistroManutencao();
-        $item = $registro->get($id);
-        return view('registro.main.show', compact('item'));
+        $idRegistro = $registro->getId($id);
+        $item = $registro->get($idRegistro->id);
+        return view('manutencoes.main.show', compact('item'));
     }
 
     /**

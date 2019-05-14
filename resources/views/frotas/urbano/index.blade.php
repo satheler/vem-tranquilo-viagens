@@ -78,6 +78,7 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                         <a class="dropdown-item" data-manutencao=@if ($item->description->disponivel) true @else false @endif data-available-id="{{ $item->id }}" href="#">{{ __('Em manutenção') }}</a>
+                                        <a class="dropdown-item" data-register-id="{{ $item->id }}" href="{{ route('manutencoes.show', $item->id) }}">{{ __('Registro de Manutenção') }}</a>
                                         <a class="dropdown-item" data-remove-id="{{ $item->id }}" href="#">{{ __('Deixar inativo') }}</a>
                                     </div>
                                 </div>
