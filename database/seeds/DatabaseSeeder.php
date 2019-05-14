@@ -13,15 +13,18 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             CidadesSeeder::class,
+            RodoviariasSeeder::class,
             TipoUsuarioSeeder::class,
             UsersTableSeeder::class,
             TiposFuncionarioSeeder::class,
-            OnibusSeeder::class,
             CategoriaOnibusSeeder::class,
+            OnibusIntermunicipalSeeder::class,
+            OnibusUrbanoSeeder::class,
             TrechosSeeder::class,
             FuncionarioSeeder::class,
             TrajetoUrbanoSeeder::class,
-            RodoviariasSeeder::class
+            TrajetoIntermunicipalSeeder::class,
+            PassagensIntermunicipalSeeder::class,
             // AlocacaoUrbanoSeeder::class
         ]);
     }

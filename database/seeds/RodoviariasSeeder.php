@@ -12,7 +12,7 @@ class RodoviariasSeeder extends Seeder
     public function run()
     {
         DB::table('rodoviarias')->insert([
-            'logradouro' => "Rua Ónorio Lemes",
+            'logradouro' => "Rua Honório Lemes",
             'numero' => 114,
             'bairro' => "Ibirapuitã",
             'cidade_id' => 1,
@@ -27,6 +27,15 @@ class RodoviariasSeeder extends Seeder
             'cidade_id' => 1,
             'cep' => 97547380,
             'telefone' => 5500112233
+        ]);
+
+        DB::table('rodoviarias')->insert([
+            'logradouro' => "Rua Pedro Pereira",
+            'numero' => 1450,
+            'bairro' => "Nossa Sra. de Lourdes",
+            'cidade_id' => 5,
+            'cep' => 97050590,
+            'telefone' => 5532224747
         ]);
     }
 }

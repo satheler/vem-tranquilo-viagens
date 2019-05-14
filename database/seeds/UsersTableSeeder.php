@@ -33,7 +33,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'local@mail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('123456'),
-            'cidade_id' => 1,
+            'rodoviaria_id' => 1,
             'tipo_usuario_id' => 2,
             'created_at' => now(),
             'updated_at' => now(),
@@ -51,8 +51,8 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-
-        /**
+      
+          /**
          * Usuário: Recursos Humanos
          */
         DB::table('users')->insert([
@@ -61,6 +61,34 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('123456'),
             'tipo_usuario_id' => 4,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        /**
+         * Usuário: Vendedor Alegrete
+         */
+        DB::table('users')->insert([
+            'name' => 'Vendedor de passagens - Alegrete',
+            'email' => 'vendedor_ale@mail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('123456'),
+            'tipo_usuario_id' => 5,
+            'rodoviaria_id' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        /**
+         * Usuário: Vendedor SM
+         */
+        DB::table('users')->insert([
+            'name' => 'Vendedor de passagens - Santa Maria',
+            'email' => 'vendedor_sm@mail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('123456'),
+            'tipo_usuario_id' => 5,
+            'rodoviaria_id' => 3,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

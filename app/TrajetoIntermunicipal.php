@@ -23,6 +23,14 @@ class TrajetoIntermunicipal extends Model
         return $this->all();
     }
 
+    public function getByFilter($origem_id, $destino_id, $data)
+    {
+        return $this->whereHas('trechos', function ($query) use ($origem_id, $destino_id, $data) {
+            $query->where('origem_id', $origem_id)
+                  ->where('destino_id', $destino_id);
+        })->get();
+    }
+
     public function get(int $id){
         $trajeto = $this->find($id);
         return $trajeto;

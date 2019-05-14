@@ -11,25 +11,25 @@ class CidadesSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('Cidades')->insert([
+        DB::table('cidades')->insert([
             'nome' => 'Alegrete'
         ]);
-        DB::table('Cidades')->insert([
+        DB::table('cidades')->insert([
             'nome' => 'Passo Novo'
         ]);
-        DB::table('Cidades')->insert([
+        DB::table('cidades')->insert([
             'nome' => 'Manoel Viana'
         ]);
-        DB::table('Cidades')->insert([
+        DB::table('cidades')->insert([
             'nome' => 'Rosário do Sul'
         ]);
-        DB::table('Cidades')->insert([
+        DB::table('cidades')->insert([
             'nome' => 'Santa Maria'
         ]);
-        DB::table('Cidades')->insert([
+        DB::table('cidades')->insert([
             'nome' => 'São Gabriel'
         ]);
-        DB::table('Cidades')->insert([
+        DB::table('cidades')->insert([
             'nome' => 'Porto Alegre'
         ]);
     }

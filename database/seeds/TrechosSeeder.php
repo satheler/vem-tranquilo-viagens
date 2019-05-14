@@ -26,5 +26,13 @@ class TrechosSeeder extends Seeder
             'origem_id' => 3,
             'destino_id' => 5
         ]);
+
+        DB::table('trecho')->insert([
+            // 'horarioSaida' => '13:05:00',
+            // 'horarioChegada' => '15:30:00',
+            'quilometragem' => 291.0,
+            'origem_id' => 5,
+            'destino_id' => 7
+        ]);
     }
 }
