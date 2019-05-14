@@ -2,31 +2,59 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
 use App\Funcionario;
+
+use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class FuncionarioTest extends TestCase
 {
-    public function testFuncionario()
-        {
-            $o = new Funcionario();
-            $test = $o->add([
-                'nome' => 'Judson Henrique',
-                'tipo' => 1
-            ]);
-    
-            $this->assertTrue($test === true);
-        }
-    public function testFuncionarioDois()
-        {
-            $o = new Funcionario();
-            $test = $o->add([
-                'nome' => 'Gustavo Gay',
-                'tipo' => 2
-            ]);
-    
-            $this->assertTrue($test === true);
-        }
+    public function testRequiredInstance(){
+        $o = new Funcionario();
+        $test = $o->add([]);
+        $this->assertInstanceOf(\Illuminate\Validation\Validator::class,$test);
+    }
+    public function testAddFuncionario()
+    {
+        $o = new Funcionario();
+        $test = $o->add([
+            'nome' => 'Michael Martins',
+            'tipo_id' => 1,
+            'local_id' => 1,
+            'status' => 1,
+            'observacao' => 'Nenhuma',
+        ]);
+
+        $esperado = $o->get(1);
+
+        $this->assertThat(
+          $esperado,
+          $this->logicalNot(
+            $this->equalTo($test)
+          )
+        );
+    }
+
+    public function testEditFuncionario()
+    {
+        $o = new Funcionario();
+        $test = $o->edit(1, [
+            'nome' => 'Michael Martins',
+            'tipo_id' => 1,
+            'local_id' => 1,
+            'status' => 0,
+            'observacao' => 'Demitido',
+        ]);
+
+        $esperado = $o->get(1);
+
+        $this->assertThat(
+          $esperado,
+          $this->logicalNot(
+            $this->equalTo($test)
+          )
+        );
+
+    }
 }
