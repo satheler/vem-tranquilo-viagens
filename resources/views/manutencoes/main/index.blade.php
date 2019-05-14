@@ -22,7 +22,6 @@
                             <table id="datatable-manutencao" class="table align-items-center table-flush dataTable">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th scope="col"></th>
                                         <th scope="col">{{ __('Motivo') }}</th>
                                         <th scope="col">{{ __('Oficina') }}</th>
                                         <th scope="col">{{ __('Orçamento') }}</th>
