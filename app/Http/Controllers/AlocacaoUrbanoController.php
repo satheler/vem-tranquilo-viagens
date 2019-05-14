@@ -36,7 +36,7 @@ class AlocacaoUrbanoController extends Controller
         $lista["trajetos"] = $trajetosUrbanos->getAll();
 
         $onibus = new OnibusUrbano();
-        $lista["onibus"] = $onibus->getByCidade(Auth::user()->cidade_id);
+        $lista["onibus"] = $onibus->getByCidade(Auth::user()->rodoviaria->cidade_id);
 
         $funcionarios = new Funcionario();
         $lista["motoristas"] = $funcionarios->getByTipoId(1);
@@ -91,7 +91,7 @@ class AlocacaoUrbanoController extends Controller
         $lista["trajetos"] = $trajetosUrbanos->getAll();
 
         $onibus = new OnibusUrbano();
-        $lista["onibus"] = $onibus->getByCidade(Auth::user()->cidade_id);
+        $lista["onibus"] = $onibus->getByCidade(Auth::user()->rodoviaria->cidade_id);
 
         $funcionarios = new Funcionario();
         $lista["motoristas"] = $funcionarios->getByTipoId(1);

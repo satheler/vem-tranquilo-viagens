@@ -37,7 +37,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function cidade() {
-        return $this->hasOne('App\Cidade', 'id', 'cidade_id');
+    public function rodoviaria() {
+        return $this->hasOne('App\Rodoviaria', 'id', 'rodoviaria_id');
     }
 }

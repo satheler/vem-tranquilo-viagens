@@ -44,7 +44,7 @@ class TrajetoUrbano extends Model
         $this->horarioSaida = $input['horarioSaida'];
         $this->horarioChegada = $input['horarioChegada'];
         $this->quilometragem = $input['quilometragem'];
-        $this->cidade_id = Auth::user()->cidade_id;
+        $this->cidade_id = Auth::user()->rodoviaria->cidade_id;
 
         $this->save();
     }

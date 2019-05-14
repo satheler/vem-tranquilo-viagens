@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             CidadesSeeder::class,
+            RodoviariasSeeder::class,
             TipoUsuarioSeeder::class,
             UsersTableSeeder::class,
             TiposFuncionarioSeeder::class,
@@ -21,7 +22,6 @@ class DatabaseSeeder extends Seeder
             TrechosSeeder::class,
             FuncionarioSeeder::class,
             TrajetoUrbanoSeeder::class,
-            RodoviariasSeeder::class,
             TrajetoIntermunicipalSeeder::class,
             PassagensIntermunicipalSeeder::class,
             // AlocacaoUrbanoSeeder::class

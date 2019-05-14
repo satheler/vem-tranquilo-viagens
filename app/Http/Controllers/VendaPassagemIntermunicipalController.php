@@ -37,7 +37,7 @@ class VendaPassagemIntermunicipalController extends Controller
         $cidades = $cidades->getAll();
 
         $trajetos = new TrajetoIntermunicipal();
-        $trajetosDisponiveis = $trajetos->getAll();
+        $trajetosDisponiveis = $trajetos->getByFilter($origem, $destino, $data);
         $trajetos = $trajetosDisponiveis;
 
 
