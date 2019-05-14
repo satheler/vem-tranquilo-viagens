@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class OnibusSeeder extends Seeder
+class OnibusUrbanoSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,11 +15,12 @@ class OnibusSeeder extends Seeder
         DB::table('onibus_urbano')->insert([
             'id' => 1,
             'lotacao' => 50,
+            'cidade_id' => 1,
             'arCondicionado' => false,
         ]);
 
         DB::table('onibus')->insert([
-            'id' => 1,
+            'id' => 2,
             'description_id' => 1,
             'description_type' => 'App\OnibusUrbano',
             'acessibilidade' => false,
@@ -36,11 +37,12 @@ class OnibusSeeder extends Seeder
         DB::table('onibus_urbano')->insert([
             'id' => 2,
             'lotacao' => 25,
+            'cidade_id' => 2,
             'arCondicionado' => false,
         ]);
 
         DB::table('onibus')->insert([
-            'id' => 2,
+            'id' => 3,
             'description_id' => 2,
             'description_type' => 'App\OnibusUrbano',
             'acessibilidade' => true,

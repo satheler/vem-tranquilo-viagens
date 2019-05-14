@@ -20,6 +20,24 @@
 
         @include('layouts.footers.auth')
     </div>
+
+    <div class="modal fade" id="modal-infos" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-title-default">Informações detalhadas do ônibus</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('js')
@@ -41,32 +59,15 @@ $(document).ready( function () {
     table = $('#datatable-basic').DataTable();
 });
 
-$('[data-remove-id]').on('click', async function () {
-    let id = $(this).data('remove-id');
 
-    let response = await Swal.fire({
-        title: 'Você tem certeza que deseja remover este funcionário?',
-        type: 'question',
-        showCancelButton: true,
-        confirmButtonColor: '#28a745',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Sim, tenho certeza!',
-        cancelButtonText: 'Não, cancelar'
+$('[data-show-id]').on('click', function() {
+    let id = $(this).data('show-id');
+
+    axios.get(`${url}/${id}`)
+    .then(data => {
+        $(".modal-body").html(data.data)
+        $("#modal-infos").modal('show');
     })
-
-    if(response.value){
-        axios.delete(`${url}/${id}`)
-        .then(data => {
-            table.row(`[data-table-row-id="${id}"]`).remove();
-            table.draw();
-            Swal.fire('Funcionário removido com sucesso!', '', 'success')
-            console.log(data);
-        })
-        .catch((error) => {
-            console.error(error);
-            Swal.fire('Aconteceu um erro inesperado...', '', 'error' )
-        })
-    }
 })
 </script>
 @endpush

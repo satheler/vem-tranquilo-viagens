@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Auth;
 use Exception;
 use Validator;
 
@@ -30,20 +30,21 @@ class TrajetoUrbano extends Model
         $validator = Validator::make($input, [
             'qntParadas' => 'required|integer',
             'terminal' => 'required|string',
-            'horarioSaida' => 'required|time',
-            'horarioChegada' => 'required|time',
-            'endereco_id'=> 'existis:cidade,id'
+            'horarioSaida' => 'required|date_format:H:i',
+            'horarioChegada' => 'required|date_format:H:i',
+            'quilometragem' => 'required|numeric'
         ]);
 
         if ($validator->fails()) {
-            throw new Exception($validator->messages());
+           return $validator;
         }
 
         $this->qntParadas = $input['qntParadas'];
         $this->terminal = $input['terminal'];
         $this->horarioSaida = $input['horarioSaida'];
         $this->horarioChegada = $input['horarioChegada'];
-        $this->endereco_id= $input['endereco_id'];
+        $this->quilometragem = $input['quilometragem'];
+        $this->cidade_id = Auth::user()->rodoviaria->cidade_id;
 
         $this->save();
     }

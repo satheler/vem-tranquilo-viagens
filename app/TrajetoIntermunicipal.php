@@ -13,12 +13,22 @@ class TrajetoIntermunicipal extends Model
 
     public function trechos()
     {
-        return $this->belongsToMany('App\Trecho', 'trajeto_trecho', 'trajeto_id', 'trecho_id');
+        return $this->belongsToMany('App\Trecho', 'trajeto_trecho', 'trajeto_id', 'trecho_id')
+            ->withPivot('horarioSaida')
+            ->withPivot('horarioChegada');
     }
 
     public function getAll()
     {
         return $this->all();
+    }
+
+    public function getByFilter($origem_id, $destino_id, $data)
+    {
+        return $this->whereHas('trechos', function ($query) use ($origem_id, $destino_id, $data) {
+            $query->where('origem_id', $origem_id)
+                  ->where('destino_id', $destino_id);
+        })->get();
     }
 
     public function get(int $id){
@@ -30,12 +40,30 @@ class TrajetoIntermunicipal extends Model
     {
         $validator = Validator::make($input, [
             'trechos' => 'required|array',
+            'horarioSaida' => 'required|array',
+            'horarioChegada' => 'required|array',
         ]);
 
+        $trechos = $this->normalize($input['trechos'], $input['horarioSaida'], $input['horarioChegada']);
+
         $this->save();
-        $this->trechos()->attach($input['trechos']);
+        $this->trechos()->attach($trechos);
     }
 
+    private function normalize(array $trechos, array $horarioSaida, array $horarioChegada) {
+
+        $listaTrechos = [];
+
+        for ($i=0; $i < count($trechos); $i++) {
+            array_push($listaTrechos, [
+                "trecho_id" => $trechos[$i],
+                "horarioSaida" => $horarioSaida[$i],
+                "horarioChegada" => $horarioChegada[$i]
+            ]);
+        }
+
+        return $listaTrechos;
+    }
 
     public function remove(int $id)
     {

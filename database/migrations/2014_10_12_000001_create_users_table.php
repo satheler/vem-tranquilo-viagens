@@ -18,8 +18,13 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+
             $table->unsignedBigInteger('tipo_usuario_id')->default(0);
             $table->foreign('tipo_usuario_id')->references('id')->on('tipos_usuario');
+
+            $table->unsignedBigInteger('rodoviaria_id')->nullable();
+            $table->foreign('rodoviaria_id')->references('id')->on('rodoviarias');
+
             $table->rememberToken();
             $table->timestamps();
         });

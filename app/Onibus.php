@@ -16,6 +16,11 @@ class Onibus extends Model
         return $this->morphTo();
     }
 
+    public function seguro()
+    {
+        return $this->belongsToMany('App\Seguro', 'seguro_onibus', 'onibus_id', 'seguro_id');
+    }
+
     public function get($id)
     {
         return $this->find($id);
@@ -23,7 +28,7 @@ class Onibus extends Model
 
     public function getAll()
     {
-        return $this->where('inativo', true)->get();
+        return $this->all();
     }
 
     public function add(array $input)
@@ -51,7 +56,7 @@ class Onibus extends Model
         $this->marca = $input['marca'];
 
         $data_fabricacaoConverter = date_create_from_format('d/m/Y', $input['data_fabricacao']);
-        $this->data_fabricacao = $data_fabricacao->format('Y-m-d');
+        $this->data_fabricacao = $data_fabricacaoConverter->format('Y-m-d');
 
         $data_compraConverter = date_create_from_format('d/m/Y', $input['data_compra']);
         $this->data_compra = $data_compraConverter->format('Y-m-d');

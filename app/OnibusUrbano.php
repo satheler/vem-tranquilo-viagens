@@ -20,11 +20,20 @@ class OnibusUrbano extends Model
         return $this->morphOne('App\Onibus', 'description');
     }
 
+    public function cidade() {
+        return $this->hasOne('App\Cidade', 'id', 'cidade_id');
+    }
+
     public function getAll()
     {
         return $this->whereHas('description', function ($query) {
             $query->where('inativo', false);
         })->get();
+    }
+
+    public function getByCidade(int $cidade_id)
+    {
+        return $this->where('cidade_id', $cidade_id)->get();
     }
 
     public function get(int $id)
@@ -34,11 +43,27 @@ class OnibusUrbano extends Model
         return $onibus;
     }
 
+    public function getFrota(int $id)
+    {
+
+        $frota = $this->where('frota_id', $id)->get();
+
+        foreach($frota as $bus => $onibus)
+        {
+            $bus .= $this->get($onibus->id);
+        }
+
+        return $bus;
+    }
+
+
+
     public function add(array $input)
     {
         $validator = Validator::make($input, [
             'lotacao' => 'required|integer',
             'arCondicionado' => 'required|boolean',
+            'cidade' => 'exists:cidades,id'
         ]);
 
         if ($validator->fails()) {
@@ -47,6 +72,7 @@ class OnibusUrbano extends Model
 
         $this->lotacao = $input['lotacao'];
         $this->arCondicionado = $input['arCondicionado'];
+        $this->cidade_id = $input['cidade'];
 
         $onibus = new Onibus();
         $onibusAdd = $onibus->add($input);

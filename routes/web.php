@@ -34,6 +34,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::prefix('trajeto')->name('trajeto_')->group(function () {
         Route::resource('urbano', 'TrajetoUrbanoController');
         Route::resource('intermunicipal', 'TrajetoIntermunicipalController');
+        Route::get('intermunicipal/create/prepare', 'TrajetoIntermunicipalController@prepareCreate')->name('intermunicipal.create.prepare');
+        Route::get('intermunicipal/create/{qntTrechos}', 'TrajetoIntermunicipalController@create');
         Route::resource('trecho', 'TrechoController');
     });
 
@@ -56,4 +58,29 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('urbano', 'AlocacaoUrbanoController');
         Route::resource('intermunicipal', 'AlocacaoIntermunicipalController');
     });
+
+    Route::resource('seguro', 'SeguroController');
+
+    Route::prefix('compra')->name('compra_')->group(function () {
+        Route::resource('intermunicipal', 'CompraPassagensIntermunicipalController');
+
+    });
+
+
+    Route::prefix('rodoviarias')->name('rodoviarias_')->group(function () {
+        Route::resource('ativas', 'RodoviariasController');
+        Route::resource('inativas', 'RodoviariasInativasController');
+    });
+
+    Route::prefix('venda')->name('venda_')->group(function() {
+
+        Route::group(['prefix' => 'intermunicipal', 'as' => 'intermunicipal'], function () {
+            Route::get('', 'VendaPassagemIntermunicipalController@index')->name('.index');
+            Route::get('{origem}/{destino}/{data}', 'VendaPassagemIntermunicipalController@list')->name('.list');
+            Route::post('search', 'VendaPassagemIntermunicipalController@search')->name('.search');
+        });
+
+
+    });
+
 });
