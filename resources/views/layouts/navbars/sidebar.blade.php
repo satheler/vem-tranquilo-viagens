@@ -271,6 +271,16 @@
                 </li>
             @endif
             <!-- Gerenciar rodoviarias :: FIM -->
+
+            <!-- Passagem :: INICIO -->
+            @if (@auth()->user()->tipo_usuario_id === 3)
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('passagem.index') }}">
+                            <i class="fas fa-money-bill"></i> {{ __('Passagens') }}
+                        </a>
+                    </li>
+            @endif
+        <!-- Passagem :: FIM -->
             </ul>
         </div>
     </div>

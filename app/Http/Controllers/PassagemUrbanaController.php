@@ -18,8 +18,10 @@ class PassagemUrbanaController extends Controller
     public function index()
     {
         $passagem = new PassagemUrbana();
-        $lista = $passagem->calcularLucroMensal();
-        return $lista;
+        $lista = $passagem->getAll();
+        return view('passagem.main.index', compact('lista'));
+        // $lista = $passagem->calcularLucroMensal();
+        // return $lista;
        // return view('passagem.urbana.index', compact('lista'));
 
     }
