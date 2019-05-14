@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\OnibusUrbano;
+use App\RegistroManutencao;
 use App\Cidade;
 use Exception;
 use Illuminate\Http\Request;
@@ -100,10 +102,25 @@ class OnibusUrbanoController extends Controller
     public function update(Request $request, $id)
     {
         try {
-
             $onibuseditado = new OnibusUrbano();
+            if($request->input('goManutencao')){
+                $validator = $onibuseditado->manutencao($request->input(), $id);
+
+                if($validator instanceof \Illuminate\Validation\Validator) {
+                    return response(["status" => "FALHA", "falhas" => $validator], 400);
+                } else {
+                    return response(["status" => "Manutenção registrada com sucesso."], 202);
+                }
+
+            }
+            $registroEditado = new RegistroManutencao();
+            $registro =$registroEditado->getId($id);
+
+            //$regId = $registro->id;
+            $registroEditado->edit($request->input(), $registro->id);
             $onibuseditado->edit($id);
-            return response(["status" => "Ônibus atualizado com sucesso"], 202);
+
+            return response(["status" => "Manutenção finalizada com sucesso."], 202);
 
         } catch (Exception $e) {
             return response($e->getMessage(), 400);

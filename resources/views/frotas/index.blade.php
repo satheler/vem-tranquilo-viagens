@@ -55,6 +55,7 @@
 <script src="{{ asset('argon') }}/vendor/datatables/dist/js/buttons.print.min.js"></script>
 <script src="{{ asset('argon') }}/vendor/datatables/dist/js/dataTables.select.min.js"></script>
 <script src="{{ asset('argon') }}/vendor/sweetalert2/dist/sweetalert2.js"></script>
+<script src="{{ asset('argon') }}/vendor/jquery-mask/dist/jquery.mask.min.js"></script>
 
 <script>
 
@@ -105,36 +106,184 @@ $('[data-remove-id]').on('click', async function () {
 })
 
 
-$('[data-available-id]').on('click', async function () {
+$('[data-available-id][data-manutencao=true]').on('click', vaiParaManutencao)
+
+async function vaiParaManutencao() {
     let id = $(this).data('available-id');
+    const t = {}
 
-    let response = await Swal.fire({
-        title: 'Você tem certeza que deseja mudar a disponibilidade deste ônibus?',
-        type: 'question',
-        showCancelButton: true,
-        confirmButtonColor: '#28a745',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Sim, tenho certeza!',
-        cancelButtonText: 'Não, cancelar'
+const {value: formValues} = await Swal.fire({
+    onOpen: () => {
+         $('[money]').mask('###0.00', { reverse: true });
+     },
+     title: 'Valor',
+     text: 'Insira o valor total da  manutenção?',
+     input: 'text',
+    inputAttributes: {
+        autocapitalize: 'off',
+        money: ''
+    },
+    inputPlaceholder: '0,00',
+    inputValidator: (value) => {
+        t.motivo = document.getElementById('swal-input1').value;
+        t.oficina = document.getElementById('swal-input2').value;
+        t.data = document.getElementById('swal-input3').value;
+
+        const now = new Date();
+        const then = new Date(t.data);
+        if (now < then) {
+            return 'Data inválida!'
+        }
+
+        const {motivo, oficina, data} = t
+
+        if (!value || motivo === "" || oficina === "" || data === "") {
+            return 'Todos os campos devem ser preenchidos!'
+        }
+    },
+    html:
+        '<div class="text-left">' +
+        '<label><b>Motivo:</b></label>' +
+        '</div>' +
+        '<input id="swal-input1" class="swal2-input" placeholder="O que aconteceu?">' +
+        '<div class="text-left">' +
+        '<label><b>Oficina:</b></label>' +
+        '</div>' +
+        '<input id="swal-input2" class="swal2-input" placeholder="Nome da oficina">' +
+        '<div class="text-left">' +
+        '<label><b>Data de entrada:</b></label>' +
+        '</div>' +
+        '<input type="date" id="swal-input3" class="swal2-input" max="2019-12-31" min="2010-01-01">' +
+        '<div class="text-left">' +
+        '<label><b>Valor do Orçamento:</b></label>' +
+        '</div>',
+    focusConfirm: false,
+}).then(data => {
+
+    if(data.dismiss) {
+        return
+    }
+    axios.put(`${url}/${id}`,  {
+        goManutencao: true,
+        valorOrcamento: data.value,
+        motivo: t.motivo,
+        oficina: t.oficina,
+        data: t.data
+
     })
-
-    if(response.value){
-        axios.put(`${url}/${id}`)
         .then(data => {
             Swal.fire('Estado do Ônibus alterado com sucesso!', '', 'success')
-            console.log(data);
+            $(this).attr("data-manutencao", false)
+            $(this).attr("onclick", "sairDaManutencao()")
 
             $(`[data-badge-available-id="${id}"]`).attr('class').includes('badge-warning') ?
             $(`[data-badge-available-id="${id}"]`).removeClass('badge-warning').addClass('badge-success').text('Disponivel') :
             $(`[data-badge-available-id="${id}"]`).removeClass('badge-success').addClass('badge-warning').text('Em manutenção')
         })
+        .then(data => {
+            setTimeout(() => {
+                location.reload();
+            }, 1000);
+        })
+        .catch((error) => {
+            console.error(error);
+            Swal.fire('Aconteceu um erro inesperado....', '', 'error' )
+        })
+
+  }).catch((error) => {
+            console.error(error);
+            Swal.fire('Aconteceu um erro inesperado...', '', 'error' )
+        })
+}
+
+$('[data-available-id][data-manutencao=false]').on('click', sairDaManutencao)
+
+async function sairDaManutencao() {
+
+    let id = $(this).attr('data-available-id');
+    const t = {}
+
+    const {value: formValues} = await Swal.fire({
+    onOpen: () => {
+         $('[money]').mask('###0.00', { reverse: true });
+     },
+     title: 'Valor',
+     text: 'Insira o valor total da  manutenção?',
+     input: 'text',
+     showCancelButton: true,
+     confirmButtonColor: '#28a745',
+     cancelButtonColor: '#d33',
+     confirmButtonText: 'Ok',
+     cancelButtonText: 'Cancelar',
+    inputAttributes: {
+        autocapitalize: 'off',
+        money: ''
+    },
+    inputPlaceholder: '0,00',
+    inputValidator: (value) => {
+        t.obs = document.getElementById('swal-input1').value;
+        t.data = document.getElementById('swal-input2').value;
+
+        const now = new Date();
+        const then = new Date(t.data);
+        if (now < then) {
+            return 'Data inválida!'
+        }
+        const {obs, data} = t
+
+        if (!value || data === "") {
+            return 'Valor e data são campos obrigatórios!'
+        }
+    },
+    html:
+        '<div class="text-left">' +
+        '<label><b>Observação:</b></label>' +
+        '</div>' +
+        '<input id="swal-input1" class="swal2-input" placeholder="Alguma observação?">' +
+        '<div class="text-left">' +
+        '<label><b>Data de Saída:</b></label>' +
+        '</div>' +
+        '<input type="date" id="swal-input2" class="swal2-input" max="2019-12-31" min="2010-01-01">' +
+        '<div class="text-left">' +
+        '<label><b>Valor Total da Manutenção:</b></label>' +
+        '</div>',
+    focusConfirm: false,
+    width: '800px'
+}).then(data => {
+
+    if(data.dismiss) {
+        return
+    }
+        axios.put(`${url}/${id}`, {
+            valorTotal: data.value,
+            observacao: t.obs,
+            data: t.data
+        })
+        .then(data => {
+
+            Swal.fire('Estado do Ônibus alterado com sucesso!', '', 'success')
+            $(this).attr("data-manutencao", true)
+            $(this).attr("data-available-id", id)
+            $(this).attr("onclick", "vaiParaManutencao()")
+
+            $(`[data-badge-available-id="${id}"]`).attr('class').includes('badge-warning') ?
+            $(`[data-badge-available-id="${id}"]`).removeClass('badge-warning').addClass('badge-success').text('Disponivel') :
+            $(`[data-badge-available-id="${id}"]`).removeClass('badge-success').addClass('badge-warning').text('Em manutenção')
+        })
+        .then(data => {
+            setTimeout(() => {
+                location.reload();
+            }, 1000);
+        })
         .catch((error) => {
             console.error(error);
             Swal.fire('Aconteceu um erro inesperado...', '', 'error' )
         })
-
-    }
-})
+    }).catch((error) => {
+            console.error(error);
+            Swal.fire('Aconteceu um erro inesperado...', '', 'error' )
+        })
+}
 
 $('[data-show-id]').on('click', function() {
     let id = $(this).data('show-id');
@@ -145,5 +294,16 @@ $('[data-show-id]').on('click', function() {
         $("#modal-infos").modal('show');
     })
 })
+
+$('[data-register-id]').on('click', function(){
+
+    let id = $(this).data('register-id');
+    console.log(id);
+
+    axios.get(`${url}/${id}`)
+})
+
 </script>
 @endpush
+
+

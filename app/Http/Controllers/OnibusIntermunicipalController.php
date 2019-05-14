@@ -97,14 +97,25 @@ class OnibusIntermunicipalController extends Controller
     public function update(Request $request, $id)
     {
         try {
-
             $onibuseditado = new OnibusIntermunicipal();
+            if($request->input('goManutencao')){
+                $validator = $onibuseditado->manutencao($request->input(), $id);
+
+                if($validator instanceof \Illuminate\Validation\Validator) {
+                    return response(["status" => "FALHA", "falhas" => $validator], 400);
+                } else {
+                    return response(["status" => "Manutenção registrada com sucesso."], 202);
+                }
+
+            }
             $onibuseditado->edit($id);
-            return response(["status" => "Ônibus atualizado com sucesso"], 202);
+            return response(["status" => "Manutenção finalizada com sucesso."], 202);
+            //return response(["status" => "foi também"], 202);
 
         } catch (Exception $e) {
             return response($e->getMessage(), 400);
         }
+        
     }
 
     /**

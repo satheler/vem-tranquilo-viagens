@@ -33,6 +33,7 @@ class Onibus extends Model
 
     public function add(array $input)
     {
+
         $date = new DateTime();
         $validator = Validator::make($input, [
             'acessibilidade' => 'required|boolean',

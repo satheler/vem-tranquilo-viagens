@@ -5,11 +5,16 @@ namespace App;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use \Validator as Validator;
+use App\RegistroManutencao;
 
 class OnibusIntermunicipal extends Model
 {
     protected $table = 'onibus_intermunicipal';
 
+    public function manutencoes(){
+        return $this->hasMany('App\RegistroManutencao', 'onibus_id', 'id');
+    }
+    
     public function assento()
     {
         return $this->hasMany('App\AssentoOnibus',  'onibus_id', 'id');
@@ -61,10 +66,34 @@ class OnibusIntermunicipal extends Model
     {
         $onibus = $this->find($id);
         $description = $onibus->description;
-        $description->disponivel = !$description->disponivel;
+        $description->disponivel = true;
 
-        $onibus->save();
         $onibus->description()->save($description);
+        $onibus->save();
+    }
+
+    public function manutencao(array $input, int $id)
+    {
+        $validator = Validator::make($input, [
+            'motivo' => 'required|string',
+            'valor' => 'required|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            return $validator;
+        }
+
+        $onibus = $this->find($id);
+        $description = $onibus->description;
+        $description->disponivel = false;
+        
+        $registro = new RegistroManutencao();
+        $registro->motivo = $input['motivo'];
+        $registro->valor = $input['valor'];
+        
+        $onibus->manutencoes()->save($registro);
+        $onibus->description()->save($description);
+        $onibus->save();
     }
 
     public function disable(int $id, array $input)
