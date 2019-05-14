@@ -64,7 +64,6 @@ class OnibusUrbanoController extends Controller
      */
     public function show($id)
     {
-
         $onibus = new OnibusUrbano();
         $item = $onibus->get($id);
         return view('frotas.urbano.show', compact('item'));

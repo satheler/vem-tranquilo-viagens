@@ -108,8 +108,6 @@ $('[data-remove-id]').on('click', async function () {
 
 $('[data-available-id][data-manutencao=true]').on('click', vaiParaManutencao)
 
-
-
 async function vaiParaManutencao() {
     let id = $(this).data('data-available-id');
     const t = {}
@@ -138,8 +136,6 @@ const {value: formValues} = await Swal.fire({
         }
 
         const {motivo, oficina, data} = t
-        //console.log(t);
-        //console.log(value);
 
         if (!value || motivo === "" || oficina === "" || data === "") {
             return 'Todos os campos devem ser preenchidos!'
@@ -168,7 +164,6 @@ const {value: formValues} = await Swal.fire({
     if(data.dismiss) {
         return
     }
-        console.log(t, data.value);
         axios.put(`${url}/${id}`, {
             goManutencao: true,
             valorOrcamento: data.value,
@@ -234,10 +229,7 @@ async function sairDaManutencao() {
         if (now < then) {
             return 'Data inválida!'
         }
-
         const {obs, data} = t
-        //console.log(t);
-        //console.log(value);
 
         if (!value || data === "") {
             return 'Valor e data são campos obrigatórios!'
@@ -256,24 +248,12 @@ async function sairDaManutencao() {
         '<label><b>Valor Total da Manutenção:</b></label>' +
         '</div>',
     focusConfirm: false,
-
-    // let response = await Swal.fire({
-    //     title: 'A manutenção deste ônibus já está pronta?',
-    //     type: 'question',
-
-    // })
-    // if(response.value){
-    //     axios.put(`${url}/${id}`,{
-    //         goManutencao: false
-    //     })
-
-
+    width: '800px'
 }).then(data => {
 
     if(data.dismiss) {
         return
     }
-        console.log(t, data.value);
         axios.put(`${url}/${id}`, {
             valorTotal: data.value,
             observacao: t.obs,
@@ -315,53 +295,13 @@ $('[data-show-id]').on('click', function() {
     })
 })
 
-//$('[data-register-id]').on('click')
+$('[data-register-id]').on('click', function(){
 
-// async function mostrarRegistro() {
-//     let id = $(this).data('register-id');
-//     console.log(id);
+    let id = $(this).data('register-id');
+    console.log(id);
 
-//         Swal.fire({
-//         html:
-//         '<div class="card-body">' +
-//         '<div class="table-responsive py-4">' +
-//         '<table id="datatable-manutencao" class="table align-items-center table-flush dataTable">' +
-//         '<thead class="thead-light">' +
-//         '<tr>' +
-//         '<th scope="col"></th>' +
-//         '<th scope="col">{{ __("Motivo") }}</th>' +
-//         '<th scope="col">{{ __("Oficina") }}</th>' +
-//         '<th scope="col">{{ __("Orçamento") }}</th>' +
-//         '<th scope="col">{{ __("Data de Entrada") }}</th>' +
-//         '<th scope="col">{{ __("Data de Saída") }}</th>' +
-//         '<th scope="col">{{ __("Valor Final") }}</th>' +
-//         '<th scope="col">{{ __("Observação") }}</th>' +
-//         '</tr>' +
-//         '</thead>' +
-//         '<tbody>' +
-//         '@foreach ($lista as $item)' +
-//         '<tr data-table-row-id={{ $item->id }}>' +
-//         '<td>{{ $item->motivo }}</td>' +
-//         '<td>{{ $item->oficina }}</td>' +
-//         '<td>{{ $item->orcamento }}</td>' +
-//         '<td>{{ $item->data_entrada }}</td>' +
-//         '<td>{{ $item->data_saida }}</td>' +
-//         '<td>{{ $item->valor_final }}</td>' +
-//         '<td>{{ $item->observacao }}</td>' +
-//         '</tr>' +
-//         '@endforeach' +
-//         '</tbody>' +
-//         '</table>' +
-//         '</div>' +
-//         '</div>',
-//     focusConfirm: false,
-//     width: '1200px'
-
-
-
-
-//     })
-//     }
+    axios.get(`${url}/${id}`)
+})
 
 </script>
 @endpush

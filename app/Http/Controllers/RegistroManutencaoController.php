@@ -65,8 +65,8 @@ class RegistroManutencaoController extends Controller
     {
         $registro = new RegistroManutencao();
         $idRegistro = $registro->getId($id);
-        $item = $registro->get($idRegistro->id);
-        return view('manutencoes.main.show', compact('item'));
+        $lista = $registro->get($idRegistro->id);
+        return view('manutencoes.main.show', compact('lista'));
     }
 
     /**
