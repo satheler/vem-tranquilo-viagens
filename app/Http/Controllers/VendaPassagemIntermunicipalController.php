@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Cidade;
+use App\TrajetoIntermunicipal;
 
-class VendaPassagemIntermunicipal extends Controller
+class VendaPassagemIntermunicipalController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,86 +16,33 @@ class VendaPassagemIntermunicipal extends Controller
     public function index()
     {
         $cidades = new Cidade();
-        $lista["cidade"] = $cidades->getAll();
-        return view('venda_passagens_intermunicipal.main.index', compact('lista'));
+        $cidades = $cidades->getAll();
+        return view('venda_passagens_intermunicipal.main.index', compact('cidades'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $lista = [];
-        return view('venda_passagens_intermunicipal.main.create', compact('lista'));
+    public function search(Request $request) {
+        $origem = $request->input('origem');
+        $destino = $request->input('destino');
+
+        $dataConverter = date_create_from_format('d/m/Y', $request->input('data'));
+        $data = $dataConverter->format('Y-m-d');
+
+        return redirect()
+            ->route('venda_intermunicipal.list', ["origem" => $origem, "destino" => $destino, "data" => $data]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function list($origem, $destino, $data)
     {
-        $onibus = new OnibusUrbano();
-        $validator = $onibus->add($request->input());
+        $cidades = new Cidade();
+        $cidades = $cidades->getAll();
 
-        if($validator instanceof \Illuminate\Validation\Validator) {
-            return redirect()
-                ->route('ROTA_PARA_PAGAMENTO_DA_PASSAGEM');
-        } else {
-            return redirect()
-                    ->route('venda_passagens_intermunicipal.create')
-                    ->withErrors($validator)
-                    ->withInput();
-        }
-    }
+        $trajetos = new TrajetoIntermunicipal();
+        $trajetosDisponiveis = $trajetos->getAll();
+        $trajetos = $trajetosDisponiveis;
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $lista = [];
-        return view('venda_passagens_intermunicipal.main.show', compact('lista'));
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        return response('Metodo não implementado', 501);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        return response('Metodo não implementado', 501);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        return response('Metodo não implementado', 501);
+        $data_converter = date_create_from_format('Y-m-d', $data);
+        $data = $data_converter->format('d/m/Y');
+        return view('venda_passagens_intermunicipal.main.index', compact('cidades', 'trajetos', 'origem', 'destino', 'data'));
     }
 }
