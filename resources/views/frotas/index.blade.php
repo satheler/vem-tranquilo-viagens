@@ -109,7 +109,7 @@ $('[data-remove-id]').on('click', async function () {
 $('[data-available-id][data-manutencao=true]').on('click', vaiParaManutencao)
 
 async function vaiParaManutencao() {
-    let id = $(this).data('data-available-id');
+    let id = $(this).data('available-id');
     const t = {}
 
 const {value: formValues} = await Swal.fire({
