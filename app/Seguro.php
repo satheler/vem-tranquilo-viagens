@@ -47,6 +47,7 @@ class Seguro extends Model
     {
 
         $onibus = new Onibus();
+        $validator ='';
 
         foreach ($listaOnibus as $itemOnibus) {
             $item = $onibus->get($itemOnibus);
