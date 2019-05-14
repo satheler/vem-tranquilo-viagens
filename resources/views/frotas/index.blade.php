@@ -130,19 +130,10 @@ const {value: formValues} = await Swal.fire({
         t.motivo = document.getElementById('swal-input1').value;
         t.oficina = document.getElementById('swal-input2').value;
         t.data = document.getElementById('swal-input3').value;
+        
         const now = new Date();
-        const dia = now.getDate();
-        const mes = now.getMonth();
-        const ano = now.getFullYear();
-
-        const dateArray = t.data.split("-");
-        console.log(dateArray);
-
-        if (ano < dateArray[0]) {
-            return 'Data inválida!'
-        } else if(mes < dateArray[1]){
-            return 'Data inválida!'
-        }else if(dia < dateArray[2]){
+        const then = new Date(t.data);
+        if (now < then) {
             return 'Data inválida!'
         }
 
@@ -236,28 +227,13 @@ async function sairDaManutencao() {
     inputValidator: (value) => {
         t.obs = document.getElementById('swal-input1').value;
         t.data = document.getElementById('swal-input2').value;
+        
         const now = new Date();
-        const dia = now.getDate();
-        const mes = now.getMonth();
-        const ano = now.getFullYear();
-
-        const dateArray = t.data.split("-");
-        console.log(dateArray);
-        console.log(dia);
-        console.log(mes);
-        console.log(ano);
-
-
-        if (ano < dateArray[0]) {
-            console.log(ano);
-            return 'Data inválida!'
-        } else if(mes + 1< dateArray[1]){
-            console.log(mes);
-            return 'Data inválida!'
-        }else if(dia < dateArray[2]){
-            console.log(dia);
+        const then = new Date(t.data);
+        if (now < then) {
             return 'Data inválida!'
         }
+
         const {obs, data} = t
         //console.log(t);
         //console.log(value);
@@ -313,11 +289,11 @@ async function sairDaManutencao() {
             $(`[data-badge-available-id="${id}"]`).removeClass('badge-warning').addClass('badge-success').text('Disponivel') :
             $(`[data-badge-available-id="${id}"]`).removeClass('badge-success').addClass('badge-warning').text('Em manutenção')
         })
-        .then(data => {
-            setTimeout(() => {
-                location.reload();
-            }, 1000);
-        })
+        // .then(data => {
+        //     setTimeout(() => {
+        //         location.reload();
+        //     }, 1000);
+        // })
         .catch((error) => {
             console.error(error);
             Swal.fire('Aconteceu um erro inesperado...', '', 'error' )

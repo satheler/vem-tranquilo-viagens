@@ -61,30 +61,11 @@ class OnibusUrbano extends Model
 
     public function edit(int $id)
     {
-        $validator = Validator::make($input, [
-            'observacao' => 'required|string',
-            'valorTotal' => 'required|numeric',
-            'data' => 'required|string',
-            ]);
-
-            if ($validator->fails()) {
-                return $validator;
-            }
-        return;
-
         $onibus = $this->find($id);
         $description = $onibus->description;
-        //$description->disponivel = true;
-
-        $registro = new RegistroManutencao();
-        $registro->observacao = $input['observacao'];
-        $registro->valor_final = $input['valorTotal'];
-        $data_converter = date_create_from_format('Y-m-d', $input['data']);
-        $registro->data_saida = $data_converter;
-
-        $onibus->manutencoes()->save($registro);
-        $onibus->description()->save($description);
+        $description->disponivel = !$description->disponivel;
         $onibus->save();
+        $onibus->description()->save($description);
     }
 
     public function manutencao(array $input, int $id)
