@@ -70,7 +70,6 @@ class OnibusUrbano extends Model
 
     public function manutencao(array $input, int $id)
     {
-
         $validator = Validator::make($input, [
             'motivo' => 'required|string',
             'valorOrcamento' => 'required|numeric',

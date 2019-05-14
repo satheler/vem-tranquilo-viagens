@@ -158,19 +158,19 @@ const {value: formValues} = await Swal.fire({
         '<label><b>Valor do Orçamento:</b></label>' +
         '</div>',
     focusConfirm: false,
-    width: '800px'
 }).then(data => {
 
     if(data.dismiss) {
         return
     }
-        axios.put(`${url}/${id}`, {
-            goManutencao: true,
-            valorOrcamento: data.value,
-            motivo: t.motivo,
-            oficina: t.oficina,
-            data: t.data
-        })
+    axios.put(`${url}/${id}`,  {
+        goManutencao: true,
+        valorOrcamento: data.value,
+        motivo: t.motivo,
+        oficina: t.oficina,
+        data: t.data
+
+    })
         .then(data => {
             Swal.fire('Estado do Ônibus alterado com sucesso!', '', 'success')
             $(this).attr("data-manutencao", false)

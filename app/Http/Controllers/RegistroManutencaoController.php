@@ -16,9 +16,12 @@ class RegistroManutencaoController extends Controller
      */
     public function index()
     {
+        // $registro = new RegistroManutencao();
+        // $lista = $registro->getAll();
         $registro = new RegistroManutencao();
-        $lista = $registro->getAll();
-        return view('registro.main.index', compact('lista'));
+        $idRegistro = $registro->getId($id);
+        $lista = $registro->get($idRegistro->id);
+        return view('manutencoes.main.index', compact('lista'));
     }
 
     /**

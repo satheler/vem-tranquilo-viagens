@@ -98,7 +98,6 @@ class OnibusUrbanoController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         try {
             $onibuseditado = new OnibusUrbano();
             if($request->input('goManutencao')){
