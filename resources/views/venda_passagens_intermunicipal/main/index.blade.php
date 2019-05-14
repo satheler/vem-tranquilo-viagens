@@ -2,7 +2,7 @@
 
 @section('infos')
     <div class="card-header border-0">
-        <div class="row align-items-center">
+        <div class="row align-cidades-center">
             <div class="col-8">
                 <h3 class="mb-0">{{ __('Venda de Passagens') }}</h3>
             </div>
@@ -18,15 +18,16 @@
             </div>
         @endif
     </div>
+
     <div class="card-body py-4">
-        <form action="{{ route('venda_intermunicipal.create') }}" method="post">
+        <form action="{{ route('venda_intermunicipal.search') }}" method="post">
             <div class="row justify-content-center">
                 <div class="col-lg-3 form-group{{ $errors->has('origem') ? ' has-danger' : '' }}">
                     <label class="form-control-label{{ $errors->has('origem') ? ' text-warning' : '' }} text-lighter" for="form-control-label"> {{__('ORIGEM')}}</label>
                     <select bootstrapSelect name="origem"  data-size="4" data-live-search="true" required>
                         <option value="" disabled selected>Selecione a origem...</option>
-                        @foreach ($lista["cidade"] as $item)
-                            <option @if($errors->has('origem') && ($errors->first('origem') == $item->id) || old('origem', Auth::user()->cidade_id) == $item->id) selected @endif value="{{ $item->id }}">{{ $item->nome }}</option>
+                        @foreach ($cidades as $cidade)
+                            <option @if($errors->has('origem') && ($errors->first('origem') == $cidade->id) || old('origem', $origem ?? Auth::user()->cidade_id) == $cidade->id) selected @endif value="{{ $cidade->id }}">{{ $cidade->nome }}</option>
                             @endforeach
                     </select>
                     @if ($errors->has('origem'))
@@ -38,8 +39,8 @@
                     <label class="form-control-label{{ $errors->has('destino') ? ' text-warning' : '' }} text-lighter" for="form-control-label"> {{__('DESTINO')}}</label>
                     <select bootstrapSelect name="destino"  data-size="4" data-live-search="true" required>
                         <option value="" disabled selected>Selecione a destino...</option>
-                        @foreach ($lista["cidade"] as $item)
-                            <option @if($errors->has('destino') && ($errors->first('destino') == $item->id) || old('destino') == $item->id) selected @endif value="{{ $item->id }}">{{ $item->nome }}</option>
+                        @foreach ($cidades as $cidade)
+                            <option @if($errors->has('destino') && ($errors->first('destino') == $cidade->id) || old('destino', $destino ?? null) == $cidade->id) selected @endif value="{{ $cidade->id }}">{{ $cidade->nome }}</option>
                             @endforeach
                     </select>
                     @if ($errors->has('destino'))
@@ -53,7 +54,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="far fa-clock"></i></span>
                             </div>
-                            <input data name='data' class="form-control datepicker" placeholder="__/__/____" type="text" value="{{ old('data') }}" required>
+                            <input data name='data' class="form-control datepicker" placeholder="__/__/____" type="text" value="{{ old('data', $data ?? null) }}" required>
                         </div>
                     </div>
                 </div>

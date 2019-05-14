@@ -17,13 +17,8 @@
                 </div>
             </div>
         </div>
-        <div class="row mt-5">
-            <div class="col">
-                <div class="card card bg-gradient-default border-0 shadow">
-                    @yield('infos')
-                </div>
-            </div>
-        </div>
+
+        @includeWhen(isset($trajetos), 'venda_passagens_intermunicipal.main.list')
 
         @include('layouts.footers.auth')
     </div>
