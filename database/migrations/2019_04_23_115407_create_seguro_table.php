@@ -1,14 +1,12 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
-class CreateOnibusIntermunicipalTable extends Migration
+class CreateSeguroTable extends Migration
 {
-
-    private $databaseName = "onibus_intermunicipal";
-
+    private $databaseName = 'seguro';
     /**
      * Run the migrations.
      *
@@ -18,11 +16,12 @@ class CreateOnibusIntermunicipalTable extends Migration
     {
         Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
-
-            $table->boolean('banheiro');
-
-            $table->unsignedBigInteger('categoria_onibus_id');
-            $table->foreign('categoria_onibus_id')->references('id')->on('categoria_onibus');
+            $table->string('empresa');
+            $table->double('valor');
+            $table->string('assegura');
+            $table->date('data_inicio');
+            $table->date('data_vigencia');
+            $table->boolean('vigente');
 
             $table->timestamps();
         });

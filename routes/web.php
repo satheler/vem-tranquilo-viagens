@@ -56,6 +56,13 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('urbano', 'AlocacaoUrbanoController');
         Route::resource('intermunicipal', 'AlocacaoIntermunicipalController');
     });
+
+    Route::resource('seguro', 'SeguroController');
+
+});
+
+
+
     
     Route::prefix('compra')->name('compra_')->group(function () {
         Route::resource('intermunicipal', 'CompraPassagensIntermunicipalController');

@@ -215,6 +215,17 @@
                 @endif
                 <!-- Gerenciar trajeto :: FIM -->
 
+
+                <!-- Gerenciar seguros :: INICIO -->
+                @if (@auth()->user()->tipo_usuario_id === 1)
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('seguro.index') }}">
+                        <i class="fas fa-file-signature"></i> {{ __('Gerenciar Seguros') }}
+                    </a>
+                </li>
+                @endif
+                <!-- Gerenciar seguros :: FIM -->
+
                 <!-- Gerenciar alocação :: INICIO -->
                 @if (@auth()->user()->tipo_usuario_id === 1 || @auth()->user()->tipo_usuario_id === 2 )
                     <li class="nav-item">

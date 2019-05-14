@@ -16,6 +16,11 @@ class Onibus extends Model
         return $this->morphTo();
     }
 
+    public function seguro()
+    {
+        return $this->belongsToMany('App\Seguro', 'seguro_onibus', 'onibus_id', 'seguro_id');
+    }
+
     public function get($id)
     {
         return $this->find($id);
@@ -23,7 +28,7 @@ class Onibus extends Model
 
     public function getAll()
     {
-        return $this->where('inativo', true)->get();
+        return $this->all();
     }
 
     public function add(array $input)
