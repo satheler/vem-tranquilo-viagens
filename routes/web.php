@@ -59,16 +59,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('seguro', 'SeguroController');
 
-});
-
-
-
-    
     Route::prefix('compra')->name('compra_')->group(function () {
         Route::resource('intermunicipal', 'CompraPassagensIntermunicipalController');
-    
-    });    
-        
+
+    });
+
 
     Route::prefix('rodoviarias')->name('rodoviarias_')->group(function () {
         Route::resource('ativas', 'RodoviariasController');
@@ -83,7 +78,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('search', 'VendaPassagemIntermunicipalController@search')->name('.search');
         });
 
-        
+
     });
 
 });
