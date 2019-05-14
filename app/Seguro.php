@@ -2,15 +2,15 @@
 
 namespace App;
 
-use Validator;
-use DateTime;
 use Illuminate\Database\Eloquent\Model;
+use Validator;
 
 class Seguro extends Model
 {
     protected $table = 'seguro';
 
-    public function onibus() {
+    public function onibus()
+    {
         return $this->belongsToMany('App\Onibus', 'seguro_onibus', 'seguro_id', 'onibus_id');
     }
 
@@ -19,24 +19,26 @@ class Seguro extends Model
         return $this->all();
     }
 
-    public function get(int $id){
+    public function get(int $id)
+    {
         return $this->find($id);
     }
 
-    public function verificarValidade(array $listaOnibus){
+    public function verificarValidade(array $listaOnibus)
+    {
 
         $onibus = new Onibus();
-        $listaObjectOnibus = [];
 
         foreach ($listaOnibus as $itemOnibus) {
-            $item = $onibus->get($itemOnibus->id);
-            array_push($listaObjectOnibus, $item);
-        }
-
-        foreach ($listaObjectOnibus as $itemOnibus) {
-            if($itemOnibus->seguro()->vigente){
-                $validator = Validator::make($listaOnibus, ['onibus' => 'unique:seguro_onibus,onibus_id']);
-                return $validator;
+            $item = $onibus->get($itemOnibus);
+            if ($item->seguro) {
+                $seguros = $item->seguro;
+                foreach ($seguros as $seguro) {
+                    if ($seguro->vigente == true) {
+                        $validator = 'unique:seguro_onibus,onibus_id';
+                        return $validator;
+                    }
+                }
             }
         }
     }
@@ -48,12 +50,12 @@ class Seguro extends Model
             'empresa' => 'required|string',
             'valor' => 'required|numeric|min:0.01',
             'assegura' => 'required|string',
-            'data_vigencia' => 'required|date_format:d/m/Y|after:'. now()->format('d/m/Y'),
+            'data_vigencia' => 'required|date_format:d/m/Y|after:' . now()->format('d/m/Y'),
             'data_inicio' => 'required|date_format:d/m/Y|before:data_vigencia',
-            'onibus' => 'required|array'
-        ]);
+            'onibus' => 'required|array',
+            'onibus' => ''.$this->verificarValidade($input['onibus'])
 
-        //$validator = $this->verificarValidade($input['onibus']);
+        ]);
 
         if ($validator->fails()) {
             return $validator;
@@ -83,10 +85,10 @@ class Seguro extends Model
             'empresa' => 'required|string',
             'valor' => 'required|numeric|min:0.01',
             'assegura' => 'required|string',
-            'data_vigencia' => 'required|date_format:d/m/Y|after:'. now()->format('d/m/Y'),
+            'data_vigencia' => 'required|date_format:d/m/Y|after:' . now()->format('d/m/Y'),
             'data_inicio' => 'required|date_format:d/m/Y|before:data_vigencia',
             'onibus' => 'required|array',
-            'onibus' => 'unique:seguro_onibus,onibus_id'//Não pode ser feita aqui
+            'onibus' => 'unique:seguro_onibus,onibus_id', //Não pode ser feita aqui
         ]);
 
         if ($validator->fails()) {
@@ -113,7 +115,7 @@ class Seguro extends Model
     {
         $seguro = new Seguro();
         $item = $seguro->find($id);
-        if($item->data_vigencia == now()->format('Y-m-d')){
+        if ($item->data_vigencia == now()->format('Y-m-d')) {
             $item->vigente = false;
 
         }
