@@ -8,7 +8,6 @@ class PassagemIntermunicipal extends Model
 {
     protected $table = 'passagens_intermunicipal';
 
-
     public function getAll() {
         return $this->all();
     }
