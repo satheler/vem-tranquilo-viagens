@@ -59,6 +59,13 @@
     </div>
 </div> --}}
 @foreach ($item->onibus as $item)
-<div>{{ $item->placa }}</div>
+<div class = "col-md-6">
+    <div>Placa: {{ $item->placa }}</div>
+    <div>Marca: {{ $item->marca }}</div>
+    <div>Chassi: {{ $item->chassi }}</div>
+    <div>Modelo: {{ $item->modelo }}</div>
+    <div>Data Compra: {{ $item->data_compra }}</div>
+    <div>Tipo:  {{$item->description_type}} </div>
+</div>
 
 @endforeach

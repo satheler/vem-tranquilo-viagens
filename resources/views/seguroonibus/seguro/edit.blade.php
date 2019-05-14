@@ -42,7 +42,7 @@
 
                                         <select multiple="multiple" name="onibus[]">
                                             @foreach ($lista["onibus"] as $item)
-                                                <option value="{{ $item->id }}">{{ $item->placa}} - {{ $item->marca }}</option>
+                                                <option value="{{ $item->id }}">Placa: {{ $item->placa}} - Marca: {{ $item->marca }} - Chassi: {{ $item->chassi }} - Modelo: {{ $item->modelo }} - Data Compra: {{ $item->data_compra }} - Tipo: {{$item->description_type}}</option>
                                             @endforeach
                                         </select>
 
