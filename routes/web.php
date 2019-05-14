@@ -63,6 +63,11 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::prefix('venda')->name('venda_')->group(function() {
-        Route::resource('intermunicipal', 'VendaPassagemIntermunicipal');
+
+        Route::group(['prefix' => 'intermunicipal', 'as' => 'intermunicipal'], function () {
+            Route::get('', 'VendaPassagemIntermunicipalController@index')->name('.index');
+            Route::get('{origem}/{destino}/{data}', 'VendaPassagemIntermunicipalController@list')->name('.list');
+            Route::post('search', 'VendaPassagemIntermunicipalController@search')->name('.search');
+        });
     });
 });
