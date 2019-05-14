@@ -64,17 +64,18 @@ class AlocacaoUrbano extends Model
         $dataConverter = date_create_from_format('d/m/Y', $input['data']);
         $this->data = $dataConverter->format('Y-m-d');
 
-        $this->save();
+        return $this->save();
     }
 
     public function edit(int $id, array $input)
     {
-        $validator = $this->validate($input);
+        $alocacao = $this->find($id);
+        $validator = $this->validate($input, $alocacao);
         if ($validator->fails()) {
             return $validator;
         }
 
-        $alocacao = $this->find($id);
+        // $alocacao = $this->find($id);
         $alocacao->trajeto_id = $input['trajeto'];
         $alocacao->onibus_id = $input['onibus'];
         $alocacao->motorista_id = $input['motorista_id'];
@@ -87,19 +88,18 @@ class AlocacaoUrbano extends Model
         $dataConverter = date_create_from_format('d/m/Y', $input['data']);
         $alocacao->data = $dataConverter->format('Y-m-d');
 
-        $alocacao->update();
+        return $alocacao->update();
     }
 
     public function inactivate(int $id)
     {
         $alocacao = $this->find($id);
         $alocacao->ativo = false;
-        $alocacao->save();
+        return $alocacao->update();
     }
 
-    private function validate(array $input)
+    private function validate(array $input, $old = null)
     {
-        define("INPUT", $input);
         $validator = Validator::make($input, [
             'trajeto' => 'required|exists:trajeto_urbano,id',
             'data' => 'required|date_format:d/m/Y|after:' . now()->format('d/m/Y'),
@@ -108,18 +108,18 @@ class AlocacaoUrbano extends Model
             'onibus' => [
                 'required',
                 'exists:onibus,id',
-                function ($attribute, $value, $fail) {
-
+                function ($attribute, $value, $fail) use ($input, $old){
                     $result = $this->where('onibus_id', $value)
-                                    ->whereBetween('horarioInicio', [INPUT['horarioInicio'], INPUT['horarioFim']])
-                                    ->whereBetween('horarioFim', [INPUT['horarioInicio'], INPUT['horarioFim']])
-                                    ->whereRaw('? BETWEEN horarioInicio and horarioFim', [INPUT['horarioInicio']])
-                                    ->whereRaw('? BETWEEN horarioInicio and horarioFim', [INPUT['horarioFim']])
-                                    ->whereDate('data', date_create_from_format('d/m/Y', INPUT['data'])->format("Y-m-d"))
+                                    ->whereBetween('horarioInicio', [$input['horarioInicio'], $input['horarioFim']])
+                                    ->whereBetween('horarioFim', [$input['horarioInicio'], $input['horarioFim']])
+                                    ->whereRaw('? BETWEEN horarioInicio and horarioFim', [$input['horarioInicio']])
+                                    ->whereRaw('? BETWEEN horarioInicio and horarioFim', [$input['horarioFim']])
+                                    ->whereDate('data', date_create_from_format('d/m/Y', $input['data'])->format("Y-m-d"))
                                     ->where('ativo', true)
                                     ->first();
 
-                    if ($result) {
+
+                    if ($result && $result->onibus_id !== (isset($old) ? $old->onibus_id : -1)) {
                         $fail('Este ônibus está em conflito de horário, por favor verifique e tente novamente.');
                     }
                 }
@@ -127,22 +127,22 @@ class AlocacaoUrbano extends Model
             'motorista_id' => [
                 'required',
                 'exists:funcionarios,id',
-                function ($attribute, $value, $fail) {
-                    $this->validateFuncionario($attribute, $value, $fail);
+                function ($attribute, $value, $fail) use ($input, $old) {
+                    $this->validateFuncionario($attribute, $value, $fail, $input, $old);
                 },
             ],
             'cobrador_id' => [
                 'required',
                 'exists:funcionarios,id',
-                function ($attribute, $value, $fail) {
-                    $this->validateFuncionario($attribute, $value, $fail);
+                function ($attribute, $value, $fail) use ($input, $old) {
+                    $this->validateFuncionario($attribute, $value, $fail, $input, $old);
                 },
             ],
             'auxiliar_id' => [
                 'nullable',
                 'exists:funcionarios,id',
-                function ($attribute, $value, $fail) {
-                    $this->validateFuncionario($attribute, $value, $fail);
+                function ($attribute, $value, $fail) use ($input, $old) {
+                    $this->validateFuncionario($attribute, $value, $fail, $input, $old);
                 },
             ],
         ]);
@@ -150,14 +150,14 @@ class AlocacaoUrbano extends Model
         return $validator;
     }
 
-    private function validateFuncionario($attribute, $value, $fail)
+    private function validateFuncionario($attribute, $value, $fail, $input, $old = null)
     {
-        $result = $this->where('data', date_create_from_format('d/m/Y', INPUT['data'])->format('Y-m-d'))
+        $result = $this->where('data', date_create_from_format('d/m/Y', $input['data'])->format('Y-m-d'))
             ->where($attribute, $value)
             ->where('ativo', true)
             ->first();
 
-        if ($result) {
+        if ($result && $result->$attribute !== (isset($old) ? $old->$attribute : -1)) {
             $fail('Funcionário já está alocado neste dia');
         }
     }
