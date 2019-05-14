@@ -57,13 +57,25 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-3">
                                         <label class="form-control-label" for="form-control-label"> {{__('STATUS')}} </label>
                                         <select bootstrapSelect name="status"  data-size="4" data-live-search="true" required>
                                             <option value="" disabled selected>Selecione Ativo/Inativo)</option>
                                                 <option value="1">Ativo</option>
                                                 <option value="0">Inativo</option>
                                         </select>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group{{ $errors->has('observacao') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label" for="input-observacao">{{ __('OBSERVAÇÃO') }}</label>
+                                            <input type="text" name="observacao" id="input-observacao" class="form-control form-control-alternative{{ $errors->has('observacao') ? ' is-invalid' : '' }}" placeholder="{{ __('Observacao') }}" value="{{ old('observacao') }}" required autofocus>
+
+                                            @if ($errors->has('observacao'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('observacao') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
 

@@ -15,25 +15,30 @@ class FuncionarioSeeder extends Seeder
             "nome" => "Michael Martins",
             "tipo_id" => 1,
             "local_id" => 1,
+            "status" => 1,
+            "observacao" => "Nenhuma",
             "created_at" => now(),
             "updated_at" => now()
-        ]);
-
-        DB::table('funcionarios')->insert([
-            "nome" => "Gustavo Satheler",
-            "tipo_id" => 2,
-            "local_id" => 1,
-            "created_at" => now(),
-            "updated_at" => now()
-        ]);
-
-        DB::table('funcionarios')->insert([
-            "nome" => "Rodrigo Oliveira",
-            "tipo_id" => 3,
-            "local_id" => 1,
-            "created_at" => now(),
-            "updated_at" => now()
-        ]);
-
+            ]);
+            
+            DB::table('funcionarios')->insert([
+                "nome" => "Gustavo Satheler",
+                "tipo_id" => 2,
+                "local_id" => 1,
+                "status" => 0,
+                "observacao" => "Férias",
+                "created_at" => now(),
+                "updated_at" => now()
+                ]);
+                
+                DB::table('funcionarios')->insert([
+                    "nome" => "Rodrigo Oliveira",
+                    "tipo_id" => 3,
+                    "local_id" => 1,
+                    "status" => 0,
+                    "observacao" => "Demitido",
+                    "created_at" => now(),
+                    "updated_at" => now()
+                    ]);
     }
 }

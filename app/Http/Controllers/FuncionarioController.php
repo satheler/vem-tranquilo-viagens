@@ -80,9 +80,13 @@ class FuncionarioController extends Controller
     public function edit($id)
     {
         $funcionario = new Funcionario();
-        $listaDeFuncionarios = $funcionario->getAll();
-        $funcionarioEditado = $listaDeFuncionarios[$id];
-        return view('funcionario.main.edit', compact('funcionarioEditado'));
+        $tipos_funcionario = new TipoFuncionario();
+        $rodoviaria = new Rodoviaria();
+        $lista['funcionario'] = $funcionario->get($id);
+        $lista['tipos_funcionario'] = $tipos_funcionario->getAll();
+        $lista['rodoviaria'] = $rodoviaria->getAll();
+
+        return view('funcionario.main.edit', compact('lista'));
     }
 
     /**
@@ -94,15 +98,19 @@ class FuncionarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try {
+        $funcionario = new Funcionario();
+        $validator = $funcionario->edit($request->input(), $id);
 
-            $funcionarioEditado = new Funcionario();
-            $funcionarioEditado->edit($id);
-            return response(["status" => "Funcionário atualizado com sucesso"], 202);
-
-        } catch (Exception $e) {
-            return response($e->getMessage(), 400);
+        if ($validator instanceof \Illuminate\Validation\Validator) {
+            return redirect()
+                ->route('funcionario.edit', $id)
+                ->withErrors($validator)
+                ->withInput();
         }
+
+        return redirect()
+                ->route('funcionario.index')
+                ->withStatus(__('Funcionário editado com sucesso.'));
     }
 
     /**
