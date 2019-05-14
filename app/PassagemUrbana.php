@@ -34,10 +34,10 @@ class PassagemUrbana extends Model
         return $passagem;
     }
 
-    public function calcularValorPassagem(TarifaUrbano $tarifa, PassagemUrbana $passagem)
+    public function calcularValorPassagem(TarifaUrbano $tarifa, CategoriaPassageiro $categoria)//Mudar para passagem
     {
 
-        $categoria = $passagem->categoria;
+        //$categoria = $passagem->categoria;
         $desconto = $categoria->desconto;
         $valorPassagem = $tarifa->description->valor;
         $valor = $valorPassagem - ($tarifa->description->valor * ($desconto / 100));
