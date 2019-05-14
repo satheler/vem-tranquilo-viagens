@@ -53,8 +53,7 @@ class Seguro extends Model
             'data_vigencia' => 'required|date_format:d/m/Y|after:' . now()->format('d/m/Y'),
             'data_inicio' => 'required|date_format:d/m/Y|before:data_vigencia',
             'onibus' => 'required|array',
-            'onibus' => ''.$this->verificarValidade($input['onibus'])
-
+            'onibus' => [$this->verificarValidade($input['onibus'])]
         ]);
 
         if ($validator->fails()) {
@@ -80,15 +79,17 @@ class Seguro extends Model
     public function edit(int $id, array $input)
     {
         $seguro = $this->get($id);
-
         $validator = Validator::make($input, [
             'empresa' => 'required|string',
             'valor' => 'required|numeric|min:0.01',
             'assegura' => 'required|string',
             'data_vigencia' => 'required|date_format:d/m/Y|after:' . now()->format('d/m/Y'),
             'data_inicio' => 'required|date_format:d/m/Y|before:data_vigencia',
-            'onibus' => 'required|array',
-            'onibus' => ''.$this->verificarValidade($input['onibus'])
+            'onibus' => [
+                'required',
+                'array',
+                $this->verificarValidade($input['onibus'])
+            ]
         ]);
 
         if ($validator->fails()) {

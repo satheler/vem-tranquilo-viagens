@@ -39,11 +39,13 @@
                                             </div>
                                         </div>
 
-
                                         <select multiple="multiple" name="onibus[]">
-                                            @foreach ($lista["onibus"] as $item)
-                                            <option value="{{ $item->id }}"><div class = "col-md-4">Placa: {{ $item->placa}} - Marca: {{ $item->marca }} - Chassi: {{ $item->chassi }} - Modelo: {{ $item->modelo }} - Data Compra: {{ $item->data_compra }} - Tipo: {{$item->description_type}} </div></option>
-                                            {{-- <option @if($errors->has('onibus') && ($errors->first('onibus') == $item->id) || old('onibus', $lista["seguro"]->onibus->id) == $item->id) selected @endif value="{{ $item->id }}">{{ $item->description->placa }}</option> --}}
+                                            @foreach ($lista["onibus"] as $onibus)
+                                                @foreach ($lista["seguro"]->onibus as $segurados)
+                                                    <option value="{{ $onibus->id }}" @if($onibus->id == $segurados->id) {{ "selected" }} @endif>
+                                                        <div class="col-md-4">Placa: {{ $onibus->placa }} - Marca: {{ $onibus->marca }} - Chassi: {{ $onibus->chassi }} - Modelo: {{ $onibus->modelo }} - Data Compra: {{ $onibus->data_compra }} - Tipo: {{$onibus->description_type}} </div>
+                                                    </option>
+                                                @endforeach
                                             @endforeach
                                         </select>
 
@@ -53,25 +55,25 @@
                                             </span>
                                         @endif
                                     </div>
-                                    <div class="col-md-4">
+                                    {{-- <div class="col-md-4"> --}}
 
-                                            <label class="form-control-label text-right" for="input-empresa">{{ __('LISTA DE ÔNIBUS ASSEGURADOS') }}</label>
-                                                @foreach ($lista["seguro"]->onibus as $item)
+                                            {{-- <label class="form-control-label text-right" for="input-empresa">{{ __('LISTA DE ÔNIBUS ASSEGURADOS') }}</label> --}}
+                                                {{-- @foreach ($lista["seguro"]->onibus as $seguro)
                                                 <tr name="onibus[]">
-                                                    <td ><div> Placa: {{ $item->placa }}</div>
-                                                        <div>Marca: {{ $item->marca }}</div>
-                                                        <div>Chassi: {{ $item->chassi }}</div>
-                                                        <div>Modelo: {{ $item->modelo }}</div>
-                                                        <div>Data Compra: {{ $item->data_compra }}</div>
-                                                        <div>Tipo:  {{$item->description_type}} </div> </td>
+                                                    <td ><div> Placa: {{ $seguro->placa }}</div>
+                                                        <div>Marca: {{ $seguro->marca }}</div>
+                                                        <div>Chassi: {{ $seguro->chassi }}</div>
+                                                        <div>Modelo: {{ $seguro->modelo }}</div>
+                                                        <div>Data Compra: {{ $seguro->data_compra }}</div>
+                                                        <div>Tipo:  {{$seguro->description_type}} </div> </td>
                                                 </tr>
-                                                @endforeach
-                                        </div>
+                                                @endforeach --}}
+                                        {{-- </div> --}}
 
                             <div class="row mt-4">
                                 <div class="form-group{{ $errors->has('empresa') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-empresa">{{ __('EMPRESA') }}</label>
-                                    <input type="text" empresa="empresa" id="input-empresa" class="form-control form-control-alternative{{ $errors->has('empresa') ? ' is-invalid' : '' }}" placeholder="{{ __('empresa') }}" value="{{ old('empresa', $lista['seguro']->empresa) }}" required>
+                                    <input type="text" name="empresa" id="input-empresa" class="form-control form-control-alternative{{ $errors->has('empresa') ? ' is-invalid' : '' }}" placeholder="{{ __('empresa') }}" value="{{ old('empresa', $lista['seguro']->empresa) }}" required>
 
                                     @if ($errors->has('empresa'))
                                         <span class="invalid-feedback" role="alert">
@@ -81,7 +83,7 @@
                                 </div>
                                 <div class="form-group{{ $errors->has('valor') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-valor">{{ __('VALOR') }}</label>
-                                    <input type="valor" empresa="valor" id="input-valor" class="form-control form-control-alternative{{ $errors->has('valor') ? ' is-invalid' : '' }}" placeholder="{{ __('valor') }}" value="{{ old('valor', $lista['seguro']->valor) }}" required>
+                                    <input type="valor" name="valor" id="input-valor" class="form-control form-control-alternative{{ $errors->has('valor') ? ' is-invalid' : '' }}" placeholder="{{ __('valor') }}" value="{{ old('valor', $lista['seguro']->valor) }}" required>
 
                                     @if ($errors->has('valor'))
                                         <span class="invalid-feedback" role="alert">
@@ -91,7 +93,7 @@
                                 </div>
                                 <div class="form-group{{ $errors->has('assegura') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-assegura">{{ __('ASSEGURA') }}</label>
-                                    <input type="assegura" empresa="assegura" id="input-assegura" class="form-control form-control-alternative{{ $errors->has('assegura') ? ' is-invalid' : '' }}" placeholder="{{ __('assegura') }}" value="{{ old('valor', $lista['seguro']->assegura) }}" required>
+                                    <input type="assegura" name="assegura" id="input-assegura" class="form-control form-control-alternative{{ $errors->has('assegura') ? ' is-invalid' : '' }}" placeholder="{{ __('assegura') }}" value="{{ old('valor', $lista['seguro']->assegura) }}" required>
 
                                     @if ($errors->has('assegura'))
                                         <span class="invalid-feedback" role="alert">
