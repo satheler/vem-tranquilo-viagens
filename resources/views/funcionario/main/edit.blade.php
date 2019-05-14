@@ -1,7 +1,7 @@
-@extends('layouts.app', ['title' => __('User Management')])
+@extends('layouts.app', ['title' => __('Editar Funcionário')])
 
 @section('content')
-    @include('users.partials.header', ['title' => __('Edit User')])   
+    @include('users.partials.header', ['title' => __('Editar Funcionário')])
 
     <div class="container-fluid mt--7">
         <div class="row">
@@ -10,65 +10,127 @@
                     <div class="card-header bg-white border-0">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h3 class="mb-0">{{ __('User Management') }}</h3>
+                                <a href="{{route('rodoviarias_ativas.index') }}" class="btn btn-sm btn-primary">{{ __('Voltar') }}</a>
                             </div>
                             <div class="col-4 text-right">
-                                <a href="{{ route('user.index') }}" class="btn btn-sm btn-primary">{{ __('Back to list') }}</a>
+                                <h3 class="mb-0">{{ __('Editar rodoviária') }}</h3>
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{ route('user.update', $user) }}" autocomplete="off">
+                        <form method="post" action="{{ route('rodoviarias_ativas.update', $lista["rodoviaria"]) }}" autocomplete="off">
                             @csrf
                             @method('put')
 
-                            <h6 class="heading-small text-muted mb-4">{{ __('User information') }}</h6>
-                            <div class="pl-lg-4">
-                                <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="input-name">{{ __('Name') }}</label>
-                                    <input type="text" name="name" id="input-name" class="form-control form-control-alternative{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', $user->name) }}" required autofocus>
+                            <h6 class="heading-small text-muted mb-4">{{ __('Informações da rodoviária') }}</h6>
 
-                                    @if ($errors->has('name'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('name') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                                <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="input-email">{{ __('Email') }}</label>
-                                    <input type="email" name="email" id="input-email" class="form-control form-control-alternative{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('Email') }}" value="{{ old('email', $user->email) }}" required>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group{{ $errors->has('logradouro') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label" for="input-logradouro">{{ __('RUA / AVENIDA') }}</label>
+                                            <input type="text" name="logradouro" class="form-control form-control-alternative{{ $errors->has('logradouro') ? ' is-invalid' : '' }}" placeholder="{{ __('Insira uma rua/avenida') }}" value="{{ old('logradouro', $lista["rodoviaria"]->logradouro) }}" required autofocus>
 
-                                    @if ($errors->has('email'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('email') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                                <div class="form-group{{ $errors->has('password') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="input-password">{{ __('Password') }}</label>
-                                    <input type="password" name="password" id="input-password" class="form-control form-control-alternative{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="{{ __('Password') }}" value="">
-                                    
-                                    @if ($errors->has('password'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('password') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-control-label" for="input-password-confirmation">{{ __('Confirm Password') }}</label>
-                                    <input type="password" name="password_confirmation" id="input-password-confirmation" class="form-control form-control-alternative" placeholder="{{ __('Confirm Password') }}" value="">
+                                            @if ($errors->has('logradouro'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('logradouro') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <div class="form-group{{ $errors->has('numero') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label" for="input-numero">{{ __('NÚMERO') }}</label>
+                                            <input type="number" name="numero" id="input-numero" class="form-control form-control-alternative{{ $errors->has('numero') ? ' is-invalid' : '' }}" placeholder="{{ __('Insira o número') }}" value="{{ old('numero', $lista["rodoviaria"]->numero) }}" required>
+
+                                            @if ($errors->has('numero'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('numero') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group{{ $errors->has('bairro') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label" for="input-bairro">{{ __('BAIRRO') }}</label>
+                                            <input type="text" name="bairro" id="input-bairro" class="form-control form-control-alternative{{ $errors->has('bairro') ? ' is-invalid' : '' }}" placeholder="{{ __('Insira o bairro') }}" value="{{ old('bairro', $lista["rodoviaria"]->bairro) }}" required>
+
+                                            @if ($errors->has('bairro'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('bairro') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-success mt-4">{{ __('Save') }}</button>
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-3 form-group{{ $errors->has('cidade') ? ' has-danger' : '' }}">
+                                        <label class="form-control-label{{ $errors->has('cidade') ? ' text-warning' : '' }}" for="form-control-label"> {{__('CIDADE')}}</label>
+                                        <select bootstrapSelect name="cidade"  data-size="4" data-live-search="true" required>
+                                            <option value="" disabled selected>Selecione a cidade...</option>
+                                            @foreach ($lista["cidade"] as $item)
+                                                <option @if($errors->has('cidade') && ($errors->first('cidade') == $item->id) || old('cidade', $lista["rodoviaria"]->cidade_id) == $item->id) selected @endif value="{{ $item->id }}">{{ $item->nome }}</option>
+                                                @endforeach
+                                            </select>
+                                            @if ($errors->has('cidade'))
+                                                <label class="form-control-label invalid-feedback" for="form-control-label"> {{ $errors->first('cidade') }} </label>
+                                            @endif
+
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group{{ $errors->has('cep') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label" for="input-cep">{{ __('CEP') }}</label>
+                                            <input type="text" cep name="cep" id="input-cep" class="form-control form-control-alternative{{ $errors->has('cep') ? ' is-invalid' : '' }}" placeholder="{{ __('_____-___') }}" value="{{ old('cep', $lista["rodoviaria"]->cep) }}" required>
+
+                                            @if ($errors->has('cep'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('cep') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group{{ $errors->has('telefone') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label" for="input-telefone">{{ __('TELEFONE') }}</label>
+                                            <input type="text" phone name="telefone" id="input-telefone" class="form-control form-control-alternative{{ $errors->has('telefone') ? ' is-invalid' : '' }}" placeholder="{{ __('(__) ____-____') }}" value="{{ old('telefone', $lista["rodoviaria"]->telefone) }}" required>
+
+                                            @if ($errors->has('telefone'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('telefone') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+
                                 </div>
+
+                            {{-- END FORM --}}
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-success mt-4">{{ __('Salvar') }}</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-        
+
         @include('layouts.footers.auth')
     </div>
 @endsection
+
+@push('js')
+<script src="{{ asset('argon') }}/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="{{ asset('argon') }}/vendor/jquery-mask/dist/jquery.mask.min.js"></script>
+
+<script>
+
+$(document).ready(function(){
+    $('[cep]').mask('00000-000');
+    $('[phone]').mask('(00) 0000-0000');
+})
+</script>
+@endpush

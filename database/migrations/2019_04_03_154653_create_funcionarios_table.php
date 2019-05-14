@@ -17,9 +17,11 @@ class CreateFuncionariosTable extends Migration
         Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nome');
-
             $table->bigInteger('tipo_id');
-
+            $table->bigInteger('local_id');
+            $table->bigInteger('status')->default(true);
+            
+            
             $table->timestamps();
         });
     }
