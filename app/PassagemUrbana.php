@@ -49,9 +49,8 @@ class PassagemUrbana extends Model
     public function agruparPorCategoria(TarifaUrbano $tarifa, PassagemUrbana $passagem)
     {
         $categoria["categoria"] = $passagem->categoria;
-         $categoria["valores"] = [];
-         array_push($categoria["valores"], $passagem->calcularValorPassagem($tarifa, $passagem));
-
+        $categoria["valores"] = [];
+        array_push($categoria["valores"], $passagem->calcularValorPassagem($tarifa, $passagem));
 
         //  $categoria = \DB::table('passagem_urbana')
         //      ->select('categoria_id', \DB::raw($passagem->calcularValorPassagem($tarifa, $passagem) . ' as valor'))
@@ -68,16 +67,16 @@ class PassagemUrbana extends Model
         $passagem = new PassagemUrbana();
         $trajeto = new TrajetoUrbano();
 
-        $datavenda = new DateTime('yesterday');
+        $datavenda = new DateTime();
         // $passagem->where('data_venda', "2019-05-*")->get();
-        $lista["valor"] = [];
 
-        $lista["passagem"] = $passagem->getAll();
-
+      //  $lista["passagem"] = $passagem->getAll();
+        $lisaPassagem = $passagem->getAll();
         foreach ($lista["passagem"] as $itempassagem) {
             $datavenda = date_create_from_format('Y-m-d', $itempassagem->data_venda);
             $lista["mes"] = $datavenda->format('m');
             $lista["alocacao"] = $itempassagem->alocacao;
+            $lista["valor"] = [];
             $lista["valor"] = $itempassagem->agruparPorCategoria($tarifa->get($itempassagem->alocacao->trajeto->tarifa->id), $itempassagem);
            // array_push($categoria["valor"], $itempassagem->agruparPorCategoria($tarifa->get($itempassagem->alocacao->trajeto->tarifa->id), $itempassagem));
             $lista["cobrador"] = $itempassagem->alocacao->cobrador;
