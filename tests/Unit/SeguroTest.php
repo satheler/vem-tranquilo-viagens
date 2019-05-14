@@ -10,10 +10,15 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class SeguroTest extends TestCase
 {
     /**
-     * A basic unit test example.
+     * A basic unit test.
      *
      * @return void
      */
+    public function testRequiredInstance(){
+        $o = new Seguro();
+        $test = $o->add([]);
+        $this->assertInstanceOf(\Illuminate\Validation\Validator::class,$test);
+    }
     public function testAddSeguro()
     {
         $o = new Seguro();
@@ -29,7 +34,14 @@ class SeguroTest extends TestCase
 
         ]);
 
-        $this->assertEquals(NULL,$test);
+        $esperado = $o->get(1);
+
+        $this->assertThat(
+          $esperado,
+          $this->logicalNot(
+            $this->equalTo($test)
+          )
+        );
 
     }
 
@@ -48,6 +60,14 @@ class SeguroTest extends TestCase
 
         ]);
 
-        $this->assertEquals(NULL,$test);
+        $esperado = $o->get(1);
+
+        $this->assertThat(
+          $esperado,
+          $this->logicalNot(
+            $this->equalTo($test)
+          )
+        );
+
     }
 }
