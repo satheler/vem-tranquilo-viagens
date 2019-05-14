@@ -1,7 +1,7 @@
 @extends('layouts.app', ['title' => __('Adicionar Trajeto Urbano')])
 
 @section('content')
-    @include('users.partials.header', ['title' => __('Adicionar Trajeto Urbano - ' . Auth::user()->cidade->nome)])
+    @include('users.partials.header', ['title' => __('Adicionar Trajeto Urbano - ' . Auth::user()->rodoviaria->cidade->nome)])
 
     <div class="container-fluid mt--7">
         <div class="row">

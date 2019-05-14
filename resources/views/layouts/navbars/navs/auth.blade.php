@@ -3,8 +3,11 @@
     <div class="container-fluid">
         <!-- Brand -->
         <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="{{ route('home') }}">{{ __('Painel de controle') }}</a>
-       @isset(Auth::user()->cidade)
-            <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block cursor-none">{{ Auth::user()->cidade->nome }}</a>
+       @isset(Auth::user()->rodoviaria)
+            <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block cursor-none">
+                {{ Auth::user()->rodoviaria->cidade->nome }} -
+                Contato: {{ sprintf("(%d) %d-%d", substr(Auth::user()->rodoviaria->telefone, 0, 2), substr(Auth::user()->rodoviaria->telefone, 2, 4), substr(Auth::user()->rodoviaria->telefone, 6, 4)) }}
+            </a>
         @endisset
         {{-- <!-- Form -->
         <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
