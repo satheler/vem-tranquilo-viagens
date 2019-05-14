@@ -2,6 +2,8 @@
 
 namespace Tests\Unit;
 
+use App\Funcionario;
+
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -9,7 +11,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class FuncionarioTest extends TestCase
 {
     public function testRequiredInstance(){
-        $o = new Seguro();
+        $o = new Funcionario();
         $test = $o->add([]);
         $this->assertInstanceOf(\Illuminate\Validation\Validator::class,$test);
     }
