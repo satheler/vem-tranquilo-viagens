@@ -17,12 +17,13 @@ class CreateTrechoTable extends Migration
     {
         Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->time('horarioSaida');
-            $table->time('horarioChegada');
             $table->double('quilometragem');
 
             $table->bigInteger('origem_id')->unsigned();
+            $table->foreign('origem_id')->references('id')->on('cidades');
+
             $table->bigInteger('destino_id')->unsigned();
+            $table->foreign('destino_id')->references('id')->on('cidades');
 
             $table->timestamps();
         });

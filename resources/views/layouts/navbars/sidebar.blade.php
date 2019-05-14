@@ -98,7 +98,7 @@
                 <!-- Passageiro :: FIM -->
 
                  <!-- Funcionário :: INICIO -->
-                 @if (@auth()->user()->tipo_usuario_id === 1)
+                 @if (@auth()->user()->tipo_usuario_id === 4)
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('funcionario.index') }}">
                             <i class="fas fa-user-cog"></i> {{ __('Funcionários') }}
@@ -215,6 +215,7 @@
                 @endif
                 <!-- Gerenciar trajeto :: FIM -->
 
+
                 <!-- Gerenciar seguros :: INICIO -->
                 @if (@auth()->user()->tipo_usuario_id === 1)
                 <li class="nav-item">
@@ -224,6 +225,91 @@
                 </li>
                 @endif
                 <!-- Gerenciar seguros :: FIM -->
+
+                <!-- Gerenciar alocação :: INICIO -->
+                @if (@auth()->user()->tipo_usuario_id === 1 || @auth()->user()->tipo_usuario_id === 2 )
+                    <li class="nav-item">
+                        <a class="nav-link" href="#navbar-alocacao" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
+                            <i class="fas fa-link"></i>
+                            <span class="nav-link-text">{{ __('Gerenciar alocação de funcionários') }}</span>
+                        </a>
+
+                        <div class="collapse" id="navbar-alocacao">
+                            <ul class="nav nav-sm flex-column">
+                                @if (@auth()->user()->tipo_usuario_id === 2)
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('alocacao_urbano.index') }}">
+                                            {{ __('Alocação Urbano') }}
+                                        </a>
+                                    </li>
+                                @endif
+                                @if (@auth()->user()->tipo_usuario_id === 1)
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('alocacao_intermunicipal.index') }}">
+                                            {{ __('Alocação Intermunicipal') }}
+                                        </a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </div>
+                    </li>
+                @endif
+                <!-- Gerenciar alocação :: FIM -->
+
+                <!-- Gerenciar rodoviarias :: INICIO -->
+                @if (@auth()->user()->tipo_usuario_id === 1)
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#navbar-rodoviarias" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-rodoviarias">
+                        <i class="fas fa-bus"></i>
+                        <span class="nav-link-text">{{ __('Gerenciar rodoviárias') }}</span>
+                    </a>
+
+                    <div class="collapse" id="navbar-rodoviarias">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('rodoviarias_ativas.index') }}">
+                                    {{ __('Lista de rodoviárias') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('rodoviarias_inativas.index') }}">
+                                    {{ __('Rodoviárias inativas') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            @endif
+            <!-- Gerenciar rodoviarias :: FIM -->
+
+            <!-- Gerenciar venda de passagens :: INICIO -->
+            @if (@auth()->user()->tipo_usuario_id === 5)
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#navbar-venda-passagens" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-venda-passagens">
+                        <i class="fas fa-bus"></i>
+                        <span class="nav-link-text">{{ __('Venda passagem') }}</span>
+                    </a>
+
+                    <div class="collapse" id="navbar-venda-passagens">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('venda_intermunicipal.index') }}">
+                                    {{ __('Intermunicipal') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                {{-- <a class="nav-link" href="{{ route('venda_urbana.index') }}"> --}}
+                                <a class="nav-link" href="#">
+                                {{ __('Urbano') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            @endif
+            <!-- Gerenciar venda de passagens :: FIM -->
             </ul>
         </div>
     </div>

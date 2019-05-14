@@ -21,4 +21,8 @@ class AlocacaoIntermunicipal extends Model
     public function auxiliar() {
         return $this->hasOne('App\Funcionario', 'id', 'auxiliar_id');
     }
+
+    public function getAll() {
+        return $this->all();
+    }
 }

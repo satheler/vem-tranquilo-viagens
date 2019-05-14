@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\OnibusUrbano;
+use App\Cidade;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,9 @@ class OnibusUrbanoController extends Controller
      */
     public function create()
     {
-        return view('frotas.urbano.create');
+        $cidades = new Cidade();
+        $lista["cidade"] = $cidades->getAll();
+        return view('frotas.urbano.create', compact('lista'));
         // return "Formulário cadastro";
         //return view('cadastroOnibusUrbano');
     }
@@ -45,12 +48,12 @@ class OnibusUrbanoController extends Controller
         $validator = $onibus->add($request->input());
 
         if($validator instanceof \Illuminate\Validation\Validator) {
-            return redirect()->route('onibus_urbano.index')->withStatus(__('Ônibus urbano adicionado com sucesso.'));
-        } else {
             return redirect()
-                    ->route('onibus_urbano.create')
-                    ->withErrors($validator)
-                    ->withInput();
+                ->route('onibus_urbano.create')
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            return redirect()->route('onibus_urbano.index')->withStatus(__('Ônibus urbano adicionado com sucesso.'));
         }
     }
 

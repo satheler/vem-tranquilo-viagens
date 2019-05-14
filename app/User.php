@@ -36,4 +36,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function rodoviaria() {
+        return $this->hasOne('App\Rodoviaria', 'id', 'rodoviaria_id');
+    }
 }

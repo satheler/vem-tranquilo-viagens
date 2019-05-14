@@ -41,7 +41,6 @@ class Tarifa extends Model
         $validator = Validator::make($input, [
             'valor' => 'required|numeric|min:0.01',
             'data' => 'required|date_format:d/m/Y|after:'. $dateToday->format('d/m/Y'),
-            'data' => 'date_format:d/m/Y|after:'. $ultimaData->format('d/m/Y')
         ]);
 
         if ($validator->fails()) {

@@ -1,5 +1,16 @@
 @extends('layouts.app', ['class' => 'bg-default'])
 
+
+{{-- DAQUI PARA BAIXO É POG - INICIO --}}
+<?php
+
+$users = new App\User();
+$lista = $users->all();
+?>
+
+
+{{-- DAQUI PARA BAIXO É POG - FIM --}}
+
 @section('content')
     @include('layouts.headers.guest')
 
@@ -21,7 +32,6 @@
                                     </small>
                                 </div>
                             </div>
-
                         </div>
                         <form role="form" method="POST" action="{{ route('login') }}">
                             @csrf
@@ -62,7 +72,15 @@
                                 <button type="submit" class="btn btn-primary my-4">{{ __('Entrar') }}</button>
                             </div>
                         </form>
+                        <label class="text-center"> Usuários cadastrados </label>
+                        <div class="row justify-content-center">
+                            @foreach ($lista as $item)
+                                <button data-user-login="{{ $item->email }}" class="btn btn-sm btn-primary py-1 px-3 m-1"> {{ $item->name }} </button>
+                            @endforeach
+                        </div>
                     </div>
+
+
                 </div>
                 <div class="row mt-3">
                     <div class="col-6 text-right"></div>
@@ -83,3 +101,13 @@
         </div>
     </div>
 @endsection
+
+@push('js')
+    <script>
+        $('[data-user-login]').on('click', function() {
+            const user = $(this).data('user-login');
+            $('input[name="email"]').val(user);
+            $('form').submit();
+        })
+    </script>
+@endpush

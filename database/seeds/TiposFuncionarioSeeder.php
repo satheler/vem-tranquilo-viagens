@@ -20,5 +20,8 @@ class TiposFuncionarioSeeder extends Seeder
         DB::table('tipos_funcionario')->insert([
             'nome' => "Auxiliar",
         ]);
+        DB::table('tipos_funcionario')->insert([
+            'nome' => "Recursos Humanos",
+        ]);
     }
 }

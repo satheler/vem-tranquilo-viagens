@@ -29,8 +29,6 @@
                     <tr>
                         <th scope="col">{{ __('Origem') }}</th>
                         <th scope="col">{{ __('Destino') }}</th>
-                        <th scope="col">{{ __('Horário saída') }}</th>
-                        <th scope="col">{{ __('Horário chegada') }}</th>
                         <th scope="col">{{ __('Distância') }}</th>
                         <th scope="col">Ações</th>
                     </tr>
@@ -40,11 +38,9 @@
                         <tr data-table-row-id={{ $item->id }}>
                             <td>{{ $item->origem->nome }}</td>
                             <td>{{ $item->destino->nome }}</td>
-                            <td>{{ $item->horarioSaida }}</td>
-                            <td>{{ $item->horarioChegada }}</td>
                             <td>{{ sprintf('%.2f km', $item->quilometragem) }}</td>
 
-                            <td class="text-right">
+                            <td class="text-center">
                                 <div class="dropdown">
                                     <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fas fa-ellipsis-v"></i>

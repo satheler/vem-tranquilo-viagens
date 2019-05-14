@@ -16,3 +16,12 @@ use Illuminate\Foundation\Inspiring;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->describe('Display an inspiring quote');
+
+Artisan::command('♥', function() {
+    $this->comment("- Gustavo Satheler");
+    $this->comment("- Judson Henrique");
+    $this->comment("- Michael Martins");
+    $this->comment("- Rodrigo Oliveira");
+    $this->comment("- Sabrina Winckler");
+    $this->comment("ESSAS PESSOAS SÃO FODAS!!");
+})->describe('Display the name of the developers involved');

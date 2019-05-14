@@ -20,8 +20,10 @@ class CreateTrajetoUrbanoTable extends Migration
             $table->string('terminal');
             $table->time('horarioSaida');
             $table->time('horarioChegada');
+            $table->float('quilometragem');
 
-            $table->bigInteger('endereco_id');
+            $table->unsignedBigInteger('cidade_id');
+            $table->foreign('cidade_id')->references('id')->on('cidades');
 
             $table->timestamps();
         });

@@ -61,7 +61,7 @@ var Datepicker = (function() {
 })()
 
 var BootstrapSelect = (function() {
-    $('select[bootstrapSelect]').selectpicker();
+    var $bootstrapSelect = $('select[bootstrapSelect]').selectpicker({selectOnTab: true});
 })()
 
 //

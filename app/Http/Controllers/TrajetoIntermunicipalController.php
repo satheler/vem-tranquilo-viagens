@@ -26,11 +26,22 @@ class TrajetoIntermunicipalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($qntTrechos)
     {
         $trechos = new Trecho();
-        $lista = $trechos->getAll();
+        $lista["trechos"] = $trechos->getAll();
+        $lista['qntTrechos'] = $qntTrechos;
         return view('trajeto.intermunicipal.create', compact('lista'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function prepareCreate()
+    {
+        return view('trajeto.intermunicipal.prepare');
     }
 
     /**

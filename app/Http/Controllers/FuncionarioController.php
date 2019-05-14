@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Funcionario;
 use App\TipoFuncionario;
+use App\Cidade;
+use App\Rodoviaria;
 use Exception;
 
 class FuncionarioController extends Controller
@@ -29,7 +31,9 @@ class FuncionarioController extends Controller
     public function create()
     {
         $tipos_funcionario = new TipoFuncionario();
-        $lista = $tipos_funcionario->getAll();
+        $rodoviarias = new Rodoviaria();
+        $lista["funcionarios"] = $tipos_funcionario->getAll();
+        $lista["rodoviarias"] = $rodoviarias->getAll();
         return view('funcionario.main.create', compact('lista'));
     }
 
@@ -76,9 +80,13 @@ class FuncionarioController extends Controller
     public function edit($id)
     {
         $funcionario = new Funcionario();
-        $listaDeFuncionarios = $funcionario->getAll();
-        $funcionarioEditado = $listaDeFuncionarios[$id];
-        return "Formulario de edição para o".$funcionarioEditado->toJson();
+        $tipos_funcionario = new TipoFuncionario();
+        $rodoviaria = new Rodoviaria();
+        $lista['funcionario'] = $funcionario->get($id);
+        $lista['tipos_funcionario'] = $tipos_funcionario->getAll();
+        $lista['rodoviaria'] = $rodoviaria->getAll();
+
+        return view('funcionario.main.edit', compact('lista'));
     }
 
     /**
@@ -90,15 +98,19 @@ class FuncionarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try {
+        $funcionario = new Funcionario();
+        $validator = $funcionario->edit($request->input(), $id);
 
-            $funcionarioEditado = new Funcionario();
-            $funcionarioEditado->edit($id);
-            return response(["status" => "Funcionário atualizado com sucesso"], 202);
-
-        } catch (Exception $e) {
-            return response($e->getMessage(), 400);
+        if ($validator instanceof \Illuminate\Validation\Validator) {
+            return redirect()
+                ->route('funcionario.edit', $id)
+                ->withErrors($validator)
+                ->withInput();
         }
+
+        return redirect()
+                ->route('funcionario.index')
+                ->withStatus(__('Funcionário editado com sucesso.'));
     }
 
     /**

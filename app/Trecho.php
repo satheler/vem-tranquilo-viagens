@@ -33,22 +33,18 @@ class Trecho extends Model
     {
         $validator = Validator::make($input, [
             'quilometragem' => 'required|numeric|min:0.1',
-            'horarioSaida' => 'required|date_format:H:i',
-            'horarioChegada' => 'required|date_format:H:i',
-            'origem_id'=> 'required|exists:cidades,id',
-            'destino_id'=>'required|exists:cidades,id|different:origem_id',
+            'origem'=> 'required|exists:cidades,id|different:destino',
+            'destino'=>'required|exists:cidades,id|different:origem',
         ]);
 
         if ($validator->fails()) {
             return $validator;
         }
 
-        $this->origem_id = $input['origem_id'];
-        $this->destino_id = $input['destino_id'];
+        $this->origem_id = $input['origem'];
+        $this->destino_id = $input['destino'];
 
         $this->quilometragem = $input['quilometragem'];
-        $this->horarioSaida = $input['horarioSaida'];
-        $this->horarioChegada = $input['horarioChegada'];
 
         $this->save();
     }
