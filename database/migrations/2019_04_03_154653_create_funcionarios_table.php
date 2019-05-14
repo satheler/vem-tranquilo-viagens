@@ -19,7 +19,7 @@ class CreateFuncionariosTable extends Migration
             $table->string('nome');
             $table->bigInteger('tipo_id');
             $table->bigInteger('local_id');
-            $table->bigInteger('cidade_id');
+            $table->bigInteger('status')->default(true);
             
             
             $table->timestamps();

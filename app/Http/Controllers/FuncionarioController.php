@@ -31,10 +31,8 @@ class FuncionarioController extends Controller
     public function create()
     {
         $tipos_funcionario = new TipoFuncionario();
-        $cidades = new Cidade();
         $rodoviarias = new Rodoviaria();
         $lista["funcionarios"] = $tipos_funcionario->getAll();
-        $lista["cidades"] = $cidades->getAll();
         $lista["rodoviarias"] = $rodoviarias->getAll();
         return view('funcionario.main.create', compact('lista'));
     }

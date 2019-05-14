@@ -30,7 +30,7 @@
                         <th width="25%" scope="col">{{ __('Nome') }}</th>
                         <th width="25%" scope="col">{{ __('Tipo') }}</th>
                         <th width="25%" scope="col">{{ __('Local') }}</th>
-                        <th width="25%" scope="col">{{ __('Cidade') }}</th>
+                        <th width="25%" scope="col">{{ __('Status') }}</th>
                         <th width="10%" scope="col">Ações</th>
                     </tr>
                 </thead>
@@ -44,8 +44,14 @@
                             </td>
                             <td>{{ $item->nome }}</td>
                             <td>{{ $item->tipo->nome }}</td>
-                            <td>{{ $item->local->nome }}</td>
-                            <td>{{ $item->cidade->nome }}</td>
+                            <td>{{ $item->local->logradouro }}</td>
+                            <td  align="center">
+                                @if ($item->status)
+                                    <span class="badge badge-success">Ativo</span>
+                                @else
+                                    <span class="badge badge-warning">Inativo</span>
+                                @endif
+                            </td>
 
                             <td align="center">
                                 <div class="dropdown">
