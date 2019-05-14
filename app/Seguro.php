@@ -69,6 +69,10 @@ class Seguro extends Model
 
     public function add(array $input)
     {
+        if(!array_key_exists('onibus',$input)){
+            $input['onibus'] = [];
+          //$input['onibus'] = $seguro->onibus->toArray();
+        }
 
         $validator = Validator::make($input, [
             'empresa' => 'required|string',
