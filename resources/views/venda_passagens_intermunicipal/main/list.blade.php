@@ -8,6 +8,10 @@
     @endif
 </div>
 <div class="card-body py-4">
+    @empty($trajetos)
+        Ônibus não encontrado
+    @endempty
+
     @foreach ($trajetos as $trajeto)
         <div>{{ $trajeto->trechos }}</div>
     @endforeach
