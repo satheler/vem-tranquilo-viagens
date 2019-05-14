@@ -35,7 +35,7 @@
                                                 <label class="form-control-label text-right" for="input-empresa">{{ __('LISTA DE ÔNIBUS') }}</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <label class="form-control-label text-right" for="input-empresa">{{ __('LISTA DE NOVOS ÔNIBUS ASSEGURADOS') }}</label>
+                                                <label class="form-control-label text-right" for="input-empresa">{{ __('LISTA DE ÔNIBUS ASSEGURADOS') }}</label>
                                             </div>
                                         </div>
 

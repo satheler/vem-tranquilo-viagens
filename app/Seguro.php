@@ -43,6 +43,30 @@ class Seguro extends Model
         }
     }
 
+    public function verificarValidadeEdicao(Seguro $seguroeditado, array $listaOnibus)
+    {
+
+        $onibus = new Onibus();
+
+        foreach ($listaOnibus as $itemOnibus) {
+            $item = $onibus->get($itemOnibus);
+            if ($item->seguro) {
+                $seguros = $item->seguro;
+                foreach ($seguros as $seguro) {
+                    if ($seguro->id == $seguroeditado->id) {
+                        $validator = '';
+                    } else {
+                        if ($seguro->vigente == true) {
+                            $validator = 'unique:seguro_onibus,onibus_id';
+                            return $validator;
+                        }
+                    }
+                }
+            }
+            return $validator;
+        }
+    }
+
     public function add(array $input)
     {
 
@@ -53,7 +77,7 @@ class Seguro extends Model
             'data_vigencia' => 'required|date_format:d/m/Y|after:' . now()->format('d/m/Y'),
             'data_inicio' => 'required|date_format:d/m/Y|before:data_vigencia',
             'onibus' => 'required|array',
-            'onibus' => [$this->verificarValidade($input['onibus'])]
+            'onibus' => [$this->verificarValidade($input['onibus'])],
         ]);
 
         if ($validator->fails()) {
@@ -79,6 +103,12 @@ class Seguro extends Model
     public function edit(int $id, array $input)
     {
         $seguro = $this->get($id);
+
+         if(!array_key_exists('onibus',$input)){
+             $input['onibus'] = [];
+           //$input['onibus'] = $seguro->onibus->toArray();
+         }
+
         $validator = Validator::make($input, [
             'empresa' => 'required|string',
             'valor' => 'required|numeric|min:0.01',
@@ -88,8 +118,8 @@ class Seguro extends Model
             'onibus' => [
                 'required',
                 'array',
-                $this->verificarValidade($input['onibus'])
-            ]
+                $this->verificarValidadeEdicao($seguro, $input['onibus']),
+            ],
         ]);
 
         if ($validator->fails()) {
@@ -109,7 +139,7 @@ class Seguro extends Model
         $seguro->vigente = true;
 
         $seguro->update();
-        $seguro->onibus()->attach($input['onibus']);
+        $seguro->onibus()->sync($input['onibus']);
 
     }
     public function disable(int $id)
