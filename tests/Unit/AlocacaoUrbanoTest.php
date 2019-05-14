@@ -6,8 +6,7 @@ use App\AlocacaoUrbano;
 use Tests\TestCase;
 use Artisan;
 
-class AlocacaoUrbanoTest extends TestCase
-{
+class AlocacaoUrbanoTest extends TestCase {
 
     private $objDefault = [
         'id' => 1,
@@ -21,8 +20,7 @@ class AlocacaoUrbanoTest extends TestCase
         'data' => '15/05/2019',
     ];
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void  {
         parent::setUp();
         Artisan::call('migrate:fresh', ['--seed' => true]);
     }
@@ -35,22 +33,19 @@ class AlocacaoUrbanoTest extends TestCase
     /**
      * @test
      */
-    public function allocate()
-    {
+    public function allocate() {
         $result = $this->addObj();
         $this->assertTrue($result);
     }
 
-    public function testAllocateDuplicate()
-    {
+    public function testAllocateDuplicate() {
         $this->addObj();
         $result = $this->addObj();
 
         $this->assertInstanceOf(\Illuminate\Validation\Validator::class, $result);
     }
 
-    public function testAllocateWithAuxiliar()
-    {
+    public function testAllocateWithAuxiliar() {
         $alocacao = new AlocacaoUrbano();
         $result = $alocacao->add([
             'trajeto' => 1,
@@ -66,8 +61,7 @@ class AlocacaoUrbanoTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function testAllocateWithPreviousDate()
-    {
+    public function testAllocateWithPreviousDate() {
         $alocacao = new AlocacaoUrbano();
         $result = $alocacao->add([
             'trajeto' => 1,
@@ -83,14 +77,12 @@ class AlocacaoUrbanoTest extends TestCase
         $this->assertInstanceOf(\Illuminate\Validation\Validator::class, $result);
     }
 
-    public function testRequiredFields()
-    {
+    public function testRequiredFields() {
         $result = $this->addObj([]);
         $this->assertInstanceOf(\Illuminate\Validation\Validator::class, $result);
     }
 
-    public function testEditAllocate()
-    {
+    public function testEditAllocate() {
         $this->addObj();
         $alocacao = new AlocacaoUrbano();
         $id = 1;

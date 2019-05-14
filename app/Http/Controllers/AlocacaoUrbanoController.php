@@ -139,6 +139,7 @@ class AlocacaoUrbanoController extends Controller
     public function destroy($id)
     {
         $alocacao = new AlocacaoUrbano();
-        return response($alocacao->inactivate($id), 204);
+        $alocacao->inactivate($id);
+        return response(["status" => "Alocação inativada com sucesso."], 202);
     }
 }

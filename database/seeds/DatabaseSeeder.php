@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
             TrajetoUrbanoSeeder::class,
             TrajetoIntermunicipalSeeder::class,
             PassagensIntermunicipalSeeder::class,
-            // AlocacaoUrbanoSeeder::class
+            AlocacaoUrbanoSeeder::class
         ]);
     }
 }
