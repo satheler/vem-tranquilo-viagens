@@ -59,8 +59,7 @@
                                         <i class="fas fa-ellipsis-v"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                        <a class="dropdown-item" href="#">{{ __('Editar') }}</a>
-                                        <a class="dropdown-item" data-remove-id="{{ $item->id }}" href="#">{{ __('Remover') }}</a>
+                                        <a class="dropdown-item" href="{{ \Request::url() }}/{{ $item->id }}/edit">{{ __('Editar') }}</a>
                                     </div>
                                 </div>
                             </td>

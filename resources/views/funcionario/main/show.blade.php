@@ -32,13 +32,13 @@
             <input type="text" name="cidade" id="input-cidade" class="form-control form-control-alternative" value="{{ $item->local->bairro }}"  readonly>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
         <div class="form-group">
             <label class="form-control-label" for="input-tipo">{{ __('CEP') }}</label>
             <input type="text" name="nome" id="input-tipo" class="form-control form-control-alternative" value="{{ $item->local->cep }}"  readonly>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="form-group">
             <label class="form-control-label" for="input-cidade">{{ __('Telefone') }}</label>
             <input type="text" name="cidade" id="input-cidade" class="form-control form-control-alternative" value="{{ $item->local->telefone }}"  readonly>
@@ -50,6 +50,12 @@
             <div>
                 <button disabled type="button" class="btn col-md-12 {{ $item->status ? ' btn-success' : ' btn-danger' }}">{{ $item->status ? 'Ativo' : 'Inativo' }}</button>
             </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label class="form-control-label" for="input-observacao">{{ __('Observação') }}</label>
+            <input type="text" name="observacao" id="input-observacao" class="form-control form-control-alternative" value="{{ $item->observacao }}"  readonly>
         </div>
     </div>
 </div>

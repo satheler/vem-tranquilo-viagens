@@ -59,33 +59,6 @@ $(document).ready( function () {
     table = $('#datatable-basic').DataTable();
 });
 
-$('[data-remove-id]').on('click', async function () {
-    let id = $(this).data('remove-id');
-
-    let response = await Swal.fire({
-        title: 'Você tem certeza que deseja remover este funcionário?',
-        type: 'question',
-        showCancelButton: true,
-        confirmButtonColor: '#28a745',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Sim, tenho certeza!',
-        cancelButtonText: 'Não, cancelar'
-    })
-
-    if(response.value){
-        axios.delete(`${url}/${id}`)
-        .then(data => {
-            table.row(`[data-table-row-id="${id}"]`).remove();
-            table.draw();
-            Swal.fire('Funcionário removido com sucesso!', '', 'success')
-            console.log(data);
-        })
-        .catch((error) => {
-            console.error(error);
-            Swal.fire('Aconteceu um erro inesperado...', '', 'error' )
-        })
-    }
-})
 
 $('[data-show-id]').on('click', function() {
     let id = $(this).data('show-id');

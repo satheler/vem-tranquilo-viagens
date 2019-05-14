@@ -43,7 +43,8 @@ class Funcionario extends Model
             'nome' => 'required|string',
             'tipo' => 'required|exists:tipos_funcionario,id',
             'local' => 'required|exists:rodoviarias,id',
-            'status' => 'required|boolean'
+            'status' => 'required|boolean',
+            'observacao' => 'required|string'
         ]);
 
         if ($validator->fails()) {
@@ -55,29 +56,38 @@ class Funcionario extends Model
         $this->tipo_id = $input['tipo'];
         $this->local_id = $input['local'];
         $this->status = $input['status'];
+        $this->observacao = $input['observacao'];
 
         $this->save();
     }
 
-    public function edit(int $id, array $input)
+    public function edit(array $input, int $id)
     {
-        $funcionario = $this->find($id);
 
-        $validator = Validator::make($input, [
-            'nome' => 'required|string',
-            'tipo' => 'required|exists:tipos_funcionario,id',
-            'local' => 'required|exists:rodoviarias,id',
-            'status' => 'required|boolean'
-        ]);
+        $validator = $this->rules($input);
         if ($validator->fails()) {
             return $validator;
         }
-        $funcionario->nome = $input['nome'];
-        $funcionario->tipo = $input['tipo_id'];
-        $funcionario->local = $input['local_id'];
-        $funcionario->status = $input['status'];
 
-        $funcionario->save();
+        $funcionario = $this->find($id);
+
+        $funcionario->nome = $input['nome'];
+        $funcionario->tipo_id = $input['tipo'];
+        $funcionario->local_id = $input['local'];
+        $funcionario->status = $input['status'];
+        $funcionario->observacao = $input['observacao'];
+
+        $funcionario->update();
+    }
+
+    private function rules(array $input){
+        return Validator::make($input, [
+            'nome' => 'required|string',
+            'tipo' => 'required|exists:tipos_funcionario,id',
+            'local' => 'required|exists:rodoviarias,id',
+            'status' => 'required|boolean',
+            'observacao' => 'requi red|string',
+        ]);
     }
 
     public function remove(int $id)

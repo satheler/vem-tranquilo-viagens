@@ -10,115 +10,100 @@
                     <div class="card-header bg-white border-0">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <a href="{{route('rodoviarias_ativas.index') }}" class="btn btn-sm btn-primary">{{ __('Voltar') }}</a>
+                                <a href="{{route('funcionario.index') }}" class="btn btn-sm btn-primary">{{ __('Voltar') }}</a>
                             </div>
                             <div class="col-4 text-right">
-                                <h3 class="mb-0">{{ __('Editar rodoviária') }}</h3>
+                                <h3 class="mb-0">{{ __('Editar Funcionário') }}</h3>
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{ route('rodoviarias_ativas.update', $lista["rodoviaria"]) }}" autocomplete="off">
+                        <form method="post" action="{{ route('funcionario.update', $lista["funcionario"]) }}" autocomplete="off">
                             @csrf
                             @method('put')
 
-                            <h6 class="heading-small text-muted mb-4">{{ __('Informações da rodoviária') }}</h6>
+                            <h6 class="heading-small text-muted mb-4">{{ __('Informações do Funcionário') }}</h6>
 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group{{ $errors->has('logradouro') ? ' has-danger' : '' }}">
-                                            <label class="form-control-label" for="input-logradouro">{{ __('RUA / AVENIDA') }}</label>
-                                            <input type="text" name="logradouro" class="form-control form-control-alternative{{ $errors->has('logradouro') ? ' is-invalid' : '' }}" placeholder="{{ __('Insira uma rua/avenida') }}" value="{{ old('logradouro', $lista["rodoviaria"]->logradouro) }}" required autofocus>
+                            <div class="pl-lg-12">
+                                <div class="row clearfix">
+                                    <div class="col-lg-6">
+                                        <div class="form-group{{ $errors->has('nome') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label" for="input-nome">{{ __('NOME') }}</label>
+                                            <input type="text" name="nome" id="input-nome" class="form-control form-control-alternative{{ $errors->has('nome') ? ' is-invalid' : '' }}" placeholder="{{ __('Nome do Funcionário') }}" value="{{ old('nome', $lista["funcionario"]->nome) }}" required autofocus>
 
-                                            @if ($errors->has('logradouro'))
+                                            @if ($errors->has('nome'))
                                                 <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('logradouro') }}</strong>
+                                                    <strong>{{ $errors->first('nome') }}</strong>
                                                 </span>
                                             @endif
                                         </div>
                                     </div>
 
-                                    <div class="col-md-2">
-                                        <div class="form-group{{ $errors->has('numero') ? ' has-danger' : '' }}">
-                                            <label class="form-control-label" for="input-numero">{{ __('NÚMERO') }}</label>
-                                            <input type="number" name="numero" id="input-numero" class="form-control form-control-alternative{{ $errors->has('numero') ? ' is-invalid' : '' }}" placeholder="{{ __('Insira o número') }}" value="{{ old('numero', $lista["rodoviaria"]->numero) }}" required>
+                                    <div class="col-lg-6">
+                                        <label class="form-control-label" for="form-control-label"> {{__('FUNÇÃO')}} </label>
+                                        <select bootstrapSelect name="tipo" data-size="4" data-live-search="true" required>
+                                            <option value="" disabled selected>Selecione uma função...</option>
+                                            @foreach ($lista["tipos_funcionario"] as $item)
+                                                <option @if($errors->has('tipo') && ($errors->first('tipo') == $item->id) || old('tipo', $lista["funcionario"]->tipo_id) == $item->id) selected @endif value="{{ $item->id }}">{{ $item->nome }}</option>
+                                            @endforeach
 
-                                            @if ($errors->has('numero'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('numero') }}</strong>
-                                                </span>
+                                            @if ($errors->has('tipo'))
+                                                <label class="form-control-label invalid-feedback" for="form-control-label"> {{ $errors->first('tipo') }} </label>
                                             @endif
-                                        </div>
+                                        </select>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">  
+                                        
+                                <div class="col-lg-6">
+                                    <label class="form-control-label" for="form-control-label"> {{__('LOCAL DE TRABALHO')}} </label>
+                                    <select bootstrapSelect name="local" data-size="4" data-live-search="true" required>
+                                        <option value="" disabled selected>Selecione o Local de Trabalho...</option>
+                                        @foreach ($lista["rodoviaria"] as $item)
+                                            <option @if($errors->has('local') && ($errors->first('local') == $item->id) || old('local', $lista["funcionario"]->local_id) == $item->id) selected @endif value="{{ $item->id }}">{{ $item->logradouro }}</option>
+                                        @endforeach
 
-                                    <div class="col-md-4">
-                                        <div class="form-group{{ $errors->has('bairro') ? ' has-danger' : '' }}">
-                                            <label class="form-control-label" for="input-bairro">{{ __('BAIRRO') }}</label>
-                                            <input type="text" name="bairro" id="input-bairro" class="form-control form-control-alternative{{ $errors->has('bairro') ? ' is-invalid' : '' }}" placeholder="{{ __('Insira o bairro') }}" value="{{ old('bairro', $lista["rodoviaria"]->bairro) }}" required>
+                                        @if ($errors->has('local'))
+                                            <label class="form-control-label invalid-feedback" for="form-control-label"> {{ $errors->first('local') }} </label>
+                                        @endif
+                                    </select>
+                                </div>
 
-                                            @if ($errors->has('bairro'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('bairro') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
+                                <div class="col-lg-3">
+                                    <label class="form-control-label" for="input-observacao">{{ __('OBSERVAÇÃO') }}</label>
+                                    <input type="text" name="observacao" id="input-observacao" class="form-control form-control-alternative{{ $errors->has('observacao') ? ' is-invalid' : '' }}" placeholder="{{ __('observacao') }}" value="{{ old('observacao', $lista["funcionario"]->observacao) }}" required autofocus>
+
+                                    @if ($errors->has('observacao'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('observacao') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
+                                <div class="col-lg-3">
+                                    <label class="form-control-label" for="form-control-label"> {{__('STATUS ATUAL: ')}} @if ($lista['funcionario']->status) <span class="badge badge-success">Ativo</span> @else <span class="badge badge-warning">Inativo</span> @endif </label>
+                                    <select bootstrapSelect name="status"  data-size="4" data-live-search="true" required>
+                                        <option value="" disabled selected>Clique para alterar Status...</option> 
+                                            <option @if ($lista['funcionario']->status) selected value="1" @endif value="1">Ativo</option>
+                                            <option @if (!$lista['funcionario']->status) selected value="0" @endif value="0">Inativo</option>
+                                        </select>
                                     </div>
                                 </div>
 
-                                <div class="row justify-content-center">
-                                    <div class="col-lg-3 form-group{{ $errors->has('cidade') ? ' has-danger' : '' }}">
-                                        <label class="form-control-label{{ $errors->has('cidade') ? ' text-warning' : '' }}" for="form-control-label"> {{__('CIDADE')}}</label>
-                                        <select bootstrapSelect name="cidade"  data-size="4" data-live-search="true" required>
-                                            <option value="" disabled selected>Selecione a cidade...</option>
-                                            @foreach ($lista["cidade"] as $item)
-                                                <option @if($errors->has('cidade') && ($errors->first('cidade') == $item->id) || old('cidade', $lista["rodoviaria"]->cidade_id) == $item->id) selected @endif value="{{ $item->id }}">{{ $item->nome }}</option>
-                                                @endforeach
-                                            </select>
-                                            @if ($errors->has('cidade'))
-                                                <label class="form-control-label invalid-feedback" for="form-control-label"> {{ $errors->first('cidade') }} </label>
-                                            @endif
-
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <div class="form-group{{ $errors->has('cep') ? ' has-danger' : '' }}">
-                                            <label class="form-control-label" for="input-cep">{{ __('CEP') }}</label>
-                                            <input type="text" cep name="cep" id="input-cep" class="form-control form-control-alternative{{ $errors->has('cep') ? ' is-invalid' : '' }}" placeholder="{{ __('_____-___') }}" value="{{ old('cep', $lista["rodoviaria"]->cep) }}" required>
-
-                                            @if ($errors->has('cep'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('cep') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <div class="form-group{{ $errors->has('telefone') ? ' has-danger' : '' }}">
-                                            <label class="form-control-label" for="input-telefone">{{ __('TELEFONE') }}</label>
-                                            <input type="text" phone name="telefone" id="input-telefone" class="form-control form-control-alternative{{ $errors->has('telefone') ? ' is-invalid' : '' }}" placeholder="{{ __('(__) ____-____') }}" value="{{ old('telefone', $lista["rodoviaria"]->telefone) }}" required>
-
-                                            @if ($errors->has('telefone'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('telefone') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-
+                                {{-- END FORM --}}
+                                <div class="text-right">
+                                    <button type="submit" class="btn btn-success mt-4">{{ __('Salvar') }}</button>
                                 </div>
-
-                            {{-- END FORM --}}
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-success mt-4">{{ __('Salvar') }}</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
+            @include('layouts.footers.auth')
+
         </div>
 
-        @include('layouts.footers.auth')
     </div>
 @endsection
 
