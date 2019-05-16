@@ -59,9 +59,10 @@ class RegistroManutencao extends Model
     public function edit(array $input, int $id)
     {
         $registro = $this->find($id);
+        $dataAnterior = $registro->data_entrada;
 
         $validator = Validator::make($input, [
-            'data' => 'required|string',
+            'data' => 'required|date_format:d/m/Y|after:'.$dataAnterior,
             'valorTotal' => 'required|numeric|min:0.01',
             'observacao' => 'required|string'
 
