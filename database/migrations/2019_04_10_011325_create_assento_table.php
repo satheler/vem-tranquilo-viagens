@@ -18,7 +18,7 @@ class CreateAssentoTable extends Migration
             $table->bigIncrements('id');
             $table->double('valor');
 
-            $table->bigInteger('categoria_id');
+            $table->boolean('ocupado');
 
             $table->timestamps();
         });
