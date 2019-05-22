@@ -18,16 +18,9 @@ class CreateVendaOnlineTable extends Migration
             $table->bigIncrements('id');
             $table->date('data_compra');
             $table->boolean('forma_pagamento');
-
-
-            $table->unsignedBigInteger('onibus_id');
-            $table->foreign('onibus_id')->references('id')->on('onibus');
-           
-            $table->unsignedBigInteger('trajeto_id');
-            $table->foreign('trajeto_id')->references('id')->on('trajeto_intermunicipal');
-           
-            $table->unsignedBigInteger('funcionario_id');
-            $table->foreign('funcionario_id')->references('id')->on('funcionarios');
+            
+            $table->unsignedBigInteger('alocacao_id');
+            $table->foreign('alocacao_id')->references('id')->on('alocacao_intermunicipal');
             
             $table->unsignedBigInteger('assento_id');
             $table->foreign('assento_id')->references('id')->on('assento');
@@ -36,10 +29,10 @@ class CreateVendaOnlineTable extends Migration
             $table->foreign('categoria_onibus_id')->references('id')->on('categoria_onibus');
             
             $table->unsignedBigInteger('categoria_passageiro_id');
-            $table->foreign('categoria_onibus_id')->references('id')->on('categoria_passageiro');
+            $table->foreign('categoria_passageiro_id')->references('id')->on('categoria_passageiro');
             
             $table->unsignedBigInteger('tarifa_intermunicipal_id');
-            $table->foreign('categoria_onibus_id')->references('id')->on('tarifa_intermunicipal');
+            $table->foreign('tarifa_intermunicipal_id')->references('id')->on('tarifa_intermunicipal');
             
             
             $table->unsignedBigInteger('users_id');
