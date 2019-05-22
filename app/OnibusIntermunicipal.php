@@ -43,7 +43,7 @@ class OnibusIntermunicipal extends Model
         $validator = Validator::make($input, [
             'banheiro' => 'required|boolean',
             'categoria_id' => 'exists:categoria_onibus,id',
-            'qnt_assento' => 'required|numeric|min:1||max:80'
+            'qnt_assento' => 'required|numeric|min:26||max:42'
         ]);
 
         if ($validator->fails()) {
