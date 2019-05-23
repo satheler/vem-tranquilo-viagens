@@ -19,13 +19,17 @@ Route::group(['prefix' => '/', 'as' => 'page_'], function () {
             Route::get('', 'CompraPassagemController@index')->name('.index');
             Route::get('{origem}/{destino}/{data}', 'CompraPassagemController@list')->name('.list');
             Route::post('search', 'CompraPassagemController@search')->name('.search');
+            Route::get('poltrona', 'CompraPassagemController@selecionarPoltrona')->name('.poltrona');
         });
 });
 
 Route::group(['prefix' => 'painel'], function () {
     Auth::routes();
-    Route::group(['middleware' => 'auth'], function () {
 
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/compra', 'CompraPassagemController@index')->name('compra_passagem');
+
+Route::group(['middleware' => 'auth'], function () {
         Route::resource('user', 'UserController', ['except' => ['show']]);
         Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
         Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
@@ -80,6 +84,5 @@ Route::group(['prefix' => 'painel'], function () {
             });
 
         });
-
     });
 });

@@ -39,4 +39,8 @@ class CompraPassagemController extends Controller
         $data = $data_converter->format('d/m/Y');
         return view('compra.main.index', compact('cidades', 'trajetos', 'origem', 'destino', 'data'));
     }
+
+    public function selecionarPoltrona() {
+        return view('compra_passagem.main.index');
+    }
 }
