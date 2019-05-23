@@ -12,7 +12,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -22,12 +22,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // var_dump(Auth::user()); exit;
-        if(Auth::user()->tipo_usuario_id === 5){
-            return redirect()
-                ->route('venda_intermunicipal.index');
-        }
+        // // var_dump(Auth::user()); exit;
+        // if(Auth::user()->tipo_usuario_id === 5){
+        //     return redirect()
+        //         ->route('venda_intermunicipal.index');
+        // }
 
-        return view('dashboard');
+        return view('home.welcome');
     }
 }
