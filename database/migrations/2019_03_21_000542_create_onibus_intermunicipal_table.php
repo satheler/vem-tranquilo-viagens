@@ -18,12 +18,14 @@ class CreateOnibusIntermunicipalTable extends Migration
     {
         Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('qnt_assento');
 
             $table->boolean('banheiro');
 
             $table->unsignedBigInteger('categoria_onibus_id');
             $table->foreign('categoria_onibus_id')->references('id')->on('categoria_onibus');
 
+            
             $table->timestamps();
         });
     }
