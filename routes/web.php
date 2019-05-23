@@ -11,10 +11,15 @@
 |
  */
 
-
 Route::group(['prefix' => '/', 'as' => 'page_'], function () {
     Route::get(null, 'HomeController@index')->name('home.index');
     Route::get('painel', 'PainelController@index')->name('painel.index');
+
+        Route::group(['prefix' => 'compra', 'as' => 'compra'], function () {
+            Route::get('', 'CompraPassagemController@index')->name('.index');
+            Route::get('{origem}/{destino}/{data}', 'CompraPassagemController@list')->name('.list');
+            Route::post('search', 'CompraPassagemController@search')->name('.search');
+        });
 });
 
 Route::group(['prefix' => 'painel'], function () {
@@ -61,11 +66,6 @@ Route::group(['prefix' => 'painel'], function () {
         });
 
         Route::resource('seguro', 'SeguroController');
-
-        Route::prefix('compra')->name('compra_')->group(function () {
-            Route::resource('intermunicipal', 'CompraPassagensIntermunicipalController');
-
-        });
 
         Route::prefix('rodoviarias')->name('rodoviarias_')->group(function () {
             Route::resource('ativas', 'RodoviariasController');

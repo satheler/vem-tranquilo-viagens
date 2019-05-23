@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        @includeWhen(isset($trajetos), 'compra_passagens_intermunicipal.main.list')
+        @includeWhen(isset($trajetos), 'compra.main.list')
 
         @include('layouts.footers.auth')
     </div>
@@ -28,7 +28,7 @@
                 <div class="modal-content">
 
                     <div class="modal-header">
-                        <h3 class="modal-title" id="modal-title-default">Informações detalhadas do ônibus</h3>
+                        <h3 class="modal-title" id="modal-title-default">Informações detalhadas</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
