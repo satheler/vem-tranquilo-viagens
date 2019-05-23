@@ -22,7 +22,7 @@ $lista = $users->all();
                         <div class="text-center text-muted mb-4">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <a class="navbar-bran" href="{{ route('home') }}">
+                                    <a class="navbar-bran" href="{{ route('page_painel.index') }}">
                                         <img src="{{ asset('argon') }}/img/brand/logo.png" class="navbar-brand-img" alt="..." width="90%" height="90%" style="">
                                     </a>
                                 </div>
