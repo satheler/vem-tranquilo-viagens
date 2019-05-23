@@ -4,10 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTrechoTable extends Migration
+class CreateTrechosTable extends Migration
 {
-
-    private $databaseName = 'trecho';
+    private $databaseName = 'trechos';
     /**
      * Run the migrations.
      *
@@ -17,13 +16,17 @@ class CreateTrechoTable extends Migration
     {
         Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->double('quilometragem');
 
-            $table->bigInteger('origem_id')->unsigned();
-            $table->foreign('origem_id')->references('id')->on('cidades');
+            $table->unsignedBigInteger('trajeto_id');
+            $table->foreign('trajeto_id')->references('id')->on('trajeto_intermunicipal');
 
-            $table->bigInteger('destino_id')->unsigned();
-            $table->foreign('destino_id')->references('id')->on('cidades');
+            $table->unsignedBigInteger('cidade_id');
+            $table->foreign('cidade_id')->references('id')->on('cidades');
+
+            $table->time('horarioSaida')->nullable();
+            $table->time('horarioChegada')->nullable();
+            $table->float('quilometragem');
+            $table->integer('ordem');
 
             $table->timestamps();
         });

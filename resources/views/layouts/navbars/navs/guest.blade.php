@@ -11,7 +11,7 @@
             <div class="navbar-collapse-header d-md-none">
                 <div class="row">
                     <div class="col-6 collapse-brand">
-                        <a href="{{ route('home') }}">
+                        <a href="{{ route('page_home.index') }}">
                             <img src="{{ asset('argon') }}/img/brand/logo.png">
                         </a>
                     </div>

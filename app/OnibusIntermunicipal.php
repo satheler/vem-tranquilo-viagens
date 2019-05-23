@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Database\Eloquent\Model;
 use \Validator as Validator;
 use App\RegistroManutencao;
+use App\Assento;
 
 class OnibusIntermunicipal extends Model
 {
@@ -14,10 +15,9 @@ class OnibusIntermunicipal extends Model
     public function manutencoes(){
         return $this->hasMany('App\RegistroManutencao', 'onibus_id', 'id');
     }
-    
-    public function assento()
-    {
-        return $this->hasMany('App\AssentoOnibus',  'onibus_id', 'id');
+
+    public function categoria() {
+        return $this->hasOne('App\CategoriaOnibus', 'id', 'categoria_id');
     }
 
     public function description()
@@ -39,10 +39,36 @@ class OnibusIntermunicipal extends Model
         return $onibus;
     }
 
+    public function getAssentos(int $id)
+    {
+        $onibus = $this->find($id);
+        $assentos = [];
+        for($i=0 ; $i<$onibus->qnt_assento ; $i++){
+            $assentos[i] = new Assento();
+        }
+
+        return $this->consultarAssentosOcupados($assentos);
+    }
+
+    public function consultarAssentosOcupados(array $assentos)
+    {
+        $assento = new Assento();
+        $vendido = new VendaOnline();
+        $vendidos = $vendido->getAll();
+
+        foreach ($vendidos as $itemVendido) {
+            $assentos[$itemVendido->assento->numero] = $assento->ocupado();
+        }
+
+        return $assentos;
+    }
+
     public function add(array $input)
     {
         $validator = Validator::make($input, [
-            'banheiro' => 'required|boolean'
+            'banheiro' => 'required|boolean',
+            'categoria_id' => 'exists:categoria_onibus,id',
+            'qnt_assento' => 'required|numeric|min:26||max:42'
         ]);
 
         if ($validator->fails()) {
@@ -50,6 +76,8 @@ class OnibusIntermunicipal extends Model
         }
 
         $this->banheiro = $input['banheiro'];
+        $this->qnt_assento = $input['qnt_assento'];
+        $this->categoria_id= $input["categoria_id"];
 
         $onibus = new Onibus();
         $onibusAdd = $onibus->add($input);
@@ -86,11 +114,11 @@ class OnibusIntermunicipal extends Model
         $onibus = $this->find($id);
         $description = $onibus->description;
         $description->disponivel = false;
-        
+
         $registro = new RegistroManutencao();
         $registro->motivo = $input['motivo'];
         $registro->valor = $input['valor'];
-        
+
         $onibus->manutencoes()->save($registro);
         $onibus->description()->save($description);
         $onibus->save();

@@ -4,9 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAssentoTable extends Migration
+class CreatePagamentoCartaoTable extends Migration
 {
-    private $databaseName = 'assento';
+    private $databaseName = 'pagamento_cartao';
     /**
      * Run the migrations.
      *
@@ -16,9 +16,13 @@ class CreateAssentoTable extends Migration
     {
         Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->double('valor');
+            $table->string('titular');
+            $table->bigInteger('num_cartao');
+            $table->integer('cvv');
+            $table->date('data_validade');
+            $table->integer('qnt_parcelas');
 
-            $table->boolean('ocupado');
+
 
             $table->timestamps();
         });
@@ -31,6 +35,7 @@ class CreateAssentoTable extends Migration
      */
     public function down()
     {
+       
         Schema::dropIfExists($this->databaseName);
     }
 }

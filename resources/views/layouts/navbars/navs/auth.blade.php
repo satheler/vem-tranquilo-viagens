@@ -2,7 +2,7 @@
 <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
     <div class="container-fluid">
         <!-- Brand -->
-        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="{{ route('home') }}">{{ __('Painel de controle') }}</a>
+        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="{{ route('page_painel.index') }}">{{ __('Painel de controle') }}</a>
        @isset(Auth::user()->rodoviaria)
             <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block cursor-none">
                 {{ Auth::user()->rodoviaria->cidade->nome }} -
@@ -55,6 +55,10 @@
                         <span>{{ __('Support') }}</span>
                     </a> --}}
                     <div class="dropdown-divider"></div>
+                    <a href="{{ route('page_home.index') }}" class="dropdown-item">
+                        <i class="fas fa-arrow-circle-left"></i>
+                        <span>{{ __('Acessar site') }}</span>
+                    </a>
                     <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
                         <i class="ni ni-user-run"></i>

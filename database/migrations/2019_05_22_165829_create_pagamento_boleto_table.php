@@ -4,9 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAssentoTable extends Migration
+class CreatePagamentoBoletoTable extends Migration
 {
-    private $databaseName = 'assento';
+    private $databaseName = 'pagamento_boleto';
     /**
      * Run the migrations.
      *
@@ -16,9 +16,9 @@ class CreateAssentoTable extends Migration
     {
         Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->double('valor');
+            $table->float('valor');
+            $table->date('data_validade');
 
-            $table->boolean('ocupado');
 
             $table->timestamps();
         });
