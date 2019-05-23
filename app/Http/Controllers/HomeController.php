@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Cidade;
 use Auth;
 
 class HomeController extends Controller
@@ -28,6 +29,8 @@ class HomeController extends Controller
         //         ->route('venda_intermunicipal.index');
         // }
 
-        return view('home.welcome');
+        $cidades = new Cidade();
+        $lista = $cidades->getAll();
+        return view('home.welcome', compact('lista'));
     }
 }
