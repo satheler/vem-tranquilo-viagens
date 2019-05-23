@@ -48,7 +48,7 @@ class CompraPassagemController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('compra.main.show');
     }
 
     /**

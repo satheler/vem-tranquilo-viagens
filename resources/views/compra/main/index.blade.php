@@ -1,7 +1,7 @@
 @extends('compra.index', ['title' => __('Compra da Passagens')])
 
 @section('infos')
-    
+
     <div class="card-header border-0" style="padding: 0.25rem 0.5rem;">
         <div class="row align-cidades-center">
             <div class="col-8">
@@ -77,14 +77,15 @@
                     <button type="submit" class="btn btn-primary" style="margin-top: 2px"><i class="fas fa-search"></i> {{ __('Pesquisar') }}</button>
                 </div>
             </div>
-        <form>
+        </form>
+
         <div class="row">
             <div class="col-xl-12 order-xl-1">
                 <div class="card bg-secondary shadow">
                     <div class="card-header bg-white border-0" style="padding: 0.25rem 0.5rem;">
                         <div class="row align-items-center">
                             <!-- <div class="col-8">
-                                <a href="{{ route('onibus_urbano.index') }}" class="btn btn-sm btn-primary">{{ __('Voltar') }}</a>
+                                {{-- <a href="{{ route('onibus_urbano.index') }}" class="btn btn-sm btn-primary">{{ __('Voltar') }}</a> --}}
                             </div> -->
                             <div class="col-12 text-center">
                                 <h3 class="mb-0">{{ __('Origem → Destino') }}</h3>
@@ -96,12 +97,13 @@
                             <table id="datatable-manutencao" class="table align-items-center table-flush dataTable">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th scope="col">{{ __('Partida') }}</th>
+                                        <th scope="col" >{{ __('Partida') }}</th>
                                         <th scope="col">{{ __('Chegada') }}</th>
                                         <th scope="col">{{ __('Tipo') }}</th>
                                         <th scope="col">{{ __('Data de Saída') }}</th>
                                         <th scope="col">{{ __('Valor') }}</th>
-                                        <th scope="col">
+                                        <th scope="col">{{ __('Quantidade') }}</th>
+                                        <th scope="col" style="width: 10%!important;">
                                             <button type="submit" class="btn btn-primary" >{{ __('Selecionar') }}</button>
                                         </th>
                                     </tr>
