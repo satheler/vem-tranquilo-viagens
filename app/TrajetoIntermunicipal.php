@@ -13,9 +13,8 @@ class TrajetoIntermunicipal extends Model
 
     public function trechos()
     {
-        return $this->belongsToMany('App\Trecho', 'trajeto_trecho', 'trajeto_id', 'trecho_id')
-            ->withPivot('horarioSaida')
-            ->withPivot('horarioChegada');
+        return $this->hasMany('App\Trecho', 'trajeto_id', 'id');
+        // return $this->hasMany('<ENTIDADE>', '<FOREING_KEY>', '<LOCAL_KEY>');
     }
 
     public function getAll()
@@ -25,7 +24,7 @@ class TrajetoIntermunicipal extends Model
 
     public function getByFilter($origem_id, $destino_id, $data)
     {
-        return $this->whereHas('trechos', function ($query) use ($origem_id, $destino_id, $data) {
+        return $this->whereHas('trajeto_trechos', function ($query) use ($origem_id, $destino_id, $data) {
             $query->where('origem_id', $origem_id)
                   ->where('destino_id', $destino_id);
         })->get();

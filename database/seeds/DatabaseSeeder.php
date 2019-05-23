@@ -20,7 +20,6 @@ class DatabaseSeeder extends Seeder
             CategoriaOnibusSeeder::class,
             OnibusIntermunicipalSeeder::class,
             OnibusUrbanoSeeder::class,
-            TrechosSeeder::class,
             FuncionarioSeeder::class,
             TrajetoUrbanoSeeder::class,
             TrajetoIntermunicipalSeeder::class,
