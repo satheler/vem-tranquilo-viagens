@@ -25,6 +25,11 @@ class Assento extends Model
         $assento->save();
     }
 
+    public function isOcupado(int $id){
+        $assento = $this->find($id);
+        return $assento->ocupado;
+    }
+
     // public function add(array $input)
     // {
     //     $validator = Validator::make($input, [
