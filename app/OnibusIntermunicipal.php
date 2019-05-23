@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Database\Eloquent\Model;
 use \Validator as Validator;
 use App\RegistroManutencao;
+use App\Assento;
 
 class OnibusIntermunicipal extends Model
 {
@@ -36,6 +37,30 @@ class OnibusIntermunicipal extends Model
         $onibus = $this->find($id);
         $onibus->description;
         return $onibus;
+    }
+
+    public function getAssentos(int $id)
+    {
+        $onibus = $this->find($id);
+        $assentos = [];
+        for($i=0 ; $i<$onibus->qnt_assento ; $i++){
+            $assentos[i] = new Assento();
+        }
+
+        return $this->consultarAssentosOcupados($assentos);
+    }
+
+    public function consultarAssentosOcupados(array $assentos)
+    {
+        $assento = new Assento();
+        $vendido = new VendaOnline();
+        $vendidos = $vendido->getAll();
+
+        foreach ($vendidos as $itemVendido) {
+            $assentos[$itemVendido->assento->numero] = $assento->ocupado();
+        }
+
+        return $assentos;
     }
 
     public function add(array $input)
