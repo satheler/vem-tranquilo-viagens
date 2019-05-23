@@ -60,11 +60,12 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::resource('seguro', 'SeguroController');
+    
+    Route::resource('compra', 'CompraPassagemController');
+    // Route::prefix('compra')->name('compra_')->group(function () {
+    //     Route::resource('intermunicipal', 'CompraPassagensIntermunicipalController');
 
-    Route::prefix('compra')->name('compra_')->group(function () {
-        Route::resource('intermunicipal', 'CompraPassagensIntermunicipalController');
-
-    });
+    // });
 
 
     Route::prefix('rodoviarias')->name('rodoviarias_')->group(function () {
