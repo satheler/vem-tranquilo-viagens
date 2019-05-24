@@ -13,8 +13,15 @@ class AssentoSeeder extends Seeder
     {
         DB::table('assento')->insert([
             'id'=>1,
-            'valor' => 12321,
+            'num_assento' => 14,
             'ocupado' => true,
+          
+        ]);
+
+        DB::table('assento')->insert([
+            'id'=>2,
+            'num_assento' => 15,
+            'ocupado' => false,
           
         ]);
     }
