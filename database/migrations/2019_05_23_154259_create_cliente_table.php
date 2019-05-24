@@ -18,10 +18,11 @@ class CreateClienteTable extends Migration
             $table->bigIncrements('id');
             
             $table->bigInteger('cpf');
-            $table->bigInteger('senha');
-            $table->bigInteger('confirmar_senha');
-            $table->string('email');
-            $table->string('confirmar_email');
+            $table->string('senha');
+            $table->string('confirmar_senha');
+            $table->string('email')->unique();
+            $table->string('confirmar_email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
             $table->bigInteger('telefone');
             $table->bigInteger('celular');
             $table->bigInteger('cep');
@@ -30,7 +31,9 @@ class CreateClienteTable extends Migration
             $table->string('bairro');
             $table->string('complemento');
             $table->string('estado');
-            
+
+            $table->rememberToken();
+            $table->timestamps();
         });
     }
 

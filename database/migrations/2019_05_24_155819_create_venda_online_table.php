@@ -17,11 +17,12 @@ class CreateVendaOnlineTable extends Migration
         Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->date('data_compra');
-            $table->boolean('forma_pagamento');
-            $table->integer('num_assento');
             
-            $table->unsignedBigInteger('alocacao_id');
-            $table->foreign('alocacao_id')->references('id')->on('alocacao_intermunicipal');
+            $table->unsignedBigInteger('cartao_id');
+            $table->foreign('cartao_id')->references('id')->on('pagamento_cartao');
+           
+            $table->unsignedBigInteger('alocacao_intermunicipal_id');
+            $table->foreign('alocacao_intermunicipal_id')->references('id')->on('alocacao_intermunicipal');
             
             $table->unsignedBigInteger('assento_id');
             $table->foreign('assento_id')->references('id')->on('assento');
@@ -31,6 +32,11 @@ class CreateVendaOnlineTable extends Migration
             
             $table->unsignedBigInteger('tarifa_intermunicipal_id');
             $table->foreign('tarifa_intermunicipal_id')->references('id')->on('tarifa_intermunicipal');
+          
+            $table->unsignedBigInteger('cliente_id');
+            $table->foreign('cliente_id')->references('id')->on('cliente');
+          
+            
             
            
             
