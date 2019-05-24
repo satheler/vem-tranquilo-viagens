@@ -28,7 +28,7 @@
                     <select bootstrapSelect name="origem"  data-size="4" data-live-search="true" required>
                         <option value="" disabled selected>Selecione a origem...</option>
                         @foreach ($cidades as $cidade)
-                            <option @if($errors->has('origem') && ($errors->first('origem') == $cidade->id) || old('origem', $origem ?? Auth::user()->rodoviaria->cidade_id) == $cidade->id) selected @endif value="{{ $cidade->id }}">{{ $cidade->nome }}</option>
+                            <option @if($errors->has('origem') && ($errors->first('origem') == $cidade->id) || old('origem') == $cidade->id) selected @endif value="{{ $cidade->id }}">{{ $cidade->nome }}</option>
                         @endforeach
                     </select>
                     @if ($errors->has('origem'))

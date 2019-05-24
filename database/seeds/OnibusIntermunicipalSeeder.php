@@ -14,6 +14,7 @@ class OnibusIntermunicipalSeeder extends Seeder
 
         DB::table('onibus_intermunicipal')->insert([
             'id' => 1,
+            'qnt_assento' => 50,
             'banheiro' => false,
             'categoria_onibus_id' => 3,
         ]);
