@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\TrajetoIntermunicipal;
+use App\TarifaIntermunicipal;
 use Validator;
 use DateTime;
 use Date;
@@ -36,18 +37,31 @@ class AlocacaoIntermunicipal extends Model
 
         $lista["trajeto"] = [];
         $lista["onibus"] = [];
+        $lista["valor"] = [];
 
         $alocacaoData = $this->where('data', $data)->get();
 
         foreach ($alocacaoData as $itemAlocacao) {
             array_push($lista["trajeto"], $itemAlocacao->trajeto->getByFilter($origem,$destino,$itemAlocacao->trajeto_id));
             array_push($lista["onibus"], $itemAlocacao->onibus);
+            array_push($lista["valor"], $this->calculaValor($itemAlocacao->trajeto));
         }
 
         return $lista;
     }
 
-    public function calculaValor($trajeto){
+    public function calculaValor(TrajetoIntermunicipal $trajeto){
+        //$tarifa = new TarifaIntermunicipal();
+        $tarifa = new Tarifa();
+        $itemTarifa = $tarifa->where('data', '<=' ,now()->format('Y-m-d'))->get();
 
+        //$intermunicipal = new TarifaIntermunicipal();
+        //$item = $intermunicipal->get($itemTarifa);
+        //$valor = $itemTarifa->description->valor;
+       // $valor = $itemTarifa->valor;
+        foreach ($trajeto->trechos as $itemTrecho) {
+           // $result = $itemTrecho->quilometragem*$valor;
+        }
+        return $itemTarifa;
     }
 }
