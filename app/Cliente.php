@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Hash;
 use \Validator as Validator;
 
 class Cliente extends Model
@@ -57,10 +58,9 @@ class Cliente extends Model
         $this->nome = strtoupper($input['nome']);
         $this->email = $input['email'];
         $this->cpf = $input['cpf'];
-        $this->senha = $input['senha'];
+        $this->senha = Hash::make($input['senha']);
         $this->save();
     }
-
 
     public function validateCPF($cpf)
     {
