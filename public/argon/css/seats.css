@@ -8,12 +8,12 @@ html {
 }
 
 .plane {
-  margin: 20px auto;
+  /* margin: 20px auto; */
   max-width: 100%;
 }
 
 .cockpit {
-  height: 250px;
+  height: 25%;
   position: relative;
   overflow: hidden;
   text-align: center;
@@ -23,7 +23,7 @@ html {
   content: "";
   display: block;
   position: absolute;
-  top: 105px;
+  top: 40%;
   left: 0;
   height: 500px;
   width: 100%;
@@ -38,21 +38,9 @@ html {
 
 .exit {
   position: relative;
-  height: 50px;
+  height: 2.5%;
 }
-.exit:before, .exit:after {
-  content: "EXIT";
-  font-size: 14px;
-  line-height: 18px;
-  padding: 0px 2px;
-  font-family: "Arial Narrow", Arial, sans-serif;
-  display: block;
-  position: absolute;
-  background: green;
-  color: white;
-  top: 50%;
-  transform: translate(0, -50%);
-}
+
 .exit:before {
   left: 0;
 }
@@ -124,7 +112,7 @@ ol {
   font-weight: bold;
   line-height: 1.5rem;
   padding: 4px 0;
-  background: #F42536;
+  background: #1B92C0;
   border-radius: 5px;
   animation-duration: 300ms;
   animation-fill-mode: both;
@@ -137,12 +125,12 @@ ol {
   top: 1px;
   left: 50%;
   transform: translate(-50%, 0%);
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 3px;
 }
 .seat label:hover {
   cursor: pointer;
-  box-shadow: 0 0 0px 2px #5C6AFF;
+  box-shadow: 0 0 0px 2px rgb(176, 181, 236);
 }
 
 @-webkit-keyframes rubberBand {
