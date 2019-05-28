@@ -18,7 +18,7 @@ class CreateClienteTable extends Migration
             $table->bigIncrements('id');
 
             $table->string('nome');
-            $table->bigInteger('cpf');
+            $table->string('cpf');
             $table->string('senha');
             $table->string('email');
 
