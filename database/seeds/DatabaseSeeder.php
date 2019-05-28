@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             PagamentoCartaoSeeder::class,
             AssentoSeeder::class,
             CategoriaPassageiroSeeder::class,
-            VendaOnlineSeeder::class
+            // VendaOnlineSeeder::class
         ]);
     }
 }

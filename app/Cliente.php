@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use \Validator as Validator;
 
 class Cliente extends Model
 {
@@ -13,8 +14,10 @@ class Cliente extends Model
     public function add(array $input)
     {
         $validator = Validator::make($input, [
-            'nome' => 'required|string',
-            'cpf' => 'required|numeric|min:11||max:11'
+            'nome' => "required|string|max:255",
+            'email' => 'required|string|email|max:255|unique:users',
+            'cpf' => 'required|string',
+            'senha' => 'required|confirmed',
         ]);
 
         if ($validator->fails()) {
@@ -23,7 +26,9 @@ class Cliente extends Model
 
 
         $this->nome = $input['nome'];
-        $this->cpf = $input['cpf'];
+        $this->email = $input['email'];
+        $this->cpf = preg_replace('/[^0-9]/', '', $input['cpf']);
+        $this->senha = $input['senha'];
         $this->save();
 
     }
