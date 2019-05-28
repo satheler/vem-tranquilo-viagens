@@ -97,8 +97,8 @@
                             <table id="datatable-manutencao" class="table align-items-center table-flush dataTable">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th scope="col" >{{ __('Partida') }}</th>
-                                        <th scope="col">{{ __('Chegada') }}</th>
+                                        <th scope="col">{{ __('Origem') }}</th>
+                                        <th scope="col">{{ __('Destino') }}</th>
                                         <th scope="col">{{ __('Tipo') }}</th>
                                         <th scope="col">{{ __('Data de Saída') }}</th>
                                         <th scope="col">{{ __('Valor') }}</th>
