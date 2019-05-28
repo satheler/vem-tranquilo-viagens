@@ -57,6 +57,11 @@
             </li> 
         </ul>
     </div>
+    
+    <div class="card-footer bg-default border-0">
+        <div class="row">
+        </div>
+    </div>
 @endsection
 
 @section('infos-pag')
@@ -86,7 +91,7 @@
             <div class="col">
                 <div class="form-group{{ $errors->has('nro') ? ' has-danger' : '' }}">
                     <label class="form-control-label" for="input-nro"> {{ __('NÚMERO DO CARTÃO') }}</label>
-                    <input type="text" name="nro" id="input-nro" class="form-control form-control-alternative{{ $errors->has('nro') ? ' is-invalid' : '' }}" placeholder="{{ __('Número do Cartão') }}" value="{{ old('nro') }}" required autofocus>
+                    <input nro type="text" name="nro" id="input-nro" class="form-control form-control-alternative{{ $errors->has('nro') ? ' is-invalid' : '' }}" placeholder="{{ __('Número do Cartão') }}" value="{{ old('nro') }}" required autofocus>
 
                     @if ($errors->has('nro'))
                         <span class="invalid-feedback" role="alert">
@@ -100,7 +105,7 @@
             <div class="col-lg-6">
                 <div class="form-group{{ $errors->has('mes') ? ' has-danger' : '' }}">
                     <label class="form-control-label" for="input-mes">{{ __('MÊS DE VENCIMENTO') }}</label>
-                    <input type="text" name="mes" id="input-mes" class="form-control form-control-alternative{{ $errors->has('mes') ? ' is-invalid' : '' }}" placeholder="{{ __('Mês de vencimento') }}" value="{{ old('mes') }}" required autofocus>
+                    <input mes type="text" name="mes" id="input-mes" class="form-control form-control-alternative{{ $errors->has('mes') ? ' is-invalid' : '' }}" placeholder="{{ __('Mês de vencimento') }}" value="{{ old('mes') }}" required autofocus>
 
                     @if ($errors->has('mes'))
                         <span class="invalid-feedback" role="alert">
@@ -146,7 +151,7 @@
             <div class="col-lg-6">
                 <div class="form-group{{ $errors->has('cod') ? ' has-danger' : '' }}">
                     <label class="form-control-label  " for="input-cod">{{ __('COD. SEGURANÇA') }}</label>
-                    <input type="text" name="cod" id="input-cod" class="form-control form-control-alternative{{ $errors->has('cod') ? ' is-invalid' : '' }}" placeholder="{{ __('Cod. Segurança') }}" value="{{ old('cod') }}" required autofocus>
+                    <input cod type="text" name="cod" id="input-cod" class="form-control form-control-alternative{{ $errors->has('cod') ? ' is-invalid' : '' }}" placeholder="{{ __('Cod. Segurança') }}" value="{{ old('cod') }}" required autofocus>
 
                     @if ($errors->has('cod'))
                         <span class="invalid-feedback" role="alert">
@@ -157,8 +162,8 @@
             </div>
         </div>
         <div class="row clearfix">
-            <div class="col-lg-8">
-                <h6 class=" ">Ao clicar em Comprar, você confirma que leu e concordou com o nosso <a href="#">Termo de Aceite</a>.</h4>
+            <div class="col">
+                <h4>Ao clicar em Comprar, você confirma que leu e concordou com o nosso <a href="#">Termo de Aceite</a>.</h4>
             </div>
         </div>
         <div class="row justify-content-center">
@@ -166,4 +171,28 @@
         </div>
     </div>
 
+    <div class="card-footer bg-default border-0">
+        <div class="row">
+        </div>
+    </div>
+
 @endsection
+
+@push('js')
+
+    <script src="{{ asset('argon') }}/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="{{ asset('argon') }}/vendor/jquery-mask/dist/jquery.mask.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('[nro]').mask('0000.0000.0000.0000');
+        })
+        $(document).ready(function(){
+            $('[mes]').mask('00');
+        })
+        $(document).ready(function(){
+            $('[cod]').mask('000');
+        })
+    </script>
+
+@endpush
