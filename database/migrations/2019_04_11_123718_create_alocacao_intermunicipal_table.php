@@ -26,9 +26,6 @@ class CreateAlocacaoIntermunicipalTable extends Migration
             $table->unsignedBigInteger('motorista_id');
             $table->foreign('motorista_id')->references('id')->on('funcionarios');
 
-            $table->unsignedBigInteger('cobrador_id');
-            $table->foreign('cobrador_id')->references('id')->on('funcionarios');
-
             $table->unsignedBigInteger('auxiliar_id')->nullable();
             $table->foreign('auxiliar_id')->references('id')->on('funcionarios');
 
