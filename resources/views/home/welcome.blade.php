@@ -17,11 +17,11 @@
                         </div>
                     </div>
                 </div>
-    
+
                 <ul class="navbar-nav ml-lg-auto">
-                    <a href="#" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Entrar</a>                                
+                    <a href="#" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Entrar</a>
                 </ul>
-    
+
             </div>
         </div>
     </nav>
@@ -52,7 +52,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                
+
                                 <div class="row cleanfix">
                                     <div class="col-lg-6">
                                         <h3>Data de Ida</h3>
@@ -80,7 +80,7 @@
                                 </div>
                             </div>
                             <div class="row clearfix justify-content-right">
-                                <a href="#" class="btn btn-primary"><i class="fas fa-search"></i> Pesquisar</a>                                
+                                <a href="#" class="btn btn-primary"><i class="fas fa-search"></i> Pesquisar</a>
                             </div>
                         </div>
                     </div>

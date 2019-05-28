@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateClienteTable extends Migration
 {
-    private $databaseName = 'cliente';
+    private $databaseName = 'clientes';
     /**
      * Run the migrations.
      *
@@ -16,21 +16,13 @@ class CreateClienteTable extends Migration
     {
         Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
-            
-            $table->bigInteger('cpf');
-            $table->bigInteger('senha');
-            $table->bigInteger('confirmar_senha');
+
+            $table->string('nome');
+            $table->string('cpf');
+            $table->string('senha');
             $table->string('email');
-            $table->string('confirmar_email');
-            $table->bigInteger('telefone');
-            $table->bigInteger('celular');
-            $table->bigInteger('cep');
-            $table->string('rua');
-            $table->integer('numero');
-            $table->string('bairro');
-            $table->string('complemento');
-            $table->string('estado');
-            
+
+            $table->timestamps();
         });
     }
 
