@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => __('Adicionar rodoviária')])
+@extends('layouts.app', ['title' => __('Adicionar Sinistro')])
 
 @section('content')
 @include('users.partials.header', ['title' => __('Registro de Sinistro')])
@@ -78,7 +78,7 @@
                             </div>
 
 
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <label class="form-control-label" for="input-data">{{ __('DATA') }}</label>
                                 <div class="form-group">
                                     <div class="input-group input-group-alternative">
@@ -90,7 +90,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <div class="form-group{{ $errors->has('custo') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-custo">{{ __('CUSTO') }}</label>
                                     <input type="number" cep name="custo" id="input-custo" class="form-control form-control-alternative{{ $errors->has('custo') ? ' is-invalid' : '' }}" placeholder="{{ __('custo do sinistro') }}" value="{{ old('custo') }}" required>

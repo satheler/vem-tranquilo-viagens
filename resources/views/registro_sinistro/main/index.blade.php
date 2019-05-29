@@ -51,7 +51,7 @@
                             <td>{{ $item->custo }}</td>
                             <td>{{ $item->descricao_custo }}</td>
                             <td>{{ $item->data }}</td>
-                            <td>{{ $item->onibus->id->placa }}</td>
+                            <td>{{ $item->onibus->placa}}</td>
                            
 
                             <td align="center">
