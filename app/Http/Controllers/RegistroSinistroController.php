@@ -50,7 +50,7 @@ class RegistroSinistroController extends Controller
                     ->route('sinistro.create')
                     ->withErrors($validator)
                     ->withInput();
-        }
+        }   
     }
 
     /**
@@ -64,7 +64,7 @@ class RegistroSinistroController extends Controller
         $sinistro = new RegistroSinistro();
         $lista["sinistro"] = $sinistro->get($id);
 
-        return view('rodoviarias.main.show', compact('lista'));
+        return view('sinistro.main.show', compact('lista'));
     }
 
     /**
@@ -75,12 +75,7 @@ class RegistroSinistroController extends Controller
      */
     public function edit($id)
     {
-        $sinistro = new RegistroSinistro();
-        $lista["sinistro"] = $sinistro->get($id);
-        $onibus = new Onibus();
-        $lista["onibus"] = $onibus->getAll();
-
-        return view('sinistro.main.edit', compact('lista'));
+    
     }
 
     // /**
