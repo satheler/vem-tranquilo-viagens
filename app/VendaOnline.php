@@ -19,11 +19,16 @@ class VendaOnline extends Model
         return $this->hasOne('App\Assento', 'id', 'assento_id');
     }
 
+    public function getAll()
+    {
+        return $this->all();
+    }
+
     public function add(array $input)
     {
+
         $validator = Validator::make($input, [
             'alocacao_id' => 'exists:alocacao_intermuncipal,id',
-            'assento_id' => 'exists:assento,id',
             'tarifa_intermunicipal_id' => 'exists:tarifa_intermuncipal,id',
             'categoria_passageiro_id' => 'exists:categoria_passageiro,id'
         ]);
@@ -32,6 +37,8 @@ class VendaOnline extends Model
             return $validator;
         }
 
+        $assento = new Assento();
+        $assento->add($input);
 
         $this->data_compra = now()->format('Y-m-d');
         $this->alocacao_id = $input['alocacao_id'];

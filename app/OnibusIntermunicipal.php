@@ -44,7 +44,7 @@ class OnibusIntermunicipal extends Model
         $onibus = $this->find($id);
         $assentos = [];
         for($i=0 ; $i<$onibus->qnt_assento ; $i++){
-            $assentos[i] = new Assento();
+            $assentos[$i] = new Assento();
         }
 
         return $this->consultarAssentosOcupados($assentos);
@@ -53,11 +53,12 @@ class OnibusIntermunicipal extends Model
     public function consultarAssentosOcupados(array $assentos)
     {
         $assento = new Assento();
+
         $vendido = new VendaOnline();
         $vendidos = $vendido->getAll();
 
         foreach ($vendidos as $itemVendido) {
-            $assentos[$itemVendido->assento->numero] = $assento->ocupado();
+            $assentos[$assento->get($itemVendido->assento->id)->num_assento] = $assento->ocupado($itemVendido->assento->id);
         }
 
         return $assentos;
