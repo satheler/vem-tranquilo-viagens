@@ -1,4 +1,4 @@
-@extends('compra.index', ['title' => __('Escolha de Assentos')])
+@extends('compra.show', ['title' => __('Escolha de Assentos')])
 
 @section('infos')
 <div class="card-header bg-default border-0">
@@ -25,7 +25,7 @@
                         </div>
                     </div>
                 </div>
-            </li> 
+            </li>
             <li class="checklist-entry list-group-item flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-between">
                     <div class="checklist-info">
@@ -48,16 +48,16 @@
                         </div>
                     </div>
                 </div>
-            </li> 
+            </li>
             <li class="checklist-entry list-group-item flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-between">
                     <button type="button" class="btn btn-warning btn-sm">Alterar</button>
-                    <h1 class="checklist-title mb-0">Total R$ 233,50</h1>                    
+                    <h1 class="checklist-title mb-0">Total R$ 233,50</h1>
                 </div>
-            </li> 
+            </li>
         </ul>
     </div>
-    
+
     <div class="card-footer bg-default border-0">
         <div class="row">
         </div>

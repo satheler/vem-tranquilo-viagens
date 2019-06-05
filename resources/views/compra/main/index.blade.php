@@ -88,7 +88,7 @@
                                 {{-- <a href="{{ route('onibus_urbano.index') }}" class="btn btn-sm btn-primary">{{ __('Voltar') }}</a> --}}
                             </div> -->
                             <div class="col-12 text-center">
-                                <h3 class="mb-0">{{ __('Origem → Destino') }}</h3>
+                                <h3 class="mb-0">{{ __('Alegrete → Porto Alegre') }}</h3>
                             </div>
                         </div>
                     </div>
@@ -97,18 +97,35 @@
                             <table id="datatable-manutencao" class="table align-items-center table-flush dataTable">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th scope="col">{{ __('Origem') }}</th>
-                                        <th scope="col">{{ __('Destino') }}</th>
                                         <th scope="col">{{ __('Tipo') }}</th>
-                                        <th scope="col">{{ __('Data de Saída') }}</th>
+                                        <th scope="col">{{ __('Horário de Saída') }}</th>
+                                        <th scope="col">{{ __('Horário de Chegada') }}</th>
                                         <th scope="col">{{ __('Valor') }}</th>
-                                        <th scope="col">{{ __('Quantidade') }}</th>
-                                        <th scope="col" style="width: 10%!important;">
-                                            <button type="submit" class="btn btn-primary" >{{ __('Selecionar') }}</button>
-                                        </th>
+                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
-                                
+                                <tbody>
+                                    @foreach ($lista as $item)
+                                        <tr data-table-row-id='none'>
+                                            <td>{{ $item[0] }}</td>
+                                            {{-- <td  align="center">
+                                                @if ($item->onibus->categoria_onibus_id == 1)
+                                                    <span class="badge badge-success">Comum</span>
+                                                @elseif($item->onibus->categoria_onibus_id == 2)
+                                                    <span class="badge badge-success">Executivo</span>
+                                                @elseif($item->onibus->categoria_onibus_id == 3)
+                                                    <span class="badge badge-success">Leito</span>
+                                                @endif
+                                            </td> --}}
+                                            <td>{{ $item[1] }}</td>
+                                            <td>{{ $item[2] }}</td>
+                                            <td>{{ $item[3] }}</td>
+                                            <td scope="col" style="width: 10%!important;">
+                                                <button type="submit" class="btn btn-primary" >{{ __('Selecionar') }}</button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
                             </table>
                         </div>
                     </div>

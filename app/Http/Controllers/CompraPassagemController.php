@@ -12,7 +12,21 @@ class CompraPassagemController extends Controller
     {
         $cidades = new Cidade();
         $cidades = $cidades->getAll();
-        return view('compra.main.index', compact('cidades'));
+
+        $lista = [];
+        $dados = [];
+
+        for ($i=0; $i < 5; $i++) {
+
+            $tipo = 'Leito';
+            $horarioSaida = '15:00';
+            $horarioChegada = '22:00';
+            $valor = 'R$132,25';
+            array_push($dados, $tipo, $horarioSaida, $horarioChegada, $valor);
+            array_push($lista, $dados);
+        }
+
+        return view('compra.main.index', compact('cidades', 'lista'));
     }
 
     public function search(Request $request) {
@@ -37,7 +51,11 @@ class CompraPassagemController extends Controller
 
         $data_converter = date_create_from_format('Y-m-d', $data);
         $data = $data_converter->format('d/m/Y');
-        return view('compra.main.index', compact('cidades', 'trajetos', 'origem', 'destino', 'data'));
+
+
+
+
+        return view('compra.main.index', compact('origem', 'destino', 'trajetos', 'data'));
     }
 
     public function selecionarPoltrona() {
