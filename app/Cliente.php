@@ -3,11 +3,20 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Pagamento;
 
 class Cliente extends Model
 {
-    public function cartao() {
-        return $this->hasOne('App\CartaoCredito', 'id', 'cartao_id');
+    protected $table ='cliente';
+
+    public function pagamento() {
+        return $this->hasOne('App\Pagamento', 'id', 'cartao_id');
+    }
+
+    public function get(int $id){
+
+        return $this->find($id);
+
     }
 
     public function add(array $input)
@@ -28,5 +37,12 @@ class Cliente extends Model
 
     }
 
-    //add cartão do cliente
+    public function addPagamento(int $idCliente, int $idPagamento){
+
+        $cliente = $this->find($id);
+        $cliente->cartao_id = $idPagamento;
+        $cliente->save();
+
+    }
+
 }
