@@ -27,6 +27,12 @@ Route::group(['prefix' => '/', 'as' => 'page_'], function () {
         Route::get('', 'CadastroClienteController@index')->name('.index');
         Route::post('', 'CadastroClienteController@store')->name('.store');
     });
+
+    Route::group(['prefix' => 'entrar', 'as' => 'entrar'], function () {
+        Route::get('', 'ClienteLoginController@index')->name('.index');
+        Route::post('', 'ClienteLoginController@store')->name('.store');
+    });
+
 });
 
 Route::group(['prefix' => 'painel'], function () {

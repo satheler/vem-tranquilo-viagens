@@ -4,10 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Pagamento;
+use Illuminate\Support\Facades\Hash;
+use \Validator as Validator;
 
 class Cliente extends Model
 {
-    protected $table ='cliente';
+    protected $table ='clientes';
 
     public function pagamento() {
         return $this->hasOne('App\Pagamento', 'id', 'cartao_id');
