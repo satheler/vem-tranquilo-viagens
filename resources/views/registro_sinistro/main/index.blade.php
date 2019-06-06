@@ -39,7 +39,7 @@
                 </thead>
                 <tbody>
                     @foreach ($lista as $item)
-                        <tr data-table-row-id={{ $item->id }}>
+                    <tr data-table-row-id={{ $item->id }}>
                             <td>
                                 <button data-show-id={{ $item->id }} class="btn btn-icon btn-sm btn-primary" type="button">
                                     <span class="btn-inner--icon"><i class="ni ni-single-copy-04"></i></span>
