@@ -33,10 +33,10 @@ class RegistroSinistro extends Model
     {
         $date = new DateTime();
         $validator = Validator::make($input, [
-            'tipo_causa'=> 'required|string',
-            'descricao_causa'=> 'required|string',
-            'envolvidos'=> 'required|string',
-            'custo',
+            'tipo_causa'=>'regex:[a-zA-Z\u00C0-\u00FF ]',
+            'descricao_causa'=>'required|string',
+            'envolvidos'=>'required|string',
+            'custo' => 'required|numeric',
             'descricao_custo'=> 'required|string',
             'data' => 'required|date_format:d/m/Y|before_or_equal:'. $date->format('d/m/Y'),
             'onibus_id'
@@ -52,7 +52,6 @@ class RegistroSinistro extends Model
         $this->envolvidos = $input['envolvidos'];
         $this->custo = $input['custo'];
         $this->descricao_custo = $input['descricao_custo'];
-    
         $this->onibus_id = $input['onibus'];
 
         $dataConverter = date_create_from_format('d/m/Y', $input['data']);

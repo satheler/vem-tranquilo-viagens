@@ -50,7 +50,9 @@ class RegistroSinistroController extends Controller
                     ->route('sinistro.create')
                     ->withErrors($validator)
                     ->withInput();
-        }   
+        
+         }   
+         
     }
 
     /**
