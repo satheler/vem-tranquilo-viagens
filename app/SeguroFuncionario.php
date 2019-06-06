@@ -11,7 +11,7 @@ class SeguroFuncionario extends Model
 
     public function funcionario()
     {
-        return $this->belongsToMany('App\User', 'seguro_funcionario', 'seguro_id', 'funcionario_id');
+        return $this->belongsToMany('App\User', 'seguro_funcionario_relacionamento', 'seguro_id', 'funcionario_id');
     }
 
     public function getAll()
