@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Cliente;
+use App\Pagamento;
 
 class VendaOnline extends Model
 {
@@ -46,8 +48,10 @@ class VendaOnline extends Model
         $this->tarifa_intermunicipal_id = $input['tarifa_intermunicipal_id'];
         $this->categoria_passageiro_id = $input['categoria_passageiro_id'];
 
-        //verificar  se o cliente existe, se não cliente add
-        //pagamento add
+        $cliente = new Cliente();
+        $cliente->addPagamento($input['cliente_id'], $input['pagamento_id']);
+
+        $this->cliente_id = $input['cliente_id'];
 
         $this->save();
 
