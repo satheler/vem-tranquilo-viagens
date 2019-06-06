@@ -16,12 +16,10 @@ class CreatePagamentoCartaoTable extends Migration
     {
         Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('num_cartao');
-            $table->date('data_validade');
+            $table->double('valor');
+            $table->date('data');
+            $table->string('num_cartao');
             $table->integer('qnt_parcelas');
-
-
-
             $table->timestamps();
         });
     }
@@ -33,7 +31,7 @@ class CreatePagamentoCartaoTable extends Migration
      */
     public function down()
     {
-       
+
         Schema::dropIfExists($this->databaseName);
     }
 }

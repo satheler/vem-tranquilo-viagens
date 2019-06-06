@@ -16,7 +16,7 @@ class CreateClienteTable extends Migration
     {
         Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
-            
+
             $table->bigInteger('cpf');
             $table->string('senha');
             $table->string('confirmar_senha');
@@ -31,6 +31,9 @@ class CreateClienteTable extends Migration
             $table->string('bairro');
             $table->string('complemento');
             $table->string('estado');
+
+            $table->unsignedBigInteger('cartao_id');
+            $table->foreign('cartao_id')->references('id')->on('pagamento_cartao');
 
             $table->rememberToken();
             $table->timestamps();
