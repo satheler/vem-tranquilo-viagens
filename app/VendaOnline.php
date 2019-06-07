@@ -5,20 +5,20 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Cliente;
 use App\Pagamento;
+use App\AlocacaoIntermunicipal;
+use Validator;
 
 class VendaOnline extends Model
 {
     protected $table = "venda_online";
 
-    public function tarifa() {
-        return $this->hasOne('App\Tarifa', 'id', 'tarifa_id');
-
-    }
     public function alocacaoIntermunicipal() {
         return $this->hasOne('App\AlocacaoIntermunicipal', 'id', 'alocacao_id');
     }
-    public function assento() {
-        return $this->hasOne('App\Assento', 'id', 'assento_id');
+
+    public function assento()
+    {
+        return $this->belongsToMany('App\Assento', 'assento_vendido', 'venda_id', 'assento_id');
     }
 
     public function getAll()
@@ -30,8 +30,7 @@ class VendaOnline extends Model
     {
 
         $validator = Validator::make($input, [
-            'alocacao_id' => 'exists:alocacao_intermuncipal,id',
-            'tarifa_intermunicipal_id' => 'exists:tarifa_intermuncipal,id',
+            'alocacao_intermunicipal_id' => 'exists:alocacao_intermunicipal,id',
             'categoria_passageiro_id' => 'exists:categoria_passageiro,id'
         ]);
 
@@ -39,21 +38,29 @@ class VendaOnline extends Model
             return $validator;
         }
 
-        $assento = new Assento();
-        $assento->add($input);
+        $this->alocacao_intermunicipal_id = $input['alocacao_intermunicipal_id'];
 
-        $this->data_compra = now()->format('Y-m-d');
-        $this->alocacao_id = $input['alocacao_id'];
-        $this->assento_id = $input['assento_id'];
-        $this->tarifa_intermunicipal_id = $input['tarifa_intermunicipal_id'];
+        $assento = new Assento();
+        $assentos = [];
+
+        $lista = [];
+        array_push($lista, $input['assentos']);
+
+        foreach ($lista as $itemAssento) {
+            array_push($assentos,$assento->add($itemAssento));
+        }
+
         $this->categoria_passageiro_id = $input['categoria_passageiro_id'];
 
-        $cliente = new Cliente();
-        $cliente->addPagamento($input['cliente_id'], $input['pagamento_id']);
+        $pagamento = new Pagamento();
+        $pagamento->add($input);
 
-        $this->cliente_id = $input['cliente_id'];
+        $this->pagamento_id = $pagamento->id;
 
         $this->save();
+        $this->assento()->attach($assentos);
+
+        return $this;
 
     }
 }

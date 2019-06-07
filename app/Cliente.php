@@ -11,10 +11,6 @@ class Cliente extends Model
 {
     protected $table ='clientes';
 
-    public function pagamento() {
-        return $this->hasOne('App\Pagamento', 'id', 'cartao_id');
-    }
-
     public function get(int $id){
 
         return $this->find($id);
@@ -114,14 +110,6 @@ class Cliente extends Model
 
             return true;
         }
-    }
-
-    public function addPagamento(int $idCliente, int $idPagamento){
-
-        $cliente = $this->find($id);
-        $cliente->cartao_id = $idPagamento;
-        $cliente->save();
-
     }
 
 }

@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Validator;
 class Assento extends Model
 {
     protected $table = 'assento';
@@ -32,20 +32,23 @@ class Assento extends Model
         return $assento->ocupado;
     }
 
-    public function add(array $input)
+    public function add($input)
     {
-        $validator = Validator::make($input, [
-            'num_assento' => 'required|numeric|min:1||max:42'
-        ]);
 
-        if ($validator->fails()) {
-            return $validator;
-        }
+        // $validator = Validator::make($input, [
+        //     'num_assento' => 'required|numeric|min:1||max:42'
+        // ]);
 
-        $this->num_assento = $input['num_assento'];
+        // if ($validator->fails()) {
+        //     return $validator;
+        // }
+
+        $this->num_assento = $input;
         $this->ocupado = true;
 
         $this->save();
+
+        return $this->id;
     }
 
     // public function edit(int $id, array $input)
