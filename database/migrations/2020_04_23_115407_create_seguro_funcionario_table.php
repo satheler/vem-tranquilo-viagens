@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSeguroTable extends Migration
+class CreateSeguroFuncionarioTable extends Migration
 {
     private $databaseName = 'seguro_funcionario';
     /**
