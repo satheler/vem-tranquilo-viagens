@@ -9,6 +9,10 @@ use Exception;
 class CadastroClienteController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('guest');
+    }
 
     public function index() {
         return view('cadastro.index');
@@ -26,6 +30,7 @@ class CadastroClienteController extends Controller
         } else {
 
             // JÁ CRIAR UMA SESSÃO PARA O USUÁRIO
+
 
             return redirect()->route('page_home.index');
         }

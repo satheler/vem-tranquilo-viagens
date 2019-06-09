@@ -1,30 +1,7 @@
-@extends('layouts.app', ['class' => 'bg-default'])
+@extends('layouts.appClient', ['class' => 'bg-default'])
 
 @section('content')
-    <nav class="navbar navbar-horizontal navbar-expand-lg navbar-dark bg-default">
-        <div class="container">
-            <a class="navbar-brand" href="#">Vem Tranquilo Viagens</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbar-default">
-                <div class="navbar-collapse-header">
-                    <div class="row">
-                        <div class="col-6 collapse-brand">
-                            <a href="../../index.html">
-                                <img src="../../assets/img/brand/blue.png">
-                            </a>
-                        </div>
-                    </div>
-                </div>
 
-                <ul class="navbar-nav ml-lg-auto">
-                    <a href="#" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Entrar</a>
-                </ul>
-
-            </div>
-        </div>
-    </nav>
     <div class="header bg-gradient-primary py-7 py-lg-5">
         <div class="container">
             <div class="header-bodys">
@@ -91,7 +68,7 @@
                             </div>
                             <div class="card-body">
                                 <span class="">Viaje</span>
-                                <div class="display-4 text-white">{{$lista[0]->nome}} <i class="fas fa-arrow-right"> </i> {{$lista[6]->nome}}</div>
+                                <div class="display-4 text-white">{{$lista[0]->nome}} <i class="fas fa-xs fa-arrow-right"> </i> {{$lista[6]->nome}}</div>
                                 <div class="display3 ">por apenas</div>
                                 <div class="display-2 text-white">R$ 100,00</div>
                                 <div class=" text-white">*Comprovantes serão solicitados no embarque.</div>

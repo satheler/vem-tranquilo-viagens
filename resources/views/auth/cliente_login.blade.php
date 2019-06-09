@@ -1,5 +1,4 @@
-@extends('layouts.app', ['class' => 'bg-default'])
-
+@extends('layouts.appClient', ['class' => 'bg-default'])
 
 {{-- DAQUI PARA BAIXO É POG - INICIO --}}
 <?php
@@ -70,33 +69,31 @@ $lista = $clientes->all();
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary my-4">{{ __('Entrar') }}</button>
-                                <button type="submit" class="btn btn-warning my-4">{{ __('Registrar-se') }}</button>
                             </div>
                         </form>
                         <label class="text-center"> Usuários cadastrados </label>
                         <div class="row justify-content-center">
                             @foreach ($lista as $item)
-                                <button data-user-login="{{ $item->email }}" class="btn btn-sm btn-primary py-1 px-3 m-1"> {{ $item->nome }} </button>
+                                <button data-user-login="{{ $item->user->email }}" class="btn btn-sm btn-primary py-1 px-3 m-1"> {{ $item->user->name }} </button>
                             @endforeach
                         </div>
                     </div>
-
-
                 </div>
                 <div class="row mt-3">
-                    <div class="col-6 text-right"></div>
                     <div class="col-6 text-right">
-                        @if (Route::has('password.request'))
+                        {{-- @if (Route::has('password.request'))
                             <a href="{{ route('password.request') }}" class="text-light">
                                 <small>{{ __('Esqueceu sua senha?') }}</small>
                             </a>
+                        @endif --}}
+                    </div>
+                    <div class="col-6 text-right">
+                        @if (Route::has('page_cadastro.index'))
+                            <a href="{{ route('page_cadastro.index') }}" class="text-light">
+                                <small>{{ __('Cadastre-se') }}</small>
+                            </a>
                         @endif
                     </div>
-                    {{-- <div class="col-6 text-right">
-                        <a href="{{ route('register') }}" class="text-light">
-                            <small>{{ __('Create new account') }}</small>
-                        </a>
-                    </div> --}}
                 </div>
             </div>
         </div>

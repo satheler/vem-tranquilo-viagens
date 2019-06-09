@@ -1,4 +1,4 @@
-@extends('layouts.app', ['class' => 'bg-default'])
+@extends('layouts.appClient', ['class' => 'bg-default'])
 
 @section('content')
     @include('layouts.headers.guest')
@@ -8,9 +8,12 @@
         <div class="row justify-content-center">
             <div class="col-lg-6 col-md-8">
                 <div class="card bg-secondary shadow border-0">
-                    <div class="card-body px-lg-5 py-lg-5">
+                    <div class="px-lg-2 py-lg-2">
+                        <a class="btn btn-primary" href="{{ route('page_entrar.index') }}"><i class="fas fa-arrow-left"></i></a>
+                    </div>
+                    <div class="card-body px-lg-5 pt-lg-3 pb-lg-5">
                         <div class="text-center text-muted mb-4">
-                            <h3>{{ __('Cadastre-se no sistema') }}</h3>
+                            <h2>{{ __('Cadastre-se no sistema') }}</h2>
                             <small>{{ __('Insira as suas informações abaixo') }}</small>
                         </div>
                         <form role="form" method="POST" action="{{ route('page_cadastro.store') }}">

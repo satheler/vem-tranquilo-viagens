@@ -2,26 +2,30 @@
 
 namespace App;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
-use App\Pagamento;
 use Illuminate\Support\Facades\Hash;
 use \Validator as Validator;
 
 class Cliente extends Model
 {
-    protected $table ='clientes';
+    protected $table = 'clientes';
 
-    public function get(int $id){
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'user_id');
+    }
 
+    public function get(int $id)
+    {
         return $this->find($id);
-
     }
 
     public function add(array $input)
     {
         $input['cpf'] = preg_replace('/[^0-9]/', '', $input['cpf']);
 
-        $messagesCustom = [ 'nome.regex' => 'Formato inválido. Informe nome e sobrenome. Ex: João Silva' ];
+        $messagesCustom = ['nome.regex' => 'Formato inválido. Informe nome e sobrenome. Ex: João Silva'];
 
         $validator = Validator::make($input, [
             'nome' => [
@@ -35,7 +39,7 @@ class Cliente extends Model
                 'string',
                 'email',
                 'max:255',
-                'unique:clientes',
+                'unique:users',
             ],
             'cpf' => [
                 'required',
@@ -59,10 +63,24 @@ class Cliente extends Model
             return $validator;
         }
 
-        $this->nome = strtoupper($input['nome']);
-        $this->email = $input['email'];
+        $user = new User([
+            'name' => strtoupper($input['nome']),
+            'email' => $input['email'],
+            'password' => Hash::make($input['senha']),
+            'type' => 'cliente',
+        ]);
+
         $this->cpf = $input['cpf'];
-        $this->senha = Hash::make($input['senha']);
+
+        $this->user()->create([
+            'name' => strtoupper($input['nome']),
+            'email' => $input['email'],
+            'password' => Hash::make($input['senha']),
+            'type' => 'cliente',
+        ]);
+
+        $userAdded = User::where('email', $input['email'])->first();
+        $this->user_id = $userAdded->id;
         $this->save();
     }
 

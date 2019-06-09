@@ -14,7 +14,7 @@ class VendaOnlineSeeder extends Seeder
         DB::table('venda_online')->insert([
             'pagamento_id' => 1,
             'alocacao_intermunicipal_id' => 1,
-            'assento_id' => 1,
+            // 'assento_id' => 1,
             'categoria_passageiro_id' => 1
         ]);
     }

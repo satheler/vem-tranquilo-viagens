@@ -10,6 +10,9 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    const ADMIN_TYPE = 'admin';
+    const CLIENTE_TYPE = 'cliente';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -39,5 +42,9 @@ class User extends Authenticatable
 
     public function rodoviaria() {
         return $this->hasOne('App\Rodoviaria', 'id', 'rodoviaria_id');
+    }
+
+    public function isAdmin() {
+        return $this->type === self::ADMIN_TYPE;
     }
 }
