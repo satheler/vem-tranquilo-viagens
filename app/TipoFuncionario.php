@@ -12,4 +12,10 @@ class TipoFuncionario extends Model
     {
         return $this->all();
     }
+
+    public function get(int $id)
+    {
+        $item = $this->find($id);
+        return $item;
+    }
 }

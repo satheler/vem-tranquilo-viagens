@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Validator;
+use App\User;
 
 class SeguroFuncionario extends Model
 {
@@ -14,7 +15,7 @@ class SeguroFuncionario extends Model
         return $this->belongsToMany('App\User', 'seguro_funcionario_relacionamento', 'seguro_id', 'funcionario_id');
     }
 
-    public function getAll()
+    public function getAxll()
     {
         return $this->all();
     }
@@ -35,7 +36,7 @@ class SeguroFuncionario extends Model
                 $seguros = $item->seguro;
                 foreach ($seguros as $seguro) {
                     if ($seguro->vigente == true) {
-                        $validator = 'unique:seguro_funcionario,funcionario_id';
+                        $validator = 'unique:seguro_funcionario_relacionamento,funcionario_id';
                         return $validator;
                     }
                 }
@@ -43,7 +44,7 @@ class SeguroFuncionario extends Model
         }
     }
 
-    public function verificarValidadeEdicao(Seguro $seguroeditado, array $listafuncionario)
+    public function verificarValidadeEdicao(SeguroFuncionario $seguroeditado, array $listafuncionario)
     {
 
         $funcionario = new User();
@@ -58,7 +59,7 @@ class SeguroFuncionario extends Model
                         $validator = '';
                     } else {
                         if ($seguro->vigente == true) {
-                            $validator = 'unique:seguro_funcionario,funcionario_id';
+                            $validator = 'unique:seguro_funcionario_relacionamento,funcionario_id';
                             return $validator;
                         }
                     }
@@ -70,8 +71,8 @@ class SeguroFuncionario extends Model
 
     public function add(array $input)
     {
-        if(!array_key_exists('funcionario',$input)){
-            $input['funcionario'] = [];
+        if(!array_key_exists('user',$input)){
+            $input['user'] = [];
 
         }
 
@@ -81,8 +82,8 @@ class SeguroFuncionario extends Model
             'assegura' => 'required|string',
             'data_vigencia' => 'required|date_format:d/m/Y|after:' . now()->format('d/m/Y'),
             'data_inicio' => 'required|date_format:d/m/Y|before:data_vigencia',
-            'funcionario' => 'required|array',
-            'funcionario' => [$this->verificarValidade($input['funcionario'])],
+            'user' => 'required|array',
+            'user' => [$this->verificarValidade($input['user'])],
         ]);
 
         if ($validator->fails()) {
@@ -102,15 +103,15 @@ class SeguroFuncionario extends Model
         $this->vigente = true;
 
         $this->save();
-        $this->funcionario()->attach($input['funcionario']);
+        $this->funcionario()->attach($input['user']);
     }
 
     public function edit(int $id, array $input)
     {
         $seguro = $this->get($id);
 
-         if(!array_key_exists('funcionario',$input)){
-             $input['funcionario'] = [];
+         if(!array_key_exists('user',$input)){
+             $input['user'] = [];
            //$input['funcionario'] = $seguro->funcionario->toArray();
          }
 
@@ -120,10 +121,10 @@ class SeguroFuncionario extends Model
             'assegura' => 'required|string',
             'data_vigencia' => 'required|date_format:d/m/Y|after:' . now()->format('d/m/Y'),
             'data_inicio' => 'required|date_format:d/m/Y|before:data_vigencia',
-            'funcionario' => [
+            'user' => [
                 'required',
                 'array',
-                $this->verificarValidadeEdicao($seguro, $input['funcionario']),
+                $this->verificarValidadeEdicao($seguro, $input['user']),
             ],
         ]);
 
@@ -144,12 +145,12 @@ class SeguroFuncionario extends Model
         $seguro->vigente = true;
 
         $seguro->update();
-        $seguro->funcionario()->sync($input['funcionario']);
+        $seguro->funcionario()->sync($input['user']);
 
     }
     public function disable(int $id)
     {
-        $seguro = new Seguro();
+        $seguro = new SeguroFuncionario();
         $item = $seguro->find($id);
         if ($item->data_vigencia == now()->format('Y-m-d')) {
             $item->vigente = false;
