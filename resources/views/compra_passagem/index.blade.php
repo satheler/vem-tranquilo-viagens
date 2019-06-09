@@ -1,4 +1,4 @@
-@extends('layouts.appNoSidebar', ['title' => $title])
+@extends('layouts.appClient', ['title' => $title])
 
 @push('css')
 <link type="text/css" href="{{ asset('argon') }}/vendor/datatables/dist/css/dataTables.bootstrap4.min.css" rel="stylesheet">

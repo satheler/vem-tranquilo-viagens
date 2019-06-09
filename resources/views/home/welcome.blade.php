@@ -9,6 +9,7 @@
                     <div class="card col-md-6">
                         <img class="card-img-top" src="{{ asset('argon') }}/img/brand/logo.png" alt="Pesquisar Passagens" style="transform: scale(0.8);margin-top:50px">
                         <div class="card-body">
+                            <form action="{{ route('page_compra.search') }}" method="post">
                             <div class="form-group">
                                 <h3>Origem</h3>
                                 <div class="input-group-prepend">
@@ -20,7 +21,7 @@
                                     </select>
                                 </div>
 
-                                <h3>Destino</h3>
+                                <h3 class="mt-2">Destino</h3>
                                 <div class="input-group mb-2 input-group-prepend">
                                     <select bootstrapSelect name="destino"  data-size="4" data-live-search="true" required>
                                         <option value="" disabled selected><i class="fas fa-map-marker-alt"></i> Selecione o Destino...</option>
@@ -32,33 +33,34 @@
 
                                 <div class="row cleanfix">
                                     <div class="col-lg-6">
-                                        <h3>Data de Ida</h3>
+                                        <h3>Data de ida</h3>
                                         <div class="input-group mb-2">
                                             <div class="input-group input-group-alternative">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="far fa-clock"></i></span>
                                                 </div>
-                                                <input data name='data' class="form-control datepicker" placeholder="__/__/____" type="text" value="{{ old('data', $data ?? null) }}" required>
+                                                <input data name='data-ida' class="form-control datepicker" placeholder="__/__/____" type="text" value="{{ old('data-ida', $data ?? null) }}" required>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
-                                        <h3>Data de Ida</h3>
+                                        <h3>Data de volta</h3>
                                         <div class="input-group mb-2">
                                             <div class="input-group input-group-alternative">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="far fa-clock"></i></span>
                                                 </div>
-                                                <input data name='data' class="form-control datepicker" placeholder="__/__/____" type="text" value="{{ old('data', $data ?? null) }}" required>
+                                                <input data name='data-volta' class="form-control datepicker" placeholder="__/__/____" type="text" value="{{ old('data-volta', $data ?? null) }}">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row clearfix justify-content-right">
-                                <a href="#" class="btn btn-primary"><i class="fas fa-search"></i> Pesquisar</a>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Pesquisar</button>
                             </div>
+                            </form>
                         </div>
                     </div>
                     <div class="col-lg-6">

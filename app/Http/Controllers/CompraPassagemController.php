@@ -19,7 +19,7 @@ class CompraPassagemController extends Controller
         $origem = $request->input('origem');
         $destino = $request->input('destino');
 
-        $dataConverter = date_create_from_format('d/m/Y', $request->input('data'));
+        $dataConverter = date_create_from_format('d/m/Y', $request->input('data-ida'));
         $data = $dataConverter->format('Y-m-d');
 
         return redirect()
