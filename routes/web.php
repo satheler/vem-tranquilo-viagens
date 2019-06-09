@@ -72,6 +72,8 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::resource('seguro', 'SeguroController');
 
+        Route::resource('segurofuncionario', 'SeguroFuncionarioController');
+
         Route::prefix('rodoviarias')->name('rodoviarias_')->group(function () {
             Route::resource('ativas', 'RodoviariasController');
             Route::resource('inativas', 'RodoviariasInativasController');
