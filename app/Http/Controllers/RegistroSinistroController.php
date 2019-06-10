@@ -77,7 +77,12 @@ class RegistroSinistroController extends Controller
      */
     public function edit($id)
     {
-    
+        $sinistro = new RegistroSinistro();
+        $onibus = new Onibus();
+        $lista['sinistro'] = $sinistro->get($id);
+        $lista['onibus'] = $onibus->getAll();
+        
+        return view('registro_sinistro.main.edit', compact('lista'));
     }
 
     // /**
@@ -94,13 +99,13 @@ class RegistroSinistroController extends Controller
 
         if ($validator instanceof \Illuminate\Validation\Validator) {
             return redirect()
-                ->route('sinistro.main.edit', $id)
+                ->route('sinistro.edit', $id)
                 ->withErrors($validator)
                 ->withInput();
         }
 
         return redirect()
-                ->route('sinistro.main.index')
+                ->route('sinistro.index')
                 ->withStatus(__('Sinistro editado com sucesso.'));
     }
 
