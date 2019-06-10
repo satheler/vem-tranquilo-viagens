@@ -91,7 +91,7 @@
                             </div>
 
                         
-                            <div class="col-md-5">
+                            <div class="col-md-4">
                                 <label class="form-control-label" for="input-custo">{{ __('CUSTO') }}</label>
                                 @if ($errors->has('custo'))
                                 <span class="invalid-feedback" role="alert">
@@ -103,7 +103,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-7">
+                            <div class="col-md-4">
                                 <div class="form-group{{ $errors->has('descricao_custo') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-descricao_custo">{{ __('DESCRIÇÃO DO CUSTO') }}</label>
                                     <input type="text" phone name="descricao_custo" id="input-descricao_custo" class="form-control form-control-alternative{{ $errors->has('descricao_custo') ? ' is-invalid' : '' }}" placeholder="{{ __('descrição do custo do sinistro') }}" value="{{ old('descricao_custo') }}" required>
@@ -116,7 +116,7 @@
                                 </div>
                             </div>
                             
-                            <div class="col-md-5">
+                            <div class="col-md-4">
                                 <div class="form-group{{ $errors->has('responsavel_custo') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-responsavel_custo">{{ __('RESPONSÁVEL PELO CUSTO') }}</label>
                                     <input type="text" phone name="responsavel_custo" id="input-responsavel_custo" class="form-control form-control-alternative{{ $errors->has('responsavel_custo') ? ' is-invalid' : '' }}" placeholder="{{ __('responsável pelo custo do sinistro') }}" value="{{ old('responsavel_custo') }}" required>
