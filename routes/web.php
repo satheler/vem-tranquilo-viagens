@@ -15,21 +15,27 @@ Route::group(['prefix' => '/', 'as' => 'page_'], function () {
     Route::get(null, 'HomeController@index')->name('home.index');
     Route::get('painel', 'PainelController@index')->name('painel.index');
 
-        Route::group(['prefix' => 'compra', 'as' => 'compra'], function () {
-            Route::get('', 'CompraPassagemController@index')->name('.index');
-            Route::get('{origem}/{destino}/{data}', 'CompraPassagemController@list')->name('.list');
-            Route::post('search', 'CompraPassagemController@search')->name('.search');
-            Route::get('poltrona', 'CompraPassagemController@selecionarPoltrona')->name('.poltrona');
-        });
+    Route::group(['prefix' => 'compra', 'as' => 'compra'], function () {
+        Route::get('', 'CompraPassagemController@index')->name('.index');
+        Route::get('{origem}/{destino}/{data}', 'CompraPassagemController@list')->name('.list');
+        Route::post('search', 'CompraPassagemController@search')->name('.search');
+        Route::get('poltrona', 'CompraPassagemController@selecionarPoltrona')->name('.poltrona');
+        Route::get('pagamento', 'CompraPassagemController@pagamento')->name('.pagamento');
+    });
+
+    Route::group(['prefix' => 'cadastro', 'as' => 'cadastro'], function () {
+        Route::get('', 'CadastroClienteController@index')->name('.index');
+        Route::post('', 'CadastroClienteController@store')->name('.store');
+    });
 });
 
 Route::group(['prefix' => 'painel'], function () {
     Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/compra', 'CompraPassagemController@index')->name('compra_passagem');
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/compra', 'CompraPassagemController@index')->name('compra_passagem');
 
-Route::group(['middleware' => 'auth'], function () {
+    Route::group(['middleware' => 'auth'], function () {
         Route::resource('user', 'UserController', ['except' => ['show']]);
         Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
         Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);

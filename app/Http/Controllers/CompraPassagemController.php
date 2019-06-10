@@ -43,4 +43,8 @@ class CompraPassagemController extends Controller
     public function selecionarPoltrona() {
         return view('compra_passagem.main.index');
     }
+
+    public function pagamento(){
+        return view('compra_passagem.main.pagamento');
+    }
 }
