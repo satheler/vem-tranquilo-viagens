@@ -18,6 +18,7 @@ class RegistroSinistroSeeder extends Seeder
             'custo' => 122211,
             'descricao_custo' => 'perda total',
             'data' => now(),
+            'responsavel_custo' => 'seguradora',
             'onibus_id' => 1
 
         ]);
@@ -29,6 +30,7 @@ class RegistroSinistroSeeder extends Seeder
             'custo' => 15000,
             'descricao_custo' => 'bateu o motor, precisa fazer um motor novo',
             'data' => now(),
+            'responsavel_custo' =>'prefeitura',
             'onibus_id' => 2
 
         ]);
