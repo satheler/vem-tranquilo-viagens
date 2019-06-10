@@ -20,9 +20,10 @@ class CreateRegistoSinistroTable extends Migration
             $table->string('tipo_causa');
             $table->string('descricao_causa');
             $table->string('envolvidos');
-            $table->float('custo');
+            $table->double('custo');
             $table->string('descricao_custo');
             $table->date('data');
+            $table->string('responsavel_custo');
             
             $table->unsignedBigInteger('onibus_id');
             $table->foreign('onibus_id')->references('id')->on('onibus');
