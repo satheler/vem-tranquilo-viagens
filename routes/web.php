@@ -18,7 +18,8 @@ Route::group(['prefix' => '/', 'as' => 'page_'], function () {
     Route::group(['prefix' => 'compra', 'as' => 'compra'], function () {
         Route::get('', 'CompraPassagemController@index')->name('.index');
         Route::post('search', 'CompraPassagemController@search')->name('.search');
-        Route::get('{origem}/{destino}/{data}', 'CompraPassagemController@list')->name('.list');
+        Route::get('{origem}/{destino}/{data_ida}/', 'CompraPassagemController@list')->name('.list');
+        Route::get('{origem}/{destino}/{data_ida}/{data_volta}', 'CompraPassagemController@list')->name('.list');
         Route::get('poltrona', 'CompraPassagemController@selecionarPoltrona')->name('.poltrona');
         Route::get('pagamento', 'CompraPassagemController@pagamento')->name('.pagamento');
     });
@@ -40,7 +41,7 @@ Route::group(['prefix' => 'painel'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/compra', 'CompraPassagemController@index')->name('compra_passagem');
 
-    Route::group(['middleware' => 'is_admin'], function () {
+    Route::group(['middleware' => ['auth', 'is_admin']], function () {
         Route::resource('user', 'UserController', ['except' => ['show']]);
         Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
         Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
