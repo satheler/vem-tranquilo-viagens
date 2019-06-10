@@ -68,7 +68,7 @@
                                 <select bootstrapSelect name="onibus" data-size="4" data-live-search="true" required>
                                     <option value="" disabled selected>Selecione o onibus...</option>
                                     @foreach ($lista["onibus"] as $item)
-                                    <option @if($errors->has('onibus') && ($errors->first('onibus') == $item->id) || old('onibus') == $item->id) selected @endif value="{{ $item->id }}">{{ $item->placa }}</option>
+                                    <option value="{{ $item->id }}">{{ $item->placa }}</option>
                                     @endforeach
                                 </select>
                                 @if ($errors->has('onibus'))
@@ -90,16 +90,16 @@
                                 </div>
                             </div>
 
+                        
                             <div class="col-md-5">
+                                <label class="form-control-label" for="input-custo">{{ __('CUSTO') }}</label>
+                                @if ($errors->has('custo'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('custo') }}</strong>
+                                </span>
+                                @endif
                                 <div class="form-group{{ $errors->has('custo') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="input-custo">{{ __('CUSTO') }}</label>
-                                    <input type="number" cep name="custo" id="input-custo" class="form-control form-control-alternative{{ $errors->has('custo') ? ' is-invalid' : '' }}" placeholder="{{ __('custo do sinistro') }}" value="{{ old('custo') }}" required>
-
-                                    @if ($errors->has('custo'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('custo') }}</strong>
-                                    </span>
-                                    @endif
+                                    <input type="text" money name="custo" maxlength="10" id="input-custo" class="form-control form-control-alternative{{ $errors->has('custo') ? ' is-invalid' : '' }}" placeholder="{{ __('Insira o custo do sinistro...') }}" value="{{ old('custo') }}" required>
                                 </div>
                             </div>
 
@@ -111,6 +111,19 @@
                                     @if ($errors->has('descricao_custo'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('descricao_custo') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-5">
+                                <div class="form-group{{ $errors->has('responsavel_custo') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="input-responsavel_custo">{{ __('RESPONSÁVEL PELO CUSTO') }}</label>
+                                    <input type="text" phone name="responsavel_custo" id="input-responsavel_custo" class="form-control form-control-alternative{{ $errors->has('responsavel_custo') ? ' is-invalid' : '' }}" placeholder="{{ __('responsável pelo custo do sinistro') }}" value="{{ old('responsavel_custo') }}" required>
+
+                                    @if ($errors->has('responsavel_custo'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('responsavel_custo') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -136,5 +149,12 @@
 <script src="{{ asset('argon') }}/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <script src="{{ asset('argon') }}/vendor/jquery-mask/dist/jquery.mask.min.js"></script>
 
+<script>
+    $(document).ready(function() {
+        $('[money]').mask('###0.00', {
+            reverse: true
+        });
+    })
+</script>
 
 @endpush

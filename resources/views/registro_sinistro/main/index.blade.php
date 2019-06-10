@@ -32,6 +32,7 @@
                         <th width="25%" scope="col">{{ __('ENVOLVIDOS') }}</th>
                         <th width="25%" scope="col">{{ __('CUSTOS') }}</th>
                         <th width="25%" scope="col">{{ __('DESCRIÇÃO DOS CUSTOS') }}</th>
+                        <th width="25%" scope="col">{{ __('RESPONSÁVEL PELOS CUSTOS') }}</th>
                         <th width="25%" scope="col">{{ __('DATA') }}</th>
                         <th width="25%" scope="col">{{ __('ONIBUS') }}</th>
                         <th width="10%" scope="col">Ações</th>
@@ -41,7 +42,7 @@
                     @foreach ($lista as $item)
                     <tr data-table-row-id={{ $item->id }}>
                             <td>
-                                <button data-show-id={{ $item->id }} class="btn btn-icon btn-sm btn-primary" type="button">
+                            <button data-show-id={{ $item->id }} class="btn btn-icon btn-sm btn-primary" type="button">
                                     <span class="btn-inner--icon"><i class="ni ni-single-copy-04"></i></span>
                                 </button>
                             </td>
@@ -50,11 +51,11 @@
                             <td>{{ $item->envolvidos }}</td>
                             <td>{{ $item->custo }}</td>
                             <td>{{ $item->descricao_custo }}</td>
+                            <td>{{ $item->responsavel_custo }}</td>
                             <td>{{ $item->data }}</td>
                             <td>{{ $item->onibus->placa}}</td>
                            
-
-                            <td align="center">
+                            <td class="text-right">
                                 <div class="dropdown">
                                     <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fas fa-ellipsis-v"></i>

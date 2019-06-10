@@ -11,9 +11,7 @@
             <input type="text" name="descricao_causa" id="input-descricao_causa" class="form-control form-control-alternative" value="{{ $item->descricao_causa }}"  readonly>
         </div>
     </div>
-</div>
 
-<div class="row">
     <div class="col-md-5">
         <div class="form-group">
             <label class="form-control-label" for="input-envolvidos">{{ __('ENVOLVIDOS') }}</label>
@@ -30,6 +28,12 @@
         <div class="form-group">
             <label class="form-control-label" for="input-descricao_custo">{{ __('DESCRIÇÃO DO CUSTO') }}</label>
             <input type="text" name="descricao_custo" id="input-descricao_custo" class="form-control form-control-alternative" value="{{ $item->descricao_custo }}"  readonly>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <div class="form-group">
+            <label class="form-control-label" for="input-responsavel_custo">{{ __('DESCRIÇÃO DO CUSTO') }}</label>
+            <input type="text" name="responsavel_custo" id="input-responsavel_custo" class="form-control form-control-alternative" value="{{ $item->responsavel_custo }}"  readonly>
         </div>
     </div>
     <div class="col-md-4">
