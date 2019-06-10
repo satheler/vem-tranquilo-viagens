@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class PagamentoBoletoSeeder extends Seeder
+class TarifaIntermunicipalSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,11 +11,10 @@ class PagamentoBoletoSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('pagamento_boleto')->insert([
-            'valor' => 1143,
-            'data_validade' => now()
         
+        DB::table('tarifa_intermunicipal')->insert([
+            'id' => 1,
+            'valor' => 123,
         ]);
-
     }
 }

@@ -16,9 +16,7 @@ class CreatePagamentoCartaoTable extends Migration
     {
         Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('titular');
             $table->bigInteger('num_cartao');
-            $table->integer('cvv');
             $table->date('data_validade');
             $table->integer('qnt_parcelas');
 

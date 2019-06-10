@@ -17,6 +17,11 @@ class AlocacaoIntermunicipalSeeder extends Seeder
             'trajeto_id' => 1,
             'cobrador_id' => 1,
             'motorista_id' => 1,
+            'auxiliar_id' => 1,
+            'data' => now(),
+            'horarioInicio' => now(),
+            'horarioFim' => now(),
+            'ativo' => true,
         ]);
     }
 }

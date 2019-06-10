@@ -25,10 +25,13 @@ class DatabaseSeeder extends Seeder
             TrajetoIntermunicipalSeeder::class,
             PassagensIntermunicipalSeeder::class,
             AlocacaoUrbanoSeeder::class,
-            PagamentoBoletoSeeder::class,
+            AlocacaoIntermunicipalSeeder::class,
             PagamentoCartaoSeeder::class,
             AssentoSeeder::class,
             CategoriaPassageiroSeeder::class,
+            TarifaIntermunicipalSeeder::class,
+            RegistroSinistroSeeder::class,
+            VendaOnlineSeeder::class,
             // VendaOnlineSeeder::class,
             ClienteSeeder::class
         ]);

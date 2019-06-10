@@ -16,7 +16,7 @@ class CreateAssentoTable extends Migration
     {
         Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->double('valor');
+            $table->Integer('num_assento');
 
             $table->boolean('ocupado');
 

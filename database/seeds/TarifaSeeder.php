@@ -18,6 +18,7 @@ class TarifaSeeder extends Seeder
             'licitacao' => 'test',
             'valor_especial' => 3.50,
         ]);
+       
 
         DB::table('tarifa')->insert([
             'id' => 1,
