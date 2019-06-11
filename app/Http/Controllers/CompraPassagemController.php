@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Cidade;
 use App\TrajetoIntermunicipal;
+use App\Compra;
 
 class CompraPassagemController extends Controller
 {
@@ -46,5 +47,12 @@ class CompraPassagemController extends Controller
 
     public function pagamento(){
         return view('compra_passagem.main.pagamento');
+    }
+
+    public function store(Request $request){
+        $compra = new Compra();
+        $compra->add($request->input());
+
+        return $compra;
     }
 }
