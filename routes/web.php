@@ -21,8 +21,12 @@ Route::group(['prefix' => '/', 'as' => 'page_'], function () {
         Route::get('{origem}/{destino}/{data_ida}/', 'CompraPassagemController@list')->name('.list');
         Route::get('{origem}/{destino}/{data_ida}/{data_volta}', 'CompraPassagemController@list')->name('.list');
         Route::post('poltrona', 'CompraPassagemController@selecionarPoltrona')->name('.poltrona');
+<<<<<<< Updated upstream
         Route::post('pagamento', 'CompraPassagemController@pagamento')->name('.pagamento');
         Route::post('registro', 'CompraPassagemController@store')->name('.store');
+=======
+        Route::get('pagamento', 'CompraPassagemController@pagamento')->name('.pagamento');
+>>>>>>> Stashed changes
     });
 
     Route::group(['prefix' => 'cadastro', 'as' => 'cadastro'], function () {

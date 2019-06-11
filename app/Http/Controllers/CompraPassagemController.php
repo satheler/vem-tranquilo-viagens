@@ -62,6 +62,7 @@ class CompraPassagemController extends Controller
         $alocacao = new AlocacaoIntermunicipal();
         $alocacao = $alocacao->get($request->input('alocacao_id'));
 
+<<<<<<< Updated upstream
         $trecho = new Trecho();
         $origem = $trecho->get($request->input('trecho_origem_id'));
         $destino = $trecho->get($request->input('trecho_destino_id'));
@@ -89,6 +90,19 @@ class CompraPassagemController extends Controller
         $valor = $request->input('totalCompra');
 
         return view('compra.main.pagamento', compact('poltronas', 'origem', 'destino', 'alocacao', 'categoria_passageiro', 'valor'));
+=======
+        $origem = new Cidade();
+        $origem = $origem->get($request->input('origem_id'));
+
+        $destino = new Cidade();
+        $destino = $destino->get($request->input('destino_id'));
+
+        $onibus = new OnibusIntermunicipal();
+        $assentos = $onibus->getAssentos($alocacao->onibus_id);
+
+        // exit;
+        return view('compra.main.show', compact('alocacao', 'origem', 'destino', 'assentos'));
+>>>>>>> Stashed changes
     }
 
     public function store(Request $request){
