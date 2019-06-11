@@ -22,6 +22,7 @@ Route::group(['prefix' => '/', 'as' => 'page_'], function () {
         Route::get('{origem}/{destino}/{data_ida}/{data_volta}', 'CompraPassagemController@list')->name('.list');
         Route::get('poltrona', 'CompraPassagemController@selecionarPoltrona')->name('.poltrona');
         Route::get('pagamento', 'CompraPassagemController@pagamento')->name('.pagamento');
+        Route::post('registro', 'CompraPassagemController@store')->name('.store');
     });
 
     Route::group(['prefix' => 'cadastro', 'as' => 'cadastro'], function () {
