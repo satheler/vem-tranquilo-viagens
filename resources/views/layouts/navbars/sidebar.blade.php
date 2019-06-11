@@ -106,6 +106,16 @@
                     </li>
                 @endif
                 <!-- Funcionário :: FIM -->
+                
+                 <!-- Registrar Sinistro :: INICIO -->
+                 @if (@auth()->user()->tipo_usuario_id === 1)
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('sinistro.index') }}">
+                            <i class="fas fa-user-cog"></i> {{ __('Registrar Sinistro') }}
+                        </a>
+                    </li>
+                @endif
+                <!-- Registrar Sinistro :: FIM -->
 
                  <!-- Pagamento :: INICIO -->
                  @if (@auth()->user()->tipo_usuario_id === 1)

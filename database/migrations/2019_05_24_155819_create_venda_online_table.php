@@ -36,15 +36,6 @@ class CreateVendaOnlineTable extends Migration
             $table->unsignedBigInteger('cliente_id');
             $table->foreign('cliente_id')->references('id')->on('clientes');
 
-
-
-
-
-
-
-
-
-
             $table->timestamps();
         });
     }

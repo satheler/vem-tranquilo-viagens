@@ -84,6 +84,9 @@ Route::group(['prefix' => 'painel'], function () {
             Route::resource('inativas', 'RodoviariasInativasController');
         });
 
+
+        Route::resource('sinistro', 'RegistroSinistroController');
+
         Route::prefix('venda')->name('venda_')->group(function () {
             Route::group(['prefix' => 'intermunicipal', 'as' => 'intermunicipal'], function () {
                 Route::get('', 'VendaPassagemIntermunicipalController@index')->name('.index');
