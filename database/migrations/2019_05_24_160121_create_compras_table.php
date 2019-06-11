@@ -23,9 +23,6 @@ class CreateComprasTable extends Migration
             $table->unsignedBigInteger('venda_id');
             $table->foreign('venda_id')->references('id')->on('venda_online');
 
-
-
-
             $table->timestamps();
         });
     }
