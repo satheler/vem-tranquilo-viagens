@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
 use \Validator as Validator;
+use App\VendaOnline;
 
 class Cliente extends Model
 {
@@ -128,6 +129,12 @@ class Cliente extends Model
 
             return true;
         }
+    }
+
+    public function pontuar(VendaOnline $venda){
+        $this->pontos = $this->pontos + ($venda->pagamento->valor/100);
+        $this->update();
+
     }
 
 }

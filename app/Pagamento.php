@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Cliente;
 use Illuminate\Database\Eloquent\Model;
 use Validator;
 
@@ -16,8 +17,8 @@ class Pagamento extends Model
 
         $validator = Validator::make($input, [
             'valor' => 'required|numeric|min:0.01',
-            'qnt_parcelas' =>  'required|numeric|max:6',
-            'num_cartao' => 'required|numeric'
+            'qnt_parcelas' => 'required|numeric|max:6',
+            'num_cartao' => 'required|numeric',
 
         ]);
 
@@ -25,15 +26,42 @@ class Pagamento extends Model
             return $validator;
         }
 
-        $this->valor = $input['valor']/$input['qnt_parcelas'];
+        $this->valor = $input['valor'] / $input['qnt_parcelas'];
         $this->data = now()->format('Y-m-d');
         $this->qnt_parcelas = $input['qnt_parcelas'];
 
         $num = str_split($input['num_cartao']);
-        $this->num_cartao = $num[0].$num[1].$num[2].$num[3];
+        $this->num_cartao = $num[12] . $num[13] . $num[14] . $num[15];
 
         $this->save();
 
         return $this;
+    }
+
+    public function mostrarPontos(int $id)
+    {
+        $cliente = $cliente->get($id);
+        return $cliente->pontos;
+    }
+
+    public function usarPontos( array $input)
+    {
+        $cliente = new Cliente();
+        $cliente = $cliente->get($input['cliente_id']);
+
+        if ($input['valor'] >= $cliente->pontos) {
+            $valor = $input['valor'] - $cliente->pontos;
+            $cliente->pontos = 0;
+
+        }else{
+            $pontosRestantes = $cliente->pontos -  $input['valor'] ;
+            $cliente->pontos = $pontosRestantes;
+            $valor = 0;
+        }
+
+        $cliente->update();
+
+        return $valor;
+
     }
 }

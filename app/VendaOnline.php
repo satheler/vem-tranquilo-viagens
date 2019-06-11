@@ -2,18 +2,23 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-use App\Cliente;
-use App\Pagamento;
 use App\AlocacaoIntermunicipal;
+use App\Pagamento;
+use Illuminate\Database\Eloquent\Model;
 use Validator;
 
 class VendaOnline extends Model
 {
     protected $table = "venda_online";
 
-    public function alocacaoIntermunicipal() {
+    public function alocacaoIntermunicipal()
+    {
         return $this->hasOne('App\AlocacaoIntermunicipal', 'id', 'alocacao_id');
+    }
+
+    public function pagamento()
+    {
+        return $this->hasOne('App\Pagamento', 'id', 'pagamento_id');
     }
 
     public function assento()
@@ -31,7 +36,7 @@ class VendaOnline extends Model
 
         $validator = Validator::make($input, [
             'alocacao_intermunicipal_id' => 'exists:alocacao_intermunicipal,id',
-            'categoria_passageiro_id' => 'exists:categoria_passageiro,id'
+            'categoria_passageiro_id' => 'exists:categoria_passageiro,id',
         ]);
 
         if ($validator->fails()) {
@@ -47,13 +52,24 @@ class VendaOnline extends Model
         array_push($lista, $input['assentos']);
 
         foreach ($lista as $itemAssento) {
-            array_push($assentos,$assento->add($itemAssento));
+            array_push($assentos, $assento->add($itemAssento));
         }
 
         $this->categoria_passageiro_id = $input['categoria_passageiro_id'];
 
         $pagamento = new Pagamento();
-        $pagamento->add($input);
+
+        if ($input['usarPontos'] == true) {
+
+            $valor = $pagamento->usarPontos($input);
+            $input['valor'] = $valor;
+            $pagamento->add($input);
+
+        } else {
+
+            $pagamento->add($input);
+
+        }
 
         $this->pagamento_id = $pagamento->id;
 

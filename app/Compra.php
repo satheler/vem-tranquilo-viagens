@@ -37,12 +37,17 @@ class Compra extends Model
             'cliente_id' => 'exists:clientes,id'
         ]);
 
+        $this->cliente_id = $input['cliente_id'];
         $venda = new VendaOnline();
         $venda->add($input);
 
-        $this->cliente_id = $input['cliente_id'];
+
 
         $this->venda_id = $venda->id;
+
+        $cliente = new Cliente();
+        $cliente = $cliente->get($this->cliente_id);
+        $cliente->pontuar($venda);
 
         $this->save();
 
