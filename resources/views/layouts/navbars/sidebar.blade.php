@@ -226,6 +226,17 @@
                 @endif
                 <!-- Gerenciar seguros :: FIM -->
 
+
+                <!-- Gerenciar seguros funcionáro :: INICIO -->
+                @if (@auth()->user()->tipo_usuario_id === 1)
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('segurofuncionario.index') }}">
+                        <i class="far fa-address-card"></i> {{ __('Gerenciar Seguros de Funcionários') }}
+                    </a>
+                </li>
+                @endif
+                <!-- Gerenciar seguros funcionário :: FIM -->
+
                 <!-- Gerenciar alocação :: INICIO -->
                 @if (@auth()->user()->tipo_usuario_id === 1 || @auth()->user()->tipo_usuario_id === 2 )
                     <li class="nav-item">

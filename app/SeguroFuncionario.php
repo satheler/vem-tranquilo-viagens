@@ -15,7 +15,7 @@ class SeguroFuncionario extends Model
         return $this->belongsToMany('App\User', 'seguro_funcionario_relacionamento', 'seguro_id', 'funcionario_id');
     }
 
-    public function getAxll()
+    public function getAll()
     {
         return $this->all();
     }
