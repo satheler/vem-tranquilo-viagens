@@ -31,7 +31,7 @@
                                 <span class="h2 font-weight-bold mb-0">2.897,00</span>
                             </div>
                             <div class="col-auto">
-                                <div class="icon icon-shape bg-red text-white rounded-circle shadow">
+                                <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
                                     <i class="far fa-money-bill-alt"></i>
                                 </div>
                             </div>
@@ -54,7 +54,55 @@
                                 <span class="h2 font-weight-bold mb-0">10.897,00</span>
                             </div>
                             <div class="col-auto">
-                                <div class="icon icon-shape bg-red text-white rounded-circle shadow">
+                                <div class="icon icon-shape bg-green text-white rounded-circle shadow">
+                                    <i class="far fa-money-bill-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-0 text-sm">
+                            <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 6.89%</span>
+                            <span class="text-nowrap">Acréscimo nos últimos meses</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row clearflix mt-4">
+            <div class="col-lg-6">
+                <div class="card card-stats">
+                    <!-- Card body -->
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="card-title text-uppercase text-muted mb-0">Vendas por Ônibus</h5>
+                                <span class="h2 font-weight-bold mb-0">2.897,00</span>
+                            </div>
+                            <div class="col-auto">
+                                <div class="icon icon-shape bg-blue text-white rounded-circle shadow">
+                                    <i class="far fa-money-bill-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-0 text-sm">
+                            <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                            <span class="text-nowrap">Acréscimo nos últimos meses</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card card-stats">
+                    <!-- Card body -->
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="card-title text-uppercase text-muted mb-0">Vendas por Trajeto</h5>
+                                <span class="h2 font-weight-bold mb-0">10.897,00</span>
+                            </div>
+                            <div class="col-auto">
+                                <div class="icon icon-shape bg-orange text-white rounded-circle shadow">
                                     <i class="far fa-money-bill-alt"></i>
                                 </div>
                             </div>
