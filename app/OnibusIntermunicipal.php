@@ -17,7 +17,7 @@ class OnibusIntermunicipal extends Model
     }
 
     public function categoria() {
-        return $this->hasOne('App\CategoriaOnibus', 'id', 'categoria_id');
+        return $this->hasOne('App\CategoriaOnibus', 'id', 'categoria_onibus_id');
     }
 
     public function description()
