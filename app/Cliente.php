@@ -8,6 +8,9 @@ use \Validator as Validator;
 
 class Cliente extends Model
 {
+
+    protected $table ='cliente';
+
     public function cartao()
     {
         return $this->hasOne('App\CartaoCredito', 'id', 'cartao_id');
@@ -108,5 +111,12 @@ class Cliente extends Model
         }
     }
 
-    //add cartão do cliente
+    public function addPagamento(int $idCliente, int $idPagamento){
+
+        $cliente = $this->find($id);
+        $cliente->cartao_id = $idPagamento;
+        $cliente->save();
+
+    }
+
 }

@@ -29,10 +29,10 @@ class DatabaseSeeder extends Seeder
             PagamentoCartaoSeeder::class,
             AssentoSeeder::class,
             CategoriaPassageiroSeeder::class,
-            TarifaIntermunicipalSeeder::class,
             ClienteSeeder::class,
+            TarifaIntermunicipalSeeder::class,
             RegistroSinistroSeeder::class,
-            VendaOnlineSeeder::class,
+            VendaOnlineSeeder::class
             // VendaOnlineSeeder::class,
         ]);
     }

@@ -12,15 +12,12 @@ class PagamentoCartaoSeeder extends Seeder
     public function run()
     {
         DB::table('pagamento_cartao')->insert([
-            'num_cartao' => 12341231412341234,
-            'data_validade' => now(),
-            'qnt_parcelas' => 5
+            'valor' => 50,
+            'num_cartao' => '4512',
+            'data' => now()->format('Y-m-d'),
+            'qnt_parcelas' => 2
         ]);
 
-        DB::table('pagamento_cartao')->insert([
-            'num_cartao' => 14341231412341234,
-            'data_validade' => now(),
-            'qnt_parcelas' => 7
-        ]);
+
     }
 }

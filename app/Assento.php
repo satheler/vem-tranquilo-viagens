@@ -23,6 +23,8 @@ class Assento extends Model
         $assento = $this->find($id);
         $assento->ocupado = true;
         $assento->save();
+
+        return $assento;
     }
 
     public function isOcupado(int $id){
@@ -30,21 +32,21 @@ class Assento extends Model
         return $assento->ocupado;
     }
 
-    // public function add(array $input)
-    // {
-    //     $validator = Validator::make($input, [
-    //         'valor' => 'required|string'
-    //     ]);
+    public function add(array $input)
+    {
+        $validator = Validator::make($input, [
+            'num_assento' => 'required|numeric|min:1||max:42'
+        ]);
 
-    //     if ($validator->fails()) {
-    //         return $validator;
-    //     }
+        if ($validator->fails()) {
+            return $validator;
+        }
 
-    //     $this->valor = $input['valor'];
-    //     $this->categoria_id = $input['categoria_id'];
+        $this->num_assento = $input['num_assento'];
+        $this->ocupado = true;
 
-    //     $this->save();
-    // }
+        $this->save();
+    }
 
     // public function edit(int $id, array $input)
     // {

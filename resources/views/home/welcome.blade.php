@@ -91,7 +91,7 @@
                             </div>
                             <div class="card-body">
                                 <span class="">Viaje</span>
-                                <div class="display-4 text-white">{{$lista[0]->nome}} -> {{$lista[6]->nome}}</div>
+                                <div class="display-4 text-white">{{$lista[0]->nome}} <i class="fas fa-arrow-right"> </i> {{$lista[6]->nome}}</div>
                                 <div class="display3 ">por apenas</div>
                                 <div class="display-2 text-white">R$ 100,00</div>
                                 <div class=" text-white">*Comprovantes serão solicitados no embarque.</div>

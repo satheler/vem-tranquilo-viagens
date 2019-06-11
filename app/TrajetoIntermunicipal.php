@@ -3,8 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
-use Exception;
 use Validator;
 
 class TrajetoIntermunicipal extends Model
@@ -22,22 +20,41 @@ class TrajetoIntermunicipal extends Model
         return $this->all();
     }
 
-    public function getByFilter($origem_id, $destino_id)
+    public function getByFilter($origem_id, $destino_id, $trajeto_id)
     {
 
-        $trecho = new Trecho();
-        $trechos = $trecho->getAll();
-        $caminhoDestino = $trechos->ordem->whereHas('trechos', function ($query) use ($destino_id) {
-            $query->where('cidade_id', $destino_id);
+        $lista = [];
+
+        $trajetosDestino = $this->whereHas('trechos', function ($query) use ($destino_id, $trajeto_id) {
+            $query->where('cidade_id', $destino_id)
+                  ->where('trajeto_id', $trajeto_id);
         })->get();
 
-        $this->whereHas('trechos', function ($query) use ($cidade_id, $caminhoDestino) {
-            $query->where('cidade_id', $origem_id)
-                  ->where('ordem', $caminhoDestino);
-        })->get();
+        foreach ($trajetosDestino as $trajeto) {
+            foreach ($trajeto->trechos as $itemTrecho) {
+
+                if ($itemTrecho->contains($origem_id)) {
+                    foreach ($trajeto->trechos as $item) {
+
+                        if ($item->contains($origem_id)) {
+                            array_push($lista, $item);
+                        }
+
+                        if ($item->contains($destino_id)) {
+                            array_push($lista, $item);
+                        }
+                    }
+                }
+
+            }
+
+        }
+
+        return $lista;
     }
 
-    public function get(int $id){
+    public function get(int $id)
+    {
         $trajeto = $this->find($id);
         return $trajeto;
     }
@@ -56,15 +73,16 @@ class TrajetoIntermunicipal extends Model
         $this->trechos()->attach($trechos);
     }
 
-    private function normalize(array $trechos, array $horarioSaida, array $horarioChegada) {
+    private function normalize(array $trechos, array $horarioSaida, array $horarioChegada)
+    {
 
         $listaTrechos = [];
 
-        for ($i=0; $i < count($trechos); $i++) {
+        for ($i = 0; $i < count($trechos); $i++) {
             array_push($listaTrechos, [
                 "trecho_id" => $trechos[$i],
                 "horarioSaida" => $horarioSaida[$i],
-                "horarioChegada" => $horarioChegada[$i]
+                "horarioChegada" => $horarioChegada[$i],
             ]);
         }
 

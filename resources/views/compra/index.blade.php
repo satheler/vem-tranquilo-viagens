@@ -16,6 +16,11 @@
                     @yield('infos')
                 </div>
             </div>
+            <div class="col">
+                <div class="card card bg-gradient-default border-0 shadow">
+                    @yield('infos-poltrona')
+                </div>
+            </div>
         </div>
 
         @includeWhen(isset($trajetos), 'compra.main.list')

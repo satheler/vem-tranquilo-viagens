@@ -15,7 +15,6 @@ class AlocacaoIntermunicipalSeeder extends Seeder
             'id' => 1,
             'onibus_id' => 1,
             'trajeto_id' => 1,
-            'cobrador_id' => 1,
             'motorista_id' => 1,
             'auxiliar_id' => 1,
             'data' => now(),
