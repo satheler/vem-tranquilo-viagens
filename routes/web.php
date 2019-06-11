@@ -66,6 +66,8 @@ Route::group(['prefix' => 'painel'], function () {
 
         Route::resource('funcionario', 'FuncionarioController');
 
+        Route::resource('contador_lucro', 'ContadorLucroController');
+
         Route::resource('manutencoes', 'RegistroManutencaoController');
 
         Route::resource('pagamento', 'FormaDePagamentoController');

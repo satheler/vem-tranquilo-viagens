@@ -97,8 +97,8 @@
                 @endif
                 <!-- Passageiro :: FIM -->
 
-                 <!-- Funcionário :: INICIO -->
-                 @if (@auth()->user()->tipo_usuario_id === 4)
+                <!-- Funcionário :: INICIO -->
+                @if (@auth()->user()->tipo_usuario_id === 4)
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('funcionario.index') }}">
                             <i class="fas fa-user-cog"></i> {{ __('Funcionários') }}
@@ -320,6 +320,16 @@
                 </li>
             @endif
             <!-- Gerenciar venda de passagens :: FIM -->
+
+             <!-- Contador :: INICIO -->
+             @if (@auth()->user()->tipo_usuario_id === 6)
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('contador_lucro.index') }}">
+                        <i class="fas fa-file-invoice-dollar"></i> {{ __('Lucros') }}
+                    </a>
+                </li>
+            @endif
+            <!-- Contador :: FIM -->
             </ul>
         </div>
     </div>

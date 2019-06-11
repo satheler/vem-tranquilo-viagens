@@ -35,5 +35,10 @@ class TipoUsuarioSeeder extends Seeder
             'id' => 5,
             'tipo' => 'Vendedor',
         ]);
+
+        DB::table('tipos_usuario')->insert([
+            'id' => 6,
+            'tipo' => 'Contador',
+        ]);
     }
 }
