@@ -11,9 +11,8 @@ class VendaOnline extends Model
 {
     protected $table = "venda_online";
 
-    public function alocacaoIntermunicipal()
-    {
-        return $this->hasOne('App\AlocacaoIntermunicipal', 'id', 'alocacao_id');
+    public function alocacaoIntermunicipal() {
+        return $this->hasOne('App\AlocacaoIntermunicipal', 'id', 'alocacao_intermunicipal_id');
     }
 
     public function pagamento()
@@ -26,6 +25,10 @@ class VendaOnline extends Model
         return $this->belongsToMany('App\Assento', 'assento_vendido', 'venda_id', 'assento_id');
     }
 
+    public function getByAlocacao($id) {
+        return $this->where('alocacao_intermunicipal_id', $id)->first();
+    }
+
     public function getAll()
     {
         return $this->all();
@@ -36,7 +39,6 @@ class VendaOnline extends Model
 
         $validator = Validator::make($input, [
             'alocacao_intermunicipal_id' => 'exists:alocacao_intermunicipal,id',
-            'categoria_passageiro_id' => 'exists:categoria_passageiro,id',
         ]);
 
         if ($validator->fails()) {
@@ -45,30 +47,19 @@ class VendaOnline extends Model
 
         $this->alocacao_intermunicipal_id = $input['alocacao_intermunicipal_id'];
 
-        $assento = new Assento();
-        $assentos = [];
-
-        $lista = [];
-        array_push($lista, $input['assentos']);
-
-        foreach ($lista as $itemAssento) {
-            array_push($assentos, $assento->add($itemAssento));
+        foreach ($input['poltronas'] as $poltrona) {
+            $assento = new Assento();
+            $assento->add(['num_assento' => $poltrona, 'alocacao_id' => $input['alocacao_intermunicipal_id']]);
         }
-
-        $this->categoria_passageiro_id = $input['categoria_passageiro_id'];
 
         $pagamento = new Pagamento();
 
-        if ($input['usarPontos'] == true) {
-
+        if ($input['usarPontos'] == 'on') {
             $valor = $pagamento->usarPontos($input);
             $input['valor'] = $valor;
-            $pagamento->add($input);
-
+            $pagamento = $pagamento->add($input);
         } else {
-
-            $pagamento->add($input);
-
+            $pagamento = $pagamento->add($input);
         }
 
         $this->pagamento_id = $pagamento->id;

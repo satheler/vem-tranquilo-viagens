@@ -28,6 +28,11 @@ class AlocacaoIntermunicipal extends Model
         return $this->hasOne('App\Funcionario', 'id', 'auxiliar_id');
     }
 
+    public function get($id)
+    {
+        return $this->find($id);
+    }
+
     public function getAll()
     {
         return $this->all();
@@ -42,6 +47,7 @@ class AlocacaoIntermunicipal extends Model
         foreach ($alocacaoData as $itemAlocacao) {
             $item = [];
 
+            $item["id"] = $itemAlocacao->id;
             $item["info"] = $itemAlocacao->trajeto->getByFilter($origem, $destino, $itemAlocacao->trajeto_id);
             $item["onibus"] = $itemAlocacao->onibus;
 

@@ -15,7 +15,7 @@ class VendaOnlineSeeder extends Seeder
             'pagamento_id' => 1,
             'alocacao_intermunicipal_id' => 1,
             // 'assento_id' => 1,
-            'categoria_passageiro_id' => 1
+            // 'categoria_passageiro_id' => 1
         ]);
     }
 }

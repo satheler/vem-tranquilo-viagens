@@ -23,8 +23,8 @@ class CreateVendaOnlineTable extends Migration
             $table->unsignedBigInteger('alocacao_intermunicipal_id');
             $table->foreign('alocacao_intermunicipal_id')->references('id')->on('alocacao_intermunicipal');
 
-            $table->unsignedBigInteger('categoria_passageiro_id');
-            $table->foreign('categoria_passageiro_id')->references('id')->on('categoria_passageiro');
+            // $table->unsignedBigInteger('categoria_passageiro_id');
+            // $table->foreign('categoria_passageiro_id')->references('id')->on('categoria_passageiro');
 
             $table->timestamps();
         });

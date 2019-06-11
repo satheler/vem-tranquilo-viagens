@@ -10,21 +10,7 @@
     @include('layouts.headers.guest')
 
     <div class="container-fluid mt--7">
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="card bg-gradient-default border-0 shadow">
-                    @yield('infos')
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="card bg-default border-0 shadow">
-                    @yield('infos-pag')
-                </div>
-            </div>
-        </div>
-
-        @includeWhen(isset($trajetos), 'compra_passagem.main.list')
-
+        @yield('infos')
     </div>
 
 @endsection

@@ -5,6 +5,7 @@ namespace App;
 use App\Cliente;
 use Illuminate\Database\Eloquent\Model;
 use Validator;
+use Auth;
 
 class Pagamento extends Model
 {
@@ -12,30 +13,31 @@ class Pagamento extends Model
 
     //protected $hidden = ['num_cartao'];
 
+
+
     public function add(array $input)
     {
 
+
         $validator = Validator::make($input, [
             'valor' => 'required|numeric|min:0.01',
-            'qnt_parcelas' => 'required|numeric|max:6',
-            'num_cartao' => 'required|numeric',
+            'parcelas' => 'required|numeric|max:6',
+            'nro' => 'required|string',
+            ]);
 
-        ]);
+            if ($validator->fails()) {
+                return $validator;
+            }
 
-        if ($validator->fails()) {
-            return $validator;
-        }
+            $this->valor = ($input['valor'] / $input['parcelas']);
+            $this->data = now();
+            $this->qnt_parcelas = $input['parcelas'];
 
-        $this->valor = $input['valor'] / $input['qnt_parcelas'];
-        $this->data = now()->format('Y-m-d');
-        $this->qnt_parcelas = $input['qnt_parcelas'];
+        $num = explode('.', $input['nro']);
+        throw new \Exception($num);
+        $this->num_cartao = $num[3];
 
-        $num = str_split($input['num_cartao']);
-        $this->num_cartao = $num[12] . $num[13] . $num[14] . $num[15];
-
-        $this->save();
-
-        return $this;
+        return $this->create();
     }
 
     public function mostrarPontos(int $id)
@@ -47,7 +49,7 @@ class Pagamento extends Model
     public function usarPontos( array $input)
     {
         $cliente = new Cliente();
-        $cliente = $cliente->get($input['cliente_id']);
+        $cliente = $cliente->get(1);
 
         if ($input['valor'] >= $cliente->pontos) {
             $valor = $input['valor'] - $cliente->pontos;

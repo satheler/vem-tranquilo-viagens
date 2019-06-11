@@ -7,6 +7,8 @@ use Validator;
 use App\VendaOnline;
 use App\Cliente;
 
+use Auth;
+
 class Compra extends Model
 {
     protected $table = 'compras';
@@ -33,24 +35,17 @@ class Compra extends Model
 
     public function add(array $input)
     {
-        $validator = Validator::make($input, [
-            'cliente_id' => 'exists:clientes,id'
-        ]);
-
-        $this->cliente_id = $input['cliente_id'];
+        $this->cliente_id = Auth::user()->id;
         $venda = new VendaOnline();
         $venda->add($input);
-
-
 
         $this->venda_id = $venda->id;
 
         $cliente = new Cliente();
-        $cliente = $cliente->get($this->cliente_id);
+        $cliente = $cliente->get(Auth::user()->id);
         $cliente->pontuar($venda);
 
         $this->save();
-
     }
 
 }

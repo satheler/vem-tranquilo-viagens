@@ -43,8 +43,8 @@
                                 </button>
                             </td>
 
-                            <td>{{ $item->trechos[0]->origem->nome }}</td>
-                            <td>{{ $item->trechos[count($item->trechos) - 1]->destino->nome }}</td>
+                            <td>{{ $item->trechos[0]->cidade->nome }}</td>
+                            <td>{{ $item->trechos[count($item->trechos) - 1]->cidade->nome }}</td>
                             <td>
                             @if (@count($item->trechos) === 1)
                             Direto

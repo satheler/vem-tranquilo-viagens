@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateAssentoVendidoTable extends Migration
 {
-    private $databaseName = 'assento_vendido';
+    private $databaseName = 'assentos_vendidos';
     /**
      * Run the migrations.
      *
@@ -17,10 +17,12 @@ class CreateAssentoVendidoTable extends Migration
         Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->unsignedBigInteger('assento_id');
-            $table->foreign('assento_id')->references('id')->on('assento');
+            $table->Integer('num_assento');
 
-            $table->unsignedBigInteger('venda_id');
+            $table->unsignedBigInteger('alocacao_id');
+            $table->foreign('alocacao_id')->references('id')->on('alocacao_intermunicipal');
+
+            $table->unsignedBigInteger('venda_id')->nullable();
             $table->foreign('venda_id')->references('id')->on('venda_online');
 
             $table->timestamps();

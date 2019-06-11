@@ -6,17 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 use Validator;
 class Assento extends Model
 {
-    protected $table = 'assento';
-
+    protected $table = 'assentos_vendidos';
 
     public function getAll()
     {
         return $this->all();
     }
 
-    public function get(int $id){
-        $assento = $this->find($id);
-        return $assento;
+    public function get(int $num_assento, int $alocacao_id){
+        return $this->where(['num_assento' => $num_assento, 'alocacao_id'=> $alocacao_id])->first();
     }
 
     public function ocupado(int $id){
@@ -34,21 +32,9 @@ class Assento extends Model
 
     public function add($input)
     {
-
-        // $validator = Validator::make($input, [
-        //     'num_assento' => 'required|numeric|min:1||max:42'
-        // ]);
-
-        // if ($validator->fails()) {
-        //     return $validator;
-        // }
-
-        $this->num_assento = $input;
-        $this->ocupado = true;
-
-        $this->save();
-
-        return $this->id;
+        $this->num_assento = $input['num_assento'];
+        $this->alocacao_id = $input['alocacao_id'];
+        return $this->save();
     }
 
     // public function edit(int $id, array $input)

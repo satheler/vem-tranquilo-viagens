@@ -20,8 +20,8 @@ Route::group(['prefix' => '/', 'as' => 'page_'], function () {
         Route::post('search', 'CompraPassagemController@search')->name('.search');
         Route::get('{origem}/{destino}/{data_ida}/', 'CompraPassagemController@list')->name('.list');
         Route::get('{origem}/{destino}/{data_ida}/{data_volta}', 'CompraPassagemController@list')->name('.list');
-        Route::get('poltrona', 'CompraPassagemController@selecionarPoltrona')->name('.poltrona');
-        Route::get('pagamento', 'CompraPassagemController@pagamento')->name('.pagamento');
+        Route::post('poltrona', 'CompraPassagemController@selecionarPoltrona')->name('.poltrona');
+        Route::post('pagamento', 'CompraPassagemController@pagamento')->name('.pagamento');
         Route::post('registro', 'CompraPassagemController@store')->name('.store');
     });
 

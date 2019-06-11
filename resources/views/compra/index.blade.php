@@ -11,14 +11,9 @@
 
     <div class="container-fluid mt--9">
         <div class="row">
-            <div class="col">
-                <div class="card card bg-gradient-default border-0 shadow">
+            <div class="col-md-12">
+                <div class="card border-0 shadow" style="background-color: transparent">
                     @yield('infos')
-                </div>
-            </div>
-            <div class="col">
-                <div class="card card bg-gradient-default border-0 shadow">
-                    @yield('infos-poltrona')
                 </div>
             </div>
         </div>

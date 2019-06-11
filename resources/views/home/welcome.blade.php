@@ -39,7 +39,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="far fa-clock"></i></span>
                                                 </div>
-                                                <input data name='data-ida' class="form-control datepicker" placeholder="__/__/____" type="text" value="{{ old('data-ida', $data ?? null) }}" required>
+                                                <input data name='data_ida' class="form-control datepicker" placeholder="__/__/____" type="text" value="{{ old('data-ida', $data ?? null) }}" required>
                                             </div>
                                         </div>
                                     </div>
@@ -51,7 +51,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="far fa-clock"></i></span>
                                                 </div>
-                                                <input data name='data-volta' class="form-control datepicker" placeholder="__/__/____" type="text" value="{{ old('data-volta', $data ?? null) }}">
+                                                <input data name='data_volta' class="form-control datepicker" placeholder="__/__/____" type="text" value="{{ old('data-volta', $data ?? null) }}">
                                             </div>
                                         </div>
                                     </div>

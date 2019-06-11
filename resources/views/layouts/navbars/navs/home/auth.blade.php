@@ -19,9 +19,10 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <div class="media align-items-center">
-                                <i class="fas fa-2x fa-user-circle"></i>
                                 <div class="media-body ml-2 d-none d-lg-block">
+                                    Olá,
                                     <span class="mb-0 text-sm font-weight-bold">{{ auth()->user()->name }}</span>
+                                    <i class="fas fa-angle-down"></i>
                                 </div>
                             </div>
                         </a>
