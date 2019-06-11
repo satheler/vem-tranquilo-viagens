@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             ClienteSeeder::class,
             TarifaIntermunicipalSeeder::class,
             VendaOnlineSeeder::class
+            // VendaOnlineSeeder::class,
         ]);
     }
 }
