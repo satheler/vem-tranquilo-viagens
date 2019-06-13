@@ -8,6 +8,11 @@ use Auth;
 
 class ClienteController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,11 +22,11 @@ class ClienteController extends Controller
     {
 
         $cliente = new Cliente();
-        $cliente = $cliente->where(['user_id' => Auth::user()->id])->first();//$id do cliente que está logado, não sei como fazer
+        $cliente = $cliente->where(['user_id' => Auth::user()->id])->first(); //$id do cliente que está logado, não sei como fazer
         $compras = $cliente->listarCompras();
-        
+
         return view('perfilcliente.index', compact('cliente', 'compras'));
-        
+
     }
 
     /**

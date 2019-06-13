@@ -28,7 +28,6 @@
                 <thead class="thead-light">
                     <tr>
                         <th scope="col">{{ __('Origem') }}</th>
-                        <th scope="col">{{ __('Destino') }}</th>
                         <th scope="col">{{ __('Distância') }}</th>
                         <th scope="col">Ações</th>
                     </tr>
@@ -36,8 +35,7 @@
                 <tbody>
                     @foreach ($lista as $item)
                         <tr data-table-row-id={{ $item->id }}>
-                            <td>{{ $item->origem->nome }}</td>
-                            <td>{{ $item->destino->nome }}</td>
+                            <td>{{ $item->cidade->nome }}</td>
                             <td>{{ sprintf('%.2f km', $item->quilometragem) }}</td>
 
                             <td class="text-center">

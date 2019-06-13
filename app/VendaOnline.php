@@ -22,7 +22,7 @@ class VendaOnline extends Model
 
     public function assento()
     {
-        return $this->belongsToMany('App\Assento', 'assento_vendido', 'venda_id', 'assento_id');
+        return $this->belongsToMany('App\Assento', 'assentos_vendidos', 'venda_id', 'id');
     }
 
     public function getByAlocacao($id) {
@@ -41,7 +41,7 @@ class VendaOnline extends Model
 
     public function add(array $input)
     {
-        
+
         $validator = Validator::make($input, [
             'alocacao_intermunicipal_id' => 'exists:alocacao_intermunicipal,id',
         ]);
@@ -65,12 +65,12 @@ class VendaOnline extends Model
         }
 
         $pagamento = $pagamento->add($input);
-        
+
         $this->pagamento_id = $pagamento;
 
         $this->save();
         $assento->addVenda($this->id);
-        
+
         return $this;
 
     }
