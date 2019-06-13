@@ -33,9 +33,8 @@ class Pagamento extends Model
             $this->data = now();
             $this->qnt_parcelas = $input['parcelas'];
 
-        $num = explode('.', $input['nro']);
-        throw new \Exception($num);
-        $this->num_cartao = $num[3];
+            $num = str_split($input['nro']);
+            $this->num_cartao = $num[12].$num[13].$num[14].$num[15];
 
         return $this->create();
     }
