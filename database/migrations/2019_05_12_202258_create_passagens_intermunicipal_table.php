@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreatePassagensIntermunicipalTable extends Migration
 {
-
+private $databaseName = 'passagens_intermunicipal';
     /**
      * Run the migrations.
      *
@@ -14,7 +14,7 @@ class CreatePassagensIntermunicipalTable extends Migration
      */
     public function up()
     {
-        Schema::create('passagens_intermunicipal', function (Blueprint $table) {
+        Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
           
             $table->date('data_compra');
@@ -44,6 +44,6 @@ class CreatePassagensIntermunicipalTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('passagens_intermunicipal');
+        Schema::dropIfExists($this->databaseName);
     }
 }

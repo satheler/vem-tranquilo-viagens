@@ -5,7 +5,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <!-- Brand -->
-        <a class="navbar-brand pb-0" href="{{ route('home') }}">
+        <a class="navbar-brand pb-0" href="{{ route('page_painel.index') }}">
             <img src="{{ asset('argon') }}/img/brand/logo.png" class="navbar-brand-img" alt="...">
         </a>
         <!-- User -->
@@ -53,7 +53,7 @@
             <div class="navbar-collapse-header d-md-none">
                 <div class="row">
                     <div class="col-6 collapse-brand">
-                        <a href="{{ route('home') }}">
+                        <a href="{{ route('page_painel.index') }}">
                             <img src="{{ asset('argon') }}/img/brand/logo.png">
                         </a>
                     </div>
@@ -81,7 +81,7 @@
 
                 <!-- Página Inicial :: FIM -->
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}">
+                    <a class="nav-link" href="{{ route('page_painel.index') }}">
                         <i class="fas fa-home"></i> {{ __('Página Inicial') }}
                     </a>
                 </li>
@@ -106,6 +106,16 @@
                     </li>
                 @endif
                 <!-- Funcionário :: FIM -->
+                
+                 <!-- Registrar Sinistro :: INICIO -->
+                 @if (@auth()->user()->tipo_usuario_id === 1)
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('sinistro.index') }}">
+                            <i class="fas fa-user-cog"></i> {{ __('Registrar Sinistro') }}
+                        </a>
+                    </li>
+                @endif
+                <!-- Registrar Sinistro :: FIM -->
 
                  <!-- Pagamento :: INICIO -->
                  @if (@auth()->user()->tipo_usuario_id === 1)
@@ -225,6 +235,17 @@
                 </li>
                 @endif
                 <!-- Gerenciar seguros :: FIM -->
+
+
+                <!-- Gerenciar seguros funcionáro :: INICIO -->
+                @if (@auth()->user()->tipo_usuario_id === 1)
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('segurofuncionario.index') }}">
+                        <i class="far fa-address-card"></i> {{ __('Gerenciar Seguros de Funcionários') }}
+                    </a>
+                </li>
+                @endif
+                <!-- Gerenciar seguros funcionário :: FIM -->
 
                 <!-- Gerenciar alocação :: INICIO -->
                 @if (@auth()->user()->tipo_usuario_id === 1 || @auth()->user()->tipo_usuario_id === 2 )

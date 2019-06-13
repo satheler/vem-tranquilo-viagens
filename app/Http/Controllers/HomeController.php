@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use App\Cidade;
 use Auth;
 
 class HomeController extends Controller
@@ -12,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -22,12 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // var_dump(Auth::user()); exit;
-        if(Auth::user()->tipo_usuario_id === 5){
-            return redirect()
-                ->route('venda_intermunicipal.index');
-        }
-
-        return view('dashboard');
+        $cidades = new Cidade();
+        $lista = $cidades->getAll();
+        return view('home.welcome', compact('lista'));
     }
 }

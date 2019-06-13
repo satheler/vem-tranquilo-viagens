@@ -20,12 +20,20 @@ class DatabaseSeeder extends Seeder
             CategoriaOnibusSeeder::class,
             OnibusIntermunicipalSeeder::class,
             OnibusUrbanoSeeder::class,
-            TrechosSeeder::class,
             FuncionarioSeeder::class,
             TrajetoUrbanoSeeder::class,
             TrajetoIntermunicipalSeeder::class,
             PassagensIntermunicipalSeeder::class,
-            AlocacaoUrbanoSeeder::class
+            AlocacaoUrbanoSeeder::class,
+            AlocacaoIntermunicipalSeeder::class,
+            PagamentoCartaoSeeder::class,
+            AssentoSeeder::class,
+            CategoriaPassageiroSeeder::class,
+            ClienteSeeder::class,
+            TarifaIntermunicipalSeeder::class,
+            RegistroSinistroSeeder::class,
+            VendaOnlineSeeder::class
+            // VendaOnlineSeeder::class,
         ]);
     }
 }

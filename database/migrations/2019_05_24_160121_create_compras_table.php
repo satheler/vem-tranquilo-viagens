@@ -4,9 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class TrajetoTrecho extends Migration
+class CreateComprasTable extends Migration
 {
-    private $databaseName = 'trajeto_trecho';
+    private $databaseName = 'compras';
     /**
      * Run the migrations.
      *
@@ -17,14 +17,14 @@ class TrajetoTrecho extends Migration
         Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->bigInteger('trajeto_id')->unsigned();
-            $table->foreign('trajeto_id')->references('id')->on('trajeto_intermunicipal');
+            $table->unsignedBigInteger('users_id');
+            $table->foreign('users_id')->references('id')->on('users');
+           
+            $table->unsignedBigInteger('venda_id');
+            $table->foreign('venda_id')->references('id')->on('venda_online');
 
-            $table->bigInteger('trecho_id')->unsigned();
-            $table->foreign('trecho_id')->references('id')->on('trajeto_trecho');
 
-            $table->time('horarioSaida');
-            $table->time('horarioChegada');
+
 
             $table->timestamps();
         });
