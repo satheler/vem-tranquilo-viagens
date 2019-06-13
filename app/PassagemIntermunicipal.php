@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Assento;
+use Auth;
 
 class PassagemIntermunicipal extends Model
 {
@@ -29,7 +30,7 @@ class PassagemIntermunicipal extends Model
         }
 
         $this->save();
-        $assento->addVenda($this->id);
+        $assento->addVendaRodoviaria($this->id);
             
     }
 }
