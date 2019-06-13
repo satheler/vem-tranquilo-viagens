@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Validator;
 use App\VendaOnline;
 use App\Cliente;
+use Exception;
 
 use Auth;
 
@@ -35,14 +36,15 @@ class Compra extends Model
 
     public function add(array $input)
     {
-        $this->cliente_id = Auth::user()->id;
+        
+        $cliente = new Cliente();
+        $cliente = $cliente->where(['user_id' => Auth::user()->id])->first();
+        $this->cliente_id = $cliente->id;
+
         $venda = new VendaOnline();
         $venda->add($input);
-
         $this->venda_id = $venda->id;
-
-        $cliente = new Cliente();
-        $cliente = $cliente->get(Auth::user()->id);
+        
         $cliente->pontuar($venda);
 
         $this->save();

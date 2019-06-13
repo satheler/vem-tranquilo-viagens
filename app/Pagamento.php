@@ -29,14 +29,16 @@ class Pagamento extends Model
                 return $validator;
             }
 
-            $this->valor = ($input['valor'] / $input['parcelas']);
+            $this->valor = $input['valor'] / $input['parcelas'];
             $this->data = now();
             $this->qnt_parcelas = $input['parcelas'];
 
             $num = str_split($input['nro']);
             $this->num_cartao = $num[12].$num[13].$num[14].$num[15];
 
-        return $this->create();
+            $this->save();
+
+            return $this->id;
     }
 
     public function mostrarPontos(int $id)
@@ -48,7 +50,7 @@ class Pagamento extends Model
     public function usarPontos( array $input)
     {
         $cliente = new Cliente();
-        $cliente = $cliente->get(1);
+        $cliente = $cliente->where(['user_id' => Auth::user()->id])->first();
 
         if ($input['valor'] >= $cliente->pontos) {
             $valor = $input['valor'] - $cliente->pontos;

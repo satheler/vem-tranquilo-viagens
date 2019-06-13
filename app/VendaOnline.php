@@ -36,7 +36,7 @@ class VendaOnline extends Model
 
     public function add(array $input)
     {
-
+        
         $validator = Validator::make($input, [
             'alocacao_intermunicipal_id' => 'exists:alocacao_intermunicipal,id',
         ]);
@@ -53,7 +53,6 @@ class VendaOnline extends Model
         }
 
         $pagamento = new Pagamento();
-
         if ($input['usarPontos'] == 'on') {
             $valor = $pagamento->usarPontos($input);
             $input['valor'] = $valor;
@@ -62,11 +61,11 @@ class VendaOnline extends Model
             $pagamento = $pagamento->add($input);
         }
 
-        $this->pagamento_id = $pagamento->id;
+        
+        $this->pagamento_id = $pagamento;
 
         $this->save();
-        $this->assento()->attach($assentos);
-
+        
         return $this;
 
     }
