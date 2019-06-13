@@ -28,8 +28,8 @@ class PassagemIntermunicipal extends Model
             $assento->add(['num_assento' => $poltrona, 'alocacao_id' => $input['alocacao_intermunicipal_id']]);
         }
 
-        
         $this->save();
+        $assento->addVenda($this->id);
             
     }
 }
