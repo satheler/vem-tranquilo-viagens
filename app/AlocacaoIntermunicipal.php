@@ -46,10 +46,22 @@ class AlocacaoIntermunicipal extends Model
 
         foreach ($alocacaoData as $itemAlocacao) {
             $item = [];
-
             $item["id"] = $itemAlocacao->id;
-            $item["info"] = $itemAlocacao->trajeto->getByFilter($origem, $destino, $itemAlocacao->trajeto_id);
             $item["onibus"] = $itemAlocacao->onibus;
+
+            $trajetos = $itemAlocacao->trajeto->getByFilter($origem, $destino, $itemAlocacao->trajeto_id);
+            
+            //foreach ($trajetos as $trajeto) {
+                if($trajetos != null){
+                    if($trajetos->origem->ordem < $trajetos->destino->ordem) {
+                        $item["info"] = $trajetos;//array_push?
+                    } else {
+                        return null;
+                    }
+                }else{
+                    return null;
+                }               
+            //}
 
             $item["valor"] = $this->calculaValor($itemAlocacao->trajeto);
             array_push($lista, $item);
