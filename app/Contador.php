@@ -31,7 +31,7 @@ class Contador extends Model
         foreach ($listaPassagem as $itempassagem) {
             $datavenda = date_create_from_format('Y-m-d', $itempassagem->data_venda);
             $item->mes = $datavenda->format('m');
-           // $item->trajeto = Trecho::where('trajeto_id', $itempassagem->alocacao->trajeto_id)->get();
+            $item->trajeto = Trajeto::where('trajeto_id', $itempassagem->alocacao->trajeto_id)->get();
             $item->valor = $itempassagem->valor;
             //$lista["valor"] = $itempassagem->agruparPorCategoria($tarifa->get($itempassagem->alocacao->trajeto->tarifa->id), $itempassagem);
            // array_push($categoria["valor"], $itempassagem->agruparPorCategoria($tarifa->get($itempassagem->alocacao->trajeto->tarifa->id), $itempassagem));
