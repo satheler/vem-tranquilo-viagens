@@ -13,41 +13,19 @@ class OnibusUrbanoSeeder extends Seeder
     {
 
         DB::table('onibus_urbano')->insert([
-            'id' => 1,
+            'id' => 11,
             'lotacao' => 50,
             'cidade_id' => 1,
             'arCondicionado' => false,
         ]);
 
         DB::table('onibus')->insert([
-            'id' => 2,
-            'description_id' => 1,
-            'description_type' => 'App\OnibusUrbano',
-            'acessibilidade' => false,
-            'chassi' => 'G2L5CH64R7K85G5KG',
-            'placa' => 'GOV8956',
-            'marca' => 'Mercedes Benz',
-            'modelo' => 'OF 1519',
-            'data_fabricacao' => now(),
-            'data_compra' => now()
-        ]);
-
-        /* --------------------------------------------------------- */
-
-        DB::table('onibus_urbano')->insert([
-            'id' => 2,
-            'lotacao' => 25,
-            'cidade_id' => 2,
-            'arCondicionado' => false,
-        ]);
-
-        DB::table('onibus')->insert([
-            'id' => 3,
+            'id' => 11,
             'description_id' => 2,
             'description_type' => 'App\OnibusUrbano',
-            'acessibilidade' => true,
-            'chassi' => '25HD6U4A78VOAI9A6',
-            'placa' => 'MGJ8741',
+            'acessibilidade' => false,
+            'chassi' => 'O2L5CH64R7K85G5KG',
+            'placa' => 'GOV8956',
             'marca' => 'Mercedes Benz',
             'modelo' => 'OF 1519',
             'data_fabricacao' => now(),
