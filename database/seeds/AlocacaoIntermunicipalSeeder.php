@@ -18,8 +18,8 @@ class AlocacaoIntermunicipalSeeder extends Seeder
             'motorista_id' => 1,
             'auxiliar_id' => 1,
             'data' => now(),
-            'horarioInicio' => now(),
-            'horarioFim' => now(),
+            'horarioInicio' => '19:00:00',
+            'horarioFim' => '21:00:00',
             'ativo' => true,
         ]);
 
@@ -30,8 +30,8 @@ class AlocacaoIntermunicipalSeeder extends Seeder
             'motorista_id' => 1,
             'auxiliar_id' => 1,
             'data' => now(),
-            'horarioInicio' => now(),
-            'horarioFim' => now(),
+            'horarioInicio' => '21:15:00',
+            'horarioFim' => '23:00:00',
             'ativo' => true,
         ]);
     }

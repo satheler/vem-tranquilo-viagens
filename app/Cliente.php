@@ -65,25 +65,19 @@ class Cliente extends Model
             return $validator;
         }
 
-        $user = new User([
-            'name' => strtoupper($input['nome']),
-            'email' => $input['email'],
-            'password' => Hash::make($input['senha']),
-            'type' => 'cliente',
-        ]);
-
         $this->cpf = $input['cpf'];
 
-        $this->user()->create([
+        $user = $this->user()->create([
             'name' => strtoupper($input['nome']),
             'email' => $input['email'],
             'password' => Hash::make($input['senha']),
             'type' => 'cliente',
         ]);
 
-        $userAdded = User::where('email', $input['email'])->first();
-        $this->user_id = $userAdded->id;
+        $this->user_id = $user->id;
         $this->save();
+
+        return $user;
     }
 
     public function validateCPF($cpf)
@@ -148,8 +142,8 @@ class Cliente extends Model
             $compras->assentos = Assento::where('venda_id', $compra->venda_id)->get();
             $compras->data = $venda->created_at;
             $compras->trajeto = $venda->alocacaoIntermunicipal->trajeto;
-            $compras->valor = $venda->pagamento->valor * $venda->pagamento->qnt_parcelas; 
-            array_push($lista, $compras);           
+            $compras->valor = $venda->pagamento->valor * $venda->pagamento->qnt_parcelas;
+            array_push($lista, $compras);
          }
 
         return $compras;//lista

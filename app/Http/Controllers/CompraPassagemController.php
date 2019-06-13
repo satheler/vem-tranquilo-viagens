@@ -14,14 +14,13 @@ use App\Cliente;
 use App\Http\Controllers\Auth\ClienteController;
 use Exception;
 use Auth;
+use Cookie;
 
 class CompraPassagemController extends Controller
 {
     public function index()
     {
-        $cidades = new Cidade();
-        $cidades = $cidades->getAll();
-        return view('compra.main.index', compact('cidades'));
+        return redirect()->route('page_home.index');
     }
 
     public function search(Request $request) {
@@ -63,6 +62,11 @@ class CompraPassagemController extends Controller
     }
 
     public function selecionarPoltrona(Request $request) {
+
+        if(Cookie::get('form_poltronas') !== null) {
+            return redirect()->route('page_compra.pagamento');
+        }
+
         $alocacao = new AlocacaoIntermunicipal();
         $alocacao = $alocacao->get($request->input('alocacao_id'));
 
@@ -76,36 +80,5 @@ class CompraPassagemController extends Controller
         $assentos = $onibus->getAssentos($alocacao);
 
         return view('compra.main.show', compact('alocacao', 'origem', 'destino', 'assentos', 'valor'));
-    }
-
-    public function pagamento(Request $request){
-        $poltronas = $request->input('poltronas');
-        $alocacao = new AlocacaoIntermunicipal();
-        $alocacao = $alocacao->get($request->input('alocacao_id'));
-
-        $trecho = new Trecho();
-        $origem = $trecho->get($request->input('trecho_origem_id'));
-        $destino = $trecho->get($request->input('trecho_destino_id'));
-
-        $categoria_passageiro = new CategoriaPassageiro();
-        $categoria_passageiro = $categoria_passageiro->getAll();
-
-        $valor = $request->input('totalCompra');
-
-        return view('compra.main.pagamento', compact('poltronas', 'origem', 'destino', 'alocacao', 'categoria_passageiro', 'valor'));
-    }
-
-    public function store(Request $request){
-        if(!isset($request['usarPontos'])){         
-            $request['usarPontos'] = 'off';
-        } 
-
-        $compra = new Compra();
-        $compra->add($request->input());
-        
-        $cliente = new Cliente();
-        $cliente = $cliente->get($compra->cliente_id);
-     
-        return redirect()->route('perfilcliente.index')->withStatus(__('Compra realizada com sucesso!'));
     }
 }
