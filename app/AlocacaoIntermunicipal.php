@@ -7,6 +7,7 @@ use App\TarifaIntermunicipal;
 use App\TrajetoIntermunicipal;
 use Illuminate\Database\Eloquent\Model;
 use App\Assento; 
+use DateTime;
 
 class AlocacaoIntermunicipal extends Model
 {
@@ -44,6 +45,12 @@ class AlocacaoIntermunicipal extends Model
         $lista = [];
 
         $alocacaoData = $this->where('data', $inputData)->get();
+
+        $dataInput = new DateTime($inputData); 
+
+        if($dataInput->format('y-m-d') < now()->format('y-m-d')){
+            return null;
+        }
 
         foreach ($alocacaoData as $itemAlocacao) {
             $item = [];
