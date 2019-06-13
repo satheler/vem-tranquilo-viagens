@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Validator;
+use DateTime;
 
 class TrajetoIntermunicipal extends Model
 {
@@ -35,8 +36,10 @@ class TrajetoIntermunicipal extends Model
 
             foreach ($trajeto->trechos as $trecho) {
                 if ($trecho->cidade_id === $origem_id) {
-                    $trajeto->origem = $trecho;
-                    $hasOrigem = true;
+                    if(strtotime($trecho->horarioSaida) >= time()){
+                        $trajeto->origem = $trecho;
+                        $hasOrigem = true;
+                    }
                 }
 
                 if ($trecho->cidade_id === $destino_id) {
