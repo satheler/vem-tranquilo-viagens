@@ -1,33 +1,15 @@
 @extends('vendaPassagem.index', ['title' => __('Venda de Passagens')])
 
 @section('infos')
-    <div class="card-header border-0">
-        <div class="row align-cidades-center">
-            <div class="col-8">
-                <h3 class="mb-0">{{ __('Venda de Passagens') }}</h3>
-            </div>
-        </div>
-    </div>
-    <div class="col-12">
-        @if (session('status'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('status') }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        @endif
-    </div>
-
-    <div class="card-header bg-gradient-secondary">
-        <form action="{{ route('venda_intermunicipal.search') }}" method="post">
+    <div class="card-body py-2">
+        <form action="{{ route('vendaPassagem.search') }}" method="post">
             <div class="row justify-content-center">
                 <div class="col-lg-3 form-group{{ $errors->has('origem') ? ' has-danger' : '' }}">
-                    <label class="form-control-label{{ $errors->has('origem') ? ' text-warning' : '' }} text-lighter" for="form-control-label"> {{__('ORIGEM')}}</label>
+                    <label class="form-control-label{{ $errors->has('origem') ? ' text-warning' : '' }} text-lighter" for="form-control-label"> {{__('De')}}</label>
                     <select bootstrapSelect name="origem"  data-size="4" data-live-search="true" required>
                         <option value="" disabled selected>Selecione a origem...</option>
                         @foreach ($cidades as $cidade)
-                            <option @if($errors->has('origem') && ($errors->first('origem') == $cidade->id) || old('origem') == $cidade->id) selected @endif value="{{ $cidade->id }}">{{ $cidade->nome }}</option>
+                            <option @if($errors->has('origem') && ($errors->first('origem') == $cidade->id) || old('origem', $origem->id ?? null) == $cidade->id) selected @endif value="{{ $cidade->id }}">{{ $cidade->nome }}</option>
                         @endforeach
                     </select>
                     @if ($errors->has('origem'))
@@ -36,25 +18,36 @@
 
                 </div>
                 <div class="col-lg-3 form-group{{ $errors->has('destino') ? ' has-danger' : '' }}">
-                    <label class="form-control-label{{ $errors->has('destino') ? ' text-warning' : '' }} text-lighter" for="form-control-label"> {{__('DESTINO')}}</label>
+                    <label class="form-control-label{{ $errors->has('destino') ? ' text-warning' : '' }} text-lighter" for="form-control-label"> {{__('Para')}}</label>
                     <select bootstrapSelect name="destino"  data-size="4" data-live-search="true" required>
                         <option value="" disabled selected>Selecione a destino...</option>
                         @foreach ($cidades as $cidade)
-                            <option @if($errors->has('destino') && ($errors->first('destino') == $cidade->id) || old('destino', $destino ?? null) == $cidade->id) selected @endif value="{{ $cidade->id }}">{{ $cidade->nome }}</option>
-                            @endforeach
+                            <option @if($errors->has('destino') && ($errors->first('destino') == $cidade->id) || old('destino', $destino->id ?? null) == $cidade->id) selected @endif value="{{ $cidade->id }}">{{ $cidade->nome }}</option>
+                        @endforeach
                     </select>
                     @if ($errors->has('destino'))
                         <label class="form-control-label invalid-feedback" for="form-control-label"> {{ $errors->first('destino') }} </label>
                     @endif
                 </div>
                 <div class="col-md-2">
-                    <label class="form-control-label text-lighter" for="input-data">{{ __('DATA') }}</label>
+                    <label class="form-control-label text-lighter" for="input-data">{{ __('Data da Ida') }}</label>
                     <div class="form-group">
                         <div class="input-group input-group-alternative">
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="far fa-clock"></i></span>
+                                <span class="input-group-text"><i class="far fa-calendar"></i></span>
                             </div>
-                            <input data name='data' class="form-control datepicker" placeholder="__/__/____" type="text" value="{{ old('data', $data ?? null) }}" required>
+                            <input data name='data_ida' class="form-control datepicker" placeholder="__/__/____" type="text" value="{{ old('data_ida', $data_ida ?? '') }}" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-control-label text-lighter" for="input-data">{{ __('Data da Volta (Opcional)') }}</label>
+                    <div class="form-group">
+                        <div class="input-group input-group-alternative">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="far fa-calendar"></i></span>
+                            </div>
+                            <input data name='data_volta' class="form-control datepicker" placeholder="__/__/____" type="text" value="{{ old('data_volta', $data_volta ?? '') }}" >
                         </div>
                     </div>
                 </div>
@@ -65,14 +58,8 @@
                     <button type="submit" class="btn btn-primary" style="margin-top: 2px"><i class="fas fa-search"></i> {{ __('Pesquisar') }}</button>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="form-control-label" for="input-chassi">{{ __('Chassi') }}</label>
-                    <div class="form-group{{ $errors->has('chassi') ? ' has-danger' : '' }}">
-                        <input type="text" name="chassi" id="input-chassi" class="form-control form-control-alternative{{ $errors->has('chassi') ? ' is-invalid' : '' }}" placeholder="{{ __('Informe o chassi... Ex: 0A1B2C3D4E5F6G789') }}" value="{{ old('chassi') }}" maxlength="17" required autofocus>
-                    </div>
-                </div>
-            </div>
-        <form>
+        </form>
     </div>
 @endsection
+
+

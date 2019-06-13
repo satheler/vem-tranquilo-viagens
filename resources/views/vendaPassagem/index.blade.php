@@ -1,4 +1,4 @@
-@extends('layouts.appNoSidebar', ['title' => $title])
+@extends('layouts.appClient', ['title' => $title])
 
 @push('css')
 <link type="text/css" href="{{ asset('argon') }}/vendor/datatables/dist/css/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -9,10 +9,10 @@
 @section('content')
     @include('layouts.headers.guest')
 
-    <div class="container-fluid mt--7">
+    <div class="container-fluid mt--9">
         <div class="row">
-            <div class="col">
-                <div class="card card bg-gradient-default border-0 shadow">
+            <div class="col-md-12">
+                <div class="card border-0 shadow" style="background-color: transparent">
                     @yield('infos')
                 </div>
             </div>
@@ -28,7 +28,7 @@
                 <div class="modal-content">
 
                     <div class="modal-header">
-                        <h3 class="modal-title" id="modal-title-default">Informações detalhadas do ônibus</h3>
+                        <h3 class="modal-title" id="modal-title-default">Informações detalhadas</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
