@@ -18,8 +18,9 @@ class ClienteController extends Controller
 
         $cliente = new Cliente();
         $cliente = $cliente->where(['user_id' => Auth::user()->id])->first();//$id do cliente que está logado, não sei como fazer
-
-        return view('perfilcliente.index', compact('cliente'));
+        $compras = $cliente->listarCompras();
+        
+        return view('perfilcliente.index', compact('cliente', 'compras'));
         
     }
 

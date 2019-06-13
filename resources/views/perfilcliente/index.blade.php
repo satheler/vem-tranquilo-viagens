@@ -32,7 +32,32 @@
                             </button>
                         </div>
                     @endif
-                    
+                    <div class="card-body">
+                        <div class="table-responsive py-4">
+                            <table id="datatable-basic" class="table align-items-center table-flush dataTable">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">{{ __('Data') }}</th>
+                                        <th scope="col">{{ __('Valor') }}</th>
+                                        <th scope="col">{{ __('Trajeto') }}</th>
+                                        <th scope="col">{{ __('Assento(s)') }}</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($compras as $item)
+                                        <tr data-table-row-id={{ $item->id }}>
+                                            
+                                            <td>{{ $item->venda_id }}</td>
+                                            <td>{R$}</td>
+                                            <td>{Origem->Destino}</td>
+                                            <td>{[1,2]}</td>
+                                  
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                 </div>
             </div>
         </div>

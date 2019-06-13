@@ -29,6 +29,11 @@ class VendaOnline extends Model
         return $this->where('alocacao_intermunicipal_id', $id)->first();
     }
 
+    public function get(int $id)
+    {
+        return $this->find($id);
+    }
+
     public function getAll()
     {
         return $this->all();

@@ -139,8 +139,20 @@ class Cliente extends Model
     }
 
     public function listarCompras(){
-        $lista = Compra::where('cliente_id', $this->id)->get();
-        return $lista;
+        $compras = Compra::where('cliente_id', $this->id)->get();
+        $lista = [];
+         foreach ($compras as $compra) {
+            $venda = new VendaOnline();
+            $venda = $venda->get($compra->venda_id);
+           //$compras->assentos = $venda->assento;
+            $compras->assentos = Assento::where('venda_id', $compra->venda_id)->get();
+            $compras->data = $venda->created_at;
+            $compras->trajeto = $venda->alocacaoIntermunicipal->trajeto;
+            $compras->valor = $venda->pagamento->valor * $venda->pagamento->qnt_parcelas; 
+            array_push($lista, $compras);           
+         }
+
+        return $compras;//lista
     }
 
 }
