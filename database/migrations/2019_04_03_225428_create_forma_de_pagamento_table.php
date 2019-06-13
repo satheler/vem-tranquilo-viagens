@@ -17,7 +17,7 @@ class CreateFormaDePagamentoTable extends Migration
         Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('forma');
-            $table->boolean('intermunicipal');
+            $table->boolean('intermunicipal')->default(0);
 
             $table->timestamps();
         });
