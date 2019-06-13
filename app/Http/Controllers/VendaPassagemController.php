@@ -45,7 +45,7 @@ class VendaPassagemController extends Controller
         }
 
         return redirect()
-            ->route('vendaPassagem.list', ["origem" => $origem, "destino" => $destino, "data_ida" => $data_ida, "data_volta" => $data_volta ?? null]);
+            ->route('vendapassagem.list', ["origem" => $origem, "destino" => $destino, "data_ida" => $data_ida, "data_volta" => $data_volta ?? null]);
     }
 
     public function list($origem, $destino, $data_ida, $data_volta = '')
@@ -112,6 +112,6 @@ class VendaPassagemController extends Controller
         $passagem->add($request->input());
         
      
-        return redirect()->route('perfilcliente.index')->withStatus(__('Compra realizada com sucesso!'));
+        return redirect()->route('vendapassagem.index')->withStatus(__('Venda realizada com sucesso!'));
     }
 }

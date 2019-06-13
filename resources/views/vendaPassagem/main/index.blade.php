@@ -2,7 +2,7 @@
 
 @section('infos')
     <div class="card-body py-2">
-        <form action="{{ route('vendaPassagem.search') }}" method="post">
+        <form action="{{ route('vendapassagem.search') }}" method="post">
             <div class="row justify-content-center">
                 <div class="col-lg-3 form-group{{ $errors->has('origem') ? ' has-danger' : '' }}">
                     <label class="form-control-label{{ $errors->has('origem') ? ' text-warning' : '' }} text-lighter" for="form-control-label"> {{__('De')}}</label>
@@ -57,6 +57,15 @@
                     </div>
                     <button type="submit" class="btn btn-primary" style="margin-top: 2px"><i class="fas fa-search"></i> {{ __('Pesquisar') }}</button>
                 </div>
+                
+                @if (session('status'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('status') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                @endif
             </div>
         </form>
     </div>

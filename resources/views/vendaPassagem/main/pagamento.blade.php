@@ -1,7 +1,7 @@
 @extends('vendaPassagem.index', ['title' => __('Venda de Passagens')])
 
 @section('infos')
-<form method="POST" action="{{ route('vendaPassagem.store') }}">
+<form method="POST" action="{{ route('vendapassagem.store') }}">
     <input type="hidden" name="alocacao_intermunicipal_id" value="{{ $alocacao->id }}">
  <div class="row">
             <div class="col-lg-6">
@@ -68,7 +68,7 @@
 
             <li class="checklist-entry list-group-item flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-between">
-                    <a href="{{ route('home.index') }}" class="btn btn-warning">Cancelar</a>
+                    <a href="{{ route('vendapassagem.index') }}" class="btn btn-warning">Cancelar</a>
                     <input type="hidden" name="valor" value={{ $valor }}>
                     <h1 class="checklist-title mb-0">Total R$ {{ $valor }}</h1>
                 </div>

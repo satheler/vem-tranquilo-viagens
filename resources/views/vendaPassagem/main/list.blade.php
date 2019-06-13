@@ -14,7 +14,7 @@
                         @foreach ($trajetos as $trajeto)
     
                             <li class="list-group-item px-0" style="background-color: transparent;">
-                                <form method="POST" action="{{ route('page_vendaPassagem.poltrona') }}">
+                                <form method="POST" action="{{ route('vendapassagem.poltrona') }}">
                                     @foreach ($trajeto['info'] as $encontrado)
                                        <input type="hidden" name="alocacao_id" value="{{ $encontrado->id }}">
                                         <input type="hidden" name="trecho_origem_id" value="{{ $encontrado->origem->id }}">
