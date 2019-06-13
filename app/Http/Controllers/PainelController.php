@@ -13,6 +13,7 @@ class PainelController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('is_admin');
     }
 
     /**
@@ -25,7 +26,7 @@ class PainelController extends Controller
         // var_dump(Auth::user()); exit;
         if(Auth::user()->tipo_usuario_id === 5){
             return redirect()
-                ->route('venda_intermunicipal.index');
+                ->route('vendapassagem.index');
         }
 
         return view('dashboard');

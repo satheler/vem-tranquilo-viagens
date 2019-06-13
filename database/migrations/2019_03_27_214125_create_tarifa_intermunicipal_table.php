@@ -15,10 +15,7 @@ class CreateTarifaIntermunicipalTable extends Migration
     public function up()
     {
         Schema::create($this->databaseName, function (Blueprint $table) {
-            
             $table->bigIncrements('id');
-            $table->float('valor');
-
             $table->timestamps();
         });
     }

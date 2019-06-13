@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             CidadesSeeder::class,
+            FormaDePagamentoSeeder::class,
             RodoviariasSeeder::class,
             TipoUsuarioSeeder::class,
             UsersTableSeeder::class,
@@ -23,7 +24,6 @@ class DatabaseSeeder extends Seeder
             FuncionarioSeeder::class,
             TrajetoUrbanoSeeder::class,
             TrajetoIntermunicipalSeeder::class,
-            PassagensIntermunicipalSeeder::class,
             AlocacaoUrbanoSeeder::class,
             AlocacaoIntermunicipalSeeder::class,
             PagamentoCartaoSeeder::class,
@@ -31,9 +31,10 @@ class DatabaseSeeder extends Seeder
             CategoriaPassageiroSeeder::class,
             ClienteSeeder::class,
             TarifaIntermunicipalSeeder::class,
-            RegistroSinistroSeeder::class,
-            VendaOnlineSeeder::class
-            // VendaOnlineSeeder::class,
+            VendaOnlineSeeder::class,
+            PassagensIntermunicipalSeeder::class,
+            RegistroSinistroSeeder::class
+
         ]);
     }
 }

@@ -4,9 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAssentoTable extends Migration
+class CreateAssentoVendidoTable extends Migration
 {
-    private $databaseName = 'assento';
+    private $databaseName = 'assentos_vendidos';
     /**
      * Run the migrations.
      *
@@ -16,9 +16,17 @@ class CreateAssentoTable extends Migration
     {
         Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
+
             $table->Integer('num_assento');
 
-            $table->boolean('ocupado');
+            $table->unsignedBigInteger('alocacao_id');
+            $table->foreign('alocacao_id')->references('id')->on('alocacao_intermunicipal');
+
+            $table->unsignedBigInteger('venda_id')->nullable();
+            $table->foreign('venda_id')->references('id')->on('venda_online');
+
+            $table->unsignedBigInteger('vendarodoviaria_id')->nullable();
+            $table->foreign('vendarodoviaria_id')->references('id')->on('passagens_intermunicipal');
 
             $table->timestamps();
         });

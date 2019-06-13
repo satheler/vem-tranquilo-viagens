@@ -3,20 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Validator;
 class Assento extends Model
 {
-    protected $table = 'assento';
-
+    protected $table = 'assentos_vendidos';
 
     public function getAll()
     {
         return $this->all();
     }
 
-    public function get(int $id){
-        $assento = $this->find($id);
-        return $assento;
+    public function get(int $num_assento, int $alocacao_id){
+        return $this->where(['num_assento' => $num_assento, 'alocacao_id'=> $alocacao_id])->first();
     }
 
     public function ocupado(int $id){
@@ -32,20 +30,27 @@ class Assento extends Model
         return $assento->ocupado;
     }
 
-    public function add(array $input)
+    public function add($input)
     {
-        $validator = Validator::make($input, [
-            'num_assento' => 'required|numeric|min:1||max:42'
-        ]);
-
-        if ($validator->fails()) {
-            return $validator;
-        }
-
         $this->num_assento = $input['num_assento'];
-        $this->ocupado = true;
+        $this->alocacao_id = $input['alocacao_id'];
+        return $this->save();
+    }
 
-        $this->save();
+    public function addVenda($id)
+    {
+        $this->venda_id = $id;
+        $this->update();
+
+        return $this;
+    }
+
+    public function addVendaRodoviaria($id)
+    {
+        $this->vendarodoviaria_id = $id;
+        $this->update();
+
+        return $this;
     }
 
     // public function edit(int $id, array $input)

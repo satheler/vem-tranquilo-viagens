@@ -10,6 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
  */
+// Route::group(['prefix' => 'perfilcliente', 'as' => 'perfilcliente'], function () {
+//     Route::get('', 'ClienteController@index')->name('.index');
+
+// });
+Route::resource('perfilcliente', 'ClienteController');
 
 Route::group(['prefix' => '/', 'as' => 'page_'], function () {
     Route::get(null, 'HomeController@index')->name('home.index');
@@ -17,30 +22,52 @@ Route::group(['prefix' => '/', 'as' => 'page_'], function () {
 
     Route::group(['prefix' => 'compra', 'as' => 'compra'], function () {
         Route::get('', 'CompraPassagemController@index')->name('.index');
-        Route::get('{origem}/{destino}/{data}', 'CompraPassagemController@list')->name('.list');
         Route::post('search', 'CompraPassagemController@search')->name('.search');
+        Route::get('{origem}/{destino}/{data_ida}/', 'CompraPassagemController@list')->name('.list');
+        Route::get('{origem}/{destino}/{data_ida}/{data_volta}', 'CompraPassagemController@list')->name('.list');
         Route::get('poltrona', 'CompraPassagemController@selecionarPoltrona')->name('.poltrona');
-        Route::get('pagamento', 'CompraPassagemController@pagamento')->name('.pagamento');
+        Route::post('poltrona', 'CompraPassagemController@selecionarPoltrona')->name('.poltrona');
+
+        Route::group(['middleware' => ['client_authenticate']], function () {
+            Route::get('pagamento', 'PagamentoController@pagamento')->name('.pagamento');
+            Route::post('pagamento', 'PagamentoController@pagamento')->name('.pagamento');
+            Route::post('registro', 'PagamentoController@store')->name('.store');
+        });
     });
 
-    Route::group(['prefix' => 'cadastro', 'as' => 'cadastro'], function () {
+        Route::group(['prefix' => 'cadastro', 'as' => 'cadastro'], function () {
         Route::get('', 'CadastroClienteController@index')->name('.index');
         Route::post('', 'CadastroClienteController@store')->name('.store');
     });
+
+    Route::group(['prefix' => 'entrar', 'as' => 'entrar'], function () {
+        Route::get('', 'ClienteLoginController@index')->name('.index');
+    });
+
 });
 
+Auth::routes();
 Route::group(['prefix' => 'painel'], function () {
-    Auth::routes();
 
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/compra', 'CompraPassagemController@index')->name('compra_passagem');
 
-    Route::group(['middleware' => 'auth'], function () {
+    Route::group(['middleware' => ['auth', 'is_admin']], function () {
         Route::resource('user', 'UserController', ['except' => ['show']]);
         Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
         Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
         Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 
+        Route::prefix('vendapassagem')->name('vendapassagem')->group(function () {
+            Route::get('', 'VendaPassagemController@index')->name('.index');
+            Route::post('search', 'VendaPassagemController@search')->name('.search');
+            Route::get('{origem}/{destino}/{data_ida}/', 'VendaPassagemController@list')->name('.list');
+            Route::get('{origem}/{destino}/{data_ida}/{data_volta}', 'VendaPassagemController@list')->name('.list');
+            Route::post('poltrona', 'VendaPassagemController@selecionarPoltrona')->name('.poltrona');
+            Route::post('pagamento', 'VendaPassagemController@pagamento')->name('.pagamento');
+            Route::post('registro', 'VendaPassagemController@store')->name('.store');
+        });
+    
         Route::prefix('onibus')->name('onibus_')->group(function () {
             Route::resource('urbano', 'OnibusUrbanoController');
             Route::resource('intermunicipal', 'OnibusIntermunicipalController');
@@ -83,7 +110,6 @@ Route::group(['prefix' => 'painel'], function () {
             Route::resource('ativas', 'RodoviariasController');
             Route::resource('inativas', 'RodoviariasInativasController');
         });
-
 
         Route::resource('sinistro', 'RegistroSinistroController');
 
