@@ -4,7 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\PassagemIntermunicipal;
+use DateTime;
 use App\VendaOnline;
+use App\OnibusIntermunicipal;
+use App\User;
 
 class Contador extends Model
 {
@@ -29,16 +32,19 @@ class Contador extends Model
         $lista = [];
         
         foreach ($listaPassagem as $itempassagem) {
-            $datavenda = date_create_from_format('Y-m-d', $itempassagem->data_venda);
-            $item->mes = $datavenda->format('m');
+            $data = new DateTime($itempassagem->data_venda);
+
+            //$datavenda = date_create_from_format('Y-m-d', $itempassagem->data_venda);
+            $itempassagem->mes = $data->format('m');
            // $item->trajeto = Trecho::where('trajeto_id', $itempassagem->alocacao->trajeto_id)->get();
-            $item->valor = $itempassagem->valor;
+            $itempassagem->valor = $itempassagem->valor;
             //$lista["valor"] = $itempassagem->agruparPorCategoria($tarifa->get($itempassagem->alocacao->trajeto->tarifa->id), $itempassagem);
            // array_push($categoria["valor"], $itempassagem->agruparPorCategoria($tarifa->get($itempassagem->alocacao->trajeto->tarifa->id), $itempassagem));
-            $item->user = $itempassagem->user->name;
-            $item->onibus = $itempassagem->alocacao->onibus;
+            $itempassagem->user = $itempassagem->user;
+            $onibus = new OnibusIntermunicipal();
+            $itempassagem->onibus = $onibus->get(1);
 
-            array_push($lista, $item);
+            array_push($lista, $itempassagem);
         }
         return $lista;
     }

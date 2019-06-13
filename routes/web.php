@@ -100,12 +100,14 @@ Route::group(['prefix' => 'painel'], function () {
 
         Route::resource('seguro', 'SeguroController');
 
+        Route::resource('contador', 'ContadorController');
+
         Route::prefix('rodoviarias')->name('rodoviarias_')->group(function () {
             Route::resource('ativas', 'RodoviariasController');
             Route::resource('inativas', 'RodoviariasInativasController');
         });
 
-    //     Route::prefix('vendapassagem')->name('vendapassagem')->group(function () {
+    //     Route::prefix('venda')->name('venda_')->group(function () {
     //         Route::group(['prefix' => 'intermunicipal', 'as' => 'intermunicipal'], function () {
     //             Route::get('', 'VendaPassagemController@index')->name('.index');
     //             Route::post('search', 'VendaPassagemController@search')->name('.search');

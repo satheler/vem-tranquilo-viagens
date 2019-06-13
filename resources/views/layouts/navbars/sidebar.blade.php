@@ -295,14 +295,8 @@
                     <div class="collapse" id="navbar-venda-passagens">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('venda_intermunicipal.index') }}">
+                                <a class="nav-link" href="{{ route('vendapassagem.index') }}">
                                     {{ __('Intermunicipal') }}
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                {{-- <a class="nav-link" href="{{ route('venda_urbana.index') }}"> --}}
-                                <a class="nav-link" href="#">
-                                {{ __('Urbano') }}
                                 </a>
                             </li>
                         </ul>
