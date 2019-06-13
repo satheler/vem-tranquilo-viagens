@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             CategoriaPassageiroSeeder::class,
             ClienteSeeder::class,
             TarifaIntermunicipalSeeder::class,
+            RegistroSinistroSeeder::class,
             VendaOnlineSeeder::class
         ]);
     }
