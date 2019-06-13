@@ -45,7 +45,10 @@ class Compra extends Model
         $venda->add($input);
         $this->venda_id = $venda->id;
         
-        $cliente->pontuar($venda);
+        if ($input['usarPontos'] == 'on') {
+            
+            $cliente->pontuar($venda);
+        }
 
         $this->save();
     }

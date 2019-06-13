@@ -10,6 +10,7 @@ use App\VendaOnline;
 use App\CategoriaPassageiro;
 use App\Trecho;
 use App\Compra;
+use Exception;
 
 class CompraPassagemController extends Controller
 {
@@ -92,9 +93,13 @@ class CompraPassagemController extends Controller
     }
 
     public function store(Request $request){
+        if(!isset($request['usarPontos'])){         
+            $request['usarPontos'] = 'off';
+        } 
+
         $compra = new Compra();
         $compra->add($request->input());
-
+        
         return $compra;
     }
 }

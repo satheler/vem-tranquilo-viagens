@@ -70,7 +70,7 @@
                 <div class="d-flex w-100 justify-content-between align-items-center justify-content-center">
                     <div class="checklist-info">
                         <div class="custom-control custom-control-alternative custom-checkbox">
-                            <input class="custom-control-input" name="usarPontos" id="customCheckLogin" type="checkbox" {{ old('usarPontos') ? 'checked' : '' }}>
+                            <input class="custom-control-input" name="usarPontos" id="customCheckLogin" type="checkbox" {{ old('usarPontos') ? 'checked' : 'off' }}>
                             <label class="custom-control-label" for="customCheckLogin">
                                 <span class="text-muted">{{ __('Você deseja utilizar seus pontos para está compra?') }}</span>
                             </label>
