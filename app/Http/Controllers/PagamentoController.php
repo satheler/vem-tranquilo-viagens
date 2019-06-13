@@ -52,6 +52,11 @@ class PagamentoController extends Controller
         $cliente = new Cliente();
         $cliente = $cliente->get($compra->cliente_id);
 
-        return redirect()->route('perfilcliente.index')->withStatus(__('Compra realizada com sucesso!'));
+        $requisicao = $request;
+        $categoria = $requisicao["categoria_passageiro_id"];
+        $desc = CategoriaPassageiro::where(['id' => $categoria])->value('descricao');
+        $status = 'Compra realizada com sucesso! '.$desc;
+
+        return redirect()->route('perfilcliente.index')->withStatus(__($status));
     }
 }
