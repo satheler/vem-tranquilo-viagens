@@ -26,6 +26,14 @@ class CategoriaPassageiroSeeder extends Seeder
             'descricao' => 'É obrigatório a apresentação dos documentos comprovatórios no momento de embarque, sujeito a não autorização do embarque por falta de comprovação, além de penalidades legais por crime previsto no art. 299 do Código Penal. Itens: 3.3, 4.9, 4.10 e 4.11 do Contrato de Transporte Intermunicipal. Acompanhantes deverão adquirir sua passagem em uma de nossas bilheterias mediante comprovação do registro junto aos órgãos competentes'
 
         ]);
+        
+        DB::table('categoria_passageiro')->insert([
+            'id' => 3,
+            'tipo' => 'comum',
+            'desconto' => 30,
+            'descricao' => ''
+
+        ]);
 
     }
 }

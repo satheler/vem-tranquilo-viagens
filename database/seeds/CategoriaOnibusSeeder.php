@@ -20,5 +20,8 @@ class CategoriaOnibusSeeder extends Seeder
         DB::table('categoria_onibus')->insert([
             'categoria' => "Leito"
         ]);
+        DB::table('categoria_onibus')->insert([
+            'categoria' => "Semi-Direto"
+        ]);
     }
 }
