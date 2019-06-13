@@ -11,27 +11,8 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    protected $table = 'users';
-
-    public function seguro()
-    {
-        return $this->belongsToMany('App\SeguroFuncionario', 'seguro_funcionario_relacionamento', 'funcionario_id', 'seguro_id');
-    }
-
-    public function tipo()
-    {
-        return $this->hasOne('App\TipoFuncionario', 'id', 'tipo_usuario_id');
-    }
-
-    public function getAll()
-    {
-        return $this->all();
-    }
-
-    public function get(int $id)
-    {
-        return $this->find($id);
-    }
+    const ADMIN_TYPE = 'admin';
+    const CLIENTE_TYPE = 'cliente';
 
     /**
      * The attributes that are mass assignable.
@@ -39,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'passwgitord',
     ];
 
     /**
@@ -62,5 +43,9 @@ class User extends Authenticatable
 
     public function rodoviaria() {
         return $this->hasOne('App\Rodoviaria', 'id', 'rodoviaria_id');
+    }
+
+    public function isAdmin() {
+        return $this->type === self::ADMIN_TYPE;
     }
 }

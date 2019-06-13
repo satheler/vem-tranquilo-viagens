@@ -11,11 +11,20 @@ class ClienteSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('users')->insert([
+            'id' => 50,
+            'name' => 'João Silva',
+            'email' => 'joao.silva@mail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('123456'),
+            'type' => 'cliente',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
         DB::table('clientes')->insert([
-            "nome" => "João Silva",
             "cpf" => "00000000000",
-            "senha" => Hash::make('123456'),
-            "email" => "joao.silva@mail.com",
+            "user_id" => 50,
             "created_at" => now(),
             "updated_at" => now(),
         ]);

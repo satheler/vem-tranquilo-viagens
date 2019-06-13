@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Database\Eloquent\Model;
 use \Validator as Validator;
 use App\RegistroManutencao;
+use App\AlocacaoIntermunicipal;
 use App\Assento;
 
 class OnibusIntermunicipal extends Model
@@ -17,7 +18,7 @@ class OnibusIntermunicipal extends Model
     }
 
     public function categoria() {
-        return $this->hasOne('App\CategoriaOnibus', 'id', 'categoria_id');
+        return $this->hasOne('App\CategoriaOnibus', 'id', 'categoria_onibus_id');
     }
 
     public function description()
@@ -39,26 +40,14 @@ class OnibusIntermunicipal extends Model
         return $onibus;
     }
 
-    public function getAssentos(int $id)
+    public function getAssentos(AlocacaoIntermunicipal $alocacao)
     {
-        $onibus = $this->find($id);
+        $onibus = $alocacao->onibus;
         $assentos = [];
-        for($i=0 ; $i<$onibus->qnt_assento ; $i++){
-            $assentos[$i] = new Assento();
-        }
-
-        return $this->consultarAssentosOcupados($assentos);
-    }
-
-    public function consultarAssentosOcupados(array $assentos)
-    {
-        $assento = new Assento();
-
-        $vendido = new VendaOnline();
-        $vendidos = $vendido->getAll();
-
-        foreach ($vendidos as $itemVendido) {
-            $assentos[$assento->get($itemVendido->assento->id)->num_assento] = $assento->ocupado($itemVendido->assento->id);
+        for($i=1 ; $i <= $onibus->qnt_assento; $i++){
+            $assento = new Assento();
+            $find = $assento->get($i, $alocacao->id);
+            $assentos[$i] = $find !== null ? $find : null;
         }
 
         return $assentos;
@@ -69,7 +58,7 @@ class OnibusIntermunicipal extends Model
         $validator = Validator::make($input, [
             'banheiro' => 'required|boolean',
             'categoria_id' => 'exists:categoria_onibus,id',
-            'qnt_assento' => 'required|numeric|min:26||max:42'
+            'qnt_assento' => 'required|numeric|min:26|max:42'
         ]);
 
         if ($validator->fails()) {

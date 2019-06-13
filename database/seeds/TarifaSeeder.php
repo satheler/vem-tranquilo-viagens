@@ -14,11 +14,11 @@ class TarifaSeeder extends Seeder
     {
 
         DB::table('tarifa_urbano')->insert([
-            'cidade' => 'Alegrete',
+            'cidade_id' => 1,
             'licitacao' => 'test',
             'valor_especial' => 3.50,
         ]);
-       
+
 
         DB::table('tarifa')->insert([
             'id' => 1,
@@ -31,7 +31,7 @@ class TarifaSeeder extends Seeder
 
         DB::table('tarifa_urbano')->insert([
             'id' => 2,
-            'cidade' => 'Uruguaiana',
+            'cidade_id' => 5,
             'licitacao' => 'test',
             'valor_especial' => 3.75,
         ]);

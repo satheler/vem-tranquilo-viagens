@@ -18,6 +18,7 @@ class CreateCategoriaPassageiroTable extends Migration
             $table->bigIncrements('id');
             $table->string('tipo');
             $table->integer('desconto');
+            $table->text('descricao')->nullable();
 
             $table->timestamps();
         });

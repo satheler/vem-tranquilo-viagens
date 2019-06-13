@@ -1,30 +1,7 @@
-@extends('layouts.app', ['class' => 'bg-default'])
+@extends('layouts.appClient', ['class' => 'bg-default'])
 
 @section('content')
-    <nav class="navbar navbar-horizontal navbar-expand-lg navbar-dark bg-default">
-        <div class="container">
-            <a class="navbar-brand" href="#">Vem Tranquilo Viagens</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbar-default">
-                <div class="navbar-collapse-header">
-                    <div class="row">
-                        <div class="col-6 collapse-brand">
-                            <a href="../../index.html">
-                                <img src="../../assets/img/brand/blue.png">
-                            </a>
-                        </div>
-                    </div>
-                </div>
 
-                <ul class="navbar-nav ml-lg-auto">
-                    <a href="#" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Entrar</a>
-                </ul>
-
-            </div>
-        </div>
-    </nav>
     <div class="header bg-gradient-primary py-7 py-lg-5">
         <div class="container">
             <div class="header-bodys">
@@ -32,6 +9,7 @@
                     <div class="card col-md-6">
                         <img class="card-img-top" src="{{ asset('argon') }}/img/brand/logo.png" alt="Pesquisar Passagens" style="transform: scale(0.8);margin-top:50px">
                         <div class="card-body">
+                            <form action="{{ route('page_compra.search') }}" method="post">
                             <div class="form-group">
                                 <h3>Origem</h3>
                                 <div class="input-group-prepend">
@@ -43,7 +21,7 @@
                                     </select>
                                 </div>
 
-                                <h3>Destino</h3>
+                                <h3 class="mt-2">Destino</h3>
                                 <div class="input-group mb-2 input-group-prepend">
                                     <select bootstrapSelect name="destino"  data-size="4" data-live-search="true" required>
                                         <option value="" disabled selected><i class="fas fa-map-marker-alt"></i> Selecione o Destino...</option>
@@ -55,33 +33,34 @@
 
                                 <div class="row cleanfix">
                                     <div class="col-lg-6">
-                                        <h3>Data de Ida</h3>
+                                        <h3>Data de ida</h3>
                                         <div class="input-group mb-2">
                                             <div class="input-group input-group-alternative">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="far fa-clock"></i></span>
                                                 </div>
-                                                <input data name='data' class="form-control datepicker" placeholder="__/__/____" type="text" value="{{ old('data', $data ?? null) }}" required>
+                                                <input data name='data_ida' class="form-control datepicker" placeholder="__/__/____" type="text" value="{{ old('data-ida', $data ?? null) }}" required>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
-                                        <h3>Data de Ida</h3>
+                                        <h3>Data de volta</h3>
                                         <div class="input-group mb-2">
                                             <div class="input-group input-group-alternative">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="far fa-clock"></i></span>
                                                 </div>
-                                                <input data name='data' class="form-control datepicker" placeholder="__/__/____" type="text" value="{{ old('data', $data ?? null) }}" required>
+                                                <input data name='data_volta' class="form-control datepicker" placeholder="__/__/____" type="text" value="{{ old('data-volta', $data ?? null) }}">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row clearfix justify-content-right">
-                                <a href="#" class="btn btn-primary"><i class="fas fa-search"></i> Pesquisar</a>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Pesquisar</button>
                             </div>
+                            </form>
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -91,7 +70,7 @@
                             </div>
                             <div class="card-body">
                                 <span class="">Viaje</span>
-                                <div class="display-4 text-white">{{$lista[0]->nome}} <i class="fas fa-arrow-right"> </i> {{$lista[6]->nome}}</div>
+                                <div class="display-4 text-white">{{$lista[0]->nome}} <i class="fas fa-xs fa-arrow-right"> </i> {{$lista[6]->nome}}</div>
                                 <div class="display3 ">por apenas</div>
                                 <div class="display-2 text-white">R$ 100,00</div>
                                 <div class=" text-white">*Comprovantes serão solicitados no embarque.</div>
