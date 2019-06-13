@@ -18,7 +18,7 @@ class OnibusIntermunicipalSeeder extends Seeder
             'banheiro' => false,
             'categoria_onibus_id' => 3,
         ]);
-        
+
         DB::table('onibus_intermunicipal')->insert([
             'id' => 2,
             'qnt_assento' => 50,
@@ -83,7 +83,6 @@ class OnibusIntermunicipalSeeder extends Seeder
         ]);
 
         DB::table('onibus')->insert([
-            'id' => 1,
             'description_id' => 1,
             'description_type' => 'App\OnibusIntermunicipal',
             'acessibilidade' => false,
@@ -96,8 +95,7 @@ class OnibusIntermunicipalSeeder extends Seeder
         ]);
 
         DB::table('onibus')->insert([
-            'id' => 2,
-            'description_id' => 1,
+            'description_id' => 2,
             'description_type' => 'App\OnibusIntermunicipal',
             'acessibilidade' => false,
             'chassi' => 'O9L5C8U4R7K85G5KA',
@@ -109,8 +107,7 @@ class OnibusIntermunicipalSeeder extends Seeder
         ]);
 
         DB::table('onibus')->insert([
-            'id' => 3,
-            'description_id' => 1,
+            'description_id' => 3,
             'description_type' => 'App\OnibusIntermunicipal',
             'acessibilidade' => false,
             'chassi' => 'P9L5CH64R7K85G5RT',
@@ -122,8 +119,7 @@ class OnibusIntermunicipalSeeder extends Seeder
         ]);
 
         DB::table('onibus')->insert([
-            'id' => 4,
-            'description_id' => 1,
+            'description_id' => 4,
             'description_type' => 'App\OnibusIntermunicipal',
             'acessibilidade' => false,
             'chassi' => 'M9L5CH64R7K85G5WE',
@@ -135,8 +131,7 @@ class OnibusIntermunicipalSeeder extends Seeder
         ]);
 
         DB::table('onibus')->insert([
-            'id' => 5,
-            'description_id' => 1,
+            'description_id' => 5,
             'description_type' => 'App\OnibusIntermunicipal',
             'acessibilidade' => false,
             'chassi' => 'Z3Z5CH64R7K85G5LN',
@@ -146,10 +141,9 @@ class OnibusIntermunicipalSeeder extends Seeder
             'data_fabricacao' => now(),
             'data_compra' => now(),
         ]);
-        
+
         DB::table('onibus')->insert([
-            'id' => 6,
-            'description_id' => 1,
+            'description_id' => 6,
             'description_type' => 'App\OnibusIntermunicipal',
             'acessibilidade' => false,
             'chassi' => 'SAL5CH64R7K85G5KA',
@@ -161,8 +155,7 @@ class OnibusIntermunicipalSeeder extends Seeder
         ]);
 
         DB::table('onibus')->insert([
-            'id' => 7,
-            'description_id' => 1,
+            'description_id' => 7,
             'description_type' => 'App\OnibusIntermunicipal',
             'acessibilidade' => false,
             'chassi' => 'U0L5CH64M7K85L5YT',
@@ -174,8 +167,7 @@ class OnibusIntermunicipalSeeder extends Seeder
         ]);
 
         DB::table('onibus')->insert([
-            'id' => 8,
-            'description_id' => 1,
+            'description_id' => 8,
             'description_type' => 'App\OnibusIntermunicipal',
             'acessibilidade' => false,
             'chassi' => 'K7L5CH64R7K85G57K',
@@ -187,8 +179,7 @@ class OnibusIntermunicipalSeeder extends Seeder
         ]);
 
         DB::table('onibus')->insert([
-            'id' => 9,
-            'description_id' => 1,
+            'description_id' => 9,
             'description_type' => 'App\OnibusIntermunicipal',
             'acessibilidade' => false,
             'chassi' => 'U7L5CH64R7K85G5YC',
@@ -200,8 +191,7 @@ class OnibusIntermunicipalSeeder extends Seeder
         ]);
 
         DB::table('onibus')->insert([
-            'id' => 10,
-            'description_id' => 1,
+            'description_id' => 10,
             'description_type' => 'App\OnibusIntermunicipal',
             'acessibilidade' => false,
             'chassi' => 'Y7L5CH64R7K85G5M8',

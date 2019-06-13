@@ -13,7 +13,7 @@ class AlocacaoIntermunicipalSeeder extends Seeder
     {
         DB::table('alocacao_intermunicipal')->insert([
             'id' => 1,
-            'onibus_id' => 11,
+            'onibus_id' => 1,
             'trajeto_id' => 1,
             'motorista_id' => 1,
             'auxiliar_id' => 1,
