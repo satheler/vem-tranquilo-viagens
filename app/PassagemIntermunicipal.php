@@ -16,6 +16,13 @@ class PassagemIntermunicipal extends Model
         return $this->find($id);
     }
 
-
-
+    public function add(array $input){
+        
+        $this->valor = $input['valor'];
+        $this->users_id = Auth::user()->id;
+        $this->alocacao_id = $input['alocacao_intermunicipal_id'];       
+        
+        $this->save();
+            
+    }
 }

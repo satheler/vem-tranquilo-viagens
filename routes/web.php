@@ -30,17 +30,7 @@ Route::group(['prefix' => '/', 'as' => 'page_'], function () {
         Route::post('registro', 'CompraPassagemController@store')->name('.store');
     });
 
-    Route::group(['prefix' => 'vendaPassagem', 'as' => 'vendapassagem'], function () {
-        Route::get('', 'VendaPassagemController@index')->name('.index');
-        Route::post('search', 'VendaPassagemController@search')->name('.search');
-        Route::get('{origem}/{destino}/{data_ida}/', 'VendaPassagemController@list')->name('.list');
-        Route::get('{origem}/{destino}/{data_ida}/{data_volta}', 'VendaPassagemController@list')->name('.list');
-        Route::get('poltrona', 'VendaPassagemController@selecionarPoltrona')->name('.poltrona');
-        Route::get('pagamento', 'VendaPassagemController@pagamento')->name('.pagamento');
-        Route::post('registro', 'VendaPassagemController@store')->name('.store');
-    });
-
-    Route::group(['prefix' => 'cadastro', 'as' => 'cadastro'], function () {
+        Route::group(['prefix' => 'cadastro', 'as' => 'cadastro'], function () {
         Route::get('', 'CadastroClienteController@index')->name('.index');
         Route::post('', 'CadastroClienteController@store')->name('.store');
     });
@@ -64,6 +54,16 @@ Route::group(['prefix' => 'painel'], function () {
         Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
         Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 
+        Route::group(['prefix' => 'vendapassagem', 'as' => 'vendapassagem'], function () {
+            Route::get('', 'VendaPassagemController@index')->name('.index');
+            Route::post('search', 'VendaPassagemController@search')->name('.search');
+            Route::get('{origem}/{destino}/{data_ida}/', 'VendaPassagemController@list')->name('.list');
+            Route::get('{origem}/{destino}/{data_ida}/{data_volta}', 'VendaPassagemController@list')->name('.list');
+            Route::post('poltrona', 'VendaPassagemController@selecionarPoltrona')->name('.poltrona');
+            Route::post('pagamento', 'VendaPassagemController@pagamento')->name('.pagamento');
+            Route::post('registro', 'VendaPassagemController@store')->name('.store');
+        });
+    
         Route::prefix('onibus')->name('onibus_')->group(function () {
             Route::resource('urbano', 'OnibusUrbanoController');
             Route::resource('intermunicipal', 'OnibusIntermunicipalController');
@@ -105,13 +105,17 @@ Route::group(['prefix' => 'painel'], function () {
             Route::resource('inativas', 'RodoviariasInativasController');
         });
 
-        Route::prefix('venda')->name('venda_')->group(function () {
-            Route::group(['prefix' => 'intermunicipal', 'as' => 'intermunicipal'], function () {
-                Route::get('', 'VendaPassagemIntermunicipalController@index')->name('.index');
-                Route::get('{origem}/{destino}/{data}', 'VendaPassagemIntermunicipalController@list')->name('.list');
-                Route::post('search', 'VendaPassagemIntermunicipalController@search')->name('.search');
-            });
+        // Route::prefix('venda')->name('venda_')->group(function () {
+        //     Route::group(['prefix' => 'intermunicipal', 'as' => 'intermunicipal'], function () {
+        //         Route::get('', 'VendaPassagemController@index')->name('.index');
+        //         Route::post('search', 'VendaPassagemController@search')->name('.search');
+        //         Route::get('{origem}/{destino}/{data_ida}/', 'VendaPassagemController@list')->name('.list');
+        //         Route::get('{origem}/{destino}/{data_ida}/{data_volta}', 'VendaPassagemController@list')->name('.list');
+        //         Route::post('poltrona', 'VendaPassagemController@selecionarPoltrona')->name('.poltrona');
+        //         Route::post('pagamento', 'VendaPassagemController@pagamento')->name('.pagamento');
+        //         Route::post('registro', 'VendaPassagemController@store')->name('.store');
+        //     });
 
-        });
+  //      });
     });
 });
