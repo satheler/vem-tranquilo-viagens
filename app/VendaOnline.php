@@ -53,18 +53,18 @@ class VendaOnline extends Model
         }
 
         $pagamento = new Pagamento();
+
         if ($input['usarPontos'] == 'on') {
             $valor = $pagamento->usarPontos($input);
             $input['valor'] = $valor;
-            $pagamento = $pagamento->add($input);
-        } else {
-            $pagamento = $pagamento->add($input);
         }
 
+        $pagamento = $pagamento->add($input);
         
         $this->pagamento_id = $pagamento;
 
         $this->save();
+        $assento->addVenda($this->id);
         
         return $this;
 
