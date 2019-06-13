@@ -22,6 +22,7 @@ class TrajetoIntermunicipal extends Model
 
     public function getByFilter($origem_id, $destino_id, $trajeto_id)
     {
+        $lista = [];
         $trajetosDestino = $this->whereHas('trechos', function ($query) use ($destino_id, $trajeto_id) {
             $query->where('cidade_id', $destino_id)
                 ->where('trajeto_id', $trajeto_id);
@@ -45,10 +46,11 @@ class TrajetoIntermunicipal extends Model
             }
 
             if ($hasOrigem && $hasDestino) {
-                return $trajeto;
+                array_push($lista, $trajeto); 
             }
 
         }
+        return $lista;
 
     }
 

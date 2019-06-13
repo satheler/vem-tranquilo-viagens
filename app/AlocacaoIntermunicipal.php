@@ -6,6 +6,7 @@ use App\Tarifa;
 use App\TarifaIntermunicipal;
 use App\TrajetoIntermunicipal;
 use Illuminate\Database\Eloquent\Model;
+use App\Assento; 
 
 class AlocacaoIntermunicipal extends Model
 {
@@ -48,20 +49,25 @@ class AlocacaoIntermunicipal extends Model
             $item = [];
             $item["id"] = $itemAlocacao->id;
             $item["onibus"] = $itemAlocacao->onibus;
+            $item["info"] = [];
 
             $trajetos = $itemAlocacao->trajeto->getByFilter($origem, $destino, $itemAlocacao->trajeto_id);
             
-            //foreach ($trajetos as $trajeto) {
-                if($trajetos != null){
-                    if($trajetos->origem->ordem < $trajetos->destino->ordem) {
-                        $item["info"] = $trajetos;//array_push?
+            foreach ($trajetos as $trajeto) {
+                if($trajeto != null){
+                    if($trajeto->origem->ordem < $trajeto->destino->ordem) {
+                        array_push( $item["info"], $trajeto);
                     } else {
                         return null;
                     }
                 }else{
                     return null;
                 }               
-            //}
+            }
+
+            $assentosOcupados = 0;
+            $assentosOcupados = Assento::where('alocacao_id', $itemAlocacao->id)->count();
+            $item["assentos"] = $itemAlocacao->onibus->qnt_assento - $assentosOcupados;
 
             $item["valor"] = $this->calculaValor($itemAlocacao->trajeto);
             array_push($lista, $item);
