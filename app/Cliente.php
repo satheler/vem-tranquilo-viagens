@@ -134,17 +134,27 @@ class Cliente extends Model
 
     public function listarCompras(){
         $compras = Compra::where('cliente_id', $this->id)->get();
-        $lista = [];
-         foreach ($compras as $compra) {
-            $venda = new VendaOnline();
-            $venda = $venda->get($compra->venda_id);
-           //$compras->assentos = $venda->assento;
-            $compras->assentos = Assento::where('venda_id', $compra->venda_id)->get();
-            $compras->data = $venda->created_at;
-            $compras->trajeto = $venda->alocacaoIntermunicipal->trajeto;
-            $compras->valor = $venda->pagamento->valor * $venda->pagamento->qnt_parcelas;
-            array_push($lista, $compras);
-         }
+        // $lista = [];
+        //  foreach ($compras as $compra) {
+        //     $venda = new VendaOnline();
+        //     $venda = $venda->get($compra->venda_id);
+
+        //     //$compras->assentos = $venda->assento;
+        //     $compras->venda = $venda;
+        //     $compras->assentos = Assento::where('venda_id', $compra->venda_id)->get();
+        //     $compras->data = $venda->created_at;
+        //     $compras->trajeto = $venda->alocacaoIntermunicipal->trajeto;
+        //     $compras->valor = $venda->pagamento->valor * $venda->pagamento->qnt_parcelas;
+
+        //     array_push($lista, $compras);
+        //  }
+
+        // foreach ($compras as $compra) {
+        //     foreach ($compra->venda as $venda) {
+        //         throw new \Exception($venda->pagamento->valor);
+        //     }
+        // }
+
 
         return $compras;//lista
     }

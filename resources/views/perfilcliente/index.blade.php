@@ -6,7 +6,7 @@
     <div class="container mt--8 pb-5">
         <!-- Table -->
         <div class="row justify-content-center">
-            <div class="col-lg-6 col-md-8">
+            <div class="col-lg-10 col-md-10">
                 <div class="card bg-secondary shadow border-0">
 
                     <div class="card-body px-lg-5 pt-lg-3 pb-lg-5">
@@ -40,19 +40,19 @@
                                         <th scope="col">{{ __('Data') }}</th>
                                         <th scope="col">{{ __('Valor') }}</th>
                                         <th scope="col">{{ __('Trajeto') }}</th>
-                                        <th scope="col">{{ __('Assento(s)') }}</th>
-                                        
+
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {{-- {{  var_dump($compras) }} --}}
                                     @foreach ($compras as $item)
                                         <tr data-table-row-id={{ $item->id }}>
-                                            
                                             <td>{{ $item->venda_id }}</td>
-                                            <td>{R$}</td>
-                                            <td>{Origem->Destino}</td>
-                                            <td>{[1,2]}</td>
-                                  
+                                            @foreach ($item->venda as $m)
+                                                <td>R$ {{ $m->pagamento->valor }}</td>
+                                                <td>{{ $m->alocacaoIntermunicipal->trajeto->trechos[0]->cidade->nome }} → {{ $m->alocacaoIntermunicipal->trajeto->trechos[count($m->alocacaoIntermunicipal->trajeto->trechos) - 1]->cidade->nome }}</td>
+                                            @endforeach
+
                                         </tr>
                                     @endforeach
                                 </tbody>
