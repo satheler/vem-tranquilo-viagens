@@ -33,7 +33,7 @@ class FuncionarioSeeder extends Seeder
 
         DB::table('funcionarios')->insert([
             "nome" => "Rodrigo Oliveira",
-            "tipo_id" => 3,
+            "tipo_id" => 1,
             "local_id" => 1,
             "status" => 0,
             "observacao" => "Demitido",
@@ -52,7 +52,7 @@ class FuncionarioSeeder extends Seeder
 
         DB::table('funcionarios')->insert([
             "nome" => "Luanvilson Martins",
-            "tipo_id" => 5,
+            "tipo_id" => 1,
             "local_id" => 1,
             "status" => 1,
             "observacao" => "Nenhuma",
@@ -61,7 +61,7 @@ class FuncionarioSeeder extends Seeder
         ]);
         DB::table('funcionarios')->insert([
             "nome" => "Felipe Souza",
-            "tipo_id" => 6,
+            "tipo_id" => 2,
             "local_id" => 1,
             "status" => 1,
             "observacao" => "Nenhum",
@@ -71,7 +71,7 @@ class FuncionarioSeeder extends Seeder
 
         DB::table('funcionarios')->insert([
             "nome" => "David Martins",
-            "tipo_id" => 7,
+            "tipo_id" => 2,
             "local_id" => 1,
             "status" => 1,
             "observacao" => "Nenhum",
@@ -80,7 +80,7 @@ class FuncionarioSeeder extends Seeder
         ]);
         DB::table('funcionarios')->insert([
             "nome" => "Edimar Pereira",
-            "tipo_id" => 8,
+            "tipo_id" => 1,
             "local_id" => 1,
             "status" => 1,
             "observacao" => "Nenhum",
@@ -90,7 +90,7 @@ class FuncionarioSeeder extends Seeder
 
         DB::table('funcionarios')->insert([
             "nome" => "Mototaxi Tourinho",
-            "tipo_id" => 9,
+            "tipo_id" => 1,
             "local_id" => 1,
             "status" => 1,
             "observacao" => "Nenhum",
