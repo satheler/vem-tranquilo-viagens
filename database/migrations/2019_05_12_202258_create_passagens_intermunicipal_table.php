@@ -17,22 +17,14 @@ private $databaseName = 'passagens_intermunicipal';
         Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
           
-            $table->date('data_compra');
-            $table->timestamp('hora_compra')->default(now());
             $table->float('valor');
-            
+        
             $table->unsignedBigInteger('users_id');
             $table->foreign('users_id')->references('id')->on('users');
-
-            $table->unsignedBigInteger('rodoviarias_id');
-            $table->foreign('rodoviarias_id')->references('id')->on('rodoviarias');
-
-            
-            $table->unsignedBigInteger('trajeto_id');
-            $table->foreign('trajeto_id')->references('id')->on('trajeto_intermunicipal');
+   
+            $table->unsignedBigInteger('alocacao_id');
+            $table->foreign('alocacao_id')->references('id')->on('alocacao_intermunicipal');
          
-          
-
             $table->timestamps();
         });
     }

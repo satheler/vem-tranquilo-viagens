@@ -25,6 +25,9 @@ class CreateAssentoVendidoTable extends Migration
             $table->unsignedBigInteger('venda_id')->nullable();
             $table->foreign('venda_id')->references('id')->on('venda_online');
 
+            $table->unsignedBigInteger('vendarodoviaria_id')->nullable();
+            $table->foreign('vendarodoviaria_id')->references('id')->on('passagens_intermunicipal');
+
             $table->timestamps();
         });
     }

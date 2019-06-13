@@ -45,6 +45,14 @@ class Assento extends Model
         return $this;
     }
 
+    public function addVendaRodoviaria($id)
+    {
+        $this->vendarodoviaria_id = $id;
+        $this->update();
+
+        return $this;
+    }
+
     // public function edit(int $id, array $input)
     // {
     //     $assento = $this->find($id);
