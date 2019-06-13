@@ -3,8 +3,9 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Cookie;
 
-class Authenticate extends Middleware
+class ClientAuthenticate extends Middleware
 {
     /**
      * Get the path the user should be redirected to when they are not authenticated.
@@ -14,8 +15,8 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-
         if (!$request->expectsJson()) {
+            Cookie::queue('form_poltronas', json_encode($request->input()));
             return route('page_entrar.index');
         }
 

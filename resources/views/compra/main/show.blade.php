@@ -6,6 +6,7 @@
 
 @section('infos')
     <form method="POST" action="{{ route('page_compra.pagamento') }}">
+        @csrf
         <input type="hidden" name="trecho_origem_id" value="{{ $origem->id }}">
         <input type="hidden" name="trecho_destino_id" value="{{ $destino->id }}">
         <input type="hidden" name="alocacao_id" value="{{ $alocacao->id }}">

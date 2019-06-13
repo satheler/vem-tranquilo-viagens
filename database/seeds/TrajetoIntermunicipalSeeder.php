@@ -15,7 +15,7 @@ class TrajetoIntermunicipalSeeder extends Seeder
             "id" => 1,
         ]);
 
-        DB::table('trechos')->insert(['trajeto_id' => 1, 'cidade_id' => 1, 'horarioSaida' => '13:00:00', 'horarioChegada' => '15:05:00', 'quilometragem' => 0, 'ordem' => 0]);
+        DB::table('trechos')->insert(['trajeto_id' => 1, 'cidade_id' => 1, 'horarioSaida' => '14:30:00', 'horarioChegada' => '15:05:00', 'quilometragem' => 0, 'ordem' => 0]);
         DB::table('trechos')->insert(['trajeto_id' => 1, 'cidade_id' => 5, 'horarioSaida' => '15:20:00', 'horarioChegada' => '18:00:00', 'quilometragem' => 200.0, 'ordem' => 1]);
         DB::table('trechos')->insert(['trajeto_id' => 1, 'cidade_id' => 7, 'horarioSaida' => '18:00:00', 'horarioChegada' => '18:00:00', 'quilometragem' => 315.0, 'ordem' => 2]);
 

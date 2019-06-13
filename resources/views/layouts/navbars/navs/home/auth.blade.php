@@ -1,6 +1,8 @@
 <nav class="navbar navbar-horizontal navbar-expand-lg navbar-dark bg-default">
         <div class="container">
-            <a class="navbar-brand" href="#">Vem Tranquilo Viagens</a>
+            <a href="{{ route('page_home.index') }}">
+                <img src="{{ asset('argon') }}/img/brand/logo_white.png" class="ml-5" style="height: 43px;">
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

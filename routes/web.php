@@ -25,9 +25,14 @@ Route::group(['prefix' => '/', 'as' => 'page_'], function () {
         Route::post('search', 'CompraPassagemController@search')->name('.search');
         Route::get('{origem}/{destino}/{data_ida}/', 'CompraPassagemController@list')->name('.list');
         Route::get('{origem}/{destino}/{data_ida}/{data_volta}', 'CompraPassagemController@list')->name('.list');
+        Route::get('poltrona', 'CompraPassagemController@selecionarPoltrona')->name('.poltrona');
         Route::post('poltrona', 'CompraPassagemController@selecionarPoltrona')->name('.poltrona');
-        Route::post('pagamento', 'CompraPassagemController@pagamento')->name('.pagamento');
-        Route::post('registro', 'CompraPassagemController@store')->name('.store');
+
+        Route::group(['middleware' => ['client_authenticate']], function () {
+            Route::get('pagamento', 'PagamentoController@pagamento')->name('.pagamento');
+            Route::post('pagamento', 'PagamentoController@pagamento')->name('.pagamento');
+            Route::post('registro', 'PagamentoController@store')->name('.store');
+        });
     });
 
     Route::group(['prefix' => 'cadastro', 'as' => 'cadastro'], function () {
@@ -35,15 +40,14 @@ Route::group(['prefix' => '/', 'as' => 'page_'], function () {
         Route::post('', 'CadastroClienteController@store')->name('.store');
     });
 
-
     Route::group(['prefix' => 'entrar', 'as' => 'entrar'], function () {
         Route::get('', 'ClienteLoginController@index')->name('.index');
     });
 
 });
 
+Auth::routes();
 Route::group(['prefix' => 'painel'], function () {
-    Auth::routes();
 
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/compra', 'CompraPassagemController@index')->name('compra_passagem');

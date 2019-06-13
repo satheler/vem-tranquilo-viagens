@@ -222,20 +222,15 @@
     <script>
         $(document).ready(function(){
             $('[nro]').mask('0000.0000.0000.0000');
-        })
-        $(document).ready(function(){
             $('[cpf]').mask('000.000.000-00', {reverse: true});
-        })
-        $(document).ready(function(){
             $('[mes]').mask('00');
-        })
-        $(document).ready(function(){
             $('[cod]').mask('000');
+
+            $('[restriction]').on('click', function(e) {
+                console.log(e);
+            })
         })
 
-        $('[restriction]').on('click', function(e) {
-            console.log(e);
-        })
     </script>
 
 @endpush

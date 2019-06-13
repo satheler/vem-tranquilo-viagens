@@ -4,8 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class IsAdmin
+class Pagamento
 {
+
     /**
      * Handle an incoming request.
      *
@@ -15,11 +16,10 @@ class IsAdmin
      */
     public function handle($request, Closure $next)
     {
-        if(auth()->user()->isAdmin()) {
-            return $next($request);
-        }
-
-        $previousURL = $request->headers->get('referer') ?: '/';
-        return redirect($previousURL);
+        // if(!$request->route()->named('page_compra.poltrona')) {
+        //     throw new \Exception('123');
+        //     return route('page_home.index');
+        // }
+        return $next($request);
     }
 }

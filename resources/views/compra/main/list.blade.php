@@ -12,7 +12,7 @@
                 <div class="card-body">
                     <ul class="list-group list-group-flush list my--3">
                         @foreach ($trajetos as $trajeto)
-    
+
                             <li class="list-group-item px-0" style="background-color: transparent;">
                                 <form method="POST" action="{{ route('page_compra.poltrona') }}">
                                     @foreach ($trajeto['info'] as $encontrado)
@@ -27,7 +27,7 @@
                                             </div>
                                             <div class="col">
                                                 <h5 class="mb-0" data-toggle="tooltip" data-placement="top" title="Tipo de ônibus">{{ $trajeto['onibus']->categoria->categoria }}</h5>
-                                                <h5 class="mb-0" data-toggle="tooltip" data-placement="top" title="Assentos Disponíveis">{{ $trajeto["assentos"] }}</h5>
+                                                <h5 class="mb-0">{{ str_pad($trajeto["assentos"], 2, 0, STR_PAD_LEFT) }} assentos livres</h5>
                                             </div>
                                             <div class="col">
                                                 <div class="row">
@@ -41,7 +41,7 @@
                                         </div>
                                     </form>
                                 </li>
-                            
+
                             @endforeach
                         @endforeach
                     </ul>
