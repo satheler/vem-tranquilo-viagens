@@ -57,7 +57,7 @@
                             <h3 class="checklist-title mt-2 mb-0">TIPO</h3>
                             <select name="categoria_passageiro_id[]" bootstrapSelect  data-size="4" data-live-search="true" required>
                                 @foreach ($categoria_passageiro as $categoria)
-                                    <option value="{{ $categoria->id }}" restriction="{{ $categoria->descricao }}"> {{ $categoria->tipo }} </option>
+                                    <option for = "option" name="categoria" value="{{ $categoria->id }}" restriction="{{ $categoria->descricao }}"> {{ $categoria->tipo }} </option>
                                 @endforeach
                             </select>
                         </div>
