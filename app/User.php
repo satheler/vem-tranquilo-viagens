@@ -11,6 +11,10 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+<<<<<<< HEAD
+    const ADMIN_TYPE = 'admin';
+    const CLIENTE_TYPE = 'cliente';
+=======
     protected $table = 'users';
 
     public function seguro()
@@ -32,6 +36,7 @@ class User extends Authenticatable
     {
         return $this->find($id);
     }
+>>>>>>> master
 
     /**
      * The attributes that are mass assignable.
@@ -62,5 +67,9 @@ class User extends Authenticatable
 
     public function rodoviaria() {
         return $this->hasOne('App\Rodoviaria', 'id', 'rodoviaria_id');
+    }
+
+    public function isAdmin() {
+        return $this->type === self::ADMIN_TYPE;
     }
 }

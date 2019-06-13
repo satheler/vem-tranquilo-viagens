@@ -21,6 +21,7 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('123456'),
             'tipo_usuario_id' => 1,
+            'type' => 'admin',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -35,6 +36,7 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('123456'),
             'rodoviaria_id' => 1,
             'tipo_usuario_id' => 2,
+            'type' => 'admin',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -47,11 +49,12 @@ class UsersTableSeeder extends Seeder
             'email' => 'secretario@mail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('123456'),
+            'type' => 'admin',
             'tipo_usuario_id' => 3,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-      
+
           /**
          * Usuário: Recursos Humanos
          */
@@ -60,6 +63,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'rh@mail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('123456'),
+            'type' => 'admin',
             'tipo_usuario_id' => 4,
             'created_at' => now(),
             'updated_at' => now(),
@@ -73,6 +77,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'vendedor_ale@mail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('123456'),
+            'type' => 'admin',
             'tipo_usuario_id' => 5,
             'rodoviaria_id' => 1,
             'created_at' => now(),
@@ -87,6 +92,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'vendedor_sm@mail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('123456'),
+            'type' => 'admin',
             'tipo_usuario_id' => 5,
             'rodoviaria_id' => 3,
             'created_at' => now(),

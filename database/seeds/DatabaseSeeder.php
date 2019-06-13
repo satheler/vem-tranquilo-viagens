@@ -33,7 +33,6 @@ class DatabaseSeeder extends Seeder
             TarifaIntermunicipalSeeder::class,
             RegistroSinistroSeeder::class,
             VendaOnlineSeeder::class
-            // VendaOnlineSeeder::class,
         ]);
     }
 }

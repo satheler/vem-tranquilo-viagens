@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Validator;
+use DateTime;
 
 class TrajetoIntermunicipal extends Model
 {
@@ -22,35 +23,38 @@ class TrajetoIntermunicipal extends Model
 
     public function getByFilter($origem_id, $destino_id, $trajeto_id)
     {
-
         $lista = [];
-
         $trajetosDestino = $this->whereHas('trechos', function ($query) use ($destino_id, $trajeto_id) {
             $query->where('cidade_id', $destino_id)
-                  ->where('trajeto_id', $trajeto_id);
+                ->where('trajeto_id', $trajeto_id);
         })->get();
 
         foreach ($trajetosDestino as $trajeto) {
-            foreach ($trajeto->trechos as $itemTrecho) {
 
-                if ($itemTrecho->contains($origem_id)) {
-                    foreach ($trajeto->trechos as $item) {
+            $hasOrigem = false;
+            $hasDestino = false;
 
-                        if ($item->contains($origem_id)) {
-                            array_push($lista, $item);
-                        }
-
-                        if ($item->contains($destino_id)) {
-                            array_push($lista, $item);
-                        }
+            foreach ($trajeto->trechos as $trecho) {
+                if ($trecho->cidade_id === $origem_id) {
+                    if(strtotime($trecho->horarioSaida) >= time()){
+                        $trajeto->origem = $trecho;
+                        $hasOrigem = true;
                     }
                 }
 
+                if ($trecho->cidade_id === $destino_id) {
+                    $trajeto->destino = $trecho;
+                    $hasDestino = true;
+                }
+            }
+
+            if ($hasOrigem && $hasDestino) {
+                array_push($lista, $trajeto); 
             }
 
         }
-
         return $lista;
+
     }
 
     public function get(int $id)

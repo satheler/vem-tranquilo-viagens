@@ -11,18 +11,16 @@ class AssentoSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('assento')->insert([
+        DB::table('assentos_vendidos')->insert([
             'id'=>1,
             'num_assento' => 14,
-            'ocupado' => true,
-          
+            'alocacao_id' => 1
         ]);
 
-        DB::table('assento')->insert([
-            'id'=>2,
+        DB::table('assentos_vendidos')->insert([
+            'id'=> 2,
             'num_assento' => 15,
-            'ocupado' => false,
-          
+            'alocacao_id' => 1
         ]);
     }
 }

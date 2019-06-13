@@ -18,7 +18,7 @@ class CreateAlocacaoIntermunicipalTable extends Migration
             $table->bigIncrements('id');
 
             $table->unsignedBigInteger('onibus_id');
-            $table->foreign('onibus_id')->references('id')->on('onibus_urbano');
+            $table->foreign('onibus_id')->references('id')->on('onibus_intermunicipal');
 
             $table->unsignedBigInteger('trajeto_id');
             $table->foreign('trajeto_id')->references('id')->on('trajeto_intermunicipal');

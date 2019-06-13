@@ -2,25 +2,32 @@
 
 namespace App;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
 use \Validator as Validator;
+use App\VendaOnline;
+use App\Compra;
 
 class Cliente extends Model
 {
+    protected $table = 'clientes';
 
-    protected $table ='cliente';
-
-    public function cartao()
+    public function user()
     {
-        return $this->hasOne('App\CartaoCredito', 'id', 'cartao_id');
+        return $this->belongsTo('App\User', 'user_id');
+    }
+
+    public function get(int $id)
+    {
+        return $this->find($id);
     }
 
     public function add(array $input)
     {
         $input['cpf'] = preg_replace('/[^0-9]/', '', $input['cpf']);
 
-        $messagesCustom = [ 'nome.regex' => 'Formato inválido. Informe nome e sobrenome. Ex: João Silva' ];
+        $messagesCustom = ['nome.regex' => 'Formato inválido. Informe nome e sobrenome. Ex: João Silva'];
 
         $validator = Validator::make($input, [
             'nome' => [
@@ -34,7 +41,7 @@ class Cliente extends Model
                 'string',
                 'email',
                 'max:255',
-                'unique:clientes',
+                'unique:users',
             ],
             'cpf' => [
                 'required',
@@ -58,11 +65,19 @@ class Cliente extends Model
             return $validator;
         }
 
-        $this->nome = strtoupper($input['nome']);
-        $this->email = $input['email'];
         $this->cpf = $input['cpf'];
-        $this->senha = Hash::make($input['senha']);
+
+        $user = $this->user()->create([
+            'name' => strtoupper($input['nome']),
+            'email' => $input['email'],
+            'password' => Hash::make($input['senha']),
+            'type' => 'cliente',
+        ]);
+
+        $this->user_id = $user->id;
         $this->save();
+
+        return $user;
     }
 
     public function validateCPF($cpf)
@@ -111,12 +126,27 @@ class Cliente extends Model
         }
     }
 
-    public function addPagamento(int $idCliente, int $idPagamento){
+    public function pontuar(VendaOnline $venda){
+        $this->pontos = $this->pontos + ($venda->pagamento->valor/100);
+        $this->update();
 
-        $cliente = $this->find($id);
-        $cliente->cartao_id = $idPagamento;
-        $cliente->save();
+    }
 
+    public function listarCompras(){
+        $compras = Compra::where('cliente_id', $this->id)->get();
+        $lista = [];
+         foreach ($compras as $compra) {
+            $venda = new VendaOnline();
+            $venda = $venda->get($compra->venda_id);
+           //$compras->assentos = $venda->assento;
+            $compras->assentos = Assento::where('venda_id', $compra->venda_id)->get();
+            $compras->data = $venda->created_at;
+            $compras->trajeto = $venda->alocacaoIntermunicipal->trajeto;
+            $compras->valor = $venda->pagamento->valor * $venda->pagamento->qnt_parcelas;
+            array_push($lista, $compras);
+         }
+
+        return $compras;//lista
     }
 
 }

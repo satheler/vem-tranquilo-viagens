@@ -2,23 +2,36 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-use App\Cliente;
+use App\AlocacaoIntermunicipal;
 use App\Pagamento;
+use Illuminate\Database\Eloquent\Model;
+use Validator;
 
 class VendaOnline extends Model
 {
     protected $table = "venda_online";
 
-    public function tarifa() {
-        return $this->hasOne('App\Tarifa', 'id', 'tarifa_id');
-
-    }
     public function alocacaoIntermunicipal() {
-        return $this->hasOne('App\AlocacaoIntermunicipal', 'id', 'alocacao_id');
+        return $this->hasOne('App\AlocacaoIntermunicipal', 'id', 'alocacao_intermunicipal_id');
     }
-    public function assento() {
-        return $this->hasOne('App\Assento', 'id', 'assento_id');
+
+    public function pagamento()
+    {
+        return $this->hasOne('App\Pagamento', 'id', 'pagamento_id');
+    }
+
+    public function assento()
+    {
+        return $this->belongsToMany('App\Assento', 'assento_vendido', 'venda_id', 'assento_id');
+    }
+
+    public function getByAlocacao($id) {
+        return $this->where('alocacao_intermunicipal_id', $id)->first();
+    }
+
+    public function get(int $id)
+    {
+        return $this->find($id);
     }
 
     public function getAll()
@@ -28,32 +41,37 @@ class VendaOnline extends Model
 
     public function add(array $input)
     {
-
+        
         $validator = Validator::make($input, [
-            'alocacao_id' => 'exists:alocacao_intermuncipal,id',
-            'tarifa_intermunicipal_id' => 'exists:tarifa_intermuncipal,id',
-            'categoria_passageiro_id' => 'exists:categoria_passageiro,id'
+            'alocacao_intermunicipal_id' => 'exists:alocacao_intermunicipal,id',
         ]);
 
         if ($validator->fails()) {
             return $validator;
         }
 
-        $assento = new Assento();
-        $assento->add($input);
+        $this->alocacao_intermunicipal_id = $input['alocacao_intermunicipal_id'];
 
-        $this->data_compra = now()->format('Y-m-d');
-        $this->alocacao_id = $input['alocacao_id'];
-        $this->assento_id = $input['assento_id'];
-        $this->tarifa_intermunicipal_id = $input['tarifa_intermunicipal_id'];
-        $this->categoria_passageiro_id = $input['categoria_passageiro_id'];
+        foreach ($input['poltronas'] as $poltrona) {
+            $assento = new Assento();
+            $assento->add(['num_assento' => $poltrona, 'alocacao_id' => $input['alocacao_intermunicipal_id']]);
+        }
 
-        $cliente = new Cliente();
-        $cliente->addPagamento($input['cliente_id'], $input['pagamento_id']);
+        $pagamento = new Pagamento();
 
-        $this->cliente_id = $input['cliente_id'];
+        if ($input['usarPontos'] == 'on') {
+            $valor = $pagamento->usarPontos($input);
+            $input['valor'] = $valor;
+        }
+
+        $pagamento = $pagamento->add($input);
+        
+        $this->pagamento_id = $pagamento;
 
         $this->save();
+        $assento->addVenda($this->id);
+        
+        return $this;
 
     }
 }

@@ -21,8 +21,7 @@ class TarifaIntermunicipal extends Model
     }
 
     public function get(int $id){
-        $tarifa = $this->find($id);
-        return $tarifa;
+        return $this->find($id);
     }
 
     public function add(array $input) {
