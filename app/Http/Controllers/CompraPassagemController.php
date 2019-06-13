@@ -10,7 +10,10 @@ use App\VendaOnline;
 use App\CategoriaPassageiro;
 use App\Trecho;
 use App\Compra;
+use App\Cliente;
+use App\Http\Controllers\Auth\ClienteController;
 use Exception;
+use Auth;
 
 class CompraPassagemController extends Controller
 {
@@ -100,6 +103,9 @@ class CompraPassagemController extends Controller
         $compra = new Compra();
         $compra->add($request->input());
         
-        return $compra;
+        $cliente = new Cliente();
+        $cliente = $cliente->get($compra->cliente_id);
+     
+        return redirect()->route('perfilcliente.index')->withStatus(__('Compra realizada com sucesso!'));
     }
 }

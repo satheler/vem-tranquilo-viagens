@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Cliente;
+use Auth;
 
 class ClienteController extends Controller
 {
@@ -16,11 +17,10 @@ class ClienteController extends Controller
     {
 
         $cliente = new Cliente();
-        $cliente = $cliente->get(1);//$id do cliente que está logado, não sei como fazer
-        $lista['pontos'] = $cliente->pontos;
-        $lista['nome'] = $cliente->user->name;
-        $lista['cpf'] = $cliente->cpf;
-        return view('perfilcliente.index', compact('lista'));
+        $cliente = $cliente->where(['user_id' => Auth::user()->id])->first();//$id do cliente que está logado, não sei como fazer
+
+        return view('perfilcliente.index', compact('cliente'));
+        
     }
 
     /**

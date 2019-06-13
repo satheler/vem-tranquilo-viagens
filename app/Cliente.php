@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
 use \Validator as Validator;
 use App\VendaOnline;
+use App\Compra;
 
 class Cliente extends Model
 {
@@ -135,6 +136,11 @@ class Cliente extends Model
         $this->pontos = $this->pontos + ($venda->pagamento->valor/100);
         $this->update();
 
+    }
+
+    public function listarCompras(){
+        $lista = Compra::where('cliente_id', $this->id)->get();
+        return $lista;
     }
 
 }
