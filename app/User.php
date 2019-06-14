@@ -14,6 +14,10 @@ class User extends Authenticatable
     const ADMIN_TYPE = 'admin';
     const CLIENTE_TYPE = 'cliente';
 
+    public function getAll()
+    {
+        return $this->all();
+    }
     /**
      * The attributes that are mass assignable.
      *
