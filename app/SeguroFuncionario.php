@@ -2,9 +2,9 @@
 
 namespace App;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Validator;
-use App\User;
 
 class SeguroFuncionario extends Model
 {
@@ -48,7 +48,7 @@ class SeguroFuncionario extends Model
     {
 
         $funcionario = new User();
-        $validator ='';
+        $validator = '';
 
         foreach ($listafuncionario as $itemfuncionario) {
             $item = $funcionario->get($itemfuncionario);
@@ -71,7 +71,7 @@ class SeguroFuncionario extends Model
 
     public function add(array $input)
     {
-        if(!array_key_exists('user',$input)){
+        if (!array_key_exists('user', $input)) {
             $input['user'] = [];
 
         }
@@ -82,8 +82,7 @@ class SeguroFuncionario extends Model
             'assegura' => 'required|string',
             'data_vigencia' => 'required|date_format:d/m/Y|after:' . now()->format('d/m/Y'),
             'data_inicio' => 'required|date_format:d/m/Y|before:data_vigencia',
-            'user' => 'required|array',
-            'user' => [$this->verificarValidade($input['user'])],
+            'user' => ['required', 'array', $this->verificarValidade($input['user'])],
         ]);
 
         if ($validator->fails()) {
@@ -110,10 +109,10 @@ class SeguroFuncionario extends Model
     {
         $seguro = $this->get($id);
 
-         if(!array_key_exists('user',$input)){
-             $input['user'] = [];
-           //$input['funcionario'] = $seguro->funcionario->toArray();
-         }
+        if (!array_key_exists('user', $input)) {
+            $input['user'] = [];
+            //$input['funcionario'] = $seguro->funcionario->toArray();
+        }
 
         $validator = Validator::make($input, [
             'empresa' => 'required|string',
