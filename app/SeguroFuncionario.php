@@ -73,7 +73,6 @@ class SeguroFuncionario extends Model
     {
         if (!array_key_exists('user', $input)) {
             $input['user'] = [];
-
         }
 
         $validator = Validator::make($input, [

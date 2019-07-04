@@ -30,7 +30,7 @@ class SeguroFuncionarioController extends Controller
     {
         $user = new User();
         $seguroFuncionario = new SeguroFuncionario();
-        $lista["user"] = $user->getAll();
+        $lista["user"] = $user->getOnlyFuncionarios();
         $listaSeguroFuncionario = $seguroFuncionario->getAll();
 
         foreach ($lista["user"] as $itemuser) {
