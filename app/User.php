@@ -18,6 +18,15 @@ class User extends Authenticatable
     {
         return $this->all();
     }
+
+    public function getOnlyFuncionarios() {
+        return $this->where('type', self::ADMIN_TYPE)->get();
+    }
+
+    public function get(int $id) {
+        return $this->find($id);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
