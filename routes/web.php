@@ -85,6 +85,7 @@ Route::group(['prefix' => 'painel'], function () {
         Route::prefix('tarifa')->name('tarifa_')->group(function () {
             Route::resource('urbano', 'TarifaUrbanoController');
             Route::resource('intermunicipal', 'TarifaIntermunicipalController');
+            Route::resource('encomenda', 'TarifaEncomendaController');
         });
 
         Route::prefix('categoria')->name('categoria_')->group(function () {

@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\TarifaIntermunicipal;
-use App\CategoriaOnibus;
+use App\TarifaEncomenda;
 use Exception;
 
-class TarifaIntermunicipalController extends Controller
+class TarifaEncomendaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +15,9 @@ class TarifaIntermunicipalController extends Controller
      */
     public function index()
     {
-        $tarifa = new TarifaIntermunicipal();
+        $tarifa = new TarifaEncomenda();
         $lista = $tarifa->getAll();
-        return view('tarifa.intermunicipal.index', compact('lista'));
+        return view('tarifa.encomenda.index', compact('lista'));
     }
 
     /**
@@ -28,10 +27,7 @@ class TarifaIntermunicipalController extends Controller
      */
     public function create()
     {
-        $categoria= new CategoriaOnibus();
-        $categoria= $categoria->getAll();
-
-        return view('tarifa.intermunicipal.create', compact('categoria'));
+        return view('tarifa.encomenda.create');
     }
 
     /**
@@ -42,15 +38,14 @@ class TarifaIntermunicipalController extends Controller
      */
     public function store(Request $request)
     {
-        $tarifa = new TarifaIntermunicipal();
-       
-        $validator = $tarifa->add($request);
+        $tarifa = new TarifaEncomenda();
+        $validator = $tarifa->add($request->input());
 
         if(!($validator instanceof \Illuminate\Validation\Validator)) {
-            return redirect()->route('tarifa_intermunicipal.index')->withStatus(__('Tarifa intermunicipal adicionada com sucesso.'));
+            return redirect()->route('tarifa_encomenda.index')->withStatus(__('Tarifa Encomenda adicionada com sucesso.'));
         } else {
             return redirect()
-                    ->route('tarifa_intermunicipal.create')
+                    ->route('tarifa_encomenda.create')
                     ->withErrors($validator)
                     ->withInput();
         }
@@ -64,9 +59,9 @@ class TarifaIntermunicipalController extends Controller
      */
     public function show($id)
     {
-        $tarifa = new TarifaIntermunicipal();
+        $tarifa = new TarifaEncomenda();
         $item = $tarifa->get($id);
-        return view('tarifa.intermunicipal.show', compact('item'));
+        return view('tarifa.encomenda.show', compact('item'));
     }
 
     /**
@@ -77,10 +72,6 @@ class TarifaIntermunicipalController extends Controller
      */
     public function edit($id)
     {
-        $tarifa = new TarifaIntermunicipal();
-        $listaDeTarifas = $tarifa->getAll();
-        $tarifaEditada = $listaDeTarifas[$id];
-        return "Formulario de edição para a".$tarifaEditada->toJson();
     }
 
     /**

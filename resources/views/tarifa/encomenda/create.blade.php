@@ -1,7 +1,7 @@
-@extends('layouts.app', ['title' => __('Adicionar Tarifa Intermunicipal')])
+@extends('layouts.app', ['title' => __('Adicionar Tarifa de Encomendas')])
 
 @section('content')
-    @include('users.partials.header', ['title' => __('Adicionar Tarifa Intermunicipal')])
+    @include('users.partials.header', ['title' => __('Adicionar Tarifa Encomenda')])
 
     <div class="container-fluid mt--7">
         <div class="row">
@@ -10,15 +10,15 @@
                     <div class="card-header bg-white border-0">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <a href="{{ route('tarifa_intermunicipal.index') }}" class="btn btn-sm btn-primary">{{ __('Voltar') }}</a>
+                                <a href="{{ route('tarifa_encomenda.index') }}" class="btn btn-sm btn-primary">{{ __('Voltar') }}</a>
                             </div>
                             <div class="col-4 text-right">
-                                <h3 class="mb-0">{{ __('Adicionar Tarifa Intermunicipal') }}</h3>
+                                <h3 class="mb-0">{{ __('Adicionar Tarifa Encomenda') }}</h3>
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{ route('tarifa_intermunicipal.store') }}" autocomplete="off">
+                        <form method="post" action="{{ route('tarifa_encomenda.store') }}" autocomplete="off">
                             @csrf
 
                             <h6 class="heading-small text-muted mb-4">{{ __('Informações do trajeto') }}</h6>
@@ -40,7 +40,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-control-label" for="input-valor">{{ __('VALOR (km)') }}</label>
+                                        <label class="form-control-label" for="input-valor">{{ __('VALOR (peso e volume)') }}</label>
                                         <div class="form-group{{ $errors->has('valor') ? ' has-danger' : '' }}">
                                             <input type="text" money name="valor" id="input-valor" class="form-control form-control-alternative{{ $errors->has('valor') ? ' is-invalid' : '' }}" placeholder="{{ __('Informe o valor por km rodado...') }}" value="{{ old('valor') }}" required>
                                         </div>
@@ -50,19 +50,6 @@
                                             </span>
                                         @endif
                                     </div>
-                                    <div class="col-md-4">
-                                    <div class="checklist-info">
-                                        <div class="row">
-                                            <h3 class="checklist-title mt-2 mb-0">TIPO</h3>
-                                            <select name="categoria_id[]" bootstrapSelect  data-size="4" data-live-search="true" required>
-                                                @foreach ($categoria as $categoria)
-                                                    <option for = "option" name="categoria" value="{{ $categoria->id }}"> {{ $categoria->categoria }} </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-    
                                 </div>
 
                                 {{-- END FORM --}}

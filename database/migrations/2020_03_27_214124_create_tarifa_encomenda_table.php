@@ -4,9 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTarifaIntermunicipalTable extends Migration
+class CreateTarifaEncomendaTable extends Migration
 {
-    private $databaseName = "tarifa_intermunicipal";
+    private $databaseName = "tarifa_encomenda";
     /**
      * Run the migrations.
      *
@@ -16,8 +16,9 @@ class CreateTarifaIntermunicipalTable extends Migration
     {
         Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('categoria_id');
-            $table->foreign('categoria_id')->references('id')->on('categoria_onibus');
+            $table->float('valor');
+            $table->date('data');
+
             $table->timestamps();
         });
     }

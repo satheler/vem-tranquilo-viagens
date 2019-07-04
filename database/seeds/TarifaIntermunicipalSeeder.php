@@ -13,7 +13,8 @@ class TarifaIntermunicipalSeeder extends Seeder
     {
 
         DB::table('tarifa_intermunicipal')->insert([
-            'id' => 1
+            'id' => 1, 
+            'categoria_id' => 2
         ]);
 
         DB::table('tarifa')->insert([
