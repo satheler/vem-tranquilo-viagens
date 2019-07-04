@@ -61,6 +61,8 @@ class Cliente extends Model
             ],
         ], $messagesCustom);
 
+        // throw new \Exception("$input['senha'], 1);
+
         if ($validator->fails()) {
             return $validator;
         }

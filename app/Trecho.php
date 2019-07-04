@@ -9,6 +9,10 @@ class Trecho extends Model
 {
     protected $table = 'trechos';
 
+    protected $fillable = [
+        'cidade_id', 'horarioSaida', 'horarioChegada', 'quilometragem', 'ordem', 'trajeto_id'
+    ];
+
     public function getAll()
     {
         return $this->all();

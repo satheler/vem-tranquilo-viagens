@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             TipoUsuarioSeeder::class,
             UsersTableSeeder::class,
             TiposFuncionarioSeeder::class,
+            TarifaSeeder::class,
             CategoriaOnibusSeeder::class,
             OnibusIntermunicipalSeeder::class,
             OnibusUrbanoSeeder::class,
@@ -33,7 +34,7 @@ class DatabaseSeeder extends Seeder
             TarifaIntermunicipalSeeder::class,
             VendaOnlineSeeder::class,
             PassagensIntermunicipalSeeder::class,
-            RegistroSinistroSeeder::class
+            RegistroSinistroSeeder::class,
 
         ]);
     }

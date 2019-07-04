@@ -13,15 +13,14 @@ class OnibusUrbanoSeeder extends Seeder
     {
 
         DB::table('onibus_urbano')->insert([
-            'id' => 11,
+            'id' => 1,
             'lotacao' => 50,
             'cidade_id' => 1,
             'arCondicionado' => false,
         ]);
 
         DB::table('onibus')->insert([
-            'id' => 11,
-            'description_id' => 2,
+            'description_id' => 1,
             'description_type' => 'App\OnibusUrbano',
             'acessibilidade' => false,
             'chassi' => 'O2L5CH64R7K85G5KG',

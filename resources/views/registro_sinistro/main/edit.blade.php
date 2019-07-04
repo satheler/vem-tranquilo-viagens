@@ -87,7 +87,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-clock"></i></span>
                                         </div>
-                                        <input data name='data' class="form-control datepicker" placeholder="__/__/____" type="text" value="{{ old('data', $lista["sinistro"]->data)}}" required>
+                                        <input data name='data' class="form-control datepicker" placeholder="__/__/____" type="text" value="{{ old('data', $lista["data"])}}" required>
                                     </div>
                                 </div>
                             </div>

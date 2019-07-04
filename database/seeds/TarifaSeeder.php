@@ -15,33 +15,17 @@ class TarifaSeeder extends Seeder
 
         DB::table('tarifa_urbano')->insert([
             'cidade_id' => 1,
-            'licitacao' => 'test',
-            'valor_especial' => 3.50,
+            'licitacao' => 'TU 9857',
+            'valor_especial' => 0.75,
         ]);
 
 
         DB::table('tarifa')->insert([
             'id' => 1,
-            'valor' => 2.00,
-            'data' =>  date('Y-m-d'),
+            'valor' => 1.25,
+            'data' =>  '2019-07-04',
             'description_id' => 1,
-            'description_type' => 'App\Tarifa',
-
-        ]);
-
-        DB::table('tarifa_urbano')->insert([
-            'id' => 2,
-            'cidade_id' => 5,
-            'licitacao' => 'test',
-            'valor_especial' => 3.75,
-        ]);
-
-        DB::table('tarifa')->insert([
-            'id' => 2,
-            'valor' => 2.50,
-            'data' =>  date('Y-m-d'),
-            'description_id' => 2,
-            'description_type' => 'App\Tarifa',
+            'description_type' => 'App\TarifaUrbano',
 
         ]);
 

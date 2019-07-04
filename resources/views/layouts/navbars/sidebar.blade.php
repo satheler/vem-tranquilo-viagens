@@ -184,6 +184,13 @@
                                         </a>
                                     </li>
                                 @endif
+                                @if (@auth()->user()->tipo_usuario_id === 1)
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('tarifa_encomenda.index') }}">
+                                            {{ __('Tarifa Encomenda') }}
+                                        </a>
+                                    </li>
+                                @endif
                             </ul>
                         </div>
                     </li>
