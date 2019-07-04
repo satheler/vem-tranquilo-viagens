@@ -14,7 +14,7 @@ class AlocacaoUrbanoSeeder extends Seeder
         DB::table('alocacao_urbano')->insert([
             'id' => 1,
             'trajeto_id' => 1,
-            'onibus_id' => 11,
+            'onibus_id' => 1,
             'motorista_id' => 1,
             'cobrador_id' => 2,
             'auxiliar_id' => null,
