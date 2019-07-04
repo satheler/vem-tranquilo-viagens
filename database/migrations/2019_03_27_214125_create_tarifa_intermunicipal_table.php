@@ -16,6 +16,8 @@ class CreateTarifaIntermunicipalTable extends Migration
     {
         Schema::create($this->databaseName, function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('categoria_id');
+            $table->foreign('categoria_id')->references('id')->on('categoria_onibus');
             $table->timestamps();
         });
     }

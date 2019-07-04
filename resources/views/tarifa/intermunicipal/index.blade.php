@@ -29,6 +29,7 @@
                     <tr>
                         <th scope="col">{{ __('Data inicial de vigência') }}</th>
                         <th scope="col">{{ __('Valor') }}</th>
+                        <th scope="col">{{ __('Categoria') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,6 +37,7 @@
                         <tr data-table-row-id={{ $item->id }}>
                             <td>{{ (new DateTime($item->description->data))->format('d/m/Y') }}</td>
                             <td>{{ sprintf("R$ %.2f", $item->description->valor) }}</td>
+                            <td>{{$item->categoria->categoria}}</td>
                         </tr>
                     @endforeach
                 </tbody>

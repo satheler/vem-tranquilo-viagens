@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\TarifaIntermunicipal;
+use App\CategoriaOnibus;
 use Exception;
 
 class TarifaIntermunicipalController extends Controller
@@ -27,7 +28,10 @@ class TarifaIntermunicipalController extends Controller
      */
     public function create()
     {
-        return view('tarifa.intermunicipal.create');
+        $categoria= new CategoriaOnibus();
+        $categoria= $categoria->getAll();
+
+        return view('tarifa.intermunicipal.create', compact('categoria'));
     }
 
     /**
@@ -39,7 +43,8 @@ class TarifaIntermunicipalController extends Controller
     public function store(Request $request)
     {
         $tarifa = new TarifaIntermunicipal();
-        $validator = $tarifa->add($request->input());
+       
+        $validator = $tarifa->add($request);
 
         if(!($validator instanceof \Illuminate\Validation\Validator)) {
             return redirect()->route('tarifa_intermunicipal.index')->withStatus(__('Tarifa intermunicipal adicionada com sucesso.'));
