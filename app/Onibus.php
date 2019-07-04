@@ -31,6 +31,10 @@ class Onibus extends Model
         return $this->all();
     }
 
+    public function getAllInativos() {
+        return $this->where('inativo', true)->get();
+    }
+
     public function add(array $input)
     {
 

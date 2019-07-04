@@ -14,7 +14,7 @@ class OnibusInativoController extends Controller
      */
     public function index() {
         $onibus = new Onibus();
-        $lista = $onibus->getAll();
+        $lista = $onibus->getAllInativos();
         return view('frotas.inativos.index', compact('lista'));
     }
 
