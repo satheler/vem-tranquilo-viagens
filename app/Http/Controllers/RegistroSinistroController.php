@@ -81,6 +81,10 @@ class RegistroSinistroController extends Controller
         $onibus = new Onibus();
         $lista['sinistro'] = $sinistro->get($id);
         $lista['onibus'] = $onibus->getAll();
+
+        $dataConverter = date_create_from_format('Y-m-d',  $lista['sinistro']->data);
+        $data = $dataConverter->format('d/m/Y');  
+        $lista['data'] = $data;
         
         return view('registro_sinistro.main.edit', compact('lista'));
     }
