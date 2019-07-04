@@ -33,6 +33,7 @@
                 </thead>
                 <tbody>
                     @foreach ($lista as $item)
+                    {{ $item }}
                         <tr data-table-row-id={{ $item->id }}>
                             <td>{{ $item->nome }}</td>
                             <td>{{ $item->tipo->nome }}</td>
