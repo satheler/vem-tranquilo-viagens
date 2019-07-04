@@ -4,7 +4,6 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Validator;
-use DateTime;
 
 class TrajetoIntermunicipal extends Model
 {
@@ -36,7 +35,7 @@ class TrajetoIntermunicipal extends Model
 
             foreach ($trajeto->trechos as $trecho) {
                 if ($trecho->cidade_id === $origem_id) {
-                    if(strtotime($trecho->horarioSaida) >= time()){
+                    if (strtotime($trecho->horarioSaida) >= time()) {
                         $trajeto->origem = $trecho;
                         $hasOrigem = true;
                     }
@@ -49,7 +48,7 @@ class TrajetoIntermunicipal extends Model
             }
 
             if ($hasOrigem && $hasDestino) {
-                array_push($lista, $trajeto); 
+                array_push($lista, $trajeto);
             }
 
         }
@@ -66,28 +65,34 @@ class TrajetoIntermunicipal extends Model
     public function add(array $input)
     {
         $validator = Validator::make($input, [
-            'trechos' => 'required|array',
+            'cidade' => 'required|array',
             'horarioSaida' => 'required|array',
             'horarioChegada' => 'required|array',
+            'quilometragem' => 'required|array',
         ]);
 
-        $trechos = $this->normalize($input['trechos'], $input['horarioSaida'], $input['horarioChegada']);
+        $trajeto = $this->create();
+        $trechos = $this->normalize($input['cidade'], $input['horarioSaida'], $input['horarioChegada'], $input['quilometragem'], $trajeto);
 
-        $this->save();
-        $this->trechos()->attach($trechos);
+        $trajeto->trechos()->saveMany($trechos);
+
+        return $this;
     }
 
-    private function normalize(array $trechos, array $horarioSaida, array $horarioChegada)
+    private function normalize(array $cidades, array $horarioSaida, array $horarioChegada, array $quilometragem, TrajetoIntermunicipal $trajeto)
     {
 
         $listaTrechos = [];
 
-        for ($i = 0; $i < count($trechos); $i++) {
-            array_push($listaTrechos, [
-                "trecho_id" => $trechos[$i],
+        for ($i = 0; $i < count($cidades); $i++) {
+            array_push($listaTrechos, new Trecho([
+                "trajeto_id" => $trajeto->id,
+                "cidade_id" => $cidades[$i],
                 "horarioSaida" => $horarioSaida[$i],
                 "horarioChegada" => $horarioChegada[$i],
-            ]);
+                "quilometragem" => $quilometragem[$i],
+                "ordem" => $i,
+            ]));
         }
 
         return $listaTrechos;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\TrajetoIntermunicipal;
 use App\Trecho;
+use App\Cidade;
 use Exception;
 
 class TrajetoIntermunicipalController extends Controller
@@ -28,10 +29,9 @@ class TrajetoIntermunicipalController extends Controller
      */
     public function create($qntTrechos)
     {
-        $trechos = new Trecho();
-        $lista["trechos"] = $trechos->getAll();
-        $lista['qntTrechos'] = $qntTrechos;
-        return view('trajeto.intermunicipal.create', compact('lista'));
+        $cidades = new Cidade();
+        $cidades = $cidades->getAll();
+        return view('trajeto.intermunicipal.create', compact('cidades', 'qntTrechos'));
     }
 
     /**
@@ -55,13 +55,13 @@ class TrajetoIntermunicipalController extends Controller
         $trajeto = new TrajetoIntermunicipal();
         $validator = $trajeto->add($request->input());
 
-        if($validator === NULL) {
-            return redirect()->route('trajeto_intermunicipal.index')->withStatus(__('Trajeto adicionado com sucesso.'));
-        } else {
+        if($validator instanceof \Illuminate\Validation\Validator) {
             return redirect()
-                    ->route('trajeto_intermunicipal.create')
-                    ->withErrors($validator)
-                    ->withInput();
+            ->route('trajeto_intermunicipal.create', $request->input('qntTrechos'))
+            ->withErrors($validator)
+            ->withInput();
+        } else {
+            return redirect()->route('trajeto_intermunicipal.index')->withStatus(__('Trajeto adicionado com sucesso.'));
         }
     }
 

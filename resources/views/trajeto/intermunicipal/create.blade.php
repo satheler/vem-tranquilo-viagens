@@ -24,22 +24,23 @@
                     <div class="card-body">
                         <form method="post" action="{{ route('trajeto_intermunicipal.store') }}" autocomplete="off">
                             @csrf
+                            <input type="hidden" name="qntTrechos" value="{{ $qntTrechos }}">
 
                                 <h3 class="heading-small text-muted mb-4">{{ __('Informações do trajeto') }}</h3>
 
-                                @for ($i = 0; $i < $lista["qntTrechos"]; $i++)
+                                @for ($i = 0; $i < $qntTrechos; $i++)
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <label class="form-control-label" for="trechos[{{ $i }}]">TRECHO</label>
-                                        <select bootstrapSelect name="trechos[{{ $i }}]" data-size="4" data-live-search="true" required="required">
-                                            <option value="{{ old('trechos[$i]') }}" disabled @if(!$errors->has('trechos['.$i.']')) selected @endif>Selecione o trecho...</option>
-                                            @foreach ($lista["trechos"] as $item)
-                                                <option @if($errors->has('trechos['.$i.']') && ($errors->first('trechos['.$i.']') == $item->id)) selected @endif value="{{ $item->id }}">{{ $item->origem->nome }} ⇒ {{ $item->destino->nome }} ({{ sprintf('%.2f km', $item->quilometragem) }})</option>
+                                    <div class="col-md-4">
+                                        <label class="form-control-label" for="cidade[{{ $i }}]">Cidade</label>
+                                        <select bootstrapSelect name="cidade[{{ $i }}]" data-size="4" data-live-search="true" required="required">
+                                            <option value="{{ old('cidade[$i]') }}" disabled @if(!$errors->has('cidade['.$i.']')) selected @endif>Selecione a cidade...</option>
+                                            @foreach ($cidades as $cidade)
+                                                <option @if($errors->has('cidade['.$i.']') && ($errors->first('cidade['.$i.']') == $cidade->id)) selected @endif value="{{ $cidade->id }}">{{ $cidade->nome }}</option>
                                             @endforeach
                                         </select>
-                                        @if ($errors->has('trechos['.$i.']'))
+                                        @if ($errors->has('cidade['.$i.']'))
                                             <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('trechos['.$i.']') }}</strong>
+                                                <strong>{{ $errors->first('cidade['.$i.']') }}</strong>
                                             </span>
                                         @endif
                                     </div>
@@ -65,7 +66,19 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-md-2">
+                                        <label class="form-control-label" for="input-quilometragem">{{ __('QUILOMETRAGEM') }}</label>
+                                        @if ($errors->has('quilometragem'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('quilometragem') }}</strong>
+                                                </span>
+                                            @endif
+                                        <div class="form-group{{ $errors->has('quilometragem') ? ' has-danger' : '' }}">
+                                            <input type="text" km name="quilometragem[{{ $i }}]" id="input-quilometragem" class="form-control form-control-alternative{{ $errors->has('quilometragem') ? ' is-invalid' : '' }}" placeholder="{{ __('Insira a quilometragem...') }}" value="{{  old('quilometragem['. $i .']')  }}" required>
+                                        </div>
+                                    </div>
                                 </div>
+
                                 @endfor
 
                             {{-- END FORM --}}
@@ -92,13 +105,14 @@
 
     $(document).ready(function(){
         $('[time]').mask('00:00');
+        $('[km]').mask('###0.0', {reverse: true});
     })
 
-    $("#addTrecho").on('click', function() {
-        let $listTrechos = $('#listTrechos');
+    // $("#addTrecho").on('click', function() {
+    //     let $listTrechos = $('#listTrechos');
 
-        $listTrechos.append('<div class="row"> //conteudo </div>');
-        currentTrechoID += 1;
-    })
+    //     $listTrechos.append('<div class="row"> //conteudo </div>');
+    //     currentTrechoID += 1;
+    // })
     </script>
 @endpush
