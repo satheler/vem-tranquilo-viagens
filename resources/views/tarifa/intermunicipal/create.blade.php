@@ -54,9 +54,9 @@
                                     <div class="checklist-info">
                                         <div class="row">
                                             <h3 class="checklist-title mt-2 mb-0">TIPO</h3>
-                                            <select name="categoria_id[]" bootstrapSelect  data-size="4" data-live-search="true" required>
+                                            <select name="categoria_id" bootstrapSelect  data-size="4" data-live-search="true" required>
                                                 @foreach ($categoria as $categoria)
-                                                    <option for = "option" name="categoria" value="{{ $categoria->id }}"> {{ $categoria->categoria }} </option>
+                                                    <option value="{{ $categoria->id }}"> {{ $categoria->categoria }} </option>
                                                 @endforeach
                                             </select>
                                         </div>

@@ -37,8 +37,8 @@ class TarifaIntermunicipal extends Model
         if(($tarifaAdd instanceof \Illuminate\Validation\Validator)) {
             return $tarifaAdd;
         }
-        $categoria = 1; 
-       //$categoria = $request["categoria_id"];
+       
+        $categoria = $request["categoria_id"];
         $this->categoria_id = $categoria;
         $this->save();
         $this->description()->save($tarifaAdd);
